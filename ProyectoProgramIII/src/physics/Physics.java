@@ -18,21 +18,16 @@ public class Physics {
 		return Math.sqrt( 2.0 * energia / masa );
 	}
 	
+	
 	/** 				Calcula la aceleracion provocada por una fuerza sobre un objeto con una masa
 	 * @param fuerza  	Fuerza aplicada, en "newtixels" (kgs.*pixel/seg^2)
-	 * 	(un newtixel = 	fuerza que aplicada durante un segundo a una masa de 1 kg incrementa su velocidad en 1 p�xel/seg)
+	 * 	(un newtixel = 	fuerza que aplicada durante un segundo a una masa de 1 kg incrementa su velocidad en 1 pixel/seg)
 	 * @param masa 		Masa	Masa del objeto en "kgs."
 	 * @return			Aceleracion provocada, en pixels/segundo^2
 	 */
 	public static double calcAceleracion( double fuerza, double masa ) {
 		return fuerza / masa;  // 2a Ley de Newton   F = m * a     (a = F/m)
 	}
-	
-	
-	
-	
-	
-	
 	
 
 	/** Calcula el cambio de espacio, considerando un movimiento uniformemente acelerado  s(fin) = 1/2*a*t^2 + v(ini)*t + s(ini)
@@ -46,6 +41,7 @@ public class Physics {
 		return aceleracion * tiempoMsgs * tiempoMsgs * 0.0000005 + vIni * tiempoMsgs * 0.001 + espacioIni;
 	}
 	
+	
 	/** Calcula el cambio de espacio, considerando un movimiento uniforme (sin aceleracion)   s(fin) = s(ini) + v * t
 	 * @param espacioIni	Espacio inicial (pixels)
 	 * @param tiempo	Tiempo transcurrido desde el espacio inicial (milisegundos)
@@ -57,12 +53,13 @@ public class Physics {
 		return vIni * tiempo * 0.001 + espacioIni;
 	}
 	
+	
 	/** Calcula el tiempo que falta para que un objeto llegue a un espacio determinado, con movimiento uniformemente acelerado
-	 * @param vIni	Velocidad inicial (p�xels/seg)
-	 * @param espIni	Espacio inicial (p�xels)
-	 * @param aceleracion	Aceleraci�n aplicada (p�xels/seg^2)
-	 * @param donde	Espacio al que llegar (p�xels)
-	 * @return	Tiempo que falta (segundos). Si no es posible que el objeto llegue, valor negativo.
+	 * @param vIni			Velocidad inicial (pixels/seg)
+	 * @param espIni		Espacio inicial (pixels)
+	 * @param aceleracion	Aceleracion aplicada (pixels/seg^2)
+	 * @param donde			Espacio al que llegar (pixels)
+	 * @return				Tiempo que falta (segundos). Si no es posible que el objeto llegue, valor negativo.
 	 */
 	public static double calcTiempoHastaEspacio( double vIni, double espIni, double aceleracion, double donde ) {
 		// s[objetivo] = 1/2*a*t[objetivo]^2 + v[ini]*t[objetivo] + s[ini]  |
@@ -75,6 +72,7 @@ public class Physics {
 		return tiempo;
 	}
 	
+	
 	/** Calcula el cambio de velocidad, considerando un movimiento uniformemente acelerado    v(fin) = v(ini) + a * t
 	 * @param vIni			Velocidad inicial (pixels/seg)
 	 * @param tiempoMsgs	Tiempo transcurrido desde la velocidad inicial (milisegundos)
@@ -84,7 +82,8 @@ public class Physics {
 	public static double calcVelocidad( double vIni, long tiempoMsgs, double aceleracion ) {
 		return vIni + aceleracion * 0.001 * tiempoMsgs;
 	}
-
+	
+	
 	/** Calcula el tiempo que falta para que un objeto llegue a un espacio determinado, con movimiento uniforme
 	 * @param vIni		Velocidad inicial (pixels/seg)
 	 * @param espIni	Espacio inicial (pixels)
@@ -115,6 +114,7 @@ public class Physics {
 		return velocFinal;
 	}
 	
+	
 	/** Comprueba la igualdad a cero de un valor double
 	 * @param num	Valor a comprobar
 	 * @return	true si esta muy cerca de cero (10^-12), false en caso contrario
@@ -122,8 +122,6 @@ public class Physics {
 	public static boolean igualACero( double num ) {
 		return Math.abs(num)<=1E-12;  // 1 * 10^-12
 	}
-	
-	
 	
 	
 	/** Calcula el choque entre dos pelotas
