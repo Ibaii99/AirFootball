@@ -76,32 +76,31 @@ public class Physics {
 	}
 	
 	/** Calcula el cambio de velocidad, considerando un movimiento uniformemente acelerado    v(fin) = v(ini) + a * t
-	 * @param vIni	Velocidad inicial (p�xels/seg)
+	 * @param vIni			Velocidad inicial (pixels/seg)
 	 * @param tiempoMsgs	Tiempo transcurrido desde la velocidad inicial (milisegundos)
-	 * @param aceleracion	Aceleraci�n aplicada (p�xels/seg^2)
-	 * @return	Nueva velocidad
+	 * @param aceleracion	Aceleracion aplicada (pixels/seg^2)
+	 * @return				Nueva velocidad
 	 */
 	public static double calcVelocidad( double vIni, long tiempoMsgs, double aceleracion ) {
 		return vIni + aceleracion * 0.001 * tiempoMsgs;
 	}
 
 	/** Calcula el tiempo que falta para que un objeto llegue a un espacio determinado, con movimiento uniforme
-	 * @param vIni	Velocidad inicial (p�xels/seg)
-	 * @param espIni	Espacio inicial (p�xels)
-	 * @param donde	Espacio al que llegar (p�xels)
-	 * @return	Tiempo que falta (segundos). Si no es posible que el objeto llegue, valor negativo.
+	 * @param vIni		Velocidad inicial (pixels/seg)
+	 * @param espIni	Espacio inicial (pixels)
+	 * @param donde		Espacio al que llegar (pixels)
+	 * @return			Tiempo que falta (segundos). Si no es posible que el objeto llegue, valor negativo.
 	 */
 	public static double calcTiempoHastaEspacio( double vIni, double espIni, double donde ) {
-		// s[objetivo] = v[ini]*t[objetivo] + s[ini]  |
-		//     t[objetivo] = (s[objetivo] - s[ini]) / v[ini]
+		// s[objetivo] = v[ini]*t[objetivo] + s[ini]  |  t[objetivo] = (s[objetivo] - s[ini]) / v[ini]
 		if (igualACero( vIni )) return -1.0;
 		double tiempo = (donde - espIni) / vIni;
-		if (Double.isInfinite(tiempo)) return -1.0;  // Si error aritm�tico, tiempo negativo para indicar que nunca llega
+		if (Double.isInfinite(tiempo)) return -1.0;  // Si error aritmetico, tiempo negativo para indicar que nunca llega
 		return tiempo;
 	}
 	
 	
-	/** Calcula un choque el�stico entre dos cuerpos
+	/** Calcula un choque elastico entre dos cuerpos
 	 * @param masa1	Masa del cuerpo 1 (Kg)
 	 * @param vel1	Velocidad del cuerpo 1 lineal hacia el otro cuerpo en el sentido del cuerpo 1 al cuerpo 2
 	 * @param masa2	Masa del cuerpo 2 (Kg)
@@ -109,7 +108,7 @@ public class Physics {
 	 * @return
 	 */
 	public static double[] calcChoque( double masa1, double vel1, double masa2, double vel2 ) {
-		// F�rmula de choque perfectamente el�stico. Ver por ejemplo  http://www.fis.puc.cl/~rbenguri/cap4(Dinamica).pdf
+		// Formula de choque perfectamente elastico. Ver por ejemplo  http://www.fis.puc.cl/~rbenguri/cap4(Dinamica).pdf
 		double[] velocFinal = new double[2];
 		velocFinal[0] = ((masa1-masa2)*vel1 + 2*masa2*vel2)/(masa1+masa2);
 		velocFinal[1] = ((masa2-masa1)*vel2 + 2*masa1*vel1)/(masa1+masa2);
@@ -118,7 +117,7 @@ public class Physics {
 	
 	/** Comprueba la igualdad a cero de un valor double
 	 * @param num	Valor a comprobar
-	 * @return	true si est� muy cerca de cero (10^-12), false en caso contrario
+	 * @return	true si esta muy cerca de cero (10^-12), false en caso contrario
 	 */
 	public static boolean igualACero( double num ) {
 		return Math.abs(num)<=1E-12;  // 1 * 10^-12
