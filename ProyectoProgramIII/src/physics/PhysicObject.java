@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 
+
 public abstract class PhysicObject extends Physics{
 	
 	protected double x;      // Coordenada x del objeto
@@ -15,6 +16,7 @@ public abstract class PhysicObject extends Physics{
 	protected double velocidadX; // Velocidad horizontal del objeto - se inicia a 0
 	protected double velocidadY; // Velocidad vertical del objeto - se inicia a 0
 	
+	protected boolean isElementoEstatico;
 	protected double velXInicial = 0;   // Velocidad anterior al ultimo movimiento
 	protected double velYInicial = 0;
 	protected double antX = 0;  // Posicion anterior al ultimo movimiento
@@ -29,12 +31,13 @@ public abstract class PhysicObject extends Physics{
 	 * @param color	Color de la pelota (p ej. 'a' = azul)
 	 * @param bota	Informaci�n de si la pelota bota (true) o no (false)
 	 */
-	public PhysicObject(double x, double y, char color, double dureza) {
+	public PhysicObject(double x, double y, char color, boolean rebota, boolean elementoEstatico) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.color = color;
-
+		this.rebota= rebota;
+		this.isElementoEstatico = elementoEstatico;
 		this.nombre = "";  // Evita el nullpointer
 	}
 	
@@ -176,21 +179,22 @@ public abstract class PhysicObject extends Physics{
 	 */
 	public abstract boolean contieneA( Point punto );
 
-	
+
 	/** Dibuja el objeto en una ventana, en el color correspondiente (por defecto, negro)
 	 * @param v	Ventana en la que dibujar el objeto
 	 */
-	public void dibuja( VentanaGrafica v ) {
-		// No se sabe c�mo dibujar el objeto... pero s� la velocidad
-		if (DIBUJAR_VELOCIDAD) {
-			v.dibujaFlecha( x,  y, x+velocidadX/10, y+velocidadY/10, 1.5f, Color.orange );
-		}
-	}
+//	public void dibuja( VentanaGrafica v ) {
+//		// No se sabe c�mo dibujar el objeto... pero s� la velocidad
+//		if (DIBUJAR_VELOCIDAD) {
+//			v.dibujaFlecha( x,  y, x+velocidadX/10, y+velocidadY/10, 1.5f, Color.orange );
+//		}
+//	}
+
 	
 	/** Borra el objeto en una ventana
 	 * @param v	Ventana en la que borrar el objeto
 	 */
-	public abstract void borra( VentanaGrafica v );
+// public abstract void borra( VentanaGrafica v );
 
 	/** Provoca el movimiento y ca�da del objeto.
 	 * La ca�da se producir� en funci�n de la velocidad e ir� increment�ndose con la gravedad.
@@ -199,111 +203,111 @@ public abstract class PhysicObject extends Physics{
 	 * @param dibujar	true si se quiere borrar y dibujar el objeto en la ventana, false si se hace aparte
 	 * @return	true si se cae, false si ya se ha parado en el suelo
 	 */
-	public boolean mueveUnPoco( VentanaGrafica v, long miliSgs, boolean dibujar ) {
-		return mueveUnPoco( v, miliSgs, dibujar, null );
-	}
+//	public boolean mueveUnPoco( VentanaGrafica v, long miliSgs, boolean dibujar ) {
+//		return mueveUnPoco( v, miliSgs, dibujar, null );
+//	}
 	
 	/** Provoca el movimiento solo horizontal del objeto.
 	 * @param v	Ventana de referencia y dibujado
 	 * @param miliSgs	Tiempo de ca�da
 	 * @param dibujar	true si se quiere borrar y dibujar el objeto en la ventana, false si se hace aparte
 	 */
-	public void mueveUnPocoX( VentanaGrafica v, long miliSgs, boolean dibujar ) {
-		// 1. C�lculos previos
-		velXInicial = velocidadX;
-		antX = x;
-		antY = y;
-		// 2. Borrado si procede
-		if (dibujar) borra( v );
-		// 3. Cambio de posici�n (x)
-		setX( Physics.calcEspacio( getX(), miliSgs, velocidadX ) );
-		// 4. Dibujado si procede
-		if (dibujar) dibuja( v );
-		// 5. Actualizaci�n de velocidad final
-		// Sin aceleraci�n sigue siendo la misma)
-	}
-	
-	/** Provoca la ca�da del objeto (el m�todo lo dibuja cayendo en la ventana)
-	 * La ca�da se producir� en funci�n de la velocidad e ir� increment�ndose con la gravedad,
-	 * y se invertir� en el rebote (si lo hay)
-	 * @param v	Ventana de referencia y dibujado
-	 * @param miliSgs	Tiempo de ca�da
-	 * @param dibujar	true si se quiere borrar y dibujar el objeto en la ventana, false si se hace aparte
-	 * @param aceleracion	Aceleraci�n adicional a la gravedad a aplicar al objeto (si procede). Si es null, no se considera
-	 * @return	true si se cae, false si ya se ha parado en el suelo
-	 */
-	public boolean mueveUnPoco( VentanaGrafica v, long miliSgs, boolean dibujar, Point2D aceleracion ) {
-		// 1. C�lculos previos
-		Point2D miAceleracion = (aceleracion==null) 
-			? new Point2D.Double( 0.0, Physics.GRAVEDAD ) 
-			: new Point2D.Double( aceleracion.getX(), aceleracion.getY() + Physics.GRAVEDAD );
-		velYInicial = velocidadY;  // Guardamos datos para posibles correcciones
-		velXInicial = velocidadX;
-		antY = y;
-		antX = x;
-		// 2. Borrado si procede
-		if (dibujar) borra( v );
-		// 3. Cambio de posici�n (x e y)
-		setX( Physics.calcEspacio( getX(), miliSgs, velocidadX, miAceleracion.getX() ) );
-			// setX( Physics.calcEspacio( getX(), miliSgs, velocidadX ) );  si sabemos que no hay fuerzas horizontales
-		setY( Physics.calcEspacio( getY(), miliSgs, velocidadY, miAceleracion.getY() ) );
-			// setY( Physics.calcEspacio( getY(), miliSgs, velocidadY, Physics.GRAVEDAD ) );  si solo hay gravedad como fuerza vertical
-		// 4. Dibujado si procede
-		if (dibujar) dibuja( v );
-		// 5. Actualizaci�n de velocidad final
-		// Actualizamos la velocidad final con la gravedad     
-		setVelocidadX( Physics.calcVelocidad( getVelocidadX(), miliSgs, miAceleracion.getX() ));
-			// no hace falta si no hay aceleraci�n horizontal (cambio de velocidad=0)
-		setVelocidadY( Physics.calcVelocidad( getVelocidadY(), miliSgs, miAceleracion.getY() ));
-			// setVelocidadY( Physics.calcVelocidad( getVelocidadY(), miliSgs, Physics.GRAVEDAD ));   si solo hay gravedad como fuerza vertical
-		return Physics.igualACero( y-antY ) && (chocaConBorde(v)>=8);
-	}
-	
-		
-
-	
-	/** Aplicamos un rebote vertical al objeto donde est� (si no bota, se queda parado)
-	 * @param coefRestitucion	Coeficiente de restituci�n de la velocidad (entre 0.0 y 1.0)
-	 */
-	public void rebotaVertical( double coefRestitucion ) {
-		// Invertimos la velocidad vertical (rebote)
-		if (bota) {  // Si rebota se le devuelve la velocidad con un % de restituci�n
-			velocidadY = -velocidadY * coefRestitucion;
-		} else {  // Si no bota se queda parada
-			velocidadY = 0;
-		}
-	}
-	
-	/** Aplicamos un rebote horizontal al objeto donde est� (si no bota, se queda parado)
-	 * @param coefRestitucion	Coeficiente de restituci�n de la velocidad (entre 0.0 y 1.0)
-	 */
-	public void rebotaHorizontal( double coefRestitucion ) {
-		// Invertimos la velocidad vertical (rebote)
-		if (rebota) {  // Si rebota se le devuelve la velocidad con un % de restituci�n
-			velocidadX = -velocidadX * coefRestitucion;
-		} else {  // Si no bota se queda parada
-			velocidadX = 0;
-		}
-	}
-	
-	/** Ajusta el objeto al suelo, si se ha "pasado" del suelo. Ajusta la velocidad a la que ten�a cuando lo toc�.
-	 * @param v	Ventana de la que ajustar al suelo
-	 * @param dibujar	true si se quiere dibujar, false en caso contrario
-	 */
-	public abstract void corrigeChoqueInferior( VentanaGrafica v, boolean dibujar );
-	
-	/** Ajusta el objeto al lateral
-	 * @param v	Ventana de la que ajustar al lateral
-	 * @param izquierda	true para izquierda, false para derecha
-	 * @param dibujar	true si se quiere dibujar, false en caso contrario
-	 */
-	public abstract void corrigeChoqueLateral( VentanaGrafica v, boolean izquierda, boolean dibujar );
-	
-	/** Detecta el choque del objeto con los bordes de la ventana
-	 * @param v	Ventana con la que probar el choque
-	 * @return	Devuelve un n�mero formado por la suma de: 0 si no choca, 1 si choca con la izquierda, 2 con la derecha, 4 arriba, 8 abajo.
-	 */
-
+//	public void mueveUnPocoX( VentanaGrafica v, long miliSgs, boolean dibujar ) {
+//		// 1. C�lculos previos
+//		velXInicial = velocidadX;
+//		antX = x;
+//		antY = y;
+//		// 2. Borrado si procede
+//		if (dibujar) borra( v );
+//		// 3. Cambio de posici�n (x)
+//		setX( Physics.calcEspacio( getX(), miliSgs, velocidadX ) );
+//		// 4. Dibujado si procede
+//		if (dibujar) dibuja( v );
+//		// 5. Actualizaci�n de velocidad final
+//		// Sin aceleraci�n sigue siendo la misma)
+//	}
+//	
+//	/** Provoca la ca�da del objeto (el m�todo lo dibuja cayendo en la ventana)
+//	 * La ca�da se producir� en funci�n de la velocidad e ir� increment�ndose con la gravedad,
+//	 * y se invertir� en el rebote (si lo hay)
+//	 * @param v	Ventana de referencia y dibujado
+//	 * @param miliSgs	Tiempo de ca�da
+//	 * @param dibujar	true si se quiere borrar y dibujar el objeto en la ventana, false si se hace aparte
+//	 * @param aceleracion	Aceleraci�n adicional a la gravedad a aplicar al objeto (si procede). Si es null, no se considera
+//	 * @return	true si se cae, false si ya se ha parado en el suelo
+//	 */
+//	public boolean mueveUnPoco( VentanaGrafica v, long miliSgs, boolean dibujar, Point2D aceleracion ) {
+//		// 1. C�lculos previos
+//		Point2D miAceleracion = (aceleracion==null) 
+//			? new Point2D.Double( 0.0, Physics.GRAVEDAD ) 
+//			: new Point2D.Double( aceleracion.getX(), aceleracion.getY() + Physics.GRAVEDAD );
+//		velYInicial = velocidadY;  // Guardamos datos para posibles correcciones
+//		velXInicial = velocidadX;
+//		antY = y;
+//		antX = x;
+//		// 2. Borrado si procede
+//		if (dibujar) borra( v );
+//		// 3. Cambio de posici�n (x e y)
+//		setX( Physics.calcEspacio( getX(), miliSgs, velocidadX, miAceleracion.getX() ) );
+//			// setX( Physics.calcEspacio( getX(), miliSgs, velocidadX ) );  si sabemos que no hay fuerzas horizontales
+//		setY( Physics.calcEspacio( getY(), miliSgs, velocidadY, miAceleracion.getY() ) );
+//			// setY( Physics.calcEspacio( getY(), miliSgs, velocidadY, Physics.GRAVEDAD ) );  si solo hay gravedad como fuerza vertical
+//		// 4. Dibujado si procede
+//		if (dibujar) dibuja( v );
+//		// 5. Actualizaci�n de velocidad final
+//		// Actualizamos la velocidad final con la gravedad     
+//		setVelocidadX( Physics.calcVelocidad( getVelocidadX(), miliSgs, miAceleracion.getX() ));
+//			// no hace falta si no hay aceleraci�n horizontal (cambio de velocidad=0)
+//		setVelocidadY( Physics.calcVelocidad( getVelocidadY(), miliSgs, miAceleracion.getY() ));
+//			// setVelocidadY( Physics.calcVelocidad( getVelocidadY(), miliSgs, Physics.GRAVEDAD ));   si solo hay gravedad como fuerza vertical
+//		return Physics.igualACero( y-antY ) && (chocaConBorde(v)>=8);
+//	}
+//	
+//		
+//
+//	
+//	/** Aplicamos un rebote vertical al objeto donde est� (si no bota, se queda parado)
+//	 * @param coefRestitucion	Coeficiente de restituci�n de la velocidad (entre 0.0 y 1.0)
+//	 */
+//	public void rebotaVertical( double coefRestitucion ) {
+//		// Invertimos la velocidad vertical (rebote)
+//		if (bota) {  // Si rebota se le devuelve la velocidad con un % de restituci�n
+//			velocidadY = -velocidadY * coefRestitucion;
+//		} else {  // Si no bota se queda parada
+//			velocidadY = 0;
+//		}
+//	}
+//	
+//	/** Aplicamos un rebote horizontal al objeto donde est� (si no bota, se queda parado)
+//	 * @param coefRestitucion	Coeficiente de restituci�n de la velocidad (entre 0.0 y 1.0)
+//	 */
+//	public void rebotaHorizontal( double coefRestitucion ) {
+//		// Invertimos la velocidad vertical (rebote)
+//		if (rebota) {  // Si rebota se le devuelve la velocidad con un % de restituci�n
+//			velocidadX = -velocidadX * coefRestitucion;
+//		} else {  // Si no bota se queda parada
+//			velocidadX = 0;
+//		}
+//	}
+//	
+//	/** Ajusta el objeto al suelo, si se ha "pasado" del suelo. Ajusta la velocidad a la que ten�a cuando lo toc�.
+//	 * @param v	Ventana de la que ajustar al suelo
+//	 * @param dibujar	true si se quiere dibujar, false en caso contrario
+//	 */
+//	public abstract void corrigeChoqueInferior( VentanaGrafica v, boolean dibujar );
+//	
+//	/** Ajusta el objeto al lateral
+//	 * @param v	Ventana de la que ajustar al lateral
+//	 * @param izquierda	true para izquierda, false para derecha
+//	 * @param dibujar	true si se quiere dibujar, false en caso contrario
+//	 */
+//	public abstract void corrigeChoqueLateral( VentanaGrafica v, boolean izquierda, boolean dibujar );
+//	
+//	/** Detecta el choque del objeto con los bordes de la ventana
+//	 * @param v	Ventana con la que probar el choque
+//	 * @return	Devuelve un n�mero formado por la suma de: 0 si no choca, 1 si choca con la izquierda, 2 con la derecha, 4 arriba, 8 abajo.
+//	 */
+//
 }
 
 
