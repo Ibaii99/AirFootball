@@ -1,3 +1,4 @@
+package objetos;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -6,9 +7,6 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import fisicas.Fisica;
-import objetos.Bloque;
-import objetos.ObjetoFisico;
-import objetos.Pelota;
 import ventanas.VentanaGrafica;
 
 public class MundoBola {
