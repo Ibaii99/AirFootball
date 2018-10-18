@@ -1,5 +1,9 @@
 package entidades;
 
+/**
+ * @author ibai
+ *
+ */
 public class Partidos {
 	
 	private Equipo equipoLocal;
@@ -7,6 +11,9 @@ public class Partidos {
 	
 	private int golesLocal;
 	private int golesVisitante;
+	
+	private boolean terminaPorTiempo;
+	private boolean terminaPorGoles;
 
 
 }

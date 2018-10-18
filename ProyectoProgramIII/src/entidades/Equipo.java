@@ -3,6 +3,10 @@ package entidades;
 import java.awt.Image;
 import java.util.ArrayList;
 
+/**
+ * @author ibai
+ *
+ */
 public class Equipo {
 	
 	private Image escudo;				// Una imagen directamente asignada, mejor que una ruta
