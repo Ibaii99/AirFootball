@@ -32,6 +32,12 @@ public class Equipo extends Objetos{
 	private int derrotasLocal;
 	private int derrotasVisitante;
 	
+	private int empatesTotales;
+	private int empatesLocal;
+	private int empatesVisitante;
+	
+	
+	
 	private ArrayList<Partidos> arrayPartidosJugados;
 	
 	/** Constructor de la clase equipo
@@ -57,25 +63,47 @@ public class Equipo extends Objetos{
 		arrayPartidosJugados.add(partido);
 	}
 	
-	public void anyadirEstadisticasVisitante(boolean haGanado) {
+	/**	Metodo para añadir estadisticas cuando el equipo juega de Visitante
+	 * @param haGanado			true si gana, false si empata o pierde
+	 * @param haEmpatado 		true si empata, false si pierde
+	 * @param golesAFavor		goles marcados por el equipo
+	 * @param golesEnContra		goles encajados al equipo
+	 */
+	public void anyadirEstadisticasVisitante(boolean haGanado, boolean haEmpatado, int golesAFavor, int golesEnContra) {
 		if(!haGanado) {
-		derrotasVisitante += 1;
-		}
-		if(haGanado) {
-		victoriasVisitante +=1;
-		}
+			if(haEmpatado){empatesVisitante += 1;}
+			else if(!haEmpatado) {derrotasVisitante += 1;}
+			}
+		else if(haGanado) {victoriasVisitante += 1;}
 		
-		golesAFavorVisitante += ;
-		golesEnContraVisitante += ;
+		golesAFavorVisitante += golesAFavor;
+		golesEnContraVisitante += golesEnContra;
 	}
 	
-	public void anyadirEstadisticasLocal() {
+	/**	Metodo para añadir estadisticas cuando el equipo juega de LOCAL
+	 * @param haGanado			true si gana, false si empata o pierde
+	 * @param haEmpatado 		true si empata, false si pierde
+	 * @param golesAFavor		goles marcados por el equipo
+	 * @param golesEnContra		goles encajados al equipo
+	 */
+	public void anyadirEstadisticasLocal(boolean haGanado, boolean haEmpatado, int golesAFavor, int golesEnContra) {
+		if(!haGanado) {
+			if(haEmpatado){empatesLocal += 1;}
+			else if(!haEmpatado) {derrotasLocal += 1;}
+			}
+		else if(haGanado) {victoriasLocal += 1;}
 		
+		golesAFavorLocal += golesAFavor;
+		golesEnContraLocal += golesEnContra;
 	}
 	
+	/** Metodo que calcula las estadisticas totales partiendo de las estadisticas locales y visitantes
+	 */
 	public void calcularEstadisticasTotales() {
 		derrotasTotales = derrotasVisitante + derrotasLocal;
 		victoriasTotales = victoriasVisitante + victoriasLocal;
+		empatesTotales = empatesVisitante + empatesLocal;
+		
 		golesAFavorTotales = golesAFavorVisitante + golesAFavorLocal;
 		golesEnContraTotales = golesEnContraVisitante + golesEnContraLocal;
 	}
