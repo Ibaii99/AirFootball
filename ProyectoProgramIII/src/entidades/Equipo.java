@@ -107,6 +107,83 @@ public class Equipo extends Objetos{
 		golesAFavorTotales = golesAFavorVisitante + golesAFavorLocal;
 		golesEnContraTotales = golesEnContraVisitante + golesEnContraLocal;
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public char getSiglas() {
+		return siglas;
+	}
+
+	public int getPuntos() {
+		return puntos;
+	}
+
+	public int getGolesEnContraTotales() {
+		return golesEnContraTotales;
+	}
+
+	public int getGolesEnContraVisitante() {
+		return golesEnContraVisitante;
+	}
+
+	public int getGolesEnContraLocal() {
+		return golesEnContraLocal;
+	}
+
+	public int getGolesAFavorTotales() {
+		return golesAFavorTotales;
+	}
+
+	public int getGolesAFavorVisitante() {
+		return golesAFavorVisitante;
+	}
+
+	public int getGolesAFavorLocal() {
+		return golesAFavorLocal;
+	}
+
+	public int getVictoriasTotales() {
+		return victoriasTotales;
+	}
+
+	public int getVictoriasLocal() {
+		return victoriasLocal;
+	}
+
+	public int getVictoriasVisitante() {
+		return victoriasVisitante;
+	}
+
+	public int getDerrotasTotales() {
+		return derrotasTotales;
+	}
+
+	public int getDerrotasLocal() {
+		return derrotasLocal;
+	}
+
+	public int getDerrotasVisitante() {
+		return derrotasVisitante;
+	}
+
+	public int getEmpatesTotales() {
+		return empatesTotales;
+	}
+
+	public int getEmpatesLocal() {
+		return empatesLocal;
+	}
+
+	public int getEmpatesVisitante() {
+		return empatesVisitante;
+	}
+
+	public ArrayList<Partidos> getArrayPartidosJugados() {
+		return arrayPartidosJugados;
+	}
+	
 	
 
 }
