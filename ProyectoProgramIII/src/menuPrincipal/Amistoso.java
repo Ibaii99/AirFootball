@@ -6,8 +6,11 @@ import entidades.Partidos;
  * @author ibai
  *
  */
-public class Amistoso {
+public class Amistoso{
 	
-	Partidos amistoso = new Partidos();
+	public Amistoso() {
+		Partidos amistoso = new Partidos(equipoLocal, equipoVisitante);
+	}
+	
 	
 }

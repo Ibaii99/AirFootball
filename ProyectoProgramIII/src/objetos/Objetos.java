@@ -12,7 +12,7 @@ public class Objetos extends Fisicas{
 	private int xAntes;
 	private int yAntes;
 	
-	private int peso;
+	private int masa;
 	private Image imagenObjeto;
 	
 	private double objetoAlto;
