@@ -1,43 +1,59 @@
 package objetos;
 
+import java.awt.Color;
 import java.awt.Image;
 
 import fisicas.Fisicas;
 
 public abstract class Objetos extends Fisicas{
 	
+///////////////////////Posicion///////////////////////////////
 	protected double x;
 	protected double y;
-	protected double velX;
-	protected double velY;
 	
 	protected double xAntes = 0;
 	protected double yAntes = 0;
+	
+////////////////////////Velocidad///////////////////////////	
+	protected double velX;
+	protected double velY;
+
 	protected double velXAntes = 0;
 	protected double velYAntes = 0;
 	
+	
 	protected double masa;
+	protected boolean bota;
+	
+	protected String nombre;
+	protected Color color;
 	protected Image imagenObjeto;
 	
 	protected double objetoAlto;
 	protected double objetoAncho;
+	
 	
 	public static boolean DIBUJAR_VELOCIDAD = false;
 
 	/** Constructor de objeto f�sico con datos
 	 * @param x	Coordenada x del centro de la pelota
 	 * @param y	Coordenada y del centro de la pelota
-	 * @param radio	Radio de la pelota
-	 * @param color	Color de la pelota (p ej. 'a' = azul)
-	 * @param bota	Informaci�n de si la pelota bota (true) o no (false)
+	 * @param color Color elegido de los de por defecto
+	 * @param bota True si el objeto rebota
+	 * @param nombre Nombre del objeto
+	 * @param alto Altura del objeto
+	 * @param ancho Anchura del objeto
 	 */
-	public Objetos(double x, double y, char color, boolean bota) {
+	public Objetos(double x, double y, Color color, boolean bota, String nombre, double alto, double ancho, double masa) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.color = color;
 		this.bota = bota;
-		this.nombre = "";  // Evita el nullpointer
+		this.nombre = nombre; 
+		this.objetoAlto = alto; 
+		this.objetoAncho = ancho;
+		this.masa = masa;
 	}
 	
 }
