@@ -45,6 +45,7 @@ public class Equipo extends Objetos{
 	 * @param siglas	Siglas del equipo
 	 */
 	public Equipo(String nombre, char siglas) {
+		super(masa1, siglas, DIBUJAR_VELOCIDAD);
 		this.nombre = nombre;
 		this.siglas = siglas;
 	}
