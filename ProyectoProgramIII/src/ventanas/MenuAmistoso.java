@@ -22,7 +22,7 @@ public class MenuAmistoso extends JFrame {
 		JLabel lblLocal = new JLabel("Local");
 		lblLocal.setFont(new Font("Arial Black", Font.PLAIN, 13));
 		lblLocal.setBounds(157, 203, 42, 16);
-		getContentPane().add(lblLocal);
+		getContentPane().add(lblLocal); 
 		
 		JLabel lblVisitante = new JLabel("Visitante");
 		lblVisitante.setFont(new Font("Arial Black", Font.PLAIN, 13));
