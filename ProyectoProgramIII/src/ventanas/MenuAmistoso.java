@@ -12,7 +12,7 @@ public class MenuAmistoso extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(157, 222, 31, 22);
+		comboBox.setBounds(157, 222, 31, 22); 
 		getContentPane().add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
