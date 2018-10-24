@@ -17,6 +17,9 @@ public class Equipo extends Objetos{
 	
 	private int puntos;
 	
+
+	
+	private ArrayList<Partidos> arrayPartidosJugados;
 	
 ////////////////////////////Atributos para estadísticas///////////////////////////////////////////////////
 	private int golesEnContraTotales;
@@ -39,9 +42,7 @@ public class Equipo extends Objetos{
 	private int empatesLocal;
 	private int empatesVisitante;
 	
-	
-	
-	private ArrayList<Partidos> arrayPartidosJugados;
+
 	
 
 	/** Metodo constructor de un objeto Equipo
@@ -88,6 +89,7 @@ public class Equipo extends Objetos{
 		
 		golesAFavorVisitante += golesAFavor;
 		golesEnContraVisitante += golesEnContra;
+		calcularEstadisticasTotales();
 	}
 	
 	/**	Metodo para añadir estadisticas cuando el equipo juega de LOCAL
@@ -105,11 +107,12 @@ public class Equipo extends Objetos{
 		
 		golesAFavorLocal += golesAFavor;
 		golesEnContraLocal += golesEnContra;
+		calcularEstadisticasTotales();
 	}
 	
 	/** Metodo que calcula las estadisticas totales partiendo de las estadisticas locales y visitantes
 	 */
-	public void calcularEstadisticasTotales() {
+	private void calcularEstadisticasTotales() {
 		derrotasTotales = derrotasVisitante + derrotasLocal;
 		victoriasTotales = victoriasVisitante + victoriasLocal;
 		empatesTotales = empatesVisitante + empatesLocal;
@@ -118,16 +121,11 @@ public class Equipo extends Objetos{
 		golesEnContraTotales = golesEnContraVisitante + golesEnContraLocal;
 	}
 	
-	public enum Estadisticas {
-		VictoriasTotales,VictoriasVisitante,VictoriasLocal, 
-		DerrotasTotales,DerrotasVisitante,DerrotasLocal,
-		EmpatesTotales,EmpatesVisitante,EmpatesLocal,
-		GolesEnContraTotales,GolesEnContraVisitante,GolesEnContraLocal, 
-		GolesAFavorTotales,GolesAFavorVisitante,GolesAFavorLocal
-	}
-	public ArrayList<Integer> getTodasLasEstadisticas() {
-		ArrayList<>
-		return null;
+	/** Metodo para añadir un partido a la lista de partidos jugados del equipo
+	 * @param p	Partido jugado
+	 */
+	public void anyadirPartido(Partidos p) {
+		arrayPartidosJugados.add(p);
 		
 	}
 
@@ -146,6 +144,66 @@ public class Equipo extends Objetos{
 
 	public ArrayList<Partidos> getArrayPartidosJugados() {
 		return arrayPartidosJugados;
+	}
+
+	public int getGolesEnContraTotales() {
+		return golesEnContraTotales;
+	}
+
+	public int getGolesEnContraVisitante() {
+		return golesEnContraVisitante;
+	}
+
+	public int getGolesEnContraLocal() {
+		return golesEnContraLocal;
+	}
+
+	public int getGolesAFavorTotales() {
+		return golesAFavorTotales;
+	}
+
+	public int getGolesAFavorVisitante() {
+		return golesAFavorVisitante;
+	}
+
+	public int getGolesAFavorLocal() {
+		return golesAFavorLocal;
+	}
+
+	public int getVictoriasTotales() {
+		return victoriasTotales;
+	}
+
+	public int getVictoriasLocal() {
+		return victoriasLocal;
+	}
+
+	public int getVictoriasVisitante() {
+		return victoriasVisitante;
+	}
+
+	public int getDerrotasTotales() {
+		return derrotasTotales;
+	}
+
+	public int getDerrotasLocal() {
+		return derrotasLocal;
+	}
+
+	public int getDerrotasVisitante() {
+		return derrotasVisitante;
+	}
+
+	public int getEmpatesTotales() {
+		return empatesTotales;
+	}
+
+	public int getEmpatesLocal() {
+		return empatesLocal;
+	}
+
+	public int getEmpatesVisitante() {
+		return empatesVisitante;
 	}
 	
 	
