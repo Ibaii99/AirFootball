@@ -117,6 +117,7 @@ public class Equipo extends Objetos{
 		golesAFavorTotales = golesAFavorVisitante + golesAFavorLocal;
 		golesEnContraTotales = golesEnContraVisitante + golesEnContraLocal;
 	}
+	
 	public enum Estadisticas {
 		VictoriasTotales,VictoriasVisitante,VictoriasLocal, 
 		DerrotasTotales,DerrotasVisitante,DerrotasLocal,
