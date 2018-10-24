@@ -58,6 +58,10 @@ public class Partidos {
 		}	
 	}
 
+	public Equipo getEquipoGanador() {
+		return equipoGanador;
+	}
+
 	public int getGolesLocal() {
 		return golesLocal;
 	}
