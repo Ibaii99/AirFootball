@@ -22,7 +22,7 @@ public class Partido extends JFrame {
 		ImageIcon icon = new ImageIcon(Partido.class.getResource("/iconos/marcador.jpg"));
 		Image img = icon.getImage();
 		BufferedImage bi = new BufferedImage(80,45,
-				BufferedImage.TYPE_INT_ARGB);
+				BufferedImage.TYPE_INT_ARGB); 
 		Graphics g = bi.createGraphics();
 		g.drawImage(img, 0, 0, 80, 45, null);
 		ImageIcon newIcon = new ImageIcon(bi);
