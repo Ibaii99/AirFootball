@@ -14,32 +14,32 @@ public class Partido extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(322, 13, 80, 45);
+		panel.setBounds(182, 13, 373, 40);
 		getContentPane().add(panel);
-		
-		JLabel label = new JLabel("");
-		label.setBounds(0, 5, 80, 45);
-		ImageIcon icon = new ImageIcon(Partido.class.getResource("/iconos/marcador.jpg"));
+		ImageIcon icon = new ImageIcon(Partido.class.getResource("/iconos/marcadorconnombres.jpg"));
 		Image img = icon.getImage();
-		BufferedImage bi = new BufferedImage(80,45,
+		BufferedImage bi = new BufferedImage(373,50,
 				BufferedImage.TYPE_INT_ARGB); 
 		Graphics g = bi.createGraphics();
-		g.drawImage(img, 0, 0, 80, 45, null);
+		g.drawImage(img, 0, 0, 373,50, null);
 		ImageIcon newIcon = new ImageIcon(bi);
 		panel.setLayout(null);
 		
 		JLabel label_2 = new JLabel("0");
 		label_2.setForeground(Color.RED);
 		label_2.setFont(new Font("DSEG14 Classic", Font.PLAIN, 28));
-		label_2.setBounds(10, 10, 23, 32);
+		label_2.setBounds(153, 5, 23, 32);
 		panel.add(label_2);
 		
 		JLabel label_1 = new JLabel("0");
 		label_1.setForeground(Color.RED);
 		label_1.setFont(new Font("DSEG14 Classic", Font.PLAIN, 28));
-		label_1.setBounds(47, 10, 23, 32);
+		label_1.setBounds(190, 5, 23, 32);
 		panel.add(label_1);
+		
+		JLabel label = new JLabel("");
 		label.setIcon(newIcon);
+		label.setBounds(0, 0, 373, 51);
 		panel.add(label);
 	}
 	boolean amistoso;
