@@ -7,6 +7,10 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 public class MenuAmistoso extends JFrame {
+	/**
+	 * @author Jorge
+	 *
+	 */
 	public MenuAmistoso() {
 		setSize(600,450);
 		getContentPane().setLayout(null);

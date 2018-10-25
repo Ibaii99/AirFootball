@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class MenuLiga extends JFrame {
+	/**
+	 * @author Jorge
+	 *
+	 */
 	public MenuLiga() {
 		getContentPane().setLayout(null);
 		

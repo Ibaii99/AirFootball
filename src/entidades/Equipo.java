@@ -12,8 +12,9 @@ import objetos.Objetos;
  */
 public class Equipo extends Objetos{
 	
-	private String nombre;			
-	private char siglas;				// Char para crear un formato de reconocimiento de siglas con lo dado en clase
+	private String nombre;		
+	
+	private char siglas; // Char para crear un formato de reconocimiento de siglas con lo dado en clase
 	
 	private int puntos;
 	
