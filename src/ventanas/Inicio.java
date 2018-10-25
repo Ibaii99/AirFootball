@@ -5,6 +5,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class Inicio extends JFrame {
 	/**
@@ -48,11 +50,17 @@ public class Inicio extends JFrame {
 		bArcade.setFont(new Font("Arial Black", Font.PLAIN, 16));
 		bArcade.setBounds(502, 198, 119, 40);
 		getContentPane().add(bArcade);
+		
+		JLabel lPortada = new JLabel("");
+		lPortada.setIcon(new ImageIcon(Inicio.class.getResource("/iconos/PORTADA.jpg")));
+		lPortada.setBounds(0, 0, 642, 433);
+		getContentPane().add(lPortada);
 	}
 
 	public static void main(String[] args) {
 		Inicio i = new Inicio();
-		i.setSize(660, 480);
+		i.setSize(630, 460);
+		i.setResizable(false);
 		i.setVisible(true);
 	}
 }

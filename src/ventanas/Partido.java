@@ -13,6 +13,7 @@ public class Partido extends JFrame {
 	public Partido() {
 		setSize(750, 500);
 		setResizable(false);
+		setVisible(true);
 		getContentPane().setLayout(null);
 		ImageIcon iconL = new ImageIcon(Partido.class.getResource("/iconos/equipos/atl.png"));
 		Image imgL = iconL.getImage();
@@ -20,6 +21,13 @@ public class Partido extends JFrame {
 		Graphics gL = biL.createGraphics();
 		gL.drawImage(imgL, 0, 0, 40, 40, null);
 		ImageIcon newIconL = new ImageIcon(biL);
+		
+		ImageIcon iconC = new ImageIcon(Partido.class.getResource("/iconos/campo.png"));
+		Image imgC = iconC.getImage();
+		BufferedImage biC = new BufferedImage(720, 395, BufferedImage.TYPE_INT_ARGB);
+		Graphics gC = biC.createGraphics();
+		gC.drawImage(imgC, 0, 0, 720, 395, null);
+		ImageIcon newIconC = new ImageIcon(biC);
 
 		ImageIcon iconV = new ImageIcon(Partido.class.getResource("/iconos/equipos/ath.png"));
 		Image imgV = iconV.getImage();
@@ -64,6 +72,11 @@ public class Partido extends JFrame {
 		label.setIcon(newIcon);
 		label.setBounds(0, 0, 373, 51);
 		panel.add(label);
+		
+		JLabel lCampo = new JLabel("");
+		lCampo.setIcon(newIconC);
+		lCampo.setBounds(12, 57, 720, 395);
+		getContentPane().add(lCampo);
 
 	}
 

@@ -5,6 +5,12 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import com.sun.prism.paint.Color;
 
 public class MenuAmistoso extends JFrame {
 	/**
@@ -12,7 +18,7 @@ public class MenuAmistoso extends JFrame {
 	 *
 	 */
 	public MenuAmistoso() {
-		setSize(600,450);
+		setSize(630,460);
 		getContentPane().setLayout(null);
 		
 		JComboBox comboBox = new JComboBox();
@@ -34,10 +40,25 @@ public class MenuAmistoso extends JFrame {
 		getContentPane().add(lblVisitante);
 		
 		JButton btnIniciarAmistoso = new JButton("Iniciar amistoso");
+		btnIniciarAmistoso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				Partido partido = new Partido(); //aquí meter quizá un constructor entre equipos
+			}
+		});
 		btnIniciarAmistoso.setFont(new Font("Arial Black", Font.PLAIN, 13));
-		btnIniciarAmistoso.setBounds(209, 317, 149, 25);
+		btnIniciarAmistoso.setBounds(209, 317, 170, 25);
 		getContentPane().add(btnIniciarAmistoso);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 612, 413);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblFondo = new JLabel("");
+		lblFondo.setBounds(0, 0, 612, 413);
+		panel.add(lblFondo);
+		lblFondo.setIcon(new ImageIcon(MenuAmistoso.class.getResource("/iconos/stadiumAmistoso.png")));
 		setVisible(true);
 	}
-
 }
