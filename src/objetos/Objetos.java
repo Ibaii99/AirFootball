@@ -7,6 +7,13 @@ import fisicas.Fisicas;
 
 public abstract class Objetos extends Fisicas{
 	
+	protected double masa;
+	protected boolean bota;
+	
+	protected String nombre;
+	protected Color color;
+	protected Image imagenObjeto;
+
 ///////////////////////Posicion///////////////////////////////
 	protected double x;
 	protected double y;
@@ -21,14 +28,7 @@ public abstract class Objetos extends Fisicas{
 	protected double velXAntes = 0;
 	protected double velYAntes = 0;
 	
-	
-	protected double masa;
-	protected boolean bota;
-	
-	protected String nombre;
-	protected Color color;
-	protected Image imagenObjeto;
-	
+///////////////////////Tamaño//////////////////////////////////////	
 	protected double objetoAlto;
 	protected double objetoAncho;
 	
