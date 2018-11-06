@@ -112,9 +112,4 @@ public class Partido extends JFrame {
 	boolean liga;
 	boolean arcade;
 
-	public static void main(String[] args) {
-		Partido p = new Partido();
-		p.setVisible(true);
-
-	}
 }
