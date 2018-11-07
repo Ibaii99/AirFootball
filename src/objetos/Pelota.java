@@ -69,7 +69,7 @@ public class Pelota extends Objetos{
 	 */
 	@Override
 	public void dibuja( ventanaPartido v ) {
-		v.dibujaCirculo( x, y, radio, 1.5f, getAWTColor() );
+		v.dibujaCirculo( x, y, radio, 1.5f, getColor() );
 		super.dibuja( v );  // Para dibujar la velocidad si procede
 	}
 	
@@ -98,7 +98,7 @@ public class Pelota extends Objetos{
 				if (dibujar) borra( v );
 				long tiempoMsgs = Math.round(tiempoChoque*1000.0);
 				setX( Fisicas.calcEspacio( xAntes, tiempoMsgs, velXAntes ) );  // Corrige la posici�n
-				setVelocidadY( Fisicas.calcVelocidad( velYAntes, tiempoMsgs, Fisicas.ROZAMIENTO )); // Corrige la velocidad
+				setVelY( Fisicas.calcVelocidad( velYAntes, tiempoMsgs, Fisicas.ROZAMIENTO )); // Corrige la velocidad
 				if (dibujar) dibuja( v );
 			}
 			// System.out.println( "Datos: " + tiempoChoque + " " + velYInicial + " " + antY + " " + radio + " " + (velYInicial*velYInicial - 2.0*Fisica.GRAVEDAD*(antY-(v.getAltura()-radio))) );
@@ -174,6 +174,14 @@ public class Pelota extends Objetos{
 	@Override
 	public String toString() {
 		return String.format( "Pelota %1s (%2$7.2f,%3$7.2f) R=%4$5.1f Vel.=(%5$6.3f,%6$6.3f)", nombre, x, y, radio, velX, velY );
+	}
+
+	public void setRadio(double radio) {
+		this.radio = radio;
+	}
+
+	public double getRadio() {
+		return radio;
 	}
 	
 }

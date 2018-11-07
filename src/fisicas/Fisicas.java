@@ -161,7 +161,7 @@ public class Fisicas {
 			velPelota2.transformaANuevoEje( tangenteXY );
 			Point2D nuevaVelPelota = velPelota.toPoint();
 			Point2D nuevaVelPelota2 = velPelota2.toPoint();
-			double[] velChoque = Fisica.calcChoque( pelota.getVolumen(), nuevaVelPelota.getY(), pelota2.getVolumen(), nuevaVelPelota2.getY() );
+			double[] velChoque = Fisicas.calcChoque( pelota.getVolumen(), nuevaVelPelota.getY(), pelota2.getVolumen(), nuevaVelPelota2.getY() );
 			nuevaVelPelota.setLocation( nuevaVelPelota.getX(), velChoque[0] );
 			nuevaVelPelota2.setLocation( nuevaVelPelota2.getX(), velChoque[1] );
 			if (visualizarChoque) {
@@ -194,8 +194,8 @@ public class Fisicas {
 			pelota.setVelocidad( velPelotaFin );
 			pelota2.setVelocidad( velPelota2Fin );
 			if (visualizarChoque) {  // Pelotas tras el choque sin correcci�n
-				ventana.dibujaCirculo( pelota.getX(), pelota.getY(), pelota.getRadio(), 2.5f, pelota.getAWTColor() );
-				ventana.dibujaCirculo( pelota2.getX(), pelota2.getY(), pelota2.getRadio(), 2.5f, pelota2.getAWTColor() );
+				ventana.dibujaCirculo( pelota.getX(), pelota.getY(), pelota.getRadio(), 2.5f, pelota.getColor() );
+				ventana.dibujaCirculo( pelota2.getX(), pelota2.getY(), pelota2.getRadio(), 2.5f, pelota2.getColor() );
 				System.out.println( "Montado exacto: " + choque );
 			}
 			// Corrige posici�n para que no se monten (en funci�n de los avances previos)
@@ -232,8 +232,8 @@ public class Fisicas {
 				pelota2.setY( pelota2.getY()+choque.getY()*diferencia2*1.1 );
 			}
 			if (visualizarChoque) {  // Pelotas tras el choque con correcci�n
-				ventana.dibujaCirculo( pelota.getX(), pelota.getY(), pelota.getRadio(), 3f, pelota.getAWTColor() );
-				ventana.dibujaCirculo( pelota2.getX(), pelota2.getY(), pelota2.getRadio(), 3f, pelota2.getAWTColor() );
+				ventana.dibujaCirculo( pelota.getX(), pelota.getY(), pelota.getRadio(), 3f, pelota.getColor() );
+				ventana.dibujaCirculo( pelota2.getX(), pelota2.getY(), pelota2.getRadio(), 3f, pelota2.getColor() );
 			}
 		} 
 	}
