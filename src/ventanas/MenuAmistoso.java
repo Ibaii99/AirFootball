@@ -51,9 +51,9 @@ public class MenuAmistoso extends JFrame {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(160, 223, 31, 22);
-		panel.add(comboBox);
+		final JComboBox cbLocal = new JComboBox();
+		cbLocal.setBounds(120, 224, 150, 22);
+		panel.add(cbLocal);
 		
 		final JButton btnIniciarAmistoso = new JButton("Iniciar amistoso");
 		btnIniciarAmistoso.setBounds(207, 271, 159, 27);
@@ -71,12 +71,12 @@ public class MenuAmistoso extends JFrame {
 		panel.add(lblVisitante);
 		lblVisitante.setFont(new Font("Arial Black", Font.PLAIN, 13));
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(375, 224, 31, 22);
-		panel.add(comboBox_1);
+		final JComboBox cbVisitante = new JComboBox();
+		cbVisitante.setBounds(300, 224, 150, 22);
+		panel.add(cbVisitante);
 		
 		final JLabel lblLocal = new JLabel("Local");
-		lblLocal.setBounds(155, 204, 40, 19);
+		lblLocal.setBounds(155, 203, 40, 19);
 		panel.add(lblLocal);
 		lblLocal.setFont(new Font("Arial Black", Font.PLAIN, 13));
 		
@@ -105,10 +105,15 @@ public class MenuAmistoso extends JFrame {
 				int nuevaAltura =  (20*getWidth()/626);
 				int nuevaAnchuraBtn =  (159*getWidth()/626);
 				int nuevaAlturaBtn =  (30*getWidth()/626);
+				int nuevaAnchuraCb =  (150*getWidth()/626);
+				int nuevaAlturaCb =  (22*getWidth()/626);
 				lblLocal.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
 				lblVisitante.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
+				
+				cbVisitante.setBounds((int) Math.round(((getWidth()/2)+(getWidth()*0.01))), (int) Math.round(((getHeight()/2)-(getHeight()*0.01))), nuevaAnchuraCb, nuevaAlturaCb);
 				lblVisitante.setBounds((int) Math.round(((getWidth()/2)+(getWidth()*0.05))), (int) Math.round(((getHeight()/2)-(getHeight()*0.075))), nuevaAnchura, nuevaAltura);
-				lblLocal.setBounds((int) Math.round(((getWidth()/2)-(getWidth()*0.25))), (int) Math.round(((getHeight()/2)-(getHeight()*0.05))), nuevaAnchura, nuevaAltura);
+				cbLocal.setBounds((int) Math.round(((getWidth()/2)-(getWidth()*0.31))), (int) Math.round(((getHeight()/2)-(getHeight()*0.01))), nuevaAnchuraCb, nuevaAlturaCb);
+				lblLocal.setBounds((int) Math.round(((getWidth()/2)-(getWidth()*0.25))), (int) Math.round(((getHeight()/2)-(getHeight()*0.075))), nuevaAnchura, nuevaAltura);
 				btnIniciarAmistoso.setBounds((int) Math.round(((getWidth()/2)-(getWidth()*0.15))), (int) Math.round(((getHeight()/2)+(getHeight()*0.2))), nuevaAnchuraBtn, nuevaAlturaBtn);
 				btnIniciarAmistoso.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
 				revalidate();
