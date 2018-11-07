@@ -55,8 +55,6 @@ public class Inicio extends JFrame {
 				dispose();
 				MenuAmistoso mu = new MenuAmistoso(getSize().width, getSize().height);
 				mu.setVisible(true);
-				
-				
 			}
 		});
 		bAmistoso.setFont(new Font("Arial Black", Font.PLAIN, 16));
