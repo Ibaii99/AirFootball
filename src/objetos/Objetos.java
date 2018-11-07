@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.geom.Point2D;
 
 import fisicas.Fisicas;
+import tema02.mundoConHerencia.Fisica;
 import tema02.mundoConHerencia.VentanaGrafica;
 import ventanas.ventanaPartido;
 
@@ -193,36 +194,10 @@ public abstract class Objetos extends Fisicas{
 		}
 	}
 	
-	/** Devuelve el color del objeto en formato AWT
-	 * @return	color del objeto, negro si no es interpretable
-	 */
-	public Color getAWTColor() {
-		Color colorDeAWT;
-		switch (this.color) {
-			case 'a': {
-				colorDeAWT = Color.blue;
-				break;  // Recordar el break!!!
-			}
-			case 'r': {
-				colorDeAWT = Color.red;
-				break;
-			}
-			case 'v': {
-				colorDeAWT = Color.green;
-				break;
-			}
-			default: {
-				colorDeAWT = Color.black;  // Por defecto negro
-				break;
-			}
-		}
-		return colorDeAWT;
-	}
-	
 	/** Borra el objeto en una ventana
 	 * @param v	Ventana en la que borrar el objeto
 	 */
-	public abstract void borra( VentanaGrafica v );
+	public abstract void borra( ventanaPartido v );
 
 	/** Provoca el movimiento y ca�da del objeto.
 	 * La ca�da se producir� en funci�n de la velocidad e ir� increment�ndose con la gravedad.
@@ -231,9 +206,28 @@ public abstract class Objetos extends Fisicas{
 	 * @param dibujar	true si se quiere borrar y dibujar el objeto en la ventana, false si se hace aparte
 	 * @return	true si se cae, false si ya se ha parado en el suelo
 	 */
-	public boolean mueveUnPoco( VentanaGrafica v, long miliSgs, boolean dibujar ) {
+	public boolean mueveUnPoco( ventanaPartido v, long miliSgs, boolean dibujar ) {
 		return mueveUnPoco( v, miliSgs, dibujar, null );
 	}
 	
+	/** Provoca el movimiento solo horizontal del objeto.
+	 * @param v	Ventana de referencia y dibujado
+	 * @param miliSgs	Tiempo de ca�da
+	 * @param dibujar	true si se quiere borrar y dibujar el objeto en la ventana, false si se hace aparte
+	 */
+	public void mueveUnPocoX( ventanaPartido v, long miliSgs, boolean dibujar ) {
+		// 1. C�lculos previos
+		velXAntes = velX;
+		xAntes = x;
+		yAntes = y;
+		// 2. Borrado si procede
+		if (dibujar) borra( v );
+		// 3. Cambio de posici�n (x)
+		setX( Fisicas.calcEspacio( getX(), miliSgs, velX ) );
+		// 4. Dibujado si procede
+		if (dibujar) dibuja( v );
+		// 5. Actualizaci�n de velocidad final
+		// Sin aceleraci�n sigue siendo la misma)
+	}
 	
 }

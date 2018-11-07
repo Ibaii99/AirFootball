@@ -20,6 +20,7 @@ public class ventanaPartido extends JFrame {
 	 */
 	private Graphics2D graphics;  // Objeto gr�fico sobre el que dibujar (del buffer)
 	private JPanel panel;         // Panel principal
+	
 	public ventanaPartido() {
 		setSize(750, 500);
 		setResizable(false);
