@@ -6,9 +6,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import fisicas.Fisicas;
-import tema02.mundoConHerencia.Fisica;
-import tema02.mundoConHerencia.ObjetoFisico;
-import tema02.mundoConHerencia.VentanaGrafica;
+
 import ventanas.ventanaPartido;
 
 public abstract class Objetos extends Fisicas{
