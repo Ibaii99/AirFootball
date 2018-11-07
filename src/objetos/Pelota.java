@@ -27,6 +27,9 @@ public class Pelota extends Objetos{
 		this.radio = radio;
 	}
 	
+	/** Metodo para crear pelotas para equipos, la ficha del equipo en si
+
+	
 	/** Constructor sencillo de pelota, posiciones: 0,0 y masa=50
 	 * @param color	Color a elegir
 	 * @param nombre Nombre a elegir	

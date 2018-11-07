@@ -303,6 +303,21 @@ public class ventanaPartido extends JFrame {
 		init();
 	}
 
+	/** Devuelve la altura del panel de dibujo de la ventana
+	 * @return	Altura del panel principal (�ltima coordenada y) en p�xels
+	 */
+	public int getAltura() {
+		return panel.getHeight()-1;
+	}
+	
+	/** Devuelve la anchura del panel de dibujo de la ventana
+	 * @return	Anchura del panel principal (�ltima coordenada x) en p�xels
+	 */
+	public int getAnchura() {
+		return panel.getWidth()-1;
+	}
+	
+	
 	/** Indica si la tecla Ctrl est� siendo pulsada en este momento
 	 * @return	true si est� pulsada, false en caso contrario
 	 */
