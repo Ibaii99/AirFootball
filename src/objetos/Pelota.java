@@ -16,9 +16,27 @@ public class Pelota extends Objetos{
 	 * @param ancho Anchura de la pelota
 	 * @param masa	Masa de la pelota
 	 */
-	public Pelota(Color color, String nombre, double alto, double ancho, double masa) {
-		super(0, 0, color, true, nombre,alto, ancho, masa);
+	public Pelota(Color color, String nombre, double x, double y, double radio, double masa) {
+		super(x, y, color, true, nombre,radio*2,radio*2, masa);
 	}
 	
+	/** Constructor sencillo de pelota, posiciones: 0,0 y masa=50
+	 * @param color	Color a elegir
+	 * @param nombre Nombre a elegir	
+	 * @param radio	Radio de la pelota
+	 */
+	public Pelota(Color color, String nombre, double radio) {
+		this(color, nombre, radio, 0, 0, 50);
+	}
 	
+	/** Constructor sencillo de pelota con imagen, posiciones: 0,0 y masa=50
+	 * @param imagen
+	 * @param nombre
+	 * @param radio
+	 */
+	public Pelota(Image imagen, String nombre, double radio) {
+		super(radio, radio, Color.BLACK, true, nombre, 0, 0, 50);
+		this.setImagenObjeto(imagen);
+	}
+
 }

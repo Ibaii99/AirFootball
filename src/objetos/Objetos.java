@@ -55,5 +55,77 @@ public abstract class Objetos extends Fisicas{
 		this.objetoAncho = ancho;
 		this.masa = masa;
 	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public Image getImagenObjeto() {
+		return imagenObjeto;
+	}
+
+	public void setImagenObjeto(Image imagenObjeto) {
+		this.imagenObjeto = imagenObjeto;
+	}
+
+	public double getMasa() {
+		return masa;
+	}
+
+	public boolean isBota() {
+		return bota;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public double getxAntes() {
+		return xAntes;
+	}
+
+	public double getyAntes() {
+		return yAntes;
+	}
+
+	public double getVelX() {
+		return velX;
+	}
+
+	public double getVelY() {
+		return velY;
+	}
+
+	public double getVelXAntes() {
+		return velXAntes;
+	}
+
+	public double getVelYAntes() {
+		return velYAntes;
+	}
+
+	public double getObjetoAlto() {
+		return objetoAlto;
+	}
+
+	public double getObjetoAncho() {
+		return objetoAncho;
+	}
+
+	public static boolean isDIBUJAR_VELOCIDAD() {
+		return DIBUJAR_VELOCIDAD;
+	}
 	
 }
