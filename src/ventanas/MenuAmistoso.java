@@ -101,14 +101,15 @@ public class MenuAmistoso extends JFrame {
 				getContentPane().revalidate();
 				getContentPane().setSize(getSize());
 				int nuevaFuente = (13*getWidth()/626);
-				int nuevaAnchura =  (159*getWidth()/626);
+				int nuevaAnchura =  (80*getWidth()/626);
 				int nuevaAltura =  (20*getWidth()/626);
-				int nuevaAnchuraBtn =  (40*getWidth()/626);
+				int nuevaAnchuraBtn =  (159*getWidth()/626);
 				int nuevaAlturaBtn =  (30*getWidth()/626);
 				lblLocal.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
 				lblVisitante.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
-				lblLocal.setBounds(155, 204, 40, 19);
-				btnIniciarAmistoso.setBounds((int) Math.round(((getWidth()/2)-(getWidth()*0.15))), (int) Math.round(((getHeight()/2)+(getHeight()*0.2))), 159*getWidth()/626, 27*getHeight()/626);
+				lblVisitante.setBounds((int) Math.round(((getWidth()/2)+(getWidth()*0.05))), (int) Math.round(((getHeight()/2)-(getHeight()*0.075))), nuevaAnchura, nuevaAltura);
+				lblLocal.setBounds((int) Math.round(((getWidth()/2)-(getWidth()*0.25))), (int) Math.round(((getHeight()/2)-(getHeight()*0.05))), nuevaAnchura, nuevaAltura);
+				btnIniciarAmistoso.setBounds((int) Math.round(((getWidth()/2)-(getWidth()*0.15))), (int) Math.round(((getHeight()/2)+(getHeight()*0.2))), nuevaAnchuraBtn, nuevaAlturaBtn);
 				btnIniciarAmistoso.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
 				revalidate();
 			}
