@@ -20,6 +20,7 @@ public class Inicio extends JFrame {
 	/**
 	 * @author Jorge
 	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	public Inicio() {
@@ -34,7 +35,7 @@ public class Inicio extends JFrame {
 		bLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MenuLiga ml = new MenuLiga();
-				ml.setSize(500, 500);
+				ml.setSize(getWidth(), getHeight());
 				ml.setVisible(true);
 				dispose();
 			}
@@ -51,8 +52,11 @@ public class Inicio extends JFrame {
 		final JButton bAmistoso = new JButton("Amistoso");
 		bAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuAmistoso mu = new MenuAmistoso();
 				dispose();
+				MenuAmistoso mu = new MenuAmistoso(getSize().width, getSize().height);
+				mu.setVisible(true);
+				
+				
 			}
 		});
 		bAmistoso.setFont(new Font("Arial Black", Font.PLAIN, 16));
