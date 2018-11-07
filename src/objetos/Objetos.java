@@ -61,10 +61,108 @@ public abstract class Objetos extends Fisicas{
 		this.objetoAncho = ancho;
 		this.masa = masa;
 	}
+	
+	
 
 	public Color getColor() {
 		return color;
 	}
+
+	public void setMasa(double masa) {
+		this.masa = masa;
+	}
+
+
+
+	public void setBota(boolean bota) {
+		this.bota = bota;
+	}
+
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+
+
+	public void setxAntes(double xAntes) {
+		this.xAntes = xAntes;
+	}
+
+
+
+	public void setyAntes(double yAntes) {
+		this.yAntes = yAntes;
+	}
+
+
+
+	public void setVelX(double velX) {
+		this.velX = velX;
+	}
+
+
+
+	public void setVelY(double velY) {
+		this.velY = velY;
+	}
+
+
+
+	public void setVelocidad(double velocidad) {
+		this.velocidad = velocidad;
+	}
+
+
+
+	public void setVelXAntes(double velXAntes) {
+		this.velXAntes = velXAntes;
+	}
+
+
+
+	public void setVelYAntes(double velYAntes) {
+		this.velYAntes = velYAntes;
+	}
+
+
+
+	public void setVelocidadAntes(double velocidadAntes) {
+		this.velocidadAntes = velocidadAntes;
+	}
+
+
+
+	public void setObjetoAlto(double objetoAlto) {
+		this.objetoAlto = objetoAlto;
+	}
+
+
+
+	public void setObjetoAncho(double objetoAncho) {
+		this.objetoAncho = objetoAncho;
+	}
+
+
+
+	public static void setDIBUJAR_VELOCIDAD(boolean dIBUJAR_VELOCIDAD) {
+		DIBUJAR_VELOCIDAD = dIBUJAR_VELOCIDAD;
+	}
+
+
 
 	public void setColor(Color color) {
 		this.color = color;
@@ -228,6 +326,41 @@ public abstract class Objetos extends Fisicas{
 		if (dibujar) dibuja( v );
 		// 5. Actualizaci�n de velocidad final
 		// Sin aceleraci�n sigue siendo la misma)
+	}
+	/** Provoca la ca�da del objeto (el m�todo lo dibuja cayendo en la ventana)
+	 * La ca�da se producir� en funci�n de la velocidad e ir� increment�ndose con la gravedad,
+	 * y se invertir� en el rebote (si lo hay)
+	 * @param v	Ventana de referencia y dibujado
+	 * @param miliSgs	Tiempo de ca�da
+	 * @param dibujar	true si se quiere borrar y dibujar el objeto en la ventana, false si se hace aparte
+	 * @param aceleracion	Aceleraci�n adicional a la gravedad a aplicar al objeto (si procede). Si es null, no se considera
+	 * @return	true si se cae, false si ya se ha parado en el suelo
+	 */
+	public boolean mueveUnPoco( ventanaPartido v, long miliSgs, boolean dibujar, Point2D aceleracion ) {
+		// 1. C�lculos previos
+		Point2D miAceleracion = (aceleracion==null) 
+			? new Point2D.Double( 0.0, Fisicas.ROZAMIENTO ) 
+			: new Point2D.Double( aceleracion.getX(), aceleracion.getY() - Fisicas.ROZAMIENTO);
+		velYAntes = velY;  // Guardamos datos para posibles correcciones
+		velXAntes= velX;
+		yAntes = y;
+		xAntes = x;
+		// 2. Borrado si procede
+		if (dibujar) borra( v );
+		// 3. Cambio de posici�n (x e y)
+		setX( Fisicas.calcEspacio( getX(), miliSgs, velX, miAceleracion.getX() ) );
+			// setX( Fisica.calcEspacio( getX(), miliSgs, velocidadX ) );  si sabemos que no hay fuerzas horizontales
+		setY( Fisicas.calcEspacio( getY(), miliSgs, velY, miAceleracion.getY() ) );
+			// setY( Fisica.calcEspacio( getY(), miliSgs, velocidadY, Fisica.GRAVEDAD ) );  si solo hay gravedad como fuerza vertical
+		// 4. Dibujado si procede
+		if (dibujar) dibuja( v );
+		// 5. Actualizaci�n de velocidad final
+		// Actualizamos la velocidad final con la gravedad     
+		setVelocidadX( Fisica.calcVelocidad( getVelocidadX(), miliSgs, miAceleracion.getX() ));
+			// no hace falta si no hay aceleraci�n horizontal (cambio de velocidad=0)
+		setVelocidadY( Fisica.calcVelocidad( getVelocidadY(), miliSgs, miAceleracion.getY() ));
+			// setVelocidadY( Fisica.calcVelocidad( getVelocidadY(), miliSgs, Fisica.GRAVEDAD ));   si solo hay gravedad como fuerza vertical
+		return Fisica.igualACero( y-antY ) && (chocaConBorde(v)>=8);
 	}
 	
 }

@@ -5,7 +5,7 @@ package fisicas;
  *
  */
 public class Fisicas {
-	public static double º1º = 2000.0;  // P�xels por segundo cuadrado
+	public static double ROZAMIENTO = 2000.0;  // P�xels por segundo cuadrado
 	
 	
 //////////////////////////////////Metodos sin aceleración///////////////////////////////////////////////////////////
