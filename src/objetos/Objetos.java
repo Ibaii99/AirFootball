@@ -2,10 +2,12 @@ package objetos;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import fisicas.Fisicas;
 import tema02.mundoConHerencia.Fisica;
+import tema02.mundoConHerencia.ObjetoFisico;
 import tema02.mundoConHerencia.VentanaGrafica;
 import ventanas.ventanaPartido;
 
@@ -356,11 +358,84 @@ public abstract class Objetos extends Fisicas{
 		if (dibujar) dibuja( v );
 		// 5. Actualizaci�n de velocidad final
 		// Actualizamos la velocidad final con la gravedad     
-		setVelocidadX( Fisica.calcVelocidad( getVelocidadX(), miliSgs, miAceleracion.getX() ));
+		setVelX( Fisicas.calcVelocidad( getVelX(), miliSgs, miAceleracion.getX() ));
 			// no hace falta si no hay aceleraci�n horizontal (cambio de velocidad=0)
-		setVelocidadY( Fisica.calcVelocidad( getVelocidadY(), miliSgs, miAceleracion.getY() ));
+		setVelY( Fisicas.calcVelocidad( getVelY(), miliSgs, miAceleracion.getY() ));
 			// setVelocidadY( Fisica.calcVelocidad( getVelocidadY(), miliSgs, Fisica.GRAVEDAD ));   si solo hay gravedad como fuerza vertical
-		return Fisica.igualACero( y-antY ) && (chocaConBorde(v)>=8);
+		return Fisicas.igualACero( y-yAntes ) && (chocaConBorde(v)>=8);
 	}
+	
+
+	
+	/** Devuelve los p�xels horizontales avanzados en el �ltimo movimiento del objeto
+	 * @return	N� de pixels avanzados en X en la �ltima llamada a {@link #mueveUnPoco(VentanaGrafica, long, boolean)}
+	 */
+	public double getAvanceX() {
+		return x - xAntes;
+	}
+	
+	/** Devuelve los p�xels verticales avanzados en el �ltimo movimiento del objeto
+	 * @return	N� de pixels avanzados en Y en la �ltima llamada a {@link #mueveUnPoco(VentanaGrafica, long, boolean)}
+	 */
+	public double getAvanceY() {
+		return y - yAntes;
+	}
+	
+	
+	/** Aplicamos un rebote vertical al objeto donde est� (si no bota, se queda parado)
+	 * @param coefRestitucion	Coeficiente de restituci�n de la velocidad (entre 0.0 y 1.0)
+	 */
+	public void rebotaVertical( double coefRestitucion ) {
+		// Invertimos la velocidad vertical (rebote)
+		if (bota) {  // Si rebota se le devuelve la velocidad con un % de restituci�n
+			velY = -velY * coefRestitucion;
+		} else {  // Si no bota se queda parada
+			velY = 0;
+		}
+	}
+	
+	/** Aplicamos un rebote horizontal al objeto donde est� (si no bota, se queda parado)
+	 * @param coefRestitucion	Coeficiente de restituci�n de la velocidad (entre 0.0 y 1.0)
+	 */
+	public void rebotaHorizontal( double coefRestitucion ) {
+		// Invertimos la velocidad vertical (rebote)
+		if (bota) {  // Si rebota se le devuelve la velocidad con un % de restituci�n
+			velX = -velX * coefRestitucion;
+		} else {  // Si no bota se queda parada
+			velX = 0;
+		}
+	}
+	
+	/** Ajusta el objeto al suelo, si se ha "pasado" del suelo. Ajusta la velocidad a la que ten�a cuando lo toc�.
+	 * @param v	Ventana de la que ajustar al suelo
+	 * @param dibujar	true si se quiere dibujar, false en caso contrario
+	 */
+	public abstract void corrigeChoqueInferior( ventanaPartido v, boolean dibujar );
+	
+	/** Ajusta el objeto al lateral
+	 * @param v	Ventana de la que ajustar al lateral
+	 * @param izquierda	true para izquierda, false para derecha
+	 * @param dibujar	true si se quiere dibujar, false en caso contrario
+	 */
+	public abstract void corrigeChoqueLateral( ventanaPartido v, boolean izquierda, boolean dibujar );
+	
+	/** Detecta el choque del objeto con los bordes de la ventana
+	 * @param v	Ventana con la que probar el choque
+	 * @return	Devuelve un n�mero formado por la suma de: 0 si no choca, 1 si choca con la izquierda, 2 con la derecha, 4 arriba, 8 abajo.
+	 */
+	public abstract int chocaConBorde( ventanaPartido v );
+	
+	/** Detecta el choque del objeto con otro
+	 * @param objeto2	Objeto con el que probar el choque
+	 * @return	Devuelve null si no chocan, un vector con forma de punto indicando el �ngulo y amplitud del choque sobre el objeto en curso
+	 */
+	public abstract Point chocaConObjeto( Objetos objeto2 );
+	
+	/** Comprueba si el objeto incluye a un punto dado
+	 * @param punto	Punto a chequear
+	 * @return	true si el punto est� dentro del objeto, false en caso contrario
+	 */
+	public abstract boolean contieneA( Point punto );
+
 	
 }
