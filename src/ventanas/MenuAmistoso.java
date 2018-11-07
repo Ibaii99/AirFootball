@@ -43,7 +43,7 @@ public class MenuAmistoso extends JFrame {
 		btnIniciarAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				Partido partido = new Partido(); //aquí meter quizá un constructor entre equipos
+				Partido partido = new Partido(); //aquï¿½ meter quizï¿½ un constructor entre equipos
 			}
 		});
 		btnIniciarAmistoso.setFont(new Font("Arial Black", Font.PLAIN, 13));
