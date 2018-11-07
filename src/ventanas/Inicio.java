@@ -3,10 +3,18 @@ package ventanas;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.image.BufferedImage;
 
 public class Inicio extends JFrame {
 	/**
@@ -15,9 +23,14 @@ public class Inicio extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	public Inicio() {
-		getContentPane().setLayout(null);
-
-		JButton bLiga = new JButton("Liga");
+		setSize(630, 460);
+		getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		final JPanel panel = new JPanel();
+		
+		panel.setLayout(null);
+		
+		final JButton bLiga = new JButton("Liga");
 		bLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MenuLiga ml = new MenuLiga();
@@ -27,15 +40,15 @@ public class Inicio extends JFrame {
 			}
 		});
 		bLiga.setFont(new Font("Arial Black", Font.PLAIN, 16));
-		bLiga.setBounds(502, 304, 119, 40);
-		getContentPane().add(bLiga);
+		bLiga.setBounds(getWidth()-150, getHeight()-100, 119, 40);
+		panel.add(bLiga);
 
-		JButton bCreacion = new JButton("Creación");
+		final JButton bCreacion = new JButton("Creación");
 		bCreacion.setFont(new Font("Arial Black", Font.PLAIN, 16));
-		bCreacion.setBounds(502, 357, 119, 40);
-		getContentPane().add(bCreacion);
+		bCreacion.setBounds(getWidth()-150, getHeight()-150, 119, 40);
+		panel.add(bCreacion);
 
-		JButton bAmistoso = new JButton("Amistoso");
+		final JButton bAmistoso = new JButton("Amistoso");
 		bAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MenuAmistoso mu = new MenuAmistoso();
@@ -43,24 +56,54 @@ public class Inicio extends JFrame {
 			}
 		});
 		bAmistoso.setFont(new Font("Arial Black", Font.PLAIN, 16));
-		bAmistoso.setBounds(502, 251, 119, 40);
-		getContentPane().add(bAmistoso);
+		bAmistoso.setBounds(getWidth()-150, getHeight()-250, 119, 40);
+		panel.add(bAmistoso);
 
-		JButton bArcade = new JButton("Arcade");
+		final JButton bArcade = new JButton("Arcade");
 		bArcade.setFont(new Font("Arial Black", Font.PLAIN, 16));
-		bArcade.setBounds(502, 198, 119, 40);
-		getContentPane().add(bArcade);
+		bArcade.setBounds(getWidth()-150, getHeight()-200, 119, 40);
+		panel.add(bArcade);
 		
-		JLabel lPortada = new JLabel("");
-		lPortada.setIcon(new ImageIcon(Inicio.class.getResource("/iconos/PORTADA.jpg")));
-		lPortada.setBounds(0, 0, 642, 433);
-		getContentPane().add(lPortada);
+		
+		
+		
+		final JLabel lPortada = new JLabel("");
+		ImageIcon imageIcon = new ImageIcon(Inicio.class.getResource("/iconos/PORTADA.jpg"));
+		Image image = imageIcon.getImage();
+		
+		Image newimg = image.getScaledInstance(getWidth(), getHeight(),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		imageIcon = new ImageIcon(newimg); 
+	
+		lPortada.setIcon(imageIcon);
+		lPortada.setBounds(0, 0, this.getWidth(), this.getHeight());
+		panel.add(lPortada);
+		
+		getContentPane().add(panel);
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent arg0) {
+				
+				bLiga.setBounds(getWidth()-150, getHeight()-100, 119, 40);
+				bCreacion.setBounds(getWidth()-150, getHeight()-150, 119, 40);
+				bAmistoso.setBounds(getWidth()-150, getHeight()-250, 119, 40);
+				bArcade.setBounds(getWidth()-150, getHeight()-200, 119, 40);
+				ImageIcon imageIconR = new ImageIcon(Inicio.class.getResource("/iconos/PORTADA.jpg"));
+				Image imagenResiz = imageIconR.getImage();
+				
+				Image iResizeo = imagenResiz.getScaledInstance(getWidth(), getHeight(),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+				ImageIcon iiResizeo = new ImageIcon(iResizeo); 
+			
+				lPortada.setIcon(iiResizeo);
+				lPortada.setBounds(0, 0, getWidth(), getHeight());
+				getContentPane().revalidate();
+				getContentPane().setSize(getSize());
+			}
+		});
 	}
 
 	public static void main(String[] args) {
 		Inicio i = new Inicio();
-		i.setSize(630, 460);
-		i.setResizable(false);
 		i.setVisible(true);
+
 	}
 }
