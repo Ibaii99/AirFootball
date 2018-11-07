@@ -46,7 +46,7 @@ public class MenuAmistoso extends JFrame {
 		Image newimg = image.getScaledInstance(anchura, altura,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		ImageIcon icRsz = new ImageIcon(newimg); 
 		
-		JPanel panel = new JPanel();
+		final JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 612, 413);
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -87,7 +87,7 @@ public class MenuAmistoso extends JFrame {
 		
 			lblFondo.setIcon(icRsz);
 		
-		getContentPane().addComponentListener(new ComponentAdapter() {
+		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
 				ImageIcon imageIconR = new ImageIcon(Inicio.class.getResource("/iconos/stadiumAmistoso.png"));
@@ -95,7 +95,7 @@ public class MenuAmistoso extends JFrame {
 				
 				Image iResizeo = imagenResiz.getScaledInstance(getWidth(), getHeight(),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 				ImageIcon iiResizeo2 = new ImageIcon(iResizeo); 
-			
+				panel.setSize(getSize());
 				lblFondo.setIcon(iiResizeo2);
 				lblFondo.setBounds(0, 0, getWidth(), getHeight());
 				getContentPane().revalidate();
