@@ -4,12 +4,11 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
-import tema02.mundoConHerencia.Bloque;
-import tema02.mundoConHerencia.Fisica;
-import tema02.mundoConHerencia.ObjetoFisico;
-import tema02.mundoConHerencia.Pelota;
-import tema02.mundoConHerencia.PolarPoint;
-import tema02.mundoConHerencia.VentanaGrafica;
+import objetos.Objetos;
+import objetos.Pelota;
+import objetos.PolarPoint;
+import ventanas.ventanaPartido;
+
 
 /**
  * @author ibai
@@ -133,6 +132,8 @@ public class Fisicas {
 	public static boolean igualACero( double num ) {
 		return Math.abs(num)<=1E-12;  // 1 * 10^-12
 	}
+	
+	
 	/** Calcula el choque entre dos pelotas
 	 * @param ventana	Ventana en la que ocurre el choque
 	 * @param pelota	Pelota 1 que choca
@@ -140,7 +141,7 @@ public class Fisicas {
 	 * @param milis	Milisegundos que pasan en el paso de movimiento
 	 * @param visualizarChoque	true para visualizar la info del choque en la ventana y en consola
 	 */
-	public static void calcChoqueEntreObjetos( VentanaGrafica ventana, ObjetoFisico objeto, ObjetoFisico objeto2, long milis, boolean visualizarChoque ) {
+	public static void calcChoqueEntreObjetos( ventanaPartido ventana, Objetos objeto, Objetos objeto2, long milis, boolean visualizarChoque ) {
 		if (objeto instanceof Pelota && objeto2 instanceof objetos.Pelota) {
 			Pelota pelota = (Pelota) objeto;
 			Pelota pelota2 = (Pelota) objeto2;
@@ -152,8 +153,8 @@ public class Fisicas {
 			PolarPoint tangente = PolarPoint.pointToPolar( choqueLinea );
 			tangente.transformaANuevoEje( Math.PI/2.0 );  // La tangente es la del choque girada 90 grados
 			Point2D tangenteXY = tangente.toPoint();
-			Point2D.Double velPelotaXY = new Point.Double( pelota.getVelocidadX(), pelota.getVelocidadY() );
-			Point2D.Double velPelota2XY = new Point.Double( pelota2.getVelocidadX(), pelota2.getVelocidadY() );
+			Point2D.Double velPelotaXY = new Point.Double( pelota.getVelX(), pelota.getVelY() );
+			Point2D.Double velPelota2XY = new Point.Double( pelota2.getVelX(), pelota2.getVelY() );
 			PolarPoint velPelota = PolarPoint.pointToPolar( velPelotaXY );
 			PolarPoint velPelota2 = PolarPoint.pointToPolar( velPelota2XY );
 			velPelota.transformaANuevoEje( tangenteXY );
@@ -234,6 +235,6 @@ public class Fisicas {
 				ventana.dibujaCirculo( pelota.getX(), pelota.getY(), pelota.getRadio(), 3f, pelota.getAWTColor() );
 				ventana.dibujaCirculo( pelota2.getX(), pelota2.getY(), pelota2.getRadio(), 3f, pelota2.getAWTColor() );
 			}
-		} else if (objeto instanceof Pelota && objeto2 instanceof Bloque) {
-			calcChoqueEntreObjetos( ventana, objeto2, objeto, milis, visualizarChoque );
+		} 
+	}
 }

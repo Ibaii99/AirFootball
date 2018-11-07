@@ -10,8 +10,10 @@ import ventanas.ventanaPartido;
  *
  */
 public class Poste extends Objetos{
-
-
+	
+	public Poste(String a) {
+		super(0, false, 0, 0, 0, 0, 0, 0);
+	}
 
 	@Override
 	public double getVolumen() {
