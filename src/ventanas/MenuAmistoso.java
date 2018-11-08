@@ -39,7 +39,7 @@ public class MenuAmistoso extends JFrame {
 	
 
 	public MenuAmistoso(int anchura, int altura) {
-		setSize(626, 458);
+		setSize(anchura, altura);
 		ImageIcon imageIcon = new ImageIcon(MenuAmistoso.class.getResource("/iconos/stadiumAmistoso.png"));
 		Image image = imageIcon.getImage();
 		
