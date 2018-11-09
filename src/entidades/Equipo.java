@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import objetos.Objetos;
 import objetos.Pelota;
 
@@ -19,7 +21,9 @@ public class Equipo{
 	
 	private int puntos;
 	
-
+	private Color color;
+	private ImageIcon imagen;
+	private String rutaImagen;
 	
 	private ArrayList<Partidos> arrayPartidosJugados;
 	
@@ -47,14 +51,17 @@ public class Equipo{
 
 	
 
-	public Equipo(String nombre, double radio, Color color, char siglas) {
+	public Equipo(String nombre, double radio, Color color, char[] siglas) {
 		bolaEquipo = new Pelota(color,nombre,75);
 		bolaEquipo.setBota(false);
+		this.color = color;
 	}
 
-	public Equipo(String nombre, double radio, Image imagen, char[] siglas) {
-		bolaEquipo = new Pelota(imagen,nombre,75);
+	public Equipo(String nombre, double radio, String image, char[] siglas) {
+		bolaEquipo = new Pelota(image,nombre,75);
 		bolaEquipo.setBota(false);
+		this.imagen = new ImageIcon(image);
+		this.rutaImagen = image;
 	}
 	/** Metodo para añadir puntos al equipo segun el partido
 	 * @param puntos Puntos a sumar, seran 0, 1 o 3
@@ -200,6 +207,22 @@ public class Equipo{
 
 	public int getEmpatesVisitante() {
 		return empatesVisitante;
+	}
+
+	public Pelota getBolaEquipo() {
+		return bolaEquipo;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public ImageIcon getImagen() {
+		return imagen;
+	}
+
+	public String getRutaImagen() {
+		return rutaImagen;
 	}
 	
 	
