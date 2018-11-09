@@ -1,13 +1,27 @@
 package fisicas;
 
 import objetos.Pelota;
+import ventanas.ventanaPartido;
 
 public class FisicasNuevas {
 
+	/** Metodo para cambiar la posición de la pelota
+	 * @param p	Pelota a la que vas a cambiar la posicion
+	 * @param x	Posicion en eje x
+	 * @param y Posicion en eje y
+	 */
 	public void muevePelota(Pelota p, double x, double y) {
-		
+		p.setxAntes(p.getX());
+		p.setyAntes(p.getY());
+		p.setY(y);
+		p.setX(x);
 	}
 	
+	/** Metodo para cambiar la velocidad de la pelota
+	 * @param p		Pelota a la que vas a cambiar la velocidad
+	 * @param velX	Velocidad en x
+	 * @param velY	Velocidad en y
+	 */
 	public void cambiarVelocidad(Pelota p, double velX, double velY) {
 		p.setVelXAntes(p.getVelX());
 		p.setVelYAntes(p.getVelY());
@@ -27,7 +41,8 @@ public class FisicasNuevas {
 		return chocan;
 	}
 	
-	public void rebotaeEnBorde() {
+	
+	public void rebotaeEnBorde(ventanaPartido v) {
 		
 	}
 	

@@ -14,10 +14,13 @@ import java.awt.Font;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
+/** @author Jorge 
+ *  @author ibai
+ */
 public class ventanaPartido extends JFrame {
-	/** @author Jorge 
-	 * 
-	 */
+
+	private boolean liga;
+	private boolean arcade;
 	private Graphics2D graphics;  // Objeto gr�fico sobre el que dibujar (del buffer)
 	private JPanel panel;         // Panel principal
 	
@@ -117,165 +120,164 @@ public class ventanaPartido extends JFrame {
 		this.arcade = arcade;
 	}
 
-	boolean liga;
-	boolean arcade;
 
 
-	
-	/** Dibuja un c�rculo en la ventana
-	 * @param x	Coordenada x del centro del c�rculo
-	 * @param y	Coordenada y del centro del c�rculo
-	 * @param radio	Radio del c�rculo (en p�xels) 
-	 * @param grosor	Grueso del c�rculo (en p�xels)
-	 * @param color  	Color del c�rculo
-	 */
-	public void dibujaCirculo( double x, double y, double radio, float grosor, Color color ) {
-		graphics.setColor( color );
-		graphics.setStroke( new BasicStroke( grosor ));
-		graphics.drawOval( (int)Math.round(x-radio), (int)Math.round(y-radio), (int)Math.round(radio*2), (int)Math.round(radio*2) );
-		panel.repaint();
-	}
-	
-	/** Dibuja un c�rculo azul en la ventana
-	 * @param x	Coordenada x del centro del c�rculo
-	 * @param y	Coordenada y del centro del c�rculo
-	 * @param radio	Radio del c�rculo (en p�xels) 
-	 * @param grosor	Grueso del c�rculo (en p�xels)
-	 */
-	public void dibujaCirculo( double x, double y, double radio, float grosor ) {
-		dibujaCirculo( x, y, radio, grosor, Color.blue );
-	}
-	
-	/** Borra un c�rculo en la ventana
-	 * @param x	Coordenada x del centro del c�rculo
-	 * @param y	Coordenada y del centro del c�rculo
-	 * @param radio	Radio del c�rculo (en p�xels) 
-	 * @param grosor	Grueso del c�rculo (en p�xels)
-	 */
-	public void borraCirculo( double x, double y, double radio, float grosor ) {
-		dibujaCirculo( x, y, radio, grosor, Color.white );
-	}
-	
-	/** Dibuja una l�nea en la ventana
-	 * @param linea	a dibujar
-	 * @param grosor	Grueso de la l�nea (en p�xels)
-	 * @param color  	Color de la l�nea
-	 */
-	public void dibujaLinea( Line2D linea, float grosor, Color color ) {
-		dibujaLinea( linea.getX1(), linea.getY1(), linea.getX2(), linea.getY2(), grosor, color );
-	}
-	
-	/** Dibuja una l�nea en la ventana
-	 * @param x	Coordenada x de un punto de la l�nea 
-	 * @param y	Coordenada y de un punto de la l�nea
-	 * @param x2	Coordenada x del segundo punto de la l�nea 
-	 * @param y2	Coordenada y del segundo punto de la l�nea
-	 * @param grosor	Grueso de la l�nea (en p�xels)
-	 * @param color  	Color de la l�nea
-	 */
-	public void dibujaLinea( double x, double y, double x2, double y2, float grosor, Color color ) {
-		graphics.setColor( color );
-		graphics.setStroke( new BasicStroke( grosor ));
-		graphics.drawLine( (int)Math.round(x), (int)Math.round(y), (int)Math.round(x2), (int)Math.round(y2) );
-		panel.repaint();
-	}
-	
-	/** Dibuja una l�nea azul en la ventana
-	 * @param x	Coordenada x de un punto de la l�nea 
-	 * @param y	Coordenada y de un punto de la l�nea
-	 * @param x2	Coordenada x del segundo punto de la l�nea 
-	 * @param y2	Coordenada y del segundo punto de la l�nea
-	 * @param grosor	Grueso de la l�nea (en p�xels)
-	 */
-	public void dibujaLinea( double x, double y, double x2, double y2, float grosor ) {
-		dibujaLinea( x, y, x2, y2, grosor, Color.blue );
-	}
-	
-	/** Borra una l�nea en la ventana
-	 * @param x	Coordenada x de un punto de la l�nea 
-	 * @param y	Coordenada y de un punto de la l�nea
-	 * @param x2	Coordenada x del segundo punto de la l�nea 
-	 * @param y2	Coordenada y del segundo punto de la l�nea
-	 * @param grosor	Grueso de la l�nea (en p�xels)
-	 */
-	public void borraLinea( double x, double y, double x2, double y2, float grosor ) {
-		dibujaLinea( x, y, x2, y2, grosor, Color.white );
-	}
 
-	/** Dibuja una flecha en la ventana
-	 * @param linea	a dibujar (el segundo punto es la punta de la flecha)
-	 * @param grosor	Grueso de la l�nea (en p�xels)
-	 * @param color  	Color de la l�nea
-	 */
-	public void dibujaFlecha( Line2D linea, float grosor, Color color ) {
-		dibujaFlecha( linea.getX1(), linea.getY1(), linea.getX2(), linea.getY2(), grosor, color );
-	}
 	
-	/** Dibuja una flecha en la ventana
-	 * @param x	Coordenada x de un punto de la l�nea 
-	 * @param y	Coordenada y de un punto de la l�nea
-	 * @param x2	Coordenada x del segundo punto de la l�nea (el de la flecha)
-	 * @param y2	Coordenada y del segundo punto de la l�nea (el de la flecha)
-	 * @param grosor	Grueso de la l�nea (en p�xels)
-	 * @param color  	Color de la l�nea
-	 */
-	public void dibujaFlecha( double x, double y, double x2, double y2, float grosor, Color color ) {
-		dibujaFlecha( x, y, x2, y2, grosor, color, 10 );
-	}
-	
-	/** Dibuja una flecha en la ventana
-	 * @param x	Coordenada x de un punto de la l�nea 
-	 * @param y	Coordenada y de un punto de la l�nea
-	 * @param x2	Coordenada x del segundo punto de la l�nea (el de la flecha)
-	 * @param y2	Coordenada y del segundo punto de la l�nea (el de la flecha)
-	 * @param grosor	Grueso de la l�nea (en p�xels)
-	 * @param color  	Color de la l�nea
-	 * @param largoFl	Pixels de largo de la flecha
-	 */
-	public void dibujaFlecha( double x, double y, double x2, double y2, float grosor, Color color, int largoFl ) {
-		graphics.setColor( color );
-		graphics.setStroke( new BasicStroke( grosor ));
-		graphics.drawLine( (int)Math.round(x), (int)Math.round(y), (int)Math.round(x2), (int)Math.round(y2) );
-		double angulo = Math.atan2( y2-y, x2-x ) + Math.PI;
-		double angulo1 = angulo - Math.PI / 10;  // La flecha se forma rotando 1/10 de Pi hacia los dos lados
-		double angulo2 = angulo + Math.PI / 10;
-		graphics.drawLine( (int)Math.round(x2), (int)Math.round(y2), 
-				(int)Math.round(x2+largoFl*Math.cos(angulo1)), (int)Math.round(y2+largoFl*Math.sin(angulo1)) );
-		graphics.drawLine( (int)Math.round(x2), (int)Math.round(y2), 
-				(int)Math.round(x2+largoFl*Math.cos(angulo2)), (int)Math.round(y2+largoFl*Math.sin(angulo2)) );
-		panel.repaint();
-	}
-	
-	/** Dibuja una l�nea azul en la ventana
-	 * @param x	Coordenada x de un punto de la l�nea 
-	 * @param y	Coordenada y de un punto de la l�nea
-	 * @param x2	Coordenada x del segundo punto de la l�nea (el de la flecha)
-	 * @param y2	Coordenada y del segundo punto de la l�nea (el de la flecha)
-	 * @param grosor	Grueso de la l�nea (en p�xels)
-	 */
-	public void dibujaFlecha( double x, double y, double x2, double y2, float grosor ) {
-		dibujaFlecha( x, y, x2, y2, grosor, Color.blue );
-	}
-	
-	/** Borra una l�nea en la ventana
-	 * @param x	Coordenada x de un punto de la l�nea 
-	 * @param y	Coordenada y de un punto de la l�nea
-	 * @param x2	Coordenada x del segundo punto de la l�nea (el de la flecha)
-	 * @param y2	Coordenada y del segundo punto de la l�nea (el de la flecha)
-	 * @param grosor	Grueso de la l�nea (en p�xels)
-	 */
-	public void borraFlecha( double x, double y, double x2, double y2, float grosor ) {
-		dibujaFlecha( x, y, x2, y2, grosor, Color.white );
-	}
-
-	/** Devuelve el objeto de gr�fico sobre el que pintar, correspondiente al 
-	 * panel principal de la ventana
-	 * @return	Objeto gr�fico principal de la ventana
-	 */
-	public Graphics2D getGraphics() {
-		return graphics;
-	}
-	
+//	/** Dibuja un c�rculo en la ventana
+//	 * @param x	Coordenada x del centro del c�rculo
+//	 * @param y	Coordenada y del centro del c�rculo
+//	 * @param radio	Radio del c�rculo (en p�xels) 
+//	 * @param grosor	Grueso del c�rculo (en p�xels)
+//	 * @param color  	Color del c�rculo
+//	 */
+//	public void dibujaCirculo( double x, double y, double radio, float grosor, Color color ) {
+//		graphics.setColor( color );
+//		graphics.setStroke( new BasicStroke( grosor ));
+//		graphics.drawOval( (int)Math.round(x-radio), (int)Math.round(y-radio), (int)Math.round(radio*2), (int)Math.round(radio*2) );
+//		panel.repaint();
+//	}
+//	
+//	/** Dibuja un c�rculo azul en la ventana
+//	 * @param x	Coordenada x del centro del c�rculo
+//	 * @param y	Coordenada y del centro del c�rculo
+//	 * @param radio	Radio del c�rculo (en p�xels) 
+//	 * @param grosor	Grueso del c�rculo (en p�xels)
+//	 */
+//	public void dibujaCirculo( double x, double y, double radio, float grosor ) {
+//		dibujaCirculo( x, y, radio, grosor, Color.blue );
+//	}
+//	
+//	/** Borra un c�rculo en la ventana
+//	 * @param x	Coordenada x del centro del c�rculo
+//	 * @param y	Coordenada y del centro del c�rculo
+//	 * @param radio	Radio del c�rculo (en p�xels) 
+//	 * @param grosor	Grueso del c�rculo (en p�xels)
+//	 */
+//	public void borraCirculo( double x, double y, double radio, float grosor ) {
+//		dibujaCirculo( x, y, radio, grosor, Color.white );
+//	}
+//	
+//	/** Dibuja una l�nea en la ventana
+//	 * @param linea	a dibujar
+//	 * @param grosor	Grueso de la l�nea (en p�xels)
+//	 * @param color  	Color de la l�nea
+//	 */
+//	public void dibujaLinea( Line2D linea, float grosor, Color color ) {
+//		dibujaLinea( linea.getX1(), linea.getY1(), linea.getX2(), linea.getY2(), grosor, color );
+//	}
+//	
+//	/** Dibuja una l�nea en la ventana
+//	 * @param x	Coordenada x de un punto de la l�nea 
+//	 * @param y	Coordenada y de un punto de la l�nea
+//	 * @param x2	Coordenada x del segundo punto de la l�nea 
+//	 * @param y2	Coordenada y del segundo punto de la l�nea
+//	 * @param grosor	Grueso de la l�nea (en p�xels)
+//	 * @param color  	Color de la l�nea
+//	 */
+//	public void dibujaLinea( double x, double y, double x2, double y2, float grosor, Color color ) {
+//		graphics.setColor( color );
+//		graphics.setStroke( new BasicStroke( grosor ));
+//		graphics.drawLine( (int)Math.round(x), (int)Math.round(y), (int)Math.round(x2), (int)Math.round(y2) );
+//		panel.repaint();
+//	}
+//	
+//	/** Dibuja una l�nea azul en la ventana
+//	 * @param x	Coordenada x de un punto de la l�nea 
+//	 * @param y	Coordenada y de un punto de la l�nea
+//	 * @param x2	Coordenada x del segundo punto de la l�nea 
+//	 * @param y2	Coordenada y del segundo punto de la l�nea
+//	 * @param grosor	Grueso de la l�nea (en p�xels)
+//	 */
+//	public void dibujaLinea( double x, double y, double x2, double y2, float grosor ) {
+//		dibujaLinea( x, y, x2, y2, grosor, Color.blue );
+//	}
+//	
+//	/** Borra una l�nea en la ventana
+//	 * @param x	Coordenada x de un punto de la l�nea 
+//	 * @param y	Coordenada y de un punto de la l�nea
+//	 * @param x2	Coordenada x del segundo punto de la l�nea 
+//	 * @param y2	Coordenada y del segundo punto de la l�nea
+//	 * @param grosor	Grueso de la l�nea (en p�xels)
+//	 */
+//	public void borraLinea( double x, double y, double x2, double y2, float grosor ) {
+//		dibujaLinea( x, y, x2, y2, grosor, Color.white );
+//	}
+//
+//	/** Dibuja una flecha en la ventana
+//	 * @param linea	a dibujar (el segundo punto es la punta de la flecha)
+//	 * @param grosor	Grueso de la l�nea (en p�xels)
+//	 * @param color  	Color de la l�nea
+//	 */
+//	public void dibujaFlecha( Line2D linea, float grosor, Color color ) {
+//		dibujaFlecha( linea.getX1(), linea.getY1(), linea.getX2(), linea.getY2(), grosor, color );
+//	}
+//	
+//	/** Dibuja una flecha en la ventana
+//	 * @param x	Coordenada x de un punto de la l�nea 
+//	 * @param y	Coordenada y de un punto de la l�nea
+//	 * @param x2	Coordenada x del segundo punto de la l�nea (el de la flecha)
+//	 * @param y2	Coordenada y del segundo punto de la l�nea (el de la flecha)
+//	 * @param grosor	Grueso de la l�nea (en p�xels)
+//	 * @param color  	Color de la l�nea
+//	 */
+//	public void dibujaFlecha( double x, double y, double x2, double y2, float grosor, Color color ) {
+//		dibujaFlecha( x, y, x2, y2, grosor, color, 10 );
+//	}
+//	
+//	/** Dibuja una flecha en la ventana
+//	 * @param x	Coordenada x de un punto de la l�nea 
+//	 * @param y	Coordenada y de un punto de la l�nea
+//	 * @param x2	Coordenada x del segundo punto de la l�nea (el de la flecha)
+//	 * @param y2	Coordenada y del segundo punto de la l�nea (el de la flecha)
+//	 * @param grosor	Grueso de la l�nea (en p�xels)
+//	 * @param color  	Color de la l�nea
+//	 * @param largoFl	Pixels de largo de la flecha
+//	 */
+//	public void dibujaFlecha( double x, double y, double x2, double y2, float grosor, Color color, int largoFl ) {
+//		graphics.setColor( color );
+//		graphics.setStroke( new BasicStroke( grosor ));
+//		graphics.drawLine( (int)Math.round(x), (int)Math.round(y), (int)Math.round(x2), (int)Math.round(y2) );
+//		double angulo = Math.atan2( y2-y, x2-x ) + Math.PI;
+//		double angulo1 = angulo - Math.PI / 10;  // La flecha se forma rotando 1/10 de Pi hacia los dos lados
+//		double angulo2 = angulo + Math.PI / 10;
+//		graphics.drawLine( (int)Math.round(x2), (int)Math.round(y2), 
+//				(int)Math.round(x2+largoFl*Math.cos(angulo1)), (int)Math.round(y2+largoFl*Math.sin(angulo1)) );
+//		graphics.drawLine( (int)Math.round(x2), (int)Math.round(y2), 
+//				(int)Math.round(x2+largoFl*Math.cos(angulo2)), (int)Math.round(y2+largoFl*Math.sin(angulo2)) );
+//		panel.repaint();
+//	}
+//	
+//	/** Dibuja una l�nea azul en la ventana
+//	 * @param x	Coordenada x de un punto de la l�nea 
+//	 * @param y	Coordenada y de un punto de la l�nea
+//	 * @param x2	Coordenada x del segundo punto de la l�nea (el de la flecha)
+//	 * @param y2	Coordenada y del segundo punto de la l�nea (el de la flecha)
+//	 * @param grosor	Grueso de la l�nea (en p�xels)
+//	 */
+//	public void dibujaFlecha( double x, double y, double x2, double y2, float grosor ) {
+//		dibujaFlecha( x, y, x2, y2, grosor, Color.blue );
+//	}
+//	
+//	/** Borra una l�nea en la ventana
+//	 * @param x	Coordenada x de un punto de la l�nea 
+//	 * @param y	Coordenada y de un punto de la l�nea
+//	 * @param x2	Coordenada x del segundo punto de la l�nea (el de la flecha)
+//	 * @param y2	Coordenada y del segundo punto de la l�nea (el de la flecha)
+//	 * @param grosor	Grueso de la l�nea (en p�xels)
+//	 */
+//	public void borraFlecha( double x, double y, double x2, double y2, float grosor ) {
+//		dibujaFlecha( x, y, x2, y2, grosor, Color.white );
+//	}
+//
+//	/** Devuelve el objeto de gr�fico sobre el que pintar, correspondiente al 
+//	 * panel principal de la ventana
+//	 * @return	Objeto gr�fico principal de la ventana
+//	 */
+//	public Graphics2D getGraphics() {
+//		return graphics;
+//	}
+//	
 
 
 	/** Devuelve la altura del panel de dibujo de la ventana
