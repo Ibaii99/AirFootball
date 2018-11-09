@@ -14,10 +14,12 @@ public class PruebaFisicas {
 	public void ChocanEntreSi(Pelota p1, Pelota p2) {
 		Point vectorPelota1 = p1.chocaConObjeto(p2);
 		Point vectorPelota2 = p2.chocaConObjeto(p1);
+		
 		// estas son las direcciones que tienen que tomar cada pelota
 		
 		p1.setVelocidad(vectorPelota1);
 		p2.setVelocidad(vectorPelota2);
+		p1.setVelocidadAntes(p1.getVelX());
 		
 		
 	}
