@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Point;
 
+import javax.swing.ImageIcon;
+
 import fisicas.Fisicas;
 
 import ventanas.ventanaPartido;
@@ -45,9 +47,9 @@ public class Pelota extends Objetos{
 	 * @param nombre
 	 * @param radio
 	 */
-	public Pelota(Image imagen, String nombre, double radio) {
+	public Pelota(String imagen, String nombre, double radio) {
 		super(radio, radio, Color.BLACK, true, nombre, 0, 0, 50);
-		this.setImagenObjeto(imagen);
+		this.setImagenObjeto(new ImageIcon(imagen));
 		this.radio = radio;
 	}
 

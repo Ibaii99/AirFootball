@@ -5,6 +5,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
+import javax.swing.ImageIcon;
+
 import fisicas.Fisicas;
 
 import ventanas.ventanaPartido;
@@ -16,7 +18,7 @@ public abstract class Objetos extends Fisicas{
 	
 	protected String nombre;
 	protected Color color;
-	protected Image imagenObjeto;
+	protected ImageIcon imagenObjeto;
 
 ///////////////////////Posicion///////////////////////////////
 	protected double x;
@@ -168,12 +170,12 @@ public abstract class Objetos extends Fisicas{
 		this.color = color;
 	}
 
-	public Image getImagenObjeto() {
+	public ImageIcon getImagenObjeto() {
 		return imagenObjeto;
 	}
 
-	public void setImagenObjeto(Image imagenObjeto) {
-		this.imagenObjeto = imagenObjeto;
+	public void setImagenObjeto(ImageIcon imageIcon) {
+		this.imagenObjeto = imageIcon;
 	}
 
 	public double getMasa() {
