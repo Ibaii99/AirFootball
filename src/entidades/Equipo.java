@@ -5,13 +5,14 @@ import java.awt.Image;
 import java.util.ArrayList;
 
 import objetos.Objetos;
+import objetos.Pelota;
 
 /**
  * @author ibai
  *
  */
-public class Equipo extends Objetos{
-	
+public class Equipo{
+	private Pelota bolaEquipo;
 	private String nombre;		
 	
 	private char siglas; // Char para crear un formato de reconocimiento de siglas con lo dado en clase
@@ -46,21 +47,15 @@ public class Equipo extends Objetos{
 
 	
 
-	/** Metodo constructor de un objeto Equipo
-	 * @param masa	Masa del equipo
-	 * @param nombre Nombre del equipo
-	 * @param siglas Siglas del equipo
-	 * @param x		 Posicion x del equipo
-	 * @param y		 Posicion y del equipo
-	 * @param color	 Color del equipo
-	 * @param alto	 Alto del objeto equipo
-	 * @param ancho	 Ancho del objeto equipo
-	 */
-	public Equipo(double masa, String nombre, char siglas, double x, double y, Color color, double alto, double ancho) {
-		super(x, y, color, false, nombre,alto, ancho, masa);
-		this.siglas = siglas;
+	public Equipo(String nombre, double radio, Color color, char siglas) {
+		bolaEquipo = new Pelota(color,nombre,75);
+		bolaEquipo.setBota(false);
 	}
 
+	public Equipo(String nombre, double radio, Image imagen, char[] siglas) {
+		bolaEquipo = new Pelota(imagen,nombre,75);
+		bolaEquipo.setBota(false);
+	}
 	/** Metodo para añadir puntos al equipo segun el partido
 	 * @param puntos Puntos a sumar, seran 0, 1 o 3
 	 */

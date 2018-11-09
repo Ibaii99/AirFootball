@@ -1,3 +1,5 @@
+package objetos;
+
 public class ObjetoCombobox {
 	private final int value;
     private final String label;

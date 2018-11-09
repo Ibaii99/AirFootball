@@ -1,11 +1,21 @@
 package fisicas;
 
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.geom.Point2D;
+
+import objetos.Objetos;
+import objetos.Pelota;
+import objetos.PolarPoint;
+import ventanas.ventanaPartido;
+
+
 /**
  * @author ibai
  *
  */
 public class Fisicas {
-	public static double º1º = 2000.0;  // P�xels por segundo cuadrado
+	public static double ROZAMIENTO = 2000.0;  // P�xels por segundo cuadrado
 	
 	
 //////////////////////////////////Metodos sin aceleración///////////////////////////////////////////////////////////
@@ -121,5 +131,110 @@ public class Fisicas {
 	
 	public static boolean igualACero( double num ) {
 		return Math.abs(num)<=1E-12;  // 1 * 10^-12
+	}
+	
+	
+	/** Calcula el choque entre dos pelotas
+	 * @param ventana	Ventana en la que ocurre el choque
+	 * @param pelota	Pelota 1 que choca
+	 * @param pelota2	Pelota 2 que choca
+	 * @param milis	Milisegundos que pasan en el paso de movimiento
+	 * @param visualizarChoque	true para visualizar la info del choque en la ventana y en consola
+	 */
+	public static void calcChoqueEntreObjetos( ventanaPartido ventana, Objetos objeto, Objetos objeto2, long milis, boolean visualizarChoque ) {
+		if (objeto instanceof Pelota && objeto2 instanceof objetos.Pelota) {
+			Pelota pelota = (Pelota) objeto;
+			Pelota pelota2 = (Pelota) objeto2;
+			Point2D choque = pelota.chocaConObjeto( pelota2 );
+			if (choque==null) return;
+			if (visualizarChoque)
+				System.out.println( "Choque entre " + pelota + " y " + pelota2 + " con vector " + choque );
+			Point2D choqueLinea = new Point2D.Double( pelota2.getX()-pelota.getX(), pelota2.getY()-pelota.getY() );
+			PolarPoint tangente = PolarPoint.pointToPolar( choqueLinea );
+			tangente.transformaANuevoEje( Math.PI/2.0 );  // La tangente es la del choque girada 90 grados
+			Point2D tangenteXY = tangente.toPoint();
+			Point2D.Double velPelotaXY = new Point.Double( pelota.getVelX(), pelota.getVelY() );
+			Point2D.Double velPelota2XY = new Point.Double( pelota2.getVelX(), pelota2.getVelY() );
+			PolarPoint velPelota = PolarPoint.pointToPolar( velPelotaXY );
+			PolarPoint velPelota2 = PolarPoint.pointToPolar( velPelota2XY );
+			velPelota.transformaANuevoEje( tangenteXY );
+			velPelota2.transformaANuevoEje( tangenteXY );
+			Point2D nuevaVelPelota = velPelota.toPoint();
+			Point2D nuevaVelPelota2 = velPelota2.toPoint();
+			double[] velChoque = Fisicas.calcChoque( pelota.getVolumen(), nuevaVelPelota.getY(), pelota2.getVolumen(), nuevaVelPelota2.getY() );
+			nuevaVelPelota.setLocation( nuevaVelPelota.getX(), velChoque[0] );
+			nuevaVelPelota2.setLocation( nuevaVelPelota2.getX(), velChoque[1] );
+			if (visualizarChoque) {
+				// Velocidades antes del choque
+				ventana.dibujaFlecha( pelota.getX(), pelota.getY(), pelota.getX()+velPelotaXY.getX()/1000*milis, pelota.getY()+velPelotaXY.getY()/1000*milis, 4.0f, Color.green );
+				ventana.dibujaFlecha( pelota2.getX(), pelota2.getY(), pelota2.getX()+velPelota2XY.getX()/1000*milis, pelota2.getY()+velPelota2XY.getY()/1000*milis, 4.0f, Color.green );
+				// Eje de choque (magenta) y tangente (negro)
+				ventana.dibujaLinea( 500, 200, 500+choqueLinea.getX(), 200+choqueLinea.getY(), 2.0f, Color.magenta );
+				ventana.dibujaLinea( 500, 200, 500+tangenteXY.getX(), 200+tangenteXY.getY(), 2.0f, Color.black );
+				// Vista de datos en consola
+				System.out.println( "Cambio en choque:");
+				System.out.println( "  Pelota 1: " + velPelotaXY + " es " + velPelota + " o sea " + nuevaVelPelota );
+				System.out.println( "  Pelota 2: " + velPelota2XY + " es " + velPelota2 + " o sea " + nuevaVelPelota2 );
+				System.out.println( "  Nueva vel pelota 1: " + nuevaVelPelota );
+				System.out.println( "  Nueva vel pelota 2: " + nuevaVelPelota2 );
+			}
+			velPelota = PolarPoint.pointToPolar(nuevaVelPelota);
+			velPelota2 = PolarPoint.pointToPolar(nuevaVelPelota2);
+			velPelota.transformaANuevoEje( -Math.atan2( tangenteXY.getY(), tangenteXY.getX() ) );
+			velPelota2.transformaANuevoEje( -Math.atan2( tangenteXY.getY(), tangenteXY.getX() ) );
+			Point2D velPelotaFin = velPelota.toPoint();
+			Point2D velPelota2Fin = velPelota2.toPoint();
+			if (visualizarChoque) {
+				// Velocidades despu�s del choque
+				ventana.dibujaFlecha( pelota.getX(), pelota.getY(), pelota.getX()+velPelotaFin.getX()/1000*milis, pelota.getY()+velPelotaFin.getY()/1000*milis, 4.0f, Color.red );
+				ventana.dibujaFlecha( pelota2.getX(), pelota2.getY(), pelota2.getX()+velPelota2Fin.getX()/1000*milis, pelota2.getY()+velPelota2Fin.getY()/1000*milis, 4.0f, Color.red );
+				System.out.println( "  Vel fin pelota 1: " + velPelotaFin );
+				System.out.println( "  Vel fin pelota 2: " + velPelota2Fin );
+			}
+			pelota.setVelocidad( velPelotaFin );
+			pelota2.setVelocidad( velPelota2Fin );
+			if (visualizarChoque) {  // Pelotas tras el choque sin correcci�n
+				ventana.dibujaCirculo( pelota.getX(), pelota.getY(), pelota.getRadio(), 2.5f, pelota.getColor() );
+				ventana.dibujaCirculo( pelota2.getX(), pelota2.getY(), pelota2.getRadio(), 2.5f, pelota2.getColor() );
+				System.out.println( "Montado exacto: " + choque );
+			}
+			// Corrige posici�n para que no se monten (en funci�n de los avances previos)
+			if (Fisicas.igualACero(choque.getX()) && Fisicas.igualACero(choque.getY())) { // Caso de choque est�tico en suelo
+				double diferencia = 0.01;
+				if (pelota.getX() < pelota2.getX()) diferencia = -diferencia;
+				if (visualizarChoque) {  // Correcci�n x
+					System.out.println( "  pelota 1 - x: " + pelota.getX() + " - correcci�n directa " + diferencia );
+					System.out.println( "  pelota 2 - x: " + pelota2.getX() + " - correcci�n directa " + -diferencia );
+				}
+				pelota.setX( pelota.getX()+diferencia );  // Corrige y aleja un poquito para que no choquen
+				pelota2.setX( pelota2.getX()-diferencia );
+			}
+			if (!Fisicas.igualACero(choque.getX())) {
+				double diferencia = 0.0;
+				if (!Fisicas.igualACero(pelota.getAvanceX())) diferencia = Math.abs(pelota.getAvanceX()) / (Math.abs(pelota.getAvanceX()) + Math.abs(pelota2.getAvanceX()));
+				double diferencia2 = 1 - diferencia;
+				if (visualizarChoque) {  // Correcci�n x
+					System.out.println( "  pelota 1 - x: " + pelota.getX() + " - correcci�n " + diferencia );
+					System.out.println( "  pelota 2 - x: " + pelota2.getX() + " - correcci�n " + diferencia2 );
+				}
+				pelota.setX( pelota.getX()-choque.getX()*diferencia*1.1 );  // Corrige y aleja un poquito para que no choquen
+				pelota2.setX( pelota2.getX()+choque.getX()*diferencia2*1.1 );
+			}
+			if (!Fisicas.igualACero(choque.getY())) {
+				double diferencia = 0.0;
+				if (!Fisicas.igualACero(pelota.getAvanceY())) diferencia = Math.abs(pelota.getAvanceY()) / (Math.abs(pelota.getAvanceY()) + Math.abs(pelota2.getAvanceY()));
+				double diferencia2 = 1 - diferencia;
+				if (visualizarChoque) {  // Correcci�n y
+					System.out.println( "  pelota 1 - y: " + pelota.getY() + " - correcci�n " + diferencia );
+					System.out.println( "  pelota 2 - y: " + pelota2.getY() + " - correcci�n " + diferencia2 );
+				}
+				pelota.setY( pelota.getY()-choque.getY()*diferencia*1.1 );  // Corrige y aleja un poquito para que no choquen
+				pelota2.setY( pelota2.getY()+choque.getY()*diferencia2*1.1 );
+			}
+			if (visualizarChoque) {  // Pelotas tras el choque con correcci�n
+				ventana.dibujaCirculo( pelota.getX(), pelota.getY(), pelota.getRadio(), 3f, pelota.getColor() );
+				ventana.dibujaCirculo( pelota2.getX(), pelota2.getY(), pelota2.getRadio(), 3f, pelota2.getColor() );
+			}
+		} 
 	}
 }
