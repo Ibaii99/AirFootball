@@ -15,7 +15,7 @@ import ventanas.ventanaPartido;
  *
  */
 public class Fisicas {
-	public static double ROZAMIENTO = 2000.0;  // P�xels por segundo cuadrado
+	public static double ROZAMIENTO = 0.9877;  // P�xels por segundo cuadrado
 	
 	
 //////////////////////////////////Metodos sin aceleración///////////////////////////////////////////////////////////

@@ -310,63 +310,89 @@ public abstract class Objetos extends Fisicas{
 		return mueveUnPoco( v, miliSgs, dibujar, null );
 	}
 	
-	/** Provoca el movimiento solo horizontal del objeto.
-	 * @param v	Ventana de referencia y dibujado
-	 * @param miliSgs	Tiempo de ca�da
-	 * @param dibujar	true si se quiere borrar y dibujar el objeto en la ventana, false si se hace aparte
-	 */
-	public void mueveUnPocoX( ventanaPartido v, long miliSgs, boolean dibujar ) {
-		// 1. C�lculos previos
-		velXAntes = velX;
-		xAntes = x;
-		yAntes = y;
-		// 2. Borrado si procede
-		if (dibujar) borra( v );
-		// 3. Cambio de posici�n (x)
-		setX( Fisicas.calcEspacio( getX(), miliSgs, velX ) );
-		// 4. Dibujado si procede
-		if (dibujar) dibuja( v );
-		// 5. Actualizaci�n de velocidad final
-		// Sin aceleraci�n sigue siendo la misma)
-	}
-	/** Provoca la ca�da del objeto (el m�todo lo dibuja cayendo en la ventana)
-	 * La ca�da se producir� en funci�n de la velocidad e ir� increment�ndose con la gravedad,
-	 * y se invertir� en el rebote (si lo hay)
-	 * @param v	Ventana de referencia y dibujado
-	 * @param miliSgs	Tiempo de ca�da
-	 * @param dibujar	true si se quiere borrar y dibujar el objeto en la ventana, false si se hace aparte
-	 * @param aceleracion	Aceleraci�n adicional a la gravedad a aplicar al objeto (si procede). Si es null, no se considera
-	 * @return	true si se cae, false si ya se ha parado en el suelo
-	 */
-	public boolean mueveUnPoco( ventanaPartido v, long miliSgs, boolean dibujar, Point2D aceleracion ) {
-		// 1. C�lculos previos
+//	/** Provoca el movimiento solo horizontal del objeto.
+//	 * @param v	Ventana de referencia y dibujado
+//	 * @param miliSgs	Tiempo de ca�da
+//	 * @param dibujar	true si se quiere borrar y dibujar el objeto en la ventana, false si se hace aparte
+//	 */
+//	public void mueveUnPocoX( ventanaPartido v, long miliSgs, boolean dibujar ) {
+//		// 1. C�lculos previos
+//		velXAntes = velX;
+//		xAntes = x;
+//		yAntes = y;
+//		// 2. Borrado si procede
+//		if (dibujar) borra( v );
+//		// 3. Cambio de posici�n (x)
+//		setX( Fisicas.calcEspacio( getX(), miliSgs, velX ) );
+//		// 4. Dibujado si procede
+//		if (dibujar) dibuja( v );
+//		// 5. Actualizaci�n de velocidad final
+//		// Sin aceleraci�n sigue siendo la misma)
+//	}
+//	/** Provoca la ca�da del objeto (el m�todo lo dibuja cayendo en la ventana)
+//	 * La ca�da se producir� en funci�n de la velocidad e ir� increment�ndose con la gravedad,
+//	 * y se invertir� en el rebote (si lo hay)
+//	 * @param v	Ventana de referencia y dibujado
+//	 * @param miliSgs	Tiempo de ca�da
+//	 * @param dibujar	true si se quiere borrar y dibujar el objeto en la ventana, false si se hace aparte
+//	 * @param aceleracion	Aceleraci�n adicional a la gravedad a aplicar al objeto (si procede). Si es null, no se considera
+//	 * @return	true si se cae, false si ya se ha parado en el suelo
+//	 */
+//	public boolean mueveUnPoco( ventanaPartido v, long miliSgs, boolean dibujar, Point2D aceleracion ) {
+//		// 1. C�lculos previos
+//		Point2D miAceleracion = (aceleracion==null) 
+//			? new Point2D.Double( 0.0, Fisicas.ROZAMIENTO ) 
+//			: new Point2D.Double( aceleracion.getX(), aceleracion.getY() - Fisicas.ROZAMIENTO);
+//		velYAntes = velY;  // Guardamos datos para posibles correcciones
+//		velXAntes= velX;
+//		yAntes = y;
+//		xAntes = x;
+//		// 2. Borrado si procede
+//		if (dibujar) borra( v );
+//		// 3. Cambio de posici�n (x e y)
+//		setX( Fisicas.calcEspacio( getX(), miliSgs, velX, miAceleracion.getX() ) );
+//			// setX( Fisica.calcEspacio( getX(), miliSgs, velocidadX ) );  si sabemos que no hay fuerzas horizontales
+//		setY( Fisicas.calcEspacio( getY(), miliSgs, velY, miAceleracion.getY() ) );
+//			// setY( Fisica.calcEspacio( getY(), miliSgs, velocidadY, Fisica.GRAVEDAD ) );  si solo hay gravedad como fuerza vertical
+//		// 4. Dibujado si procede
+//		if (dibujar) dibuja( v );
+//		// 5. Actualizaci�n de velocidad final
+//		// Actualizamos la velocidad final con la gravedad     
+//		setVelX( Fisicas.calcVelocidad( getVelX(), miliSgs, miAceleracion.getX() ));
+//			// no hace falta si no hay aceleraci�n horizontal (cambio de velocidad=0)
+//		setVelY( Fisicas.calcVelocidad( getVelY(), miliSgs, miAceleracion.getY() ));
+//			// setVelocidadY( Fisica.calcVelocidad( getVelocidadY(), miliSgs, Fisica.GRAVEDAD ));   si solo hay gravedad como fuerza vertical
+//		return Fisicas.igualACero( y-yAntes ) && (chocaConBorde(v)>=8);
+//	}
+//	
+
+	public boolean movimiento(long tiempo, Point2D aceleracion, ventanaPartido v, boolean dibujar) {
 		Point2D miAceleracion = (aceleracion==null) 
-			? new Point2D.Double( 0.0, Fisicas.ROZAMIENTO ) 
-			: new Point2D.Double( aceleracion.getX(), aceleracion.getY() - Fisicas.ROZAMIENTO);
+				? new Point2D.Double( 0.0, 0.0) 
+				: new Point2D.Double( aceleracion.getX()* Fisicas.ROZAMIENTO, aceleracion.getY() * Fisicas.ROZAMIENTO);
+		
 		velYAntes = velY;  // Guardamos datos para posibles correcciones
 		velXAntes= velX;
 		yAntes = y;
 		xAntes = x;
+		
 		// 2. Borrado si procede
 		if (dibujar) borra( v );
 		// 3. Cambio de posici�n (x e y)
-		setX( Fisicas.calcEspacio( getX(), miliSgs, velX, miAceleracion.getX() ) );
+		setX( Fisicas.calcEspacio( getY(), tiempo, velY, miAceleracion.getY() ));
 			// setX( Fisica.calcEspacio( getX(), miliSgs, velocidadX ) );  si sabemos que no hay fuerzas horizontales
-		setY( Fisicas.calcEspacio( getY(), miliSgs, velY, miAceleracion.getY() ) );
+		setY( Fisicas.calcEspacio( getY(), tiempo, velY, miAceleracion.getY() ) );
 			// setY( Fisica.calcEspacio( getY(), miliSgs, velocidadY, Fisica.GRAVEDAD ) );  si solo hay gravedad como fuerza vertical
 		// 4. Dibujado si procede
 		if (dibujar) dibuja( v );
 		// 5. Actualizaci�n de velocidad final
 		// Actualizamos la velocidad final con la gravedad     
-		setVelX( Fisicas.calcVelocidad( getVelX(), miliSgs, miAceleracion.getX() ));
+		setVelX( Fisicas.calcVelocidad( getVelX(), tiempo, miAceleracion.getX() ));
 			// no hace falta si no hay aceleraci�n horizontal (cambio de velocidad=0)
-		setVelY( Fisicas.calcVelocidad( getVelY(), miliSgs, miAceleracion.getY() ));
+		setVelY( Fisicas.calcVelocidad( getVelY(), tiempo, miAceleracion.getY() ));
 			// setVelocidadY( Fisica.calcVelocidad( getVelocidadY(), miliSgs, Fisica.GRAVEDAD ));   si solo hay gravedad como fuerza vertical
 		return Fisicas.igualACero( y-yAntes ) && (chocaConBorde(v)>=8);
 	}
-	
-
-	
 	/** Devuelve los p�xels horizontales avanzados en el �ltimo movimiento del objeto
 	 * @return	N� de pixels avanzados en X en la �ltima llamada a {@link #mueveUnPoco(VentanaGrafica, long, boolean)}
 	 */
