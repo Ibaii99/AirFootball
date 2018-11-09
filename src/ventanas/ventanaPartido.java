@@ -277,31 +277,6 @@ public class ventanaPartido extends JFrame {
 	}
 	
 
-	// M�todos est�ticos
-		private static int codTeclaTecleada = 0;
-		private static int codTeclaActualmentePulsada = 0;
-		private static boolean controlActivo = false;
-	// Inicializa el control de teclado
-	private static void init() {
-		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-		manager.addKeyEventDispatcher( new KeyEventDispatcher() {
-			@Override
-			public boolean dispatchKeyEvent(KeyEvent e) {
-				if (e.getID() == KeyEvent.KEY_PRESSED) {
-					codTeclaActualmentePulsada = e.getKeyCode();
-					if (e.getKeyCode() == KeyEvent.VK_CONTROL) controlActivo = true; 
-				} else if (e.getID() == KeyEvent.KEY_RELEASED) {
-					if (e.getKeyCode() == KeyEvent.VK_CONTROL) controlActivo = false; 
-					codTeclaTecleada = e.getKeyCode();
-					codTeclaActualmentePulsada = 0;
-				} else if (e.getID() == KeyEvent.KEY_TYPED) {
-				}
-				return false;   // false = enviar el evento al comp
-			} } );
-	}
-	static {  // Inicializar en la carta de la clase
-		init();
-	}
 
 	/** Devuelve la altura del panel de dibujo de la ventana
 	 * @return	Altura del panel principal (�ltima coordenada y) en p�xels
@@ -317,28 +292,4 @@ public class ventanaPartido extends JFrame {
 		return panel.getWidth()-1;
 	}
 	
-	
-	/** Indica si la tecla Ctrl est� siendo pulsada en este momento
-	 * @return	true si est� pulsada, false en caso contrario
-	 */
-	public boolean isControlPulsado() {
-		return controlActivo;
-	}
-	
-	/** Devuelve el c�digo de la tecla pulsada actualmente
-	 * @return	c�digo de tecla pulsada, 0 si no hay ninguna. Si hay varias, se devuelve la �ltima que se puls�.<br/>
-	 * 			Si se pulsan varias a la vez, tras soltar la primera este m�todo devuelve 0.
-	 */
-	public int getCodTeclaQueEstaPulsada() {
-		return codTeclaActualmentePulsada;
-	}
-	
-	/** Devuelve el c�digo de la �ltima tecla tecleada (pulsada y soltada). Tras eso, borra la tecla (solo se devuelve una vez)
-	 * @return	C�digo de la �ltima tecla tecleada. Si no ha sido tecleada ninguna o ya se ha consultado, se devuelve 0.
-	 */
-	public int getCodUltimaTeclaTecleada() {
-		int ret = codTeclaTecleada;
-		codTeclaTecleada = 0;
-		return ret;
-	}
 }
