@@ -58,8 +58,17 @@ public class FisicasNuevas {
 	}
 	
 	
-	public void daAlPoste(ventanaPartido v, Pelota pelota, Poste palo) {
-		
+	/** Metodo para saber si la pelota ha chocado o choca contra un poste
+	 * @param v			Ventana donde se juega el partido
+	 * @param pelota	Pelota con la que se esta jugando
+	 * @param palo		Palo del que se quiere saber
+	 * @return			Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
+	 */
+	public boolean daAlPoste(ventanaPartido v, Pelota pelota, Poste palo) {
+		boolean hayChoque = false;
+		if( Math.abs(palo.getX() - pelota.getX()) <= (pelota.getRadio() + palo.RADIO_POSTE) ) hayChoque = true;
+		if( Math.abs(palo.getY() - pelota.getY()) <= (pelota.getRadio() + palo.RADIO_POSTE) ) hayChoque = true;
+		return hayChoque;
 	}
 	
 	public void reboteConPoste() {

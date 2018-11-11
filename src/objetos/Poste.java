@@ -10,9 +10,9 @@ import ventanas.ventanaPartido;
  *
  */
 public class Poste extends Objetos{
-	private static double RADIO_POSTE = 25;
-	private static double MASA_POSTE = 99999;
-	private static double ANCHURA_PORTERIA = 120;
+	public static double RADIO_POSTE = 25;
+	public static double MASA_POSTE = 99999;
+	public static double ANCHURA_PORTERIA = 120;
 	
 	
 	/** Metodo constructor de un poste, 
@@ -42,14 +42,12 @@ public class Poste extends Objetos{
 
 	@Override
 	public double getVolumen() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Math.PI*(RADIO_POSTE*RADIO_POSTE*RADIO_POSTE)*4/3;
 	}
 
 	@Override
 	public double getArea() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Math.PI*(RADIO_POSTE*RADIO_POSTE);
 	}
 
 
