@@ -1,6 +1,7 @@
 package fisicas;
 
 import objetos.Pelota;
+import objetos.Poste;
 import ventanas.ventanaPartido;
 
 public class FisicasNuevas {
@@ -42,11 +43,22 @@ public class FisicasNuevas {
 	}
 	
 	
-	public void rebotaeEnBorde(ventanaPartido v) {
-		
+	/** Metodo para saber si ha ocurrido u ocurre algun choque en los bordes del campo
+	 * @param v	 Ventana donde se juega el partido
+	 * @param p	 Pelota con la que se esta jugando
+	 * @return	 Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
+	 */
+	public boolean rebotaeEnBorde(ventanaPartido v, Pelota p) {
+		boolean hayRebote = false;
+		if(v.getAnchuraCampo()<= (p.getX() + p.getRadio()))hayRebote = true;	//Choca en la derecha
+		if(v.getAlturaCampo() <= (p.getY() + p.getRadio()))hayRebote = true;	//Choca arriba
+		if((p.getX() - p.getRadio()) <= 0)hayRebote = true;						//Choca a la izquierda
+		if((p.getY() - p.getRadio()) <= 0)hayRebote = true;						//Choca abajo
+		return hayRebote;
 	}
 	
-	public void daAlPoste() {
+	
+	public void daAlPoste(ventanaPartido v, Pelota pelota, Poste palo) {
 		
 	}
 	

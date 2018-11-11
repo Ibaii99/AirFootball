@@ -13,6 +13,8 @@ import javax.swing.*;
 import java.awt.Font;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /** @author Jorge 
  *  @author ibai
@@ -22,13 +24,12 @@ public class ventanaPartido extends JFrame {
 	private boolean liga;
 	private boolean arcade;
 	private Graphics2D graphics;  // Objeto gr�fico sobre el que dibujar (del buffer)
-	private JPanel panel;         // Panel principal
+	private JPanel panelCampo;         // Panel principal
 	
 	public ventanaPartido() {
 		setSize(750, 500);
 		setResizable(false);
 		setVisible(true);
-		getContentPane().setLayout(null);
 		ImageIcon iconL = new ImageIcon(ventanaPartido.class.getResource("/iconos/equipos/atl.png"));
 		Image imgL = iconL.getImage();
 		BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
@@ -49,48 +50,57 @@ public class ventanaPartido extends JFrame {
 		Graphics gV = biV.createGraphics();
 		gV.drawImage(imgV, 0, 0, 40, 40, null);
 		ImageIcon newIconV = new ImageIcon(biV);
-
-		JLabel lblEscudoL = new JLabel("");
-		lblEscudoL.setBounds(164, 13, 40, 40);
-		lblEscudoL.setIcon(newIconL);
-		getContentPane().add(lblEscudoL);
-		JLabel lblEscudoV = new JLabel("");
-		lblEscudoV.setBounds(532, 13, 40, 40);
-		lblEscudoV.setIcon(newIconV);
-		getContentPane().add(lblEscudoV);
-
-		JPanel panel = new JPanel();
-		panel.setBounds(182, 13, 373, 40);
-		getContentPane().add(panel);
 		ImageIcon icon = new ImageIcon(ventanaPartido.class.getResource("/iconos/marcadorconnombres.jpg"));
 		Image img = icon.getImage();
 		BufferedImage bi = new BufferedImage(373, 50, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = bi.createGraphics();
 		g.drawImage(img, 0, 0, 373, 50, null);
 		ImageIcon newIcon = new ImageIcon(bi);
+		
+		panelCampo= new JPanel();
+		
+		JPanel panel = new JPanel();
 		panel.setLayout(null);
-
-		JLabel label_2 = new JLabel("0");
-		label_2.setForeground(Color.RED);
-		label_2.setFont(new Font("DSEG14 Classic", Font.PLAIN, 28));
-		label_2.setBounds(153, 5, 23, 32);
-		panel.add(label_2);
-
-		JLabel label_1 = new JLabel("0");
-		label_1.setForeground(Color.RED);
-		label_1.setFont(new Font("DSEG14 Classic", Font.PLAIN, 28));
-		label_1.setBounds(190, 5, 23, 32);
-		panel.add(label_1);
-
-		JLabel label = new JLabel("");
-		label.setIcon(newIcon);
-		label.setBounds(0, 0, 373, 51);
+		
+		JLabel label = new JLabel("0");
+		label.setForeground(Color.RED);
+		label.setFont(new Font("Dialog", Font.PLAIN, 28));
+		label.setBounds(346, 5, 75, 36);
 		panel.add(label);
 		
-		JLabel lCampo = new JLabel("");
-		lCampo.setIcon(newIconC);
-		lCampo.setBounds(12, 57, 720, 395);
-		getContentPane().add(lCampo);
+		JLabel label_1 = new JLabel("");
+		label_1.setBounds(12, 5, 40, 40);
+		panel.add(label_1);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setBounds(686, 5, 40, 40);
+		panel.add(label_2);
+		
+		JLabel label_3 = new JLabel("0");
+		label_3.setForeground(Color.RED);
+		label_3.setFont(new Font("Dialog", Font.PLAIN, 28));
+		label_3.setBounds(217, 5, 75, 36);
+		panel.add(label_3);
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 730, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		getContentPane().setLayout(groupLayout);
 
 	}
 
@@ -283,15 +293,14 @@ public class ventanaPartido extends JFrame {
 	/** Devuelve la altura del panel de dibujo de la ventana
 	 * @return	Altura del panel principal (�ltima coordenada y) en p�xels
 	 */
-	public int getAltura() {
-		return panel.getHeight()-1;
+	public int getAlturaCampo() {
+		return panelCampo.getHeight()-1;
 	}
 	
 	/** Devuelve la anchura del panel de dibujo de la ventana
 	 * @return	Anchura del panel principal (�ltima coordenada x) en p�xels
 	 */
-	public int getAnchura() {
-		return panel.getWidth()-1;
+	public int getAnchuraCampo() {
+		return panelCampo.getWidth()-1;
 	}
-	
 }
