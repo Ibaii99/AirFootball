@@ -16,36 +16,54 @@ import ventanas.ventanaPartido;
  */
 public class Pelota extends Objetos{
 	
-	/** Metodo constructor de la clase pelota sin imagen y con rebote
-	 * @param color	Color de la pelota
-	 * @param nombre Nombre de la pelota
-	 * @param alto Altura de la pelota
-	 * @param ancho Anchura de la pelota
-	 * @param masa	Masa de la pelota
-	 */
+	private static double MASA_POR_DEFECTO = 50;			// Masa por defecto de los constructores simples
+	private static double POSICION_Y_POR_DEFECTO = 0;		// Posicion Y por defecto de los constructores simples
+	private static double POSICION_X_POR_DEFECTO = 0;		// Posicion X por defecto de los constructores simples
+	
+	/** Metodo constructor de la clase pelota SIN imagen y con rebote
+	 * @param color		Color de la pelota
+	 * @param nombre 	Nombre de la pelota
+	 * @param alto 		Altura de la pelota
+	 * @param ancho 	Anchura de la pelota
+	 * @param masa		Masa de la pelota
+	 */	
 	public Pelota(Color color, String nombre, double x, double y, double radio, double masa) {
 		super(x, y, color, true, nombre, radio, masa, null);
 	}
 	
+	/** Metodo constructor de la clase pelota CON imagen y con rebote
+	 * @param imagen	Ruta de la imagen
+	 * @param nombre 	Nombre de la pelota
+	 * @param alto 		Altura de la pelota
+	 * @param ancho 	Anchura de la pelota
+	 * @param masa		Masa de la pelota
+	 */
+	public Pelota(String imagen, String nombre, double x, double y, double radio, double masa) {
+		super(x, y, null, true, nombre, radio, masa, (new ImageIcon(imagen)));
+	}
 
-	/** Constructor sencillo de pelota, posiciones: 0,0 y masa=50 y SIN imagen
+	/** Constructor sencillo de pelota, posiciones y masa por defecto y SIN imagen
 	 * @param color	Color a elegir
 	 * @param nombre Nombre a elegir	
 	 * @param radio	Radio de la pelota
 	 */
 	public Pelota(Color color, String nombre, double radio) {
-		super(0, 0, color, true, nombre, radio, 50, null);
+		super(POSICION_X_POR_DEFECTO, POSICION_Y_POR_DEFECTO, color, true, nombre, radio, MASA_POR_DEFECTO, null);
 	}
 	
-	/** Constructor sencillo de pelota, posiciones: 0,0 y masa=50 y CON imagen
+	/** Constructor sencillo de pelota, posiciones y masa por defecto  y CON imagen
 	 * @param imagen
 	 * @param nombre
 	 * @param radio
 	 */
 	public Pelota(String imagen, String nombre, double radio) {
-		super(0, 0, null, true, nombre, radio, 50, (new ImageIcon(imagen)));
+		super(POSICION_X_POR_DEFECTO, POSICION_Y_POR_DEFECTO, null, true, nombre, radio, MASA_POR_DEFECTO, (new ImageIcon(imagen)));
 	}
 
+	
+	
+	
+	
 	/** Calcula el volumen de la pelota partiendo de su informaci�n de radio
 	 * @return	Volumen de la pelota suponiendo una esfera perfecta
 	 */

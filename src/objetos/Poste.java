@@ -10,9 +10,12 @@ import ventanas.ventanaPartido;
  *
  */
 public class Poste extends Objetos{
+	double ANCHURA_POSTE = 25;
+	double MASA_POSTE = 99999;
+	double ANCHURA_PORTERIA = 120;
 	
-	public Poste(ventanaPartido v) {
-		super(x, altura, Color.WHITE, false, "Poste", radio, masa)
+	public Poste(ventanaPartido v, boolean esPaloDeLaDerecha ) {
+		if(esPaloDeLaDerecha)super(0, calcularPosicionDelPalo(v, ANCHURA_PORTERIA), Color.WHITE, false, "Palo izquierda", ANCHURA_POSTE, MASA_POSTE, null);
 	}
 
 	/** Metodo para calcular la posicion de un palo de la porteria
