@@ -70,6 +70,7 @@ public class FisicasNuevas {
 		if( Math.abs(palo.getY() - pelota.getY()) <= (pelota.getRadio() + palo.RADIO_POSTE) ) hayChoque = true;
 		return hayChoque;
 	}
+
 	
 	public void reboteConPoste() {
 		
