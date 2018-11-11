@@ -22,7 +22,7 @@ public class PruebaFisicas {
 		p1.setVelocidadAntes(p1.getVelX());
 		
 		
-	}
+	}a
 	
 	// Primero hay que hacer metodo de calcular si chocan
 	// Devuelva la direccion y velocidad con la que rebotan las pelotas
