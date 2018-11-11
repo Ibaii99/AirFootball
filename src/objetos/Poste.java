@@ -11,8 +11,18 @@ import ventanas.ventanaPartido;
  */
 public class Poste extends Objetos{
 	
-	public Poste(String a) {
-		super(0, false, 0, 0, 0, 0, 0, 0);
+	public Poste(ventanaPartido v) {
+		super(x, altura, Color.WHITE, false, "Poste", radio, masa)
+	}
+
+	/** Metodo para calcular la posicion de un palo de la porteria
+	 * @param v					Ventana donde se van a colocar
+	 * @param anchuraPorteria	Anchura que va a tener la porteria
+	 * @return					devuelve la posicion y del palo
+	 */
+	public double calcularPosicionDelPalo(ventanaPartido v, double anchuraPorteria) {
+		double mitadDeLaPorteria = (v.getAlturaCampo())/2;
+		return(mitadDeLaPorteria + anchuraPorteria);
 	}
 
 	@Override
@@ -27,40 +37,7 @@ public class Poste extends Objetos{
 		return 0;
 	}
 
-	@Override
-	public void borra(ventanaPartido v) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
-	@Override
-	public void corrigeChoqueInferior(ventanaPartido v, boolean dibujar) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void corrigeChoqueLateral(ventanaPartido v, boolean izquierda, boolean dibujar) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int chocaConBorde(ventanaPartido v) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Point chocaConObjeto(Objetos objeto2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean contieneA(Point punto) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-}

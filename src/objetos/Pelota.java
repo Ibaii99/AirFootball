@@ -15,9 +15,8 @@ import ventanas.ventanaPartido;
  *
  */
 public class Pelota extends Objetos{
-	private double radio;
 	
-	/** Metodo constructor de la clase pelota
+	/** Metodo constructor de la clase pelota sin imagen y con rebote
 	 * @param color	Color de la pelota
 	 * @param nombre Nombre de la pelota
 	 * @param alto Altura de la pelota
@@ -25,32 +24,26 @@ public class Pelota extends Objetos{
 	 * @param masa	Masa de la pelota
 	 */
 	public Pelota(Color color, String nombre, double x, double y, double radio, double masa) {
-		super(x, y, color, true, nombre,radio*2,radio*2, masa);
-		this.radio = radio;
+		super(x, y, color, true, nombre, radio, masa, null);
 	}
 	
-	/** Metodo para crear pelotas para equipos, la ficha del equipo en si
 
-	
-	/** Constructor sencillo de pelota, posiciones: 0,0 y masa=50
+	/** Constructor sencillo de pelota, posiciones: 0,0 y masa=50 y SIN imagen
 	 * @param color	Color a elegir
 	 * @param nombre Nombre a elegir	
 	 * @param radio	Radio de la pelota
 	 */
 	public Pelota(Color color, String nombre, double radio) {
-		this(color, nombre, radio, 0, 0, 50);
-		this.radio = radio;
+		super(0, 0, color, true, nombre, radio, 50, null);
 	}
 	
-	/** Constructor sencillo de pelota con imagen, posiciones: 0,0 y masa=50
+	/** Constructor sencillo de pelota, posiciones: 0,0 y masa=50 y CON imagen
 	 * @param imagen
 	 * @param nombre
 	 * @param radio
 	 */
 	public Pelota(String imagen, String nombre, double radio) {
-		super(radio, radio, Color.BLACK, true, nombre, 0, 0, 50);
-		this.setImagenObjeto(new ImageIcon(imagen));
-		this.radio = radio;
+		super(0, 0, null, true, nombre, radio, 50, (new ImageIcon(imagen)));
 	}
 
 	/** Calcula el volumen de la pelota partiendo de su informaci�n de radio
@@ -188,5 +181,7 @@ public class Pelota extends Objetos{
 	public double getRadio() {
 		return radio;
 	}
+
+	}
 	
-}
+

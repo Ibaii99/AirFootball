@@ -37,8 +37,7 @@ public abstract class Objetos extends Fisicas{
 	protected double velYAntes = 0;
 	private double velocidadAntes = 0;	
 ///////////////////////Tamaño//////////////////////////////////////	
-	protected double objetoAlto;
-	protected double objetoAncho;
+	protected double radio;
 	
 	
 	public static boolean DIBUJAR_VELOCIDAD = false;
@@ -52,16 +51,16 @@ public abstract class Objetos extends Fisicas{
 	 * @param alto Altura del objeto
 	 * @param ancho Anchura del objeto
 	 */
-	public Objetos(double x, double y, Color color, boolean bota, String nombre, double alto, double ancho, double masa) {
+	public Objetos(double x, double y, Color color, boolean bota, String nombre, double radio, double masa, ImageIcon imagen) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.color = color;
 		this.bota = bota;
-		this.nombre = nombre; 
-		this.objetoAlto = alto; 
-		this.objetoAncho = ancho;
+		this.nombre = nombre;
+		this.radio = radio;
 		this.masa = masa;
+		this.imagenObjeto = imagen;
 	}
 	
 	
@@ -146,20 +145,6 @@ public abstract class Objetos extends Fisicas{
 		this.velocidadAntes = velocidadAntes;
 	}
 
-
-
-	public void setObjetoAlto(double objetoAlto) {
-		this.objetoAlto = objetoAlto;
-	}
-
-
-
-	public void setObjetoAncho(double objetoAncho) {
-		this.objetoAncho = objetoAncho;
-	}
-
-
-
 	public static void setDIBUJAR_VELOCIDAD(boolean dIBUJAR_VELOCIDAD) {
 		DIBUJAR_VELOCIDAD = dIBUJAR_VELOCIDAD;
 	}
@@ -222,13 +207,6 @@ public abstract class Objetos extends Fisicas{
 		return velYAntes;
 	}
 
-	public double getObjetoAlto() {
-		return objetoAlto;
-	}
-
-	public double getObjetoAncho() {
-		return objetoAncho;
-	}
 
 	public static boolean isDIBUJAR_VELOCIDAD() {
 		return DIBUJAR_VELOCIDAD;
@@ -284,16 +262,16 @@ public abstract class Objetos extends Fisicas{
 	 */
 	public abstract double getArea();
 	
-	/** Dibuja el objeto en una ventana, en el color correspondiente (por defecto, negro)
-	 * @param v	Ventana en la que dibujar el objeto
-	 */
-	public void dibuja( ventanaPartido v ) {
-		// No se sabe c�mo dibujar el objeto... pero s� la velocidad
-		if (DIBUJAR_VELOCIDAD) {
-			v.dibujaFlecha( x,  y, x+velX/10, y+velY/10, 1.5f, Color.orange );
-		}
-	}
-	
+//	/** Dibuja el objeto en una ventana, en el color correspondiente (por defecto, negro)
+//	 * @param v	Ventana en la que dibujar el objeto
+//	 */
+//	public void dibuja( ventanaPartido v ) {
+//		// No se sabe c�mo dibujar el objeto... pero s� la velocidad
+//		if (DIBUJAR_VELOCIDAD) {
+//			v.dibujaFlecha( x,  y, x+velX/10, y+velY/10, 1.5f, Color.orange );
+//		}
+//	}
+//	
 //	/** Borra el objeto en una ventana
 //	 * @param v	Ventana en la que borrar el objeto
 //	 */
