@@ -1,13 +1,15 @@
 package main;
 
-<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.Font;
 import java.io.InputStream;
-=======
 import objetos.Poste;
 import ventanas.ventanaPartido;
+import javax.swing.ImageIcon;
 
+import entidades.BaseDeDatos;
+import entidades.Equipo;
+import ventanas.Inicio;
 public class Juego {
 	
 	public ventanaPartido v = new ventanaPartido();
@@ -19,21 +21,6 @@ public class Juego {
 	
 	
 	public static void main(String[] args) {
-		
-	}
-	
-	
->>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
-
-import javax.swing.ImageIcon;
-
-import entidades.BaseDeDatos;
-import entidades.Equipo;
-import ventanas.Inicio;
-
-public class Juego {
-	public static void main(String[] args) {
-
 		BaseDeDatos bd = new BaseDeDatos();
 		bd.anyadirEquipo(new Equipo('a', "Deportivo Alavés", 0, Color.BLUE, new ImageIcon("iconos/equipos/ala.png"),
 				"iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
@@ -76,9 +63,13 @@ public class Juego {
 				"iconos/equipos/vll.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 		bd.anyadirEquipo(new Equipo('a', "Villarreal CF", 0, Color.BLUE, new ImageIcon("iconos/equipos/vlr.png"),
 				"iconos/equipos/vlr.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-
 	}
 }
+	
+	
+
+
+
 /**
  * (char siglas, String nombre, int puntos, Color color, ImageIcon imagen,
  * String rutaImagen, int golesEnContraTotales, int golesEnContraLocal, int
