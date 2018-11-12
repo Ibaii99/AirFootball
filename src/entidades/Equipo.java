@@ -17,7 +17,7 @@ public class Equipo{
 	private Pelota bolaEquipo;
 	private String nombre;		
 	
-	private char siglas; // Char para crear un formato de reconocimiento de siglas con lo dado en clase
+	private String siglas; // Char para crear un formato de reconocimiento de siglas con lo dado en clase
 	
 	private int puntos;
 	
@@ -164,7 +164,7 @@ public class Equipo{
 		return nombre;
 	}
 
-	public char getSiglas() {
+	public String getSiglas() {
 		return siglas;
 	}
 

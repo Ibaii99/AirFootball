@@ -3,19 +3,28 @@ package fisicas;
 import java.awt.Point;
 
 import entidades.BaseDeDatos;
+<<<<<<< HEAD
 import entidades.Equipo;
+=======
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 import objetos.Pelota;
 import ventanas.ventanaPartido;
 
 public class PruebaFisicas {
-	
+	public static void main(String[] args) {
+		BaseDeDatos b = new BaseDeDatos();
+		b.crearTabla();
+	}
 	public void ChocanEntreSi(Pelota p1, Pelota p2) {
 		Point vectorPelota1 = p1.chocaConObjeto(p2);
 		Point vectorPelota2 = p2.chocaConObjeto(p1);
+		
 		// estas son las direcciones que tienen que tomar cada pelota
 		
 		p1.setVelocidad(vectorPelota1);
 		p2.setVelocidad(vectorPelota2);
+		p1.setVelocidadAntes(p1.getVelX());
+		
 		
 	}
 	public static void main(String[] args) {
@@ -29,7 +38,11 @@ public class PruebaFisicas {
 	// Devuelva la direccion y velocidad con la que rebotan las pelotas
 	
 	public void chocaEnVentana(ventanaPartido v, Pelota p) {
+<<<<<<< HEAD
 //		if(p.)
+=======
+	//	if(p.)
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 	}
 	// Metodo de rebota en los laterales
 	// Devuelve la direccion y velocidad con la que rebota la pelota
