@@ -22,46 +22,46 @@ public class Juego {
 	
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos();
-		bd.anyadirEquipo(new Equipo('a', "Deportivo Alavés", 0, Color.BLUE, new ImageIcon("iconos/equipos/ala.png"),
+		bd.anyadirEquipo(new Equipo("ALA", "Deportivo Alavés", 0, Color.BLUE, new ImageIcon("iconos/equipos/ala.png"),
 				"iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Athletic Club", 0, Color.RED, new ImageIcon("iconos/equipos/ath.png"),
+		bd.anyadirEquipo(new Equipo("ATH", "Athletic Club", 0, Color.RED, new ImageIcon("iconos/equipos/ath.png"),
 				"iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Atlético de Madrid", 0, Color.RED, new ImageIcon("iconos/equipos/atl.png"),
+		bd.anyadirEquipo(new Equipo("ATM", "Atlético de Madrid", 0, Color.RED, new ImageIcon("iconos/equipos/atl.png"),
 				"iconos/equipos/atl.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "FC Barcelona", 0, Color.BLUE, new ImageIcon("iconos/equipos/bar.png"),
+		bd.anyadirEquipo(new Equipo("BAR", "FC Barcelona", 0, Color.BLUE, new ImageIcon("iconos/equipos/bar.png"),
 				"iconos/equipos/bar.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Real Betis", 0, Color.BLUE, new ImageIcon("iconos/equipos/bet.png"),
+		bd.anyadirEquipo(new Equipo("BET", "Real Betis", 0, Color.BLUE, new ImageIcon("iconos/equipos/bet.png"),
 				"iconos/equipos/bet.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Celta de Vigo", 0, Color.BLUE, new ImageIcon("iconos/equipos/cel.png"),
+		bd.anyadirEquipo(new Equipo("CEL", "Celta de Vigo", 0, Color.BLUE, new ImageIcon("iconos/equipos/cel.png"),
 				"iconos/equipos/cel.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 		bd.anyadirEquipo(
-				new Equipo('a', "Deportivo de La Coruña", 0, Color.BLUE, new ImageIcon("iconos/equipos/dep.png"),
+				new Equipo("DEP", "Deportivo de La Coruña", 0, Color.BLUE, new ImageIcon("iconos/equipos/dep.png"),
 						"iconos/equipos/dep.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "SD Eibar", 0, Color.BLUE, new ImageIcon("iconos/equipos/eib.png"),
+		bd.anyadirEquipo(new Equipo("EIB", "SD Eibar", 0, Color.BLUE, new ImageIcon("iconos/equipos/eib.png"),
 				"iconos/equipos/eib.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "RCD Espanyol", 0, Color.BLUE, new ImageIcon("iconos/equipos/esp.png"),
+		bd.anyadirEquipo(new Equipo("ESP", "RCD Espanyol", 0, Color.BLUE, new ImageIcon("iconos/equipos/esp.png"),
 				"iconos/equipos/esp.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Getafe CF", 0, Color.BLUE, new ImageIcon("iconos/equipos/get.png"),
+		bd.anyadirEquipo(new Equipo("GET", "Getafe CF", 0, Color.BLUE, new ImageIcon("iconos/equipos/get.png"),
 				"iconos/equipos/get.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Girona FC", 0, Color.BLUE, new ImageIcon("iconos/equipos/gir.png"),
+		bd.anyadirEquipo(new Equipo("GIR", "Girona FC", 0, Color.BLUE, new ImageIcon("iconos/equipos/gir.png"),
 				"iconos/equipos/gir.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "SD Huesca", 0, Color.BLUE, new ImageIcon("iconos/equipos/hue.png"),
+		bd.anyadirEquipo(new Equipo("HUE", "SD Huesca", 0, Color.BLUE, new ImageIcon("iconos/equipos/hue.png"),
 				"iconos/equipos/hue.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Leganés", 0, Color.BLUE, new ImageIcon("iconos/equipos/leg.png"),
+		bd.anyadirEquipo(new Equipo("LEG", "Leganés", 0, Color.BLUE, new ImageIcon("iconos/equipos/leg.png"),
 				"iconos/equipos/leg.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Rayo Vallecano", 0, Color.BLUE, new ImageIcon("iconos/equipos/ray.png"),
+		bd.anyadirEquipo(new Equipo("RAY", "Rayo Vallecano", 0, Color.BLUE, new ImageIcon("iconos/equipos/ray.png"),
 				"iconos/equipos/ray.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Real Madrid CF", 0, Color.BLUE, new ImageIcon("iconos/equipos/rma.png"),
+		bd.anyadirEquipo(new Equipo("RMA", "Real Madrid CF", 0, Color.BLUE, new ImageIcon("iconos/equipos/rma.png"),
 				"iconos/equipos/rma.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Real Sociedad", 0, Color.BLUE, new ImageIcon("iconos/equipos/rso.png"),
+		bd.anyadirEquipo(new Equipo("RSO", "Real Sociedad", 0, Color.BLUE, new ImageIcon("iconos/equipos/rso.png"),
 				"iconos/equipos/rso.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Sevilla FC", 0, Color.BLUE, new ImageIcon("iconos/equipos/sev.png"),
+		bd.anyadirEquipo(new Equipo("SEV", "Sevilla FC", 0, Color.BLUE, new ImageIcon("iconos/equipos/sev.png"),
 				"iconos/equipos/sev.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Valencia CF", 0, Color.BLUE, new ImageIcon("iconos/equipos/val.png"),
+		bd.anyadirEquipo(new Equipo("VAL", "Valencia CF", 0, Color.BLUE, new ImageIcon("iconos/equipos/val.png"),
 				"iconos/equipos/val.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Real Valladolid", 0, Color.BLUE, new ImageIcon("iconos/equipos/vll.png"),
+		bd.anyadirEquipo(new Equipo("VLL", "Real Valladolid", 0, Color.BLUE, new ImageIcon("iconos/equipos/vll.png"),
 				"iconos/equipos/vll.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		bd.anyadirEquipo(new Equipo('a', "Villarreal CF", 0, Color.BLUE, new ImageIcon("iconos/equipos/vlr.png"),
+		bd.anyadirEquipo(new Equipo("VLR", "Villarreal CF", 0, Color.BLUE, new ImageIcon("iconos/equipos/vlr.png"),
 				"iconos/equipos/vlr.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 	}
 }

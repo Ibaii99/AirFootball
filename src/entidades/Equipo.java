@@ -50,7 +50,7 @@ public class Equipo{
 	
 	
 
-	public Equipo(char siglas, String nombre, int puntos, Color color, ImageIcon imagen, String rutaImagen,
+	public Equipo(String siglas, String nombre, int puntos, Color color, ImageIcon imagen, String rutaImagen,
 			int golesEnContraTotales, int golesEnContraLocal, int golesEnContraVisitante, int golesAFavorTotales,
 			int golesAFavorVisitante, int golesAFavorLocal, int victoriasTotales, int victoriasLocal,
 			int victoriasVisitante, int derrotasTotales, int derrotasLocal, int derrotasVisitante, int empatesTotales,

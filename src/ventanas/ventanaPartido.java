@@ -24,12 +24,12 @@ public class ventanaPartido extends JFrame {
 	private JPanel panel;         // Panel principal
 	
 	public ventanaPartido() {
-		String nombreFont = "ventanas/DSEG14Classic-Regular.ttf";  
+		String nombreFont = "DSEG14Classic-Regular.ttf";  
 		Font f = null;
 		try {
-			f = Font.createFont( Font.TRUETYPE_FONT,
-					ventanaPartido.class.getResourceAsStream(nombreFont) );
-			f = f.deriveFont( Font.PLAIN, 24 );
+			f = Font.createFont(Font.TRUETYPE_FONT,
+					ventanaPartido.class.getResourceAsStream(nombreFont));
+			f = f.deriveFont(Font.PLAIN, 12);
 		} catch (FontFormatException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
