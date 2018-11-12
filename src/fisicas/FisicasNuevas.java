@@ -4,6 +4,10 @@ import objetos.Pelota;
 import objetos.Poste;
 import ventanas.ventanaPartido;
 
+/**
+ * @author ibai
+ *
+ */
 public class FisicasNuevas {
 
 	/** Metodo para cambiar la posición de la pelota
@@ -71,8 +75,35 @@ public class FisicasNuevas {
 		return hayChoque;
 	}
 
+	public void choqueConPalos(ventanaPartido v, Poste paloArribDer, Poste paloAbajoDer, Poste paloArribIzq, Poste paloAbajoIzq, Pelota p) {
+		if(daAlPoste(v, p, paloArribDer)) {
+			
+		}
+		
+		if(daAlPoste(v, p, paloAbajoDer)) {
+		
+		}
+		
+		if(daAlPoste(v, p, paloArribIzq)) {
+			
+		}
+		
+		if(daAlPoste(v, p, paloAbajoIzq)) {
+			
+		}
+	}
+	
 	
 	public void reboteConPoste() {
 		
 	}
+
+	/** Metodo para saber si un numero es 0, redondeo
+	 * @param num	Numero del que se quiere saber si es muy proximo a 0
+	 * @return		Devuelve: True-> si es 0 / False-> si no es 0
+	 */
+	public static boolean igualACero( double num ) {
+		return Math.abs(num)<=1E-12;  // 1 * 10^-12
+	}
+	
 }

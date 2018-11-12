@@ -20,7 +20,7 @@ public class PruebaFisicas {
 		p1.setVelocidad(vectorPelota1);
 		p2.setVelocidad(vectorPelota2);
 		p1.setVelocidadAntes(p1.getVelX());
-		s
+		
 		
 	}
 	
