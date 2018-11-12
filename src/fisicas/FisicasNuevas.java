@@ -9,7 +9,8 @@ import ventanas.ventanaPartido;
  *
  */
 public class FisicasNuevas {
-
+	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
+	// Y el tiempo en el que se calcule eso
 	/** Metodo para cambiar la posición de la pelota
 	 * @param p	Pelota a la que vas a cambiar la posicion
 	 * @param x	Posicion en eje x
@@ -76,6 +77,7 @@ public class FisicasNuevas {
 	}
 
 	public void choqueConPalos(ventanaPartido v, Poste paloArribDer, Poste paloAbajoDer, Poste paloArribIzq, Poste paloAbajoIzq, Pelota p) {
+		
 		if(daAlPoste(v, p, paloArribDer)) {
 			
 		}
