@@ -48,8 +48,36 @@ public class Equipo{
 	private int empatesLocal;
 	private int empatesVisitante;
 	
-
 	
+
+	public Equipo(char siglas, String nombre, int puntos, Color color, ImageIcon imagen, String rutaImagen,
+			int golesEnContraTotales, int golesEnContraLocal, int golesEnContraVisitante, int golesAFavorTotales,
+			int golesAFavorVisitante, int golesAFavorLocal, int victoriasTotales, int victoriasLocal,
+			int victoriasVisitante, int derrotasTotales, int derrotasLocal, int derrotasVisitante, int empatesTotales,
+			int empatesLocal, int empatesVisitante) {
+		super();
+		this.siglas = siglas;
+		this.nombre = nombre;
+		this.puntos = puntos;
+		this.color = color;
+		this.imagen = imagen;
+		this.rutaImagen = rutaImagen;
+		this.golesEnContraTotales = golesEnContraTotales;
+		this.golesEnContraLocal = golesEnContraLocal;
+		this.golesEnContraVisitante = golesEnContraVisitante;
+		this.golesAFavorTotales = golesAFavorTotales;
+		this.golesAFavorVisitante = golesAFavorVisitante;
+		this.golesAFavorLocal = golesAFavorLocal;
+		this.victoriasTotales = victoriasTotales;
+		this.victoriasLocal = victoriasLocal;
+		this.victoriasVisitante = victoriasVisitante;
+		this.derrotasTotales = derrotasTotales;
+		this.derrotasLocal = derrotasLocal;
+		this.derrotasVisitante = derrotasVisitante;
+		this.empatesTotales = empatesTotales;
+		this.empatesLocal = empatesLocal;
+		this.empatesVisitante = empatesVisitante;
+	}
 
 	public Equipo(String nombre, double radio, Color color, char[] siglas) {
 		bolaEquipo = new Pelota(color,nombre,75);

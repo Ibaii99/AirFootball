@@ -8,9 +8,11 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.swing.*;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
@@ -22,6 +24,18 @@ public class ventanaPartido extends JFrame {
 	private JPanel panel;         // Panel principal
 	
 	public ventanaPartido() {
+		String nombreFont = "ventanas/DSEG14Classic-Regular.ttf";  
+		Font f = null;
+		try {
+			f = Font.createFont( Font.TRUETYPE_FONT,
+					ventanaPartido.class.getResourceAsStream(nombreFont) );
+			f = f.deriveFont( Font.PLAIN, 24 );
+		} catch (FontFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+
 		setSize(750, 500);
 		setResizable(false);
 		setVisible(true);
@@ -69,13 +83,13 @@ public class ventanaPartido extends JFrame {
 
 		JLabel label_2 = new JLabel("0");
 		label_2.setForeground(Color.RED);
-		label_2.setFont(new Font("DSEG14 Classic", Font.PLAIN, 28));
+		label_2.setFont(f);
 		label_2.setBounds(153, 5, 23, 32);
 		panel.add(label_2);
 
 		JLabel label_1 = new JLabel("0");
 		label_1.setForeground(Color.RED);
-		label_1.setFont(new Font("DSEG14 Classic", Font.PLAIN, 28));
+		label_1.setFont(f);
 		label_1.setBounds(190, 5, 23, 32);
 		panel.add(label_1);
 
@@ -291,5 +305,10 @@ public class ventanaPartido extends JFrame {
 	public int getAnchura() {
 		return panel.getWidth()-1;
 	}
+	public static void main(String[] args) {
+		ventanaPartido v = new ventanaPartido();
+		v.setVisible(true);
+	}
+	
 	
 }

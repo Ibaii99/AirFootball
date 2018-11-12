@@ -2,6 +2,8 @@ package fisicas;
 
 import java.awt.Point;
 
+import entidades.BaseDeDatos;
+import entidades.Equipo;
 import objetos.Pelota;
 import ventanas.ventanaPartido;
 
@@ -16,12 +18,18 @@ public class PruebaFisicas {
 		p2.setVelocidad(vectorPelota2);
 		
 	}
+	public static void main(String[] args) {
+		System.out.println("h");
+		BaseDeDatos b = new BaseDeDatos();
+		b.crearTabla();
+		
+	}
 	
 	// Primero hay que hacer metodo de calcular si chocan
 	// Devuelva la direccion y velocidad con la que rebotan las pelotas
 	
 	public void chocaEnVentana(ventanaPartido v, Pelota p) {
-		if(p.)
+//		if(p.)
 	}
 	// Metodo de rebota en los laterales
 	// Devuelve la direccion y velocidad con la que rebota la pelota
