@@ -78,6 +78,16 @@ public class Equipo{
 		this.empatesLocal = empatesLocal;
 		this.empatesVisitante = empatesVisitante;
 	}
+	
+	
+
+	public Equipo(String nombre, ImageIcon imagen) {
+		super();
+		this.nombre = nombre;
+		this.imagen = imagen;
+	}
+
+
 
 	public Equipo(String nombre, double radio, Color color, char[] siglas) {
 		bolaEquipo = new Pelota(color,nombre,75);

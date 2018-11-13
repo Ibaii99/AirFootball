@@ -12,9 +12,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import com.sun.prism.paint.Color;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.sql.*;
 import java.awt.BorderLayout;
 
 public class MenuAmistoso extends JFrame {
@@ -38,7 +38,7 @@ public class MenuAmistoso extends JFrame {
 	}
 	
 
-	public MenuAmistoso(int anchura, int altura) {
+	public MenuAmistoso(int anchura, int altura) throws ClassNotFoundException {
 		setSize(anchura, altura);
 		ImageIcon imageIcon = new ImageIcon(MenuAmistoso.class.getResource("/iconos/stadiumAmistoso.png"));
 		Image image = imageIcon.getImage();
@@ -96,6 +96,18 @@ public class MenuAmistoso extends JFrame {
 			lblEqV.setBounds(334, 96, 100, 100);
 			panel.add(lblEqV);
 		
+			try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestion_campeonatos", "root", "tomorrow");
+			PreparedStatement consulta1 = conexion.prepareStatement("select equipo, icono from equipos");
+			ResultSet result1 = consulta1.executeQuery();
+			while(result1.next()){
+			
+			}
+			}catch(Exception e) {
+				
+			}
+			
 			ImageIcon imageIconL = new ImageIcon(Inicio.class.getResource("/iconos/equipos/ala.png"));
 			Image imagenResizL = imageIconL.getImage();
 			Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(100*getWidth()/626), (int) Math.round(100*getWidth()/626),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
@@ -139,6 +151,8 @@ public class MenuAmistoso extends JFrame {
 				lblLocal.setBounds((int) Math.round(((getWidth()/2)-(getWidth()*0.25))), (int) Math.round(((getHeight()/2)-(getHeight()*0.075))), nuevaAnchura, nuevaAltura);
 				btnIniciarAmistoso.setBounds((int) Math.round(((getWidth()/2)-(getWidth()*0.15))), (int) Math.round(((getHeight()/2)+(getHeight()*0.2))), nuevaAnchuraBtn, nuevaAlturaBtn);
 				btnIniciarAmistoso.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
+				
+				
 				
 				ImageIcon imageIconL = new ImageIcon(Inicio.class.getResource("/iconos/equipos/ala.png"));
 				Image imagenResizL = imageIconL.getImage();

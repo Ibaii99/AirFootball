@@ -22,6 +22,7 @@ public class Juego {
 	
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos();
+		try {
 		bd.anyadirEquipo(new Equipo("ALA", "Deportivo Alavés", 0, Color.BLUE, new ImageIcon("iconos/equipos/ala.png"),
 				"iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 		bd.anyadirEquipo(new Equipo("ATH", "Athletic Club", 0, Color.RED, new ImageIcon("iconos/equipos/ath.png"),
@@ -63,6 +64,13 @@ public class Juego {
 				"iconos/equipos/vll.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 		bd.anyadirEquipo(new Equipo("VLR", "Villarreal CF", 0, Color.BLUE, new ImageIcon("iconos/equipos/vlr.png"),
 				"iconos/equipos/vlr.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+		
+		}catch(Exception e) {
+			System.out.println("Error. Equipos ya introducidos a la BD.");
+		}
+		System.out.println(bd);
+		Inicio i = new Inicio();
+		
 	}
 }
 	
