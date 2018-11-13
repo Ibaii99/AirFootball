@@ -96,16 +96,21 @@ public class MenuAmistoso extends JFrame {
 			lblEqV.setBounds(334, 96, 100, 100);
 			panel.add(lblEqV);
 		
-			try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestion_campeonatos", "root", "tomorrow");
-			PreparedStatement consulta1 = conexion.prepareStatement("select equipo, icono from equipos");
-			ResultSet result1 = consulta1.executeQuery();
-			while(result1.next()){
+			Connection conexion;
+			PreparedStatement consulta1;
+			ResultSet rs;
 			
+			//CONSULTA SQL FALLA
+			try {
+			Class.forName("org.sqlite.JDBC");
+			conexion = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+			consulta1 = conexion.prepareStatement("select equipo, icono from equipos");
+			rs = consulta1.executeQuery();
+			while(rs.next()){
+				System.out.println(rs);
 			}
 			}catch(Exception e) {
-				
+				System.out.println("no se ha podido añadir equipos");
 			}
 			
 			ImageIcon imageIconL = new ImageIcon(Inicio.class.getResource("/iconos/equipos/ala.png"));

@@ -70,6 +70,7 @@ public class Juego {
 		}
 		System.out.println(bd);
 		Inicio i = new Inicio();
+		i.setVisible(true);
 		
 	}
 }

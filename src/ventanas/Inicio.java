@@ -53,8 +53,15 @@ public class Inicio extends JFrame {
 		bAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MenuAmistoso mu = new MenuAmistoso(getSize().width, getSize().height);
-				mu.setVisible(true);
+				MenuAmistoso mu;
+				try {
+					mu = new MenuAmistoso(getSize().width, getSize().height);
+					mu.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		bAmistoso.setFont(new Font("Arial Black", Font.PLAIN, 16));
