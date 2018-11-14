@@ -25,6 +25,10 @@ public class ventanaPartido extends JFrame {
 	private boolean arcade;
 	private Graphics2D graphics;  // Objeto gr�fico sobre el que dibujar (del buffer)
 	private JPanel panelCampo;         // Panel principal
+	private boolean amistoso;
+	private JLabel equipoLocal;
+	private JLabel equipoVisitante;
+	private JLabel pelota;
 	
 	public ventanaPartido() {
 		setSize(750, 500);
@@ -100,11 +104,24 @@ public class ventanaPartido extends JFrame {
 					.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+		panelCampo.setLayout(null);
+		
+		equipoLocal = new JLabel("EquipoLocal");
+		equipoLocal.setBounds(31, 39, 70, 50);
+		panelCampo.add(equipoLocal);
+		
+		equipoVisitante = new JLabel("EquipoVisitante");
+		equipoVisitante.setBounds(544, 91, 84, 55);
+		panelCampo.add(equipoVisitante);
+		
+		pelota = new JLabel("Pelota");
+		pelota.setBounds(203, 85, 77, 61);
+		panelCampo.add(pelota);
 		getContentPane().setLayout(groupLayout);
 
 	}
 
-	boolean amistoso;
+	
 
 	public boolean isAmistoso() {
 		return amistoso;

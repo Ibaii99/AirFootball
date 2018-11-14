@@ -12,6 +12,7 @@ import ventanas.ventanaPartido;
 public class FisicasNuevas {
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
+	
 	/** Metodo para cambiar la posición de la pelota
 	 * @param p	Pelota a la que vas a cambiar la posicion
 	 * @param x	Posicion en eje x
@@ -118,9 +119,7 @@ public class FisicasNuevas {
 	}
 	
 	
-	public void reboteConPoste() {
-		
-	}
+
 
 	/** Metodo para saber si un numero es 0, redondeo
 	 * @param num	Numero del que se quiere saber si es muy proximo a 0
