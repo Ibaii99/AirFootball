@@ -16,6 +16,9 @@ import java.awt.Color;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import entidades.Equipo;
+import objetos.Pelota;
+
 /** @author Jorge 
  *  @author ibai
  */
@@ -26,11 +29,11 @@ public class ventanaPartido extends JFrame {
 	private Graphics2D graphics;  // Objeto gr�fico sobre el que dibujar (del buffer)
 	private JPanel panelCampo;         // Panel principal
 	private boolean amistoso;
-	private JLabel equipoLocal;
-	private JLabel equipoVisitante;
-	private JLabel pelota;
+	private JLabel equipoLocal=new JLabel("");
+	private JLabel equipoVisitante= new JLabel("");
+	private JLabel pelota = new JLabel("");
 	
-	public ventanaPartido() {
+	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p) {
 		setSize(750, 500);
 		setResizable(false);
 		setVisible(true);
@@ -107,7 +110,10 @@ public class ventanaPartido extends JFrame {
 		panelCampo.setLayout(null);
 		
 		equipoLocal = new JLabel("EquipoLocal");
-		equipoLocal.setBounds(31, 39, 70, 50);
+		equipoLocal.setBounds(eLocal.getBolaEquipo().getX(), eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2, eLocal.getBolaEquipo().getRadio()*2);
+
+//		Metodo original con doubles		
+//		equipoLocal.setBounds(eLocal.getBolaEquipo().getX(), eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2, eLocal.getBolaEquipo().getRadio()*2);
 		panelCampo.add(equipoLocal);
 		
 		equipoVisitante = new JLabel("EquipoVisitante");
