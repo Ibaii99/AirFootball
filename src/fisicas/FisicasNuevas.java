@@ -1,5 +1,6 @@
 package fisicas;
 
+import entidades.Equipo;
 import objetos.Pelota;
 import objetos.Poste;
 import ventanas.ventanaPartido;
@@ -75,7 +76,28 @@ public class FisicasNuevas {
 		if( Math.abs(palo.getY() - pelota.getY()) <= (pelota.getRadio() + palo.RADIO_POSTE) ) hayChoque = true;
 		return hayChoque;
 	}
+	
+	/**	Metodo para cambiar las velocidades de una pelota cuando esta choca con un equipo
+	 *  Suponiendo un choque elastico de velPelo = velPelo*masaPelo - velEqui*masaEqui
+	 *  El equipo no se verá afectado por el choque
+	 * @param p			Pelota que va a sufrir el choque
+	 * @param equipo	Equipo con el que choca la pelota
+	 */
+	public void cambioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
+		p.setVelX(p.getVelX()*p.getMasa() - equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa());
+		p.setVelY(p.getVelY()*p.getMasa() - equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa());
+	}
 
+	
+	/** El choque con los postes es totalmente inelástico, ya que el poste no tiene velocidad ni va a sufrir
+	 *  ninguna consecuencia por el choque
+	 * @param v
+	 * @param paloArribDer
+	 * @param paloAbajoDer
+	 * @param paloArribIzq
+	 * @param paloAbajoIzq
+	 * @param p
+	 */
 	public void choqueConPalos(ventanaPartido v, Poste paloArribDer, Poste paloAbajoDer, Poste paloArribIzq, Poste paloAbajoIzq, Pelota p) {
 		
 		if(daAlPoste(v, p, paloArribDer)) {
