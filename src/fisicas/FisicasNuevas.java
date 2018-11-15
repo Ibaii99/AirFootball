@@ -84,8 +84,17 @@ public class FisicasNuevas {
 		cambiarVelocidad(p, -p.getVelX(), -p.getY());
 	}
 	
-	public void puntoExactoChoque() {
+	public void puntoExactoChoqueConBorde(ventanaPartido v, Pelota p, ) {
+		boolean hayReboteAntes = false;
+		boolean hayReboteAhora = false;
 		
+		hayReboteAhora = rebotaeEnBorde(v, p);
+		if(hayReboteAhora) {
+			hayReboteAntes = hayReboteAhora;
+			puntoExactoChoqueConBorde(v, p);
+		} else if (!hayReboteAhora && hayReboteAntes) {
+			
+		}
 	}
 	
 	
