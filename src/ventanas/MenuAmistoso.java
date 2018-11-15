@@ -130,12 +130,14 @@ public class MenuAmistoso extends JFrame {
 		} catch (Exception e3) {
 			e3.printStackTrace();
 		}
-				String query = "SELECT NOMBRE, ICONO FROM EQUIPOS";
+				String query = "SELECT NOMBRE, ICONO FROM EQUIPOS;";
 				System.out.println(query);
+				con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 		//		Statement st = con.createStatement();
 				ResultSet rs = con.createStatement().executeQuery(query);
-				
-				System.out.println(rs.isClosed());
+				System.out.println(rs.toString());
+				System.out.println(rs);
+		//		System.out.println(rs.isClosed());
 				
 				System.out.println(rs.getString("NOMBRE"));
 				 while (rs.next())
