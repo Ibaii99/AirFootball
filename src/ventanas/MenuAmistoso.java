@@ -145,7 +145,7 @@ public class MenuAmistoso extends JFrame {
 			        System.out.println(nomEq + " " + iconEq);
 			      }
 	//		      st.close();
-			      rs.close();
+			      rs.close(); 
 				// consulta.executeUpdate(comando);
 				// comando = "select equipo, icono from equipos";
 				// logger.log(Level.INFO, "BD: " + comando);
