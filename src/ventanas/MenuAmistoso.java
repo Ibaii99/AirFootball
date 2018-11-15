@@ -43,7 +43,7 @@ public class MenuAmistoso extends JFrame {
 		this.altura = altura;
 	}
 
-	public MenuAmistoso(int anchura, int altura) throws ClassNotFoundException {
+	public MenuAmistoso(int anchura, int altura) throws ClassNotFoundException, SQLException {
 		setSize(anchura, altura);
 		ImageIcon imageIcon = new ImageIcon(MenuAmistoso.class.getResource("/iconos/stadiumAmistoso.png"));
 		Image image = imageIcon.getImage();
@@ -119,32 +119,37 @@ public class MenuAmistoso extends JFrame {
 
 		Logger logger = Logger.getLogger("baseDeDatos");
 
-		Connection con;
+		Connection con = null;
+		
 		Statement consulta;
 
 		String comando = "";
 		try {
-
 			Class.forName("org.sqlite.JDBC");
 			con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
-
 		} catch (Exception e3) {
 			e3.printStackTrace();
 		}
-
-
-				String query = "SELECT EQUIPO, ICONO FROM EQUIPOS";
+				String query = "SELECT NOMBRE, ICONO FROM EQUIPOS";
 				System.out.println(query);
-				Statement st = con.createStatement();
-
-				ResultSet rs = st.executeQuery(query);
-				System.out.println(rs);
+		//		Statement st = con.createStatement();
+				ResultSet rs = con.createStatement().executeQuery(query);
+				
+				System.out.println(rs.isClosed());
+				
+				System.out.println(rs.getString("NOMBRE"));
+				 while (rs.next())
+			      {
+			        String nomEq = rs.getString("Nombre");
+			        String iconEq = rs.getString("Icono");
+			        System.out.println(nomEq + " " + iconEq);
+			      }
+	//		      st.close();
+			      rs.close();
 				// consulta.executeUpdate(comando);
 				// comando = "select equipo, icono from equipos";
 				// logger.log(Level.INFO, "BD: " + comando);
 				// System.out.println(consulta.executeUpdate(comando));
-			
-
 		
 		ImageIcon imageIconL = new ImageIcon(Inicio.class.getResource("/iconos/equipos/ala.png"));
 		Image imagenResizL = imageIconL.getImage();

@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
+import java.sql.SQLException;
 
 public class Inicio extends JFrame {
 	/**
@@ -62,7 +63,7 @@ public class Inicio extends JFrame {
 					try {
 						muAlt = new MenuAmistoso(630, 460);
 						muAlt.setVisible(true);
-					} catch (ClassNotFoundException e2) {
+					} catch (Exception e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
