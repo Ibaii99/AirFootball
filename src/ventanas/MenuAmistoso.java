@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.awt.BorderLayout;
 
 public class MenuAmistoso extends JFrame {
@@ -96,21 +98,53 @@ public class MenuAmistoso extends JFrame {
 			lblEqV.setBounds(334, 96, 100, 100);
 			panel.add(lblEqV);
 		
-			Connection conexion;
-			PreparedStatement consulta1;
-			ResultSet rs;
+//			Connection conexion;
+//			PreparedStatement consulta1;
+//			ResultSet rs;
 			
 			//CONSULTA SQL FALLA
+//			try {
+//			Class.forName("org.sqlite.JDBC");
+//			conexion = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+//			consulta1 = conexion.prepareStatement("select equipo, icono from equipos");
+//			rs = consulta1.executeQuery();
+//			while(rs.next()){
+//				System.out.println(rs);
+//			}
+//			}catch(Exception e) {
+//				System.out.println("no se ha podido añadir equipos");
+//			}
+			
+			Logger logger = Logger.getLogger( "baseDeDatos" );
+
+			Connection con;
+			Statement consulta;
+			ResultSet rs;
+			
+			String comando = "";
 			try {
-			Class.forName("org.sqlite.JDBC");
-			conexion = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
-			consulta1 = conexion.prepareStatement("select equipo, icono from equipos");
-			rs = consulta1.executeQuery();
-			while(rs.next()){
-				System.out.println(rs);
-			}
-			}catch(Exception e) {
-				System.out.println("no se ha podido añadir equipos");
+			Class.forName( "org.sqlite.JDBC" );
+			con = DriverManager.getConnection( "jdbc:sqlite:airHockey.db" );
+		
+				try {
+		
+					Class.forName("org.sqlite.JDBC");
+					con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+					consulta = con.createStatement();
+
+					System.out.println("inicio");
+					try {
+						consulta.executeUpdate(comando);
+						comando = "select equipo, icono from equipos";
+						logger.log(Level.INFO, "BD: " + comando);
+						System.out.println(consulta.executeUpdate(comando));
+					} catch (SQLException i) {
+					}
+				}catch(Exception e) {
+					System.out.println("no va e");
+				}
+			}catch(Exception e3) {
+				System.out.println("no funciona al final");
 			}
 			
 			ImageIcon imageIconL = new ImageIcon(Inicio.class.getResource("/iconos/equipos/ala.png"));
