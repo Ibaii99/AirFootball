@@ -58,8 +58,15 @@ public class Inicio extends JFrame {
 					mu = new MenuAmistoso(getSize().width, getSize().height);
 					mu.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					MenuAmistoso muAlt;
+					try {
+						muAlt = new MenuAmistoso(630, 460);
+						muAlt.setVisible(true);
+					} catch (ClassNotFoundException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					
 				}
 				
 			}
