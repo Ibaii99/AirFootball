@@ -13,16 +13,16 @@ public class FisicasNuevas {
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
 	
-	/** Metodo para cambiar la posición de la pelota
-	 * @param p	Pelota a la que vas a cambiar la posicion
-	 * @param x	Posicion en eje x
-	 * @param y Posicion en eje y
+	/** Metodo para cambiar la posición de la pelota, velocidad * tiempo = posicion
+	 * @param p			Pelota a la que vas a cambiar la posicion
+	 * @param tiempo	Tiempo que ha pasado para mover
 	 */
-	public void muevePelota(Pelota p, double x, double y) {
+	public void muevePelota(Pelota p, double tiempo) {
+		
 		p.setxAntes(p.getX());
 		p.setyAntes(p.getY());
-		p.setY(y);
-		p.setX(x);
+		p.setY(p.getVelY()*tiempo);
+		p.setX(p.getVelX()*tiempo);
 	}
 	
 	/** Metodo para cambiar la velocidad de la pelota
@@ -37,16 +37,27 @@ public class FisicasNuevas {
 		p.setVelY(velY);
 	}
 	
-	/** Metodo para saber si hay o ha habido un choque en las posiciones de las pelotas
+	/** Metodo para saber si hay o ha habido un choque en las posiciones de la pelota y el equipo
 	 * @param p1 Pelota 1
-	 * @param p2 Pelota 2
+	 * @param equipo Equipo con el que choca
 	 * @return Devuelve true si es verdad, false si no
 	 */
-	public boolean chocanPelotas(Pelota p1, Pelota p2) {
+	public boolean chocanPelotas(Pelota p1, Equipo equipo) {
 		boolean chocan = false;
-		if(Math.abs(p1.getX() - p2.getX())<= (p1.getRadio() + p2.getRadio()))chocan = true;
-		if(Math.abs(p1.getY() - p2.getY())<= (p1.getRadio() + p2.getRadio()))chocan = true;
+		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
+		if(Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
 		return chocan;
+	}
+	
+	/**	Metodo para cambiar las velocidades de una pelota cuando esta choca con un equipo
+	 *  Suponiendo un choque elastico de velPelo = velPelo*masaPelo - velEqui*masaEqui
+	 *  El equipo no se verá afectado por el choque
+	 * @param p			Pelota que va a sufrir el choque
+	 * @param equipo	Equipo con el que choca la pelota
+	 */
+	public void cambioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
+		p.setVelX(p.getVelX()*p.getMasa() - equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa());
+		p.setVelY(p.getVelY()*p.getMasa() - equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa());
 	}
 	
 	
@@ -64,6 +75,19 @@ public class FisicasNuevas {
 		return hayRebote;
 	}
 	
+	/**	Metodo para cambiar posicion si hay choque con un lateral
+	 * @param v		Ventana donde ocurre el choque
+	 * @param p		Pelota que genera el choque
+	 */
+	public void choqueEnBorde(ventanaPartido v, Pelota p) {
+		// Invierto los vectores de velocidad
+		cambiarVelocidad(p, -p.getVelX(), -p.getY());
+	}
+	
+	public void puntoExactoChoque() {
+		
+	}
+	
 	
 	/** Metodo para saber si la pelota ha chocado o choca contra un poste
 	 * @param v			Ventana donde se juega el partido
@@ -78,16 +102,7 @@ public class FisicasNuevas {
 		return hayChoque;
 	}
 	
-	/**	Metodo para cambiar las velocidades de una pelota cuando esta choca con un equipo
-	 *  Suponiendo un choque elastico de velPelo = velPelo*masaPelo - velEqui*masaEqui
-	 *  El equipo no se verá afectado por el choque
-	 * @param p			Pelota que va a sufrir el choque
-	 * @param equipo	Equipo con el que choca la pelota
-	 */
-	public void cambioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
-		p.setVelX(p.getVelX()*p.getMasa() - equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa());
-		p.setVelY(p.getVelY()*p.getMasa() - equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa());
-	}
+
 
 	
 	/** El choque con los postes es totalmente inelástico, ya que el poste no tiene velocidad ni va a sufrir
@@ -119,6 +134,7 @@ public class FisicasNuevas {
 	}
 	
 	
+
 
 
 	/** Metodo para saber si un numero es 0, redondeo
