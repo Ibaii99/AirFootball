@@ -29,9 +29,11 @@ public class ventanaPartido extends JFrame {
 	private Graphics2D graphics;  // Objeto gr�fico sobre el que dibujar (del buffer)
 	private JPanel panelCampo;         // Panel principal
 	private boolean amistoso;
-	private JLabel equipoLocal=new JLabel("");
-	private JLabel equipoVisitante= new JLabel("");
-	private JLabel pelota = new JLabel("");
+	private JLabel lblEquipoLocal=new JLabel("");
+	private JLabel lblEquipoVisitante= new JLabel("");
+	private JLabel lblPelota = new JLabel("");
+	
+	
 	
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p) {
 		setSize(750, 500);
@@ -109,24 +111,33 @@ public class ventanaPartido extends JFrame {
 		);
 		panelCampo.setLayout(null);
 		
-		equipoLocal = new JLabel("EquipoLocal");
-		equipoLocal.setBounds(eLocal.getBolaEquipo().getX(), eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2, eLocal.getBolaEquipo().getRadio()*2);
-
+		
+		
 //		Metodo original con doubles		
-//		equipoLocal.setBounds(eLocal.getBolaEquipo().getX(), eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2, eLocal.getBolaEquipo().getRadio()*2);
-		panelCampo.add(equipoLocal);
-		
-		equipoVisitante = new JLabel("EquipoVisitante");
-		equipoVisitante.setBounds(544, 91, 84, 55);
-		panelCampo.add(equipoVisitante);
-		
-		pelota = new JLabel("Pelota");
-		pelota.setBounds(203, 85, 77, 61);
-		panelCampo.add(pelota);
+//		lblEquipoLocal.setBounds(eLocal.getBolaEquipo().getX(), eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2, eLocal.getBolaEquipo().getRadio()*2);
 		getContentPane().setLayout(groupLayout);
 
 	}
 
+	/**	Metodo para actualizar las posiciones de los objetos del campo
+	 * @param eLocal		Equipo local
+	 * @param eVisitante	Equipo Visitante
+	 * @param p				Pelota con la que se juega
+	 */
+	public void actualizarPosicionObjetos(Equipo eLocal, Equipo eVisitante, Pelota p) {
+		panelCampo.removeAll(); // elimino todo los componenetes del panel de juego
+		
+		// añado todo al panel con las posiciones actualizadas
+		lblEquipoLocal.setBounds((int)eLocal.getBolaEquipo().getX(), (int)eLocal.getBolaEquipo().getY(), (int)eLocal.getBolaEquipo().getRadio()*2, (int)eLocal.getBolaEquipo().getRadio()*2);
+		panelCampo.add(lblEquipoLocal);
+		
+		lblEquipoVisitante.setBounds((int)eVisitante.getBolaEquipo().getX(), (int)eVisitante.getBolaEquipo().getY(), (int)eVisitante.getBolaEquipo().getRadio()*2, (int)eVisitante.getBolaEquipo().getRadio()*2);
+		panelCampo.add(lblEquipoVisitante);
+		
+		lblPelota.setBounds((int)p.getX(), (int)p.getY(), (int)p.getRadio()*2, (int)p.getRadio()*2);
+		panelCampo.add(lblPelota);
+	
+	}
 	
 
 	public boolean isAmistoso() {
