@@ -34,6 +34,7 @@ public class BaseDeDatos {
 					logger.log(Level.INFO, "BD: " + comando);
 					equipo.executeUpdate(comando);
 				} catch (SQLException i) {
+					i.printStackTrace();
 				} // Se lanza si la tabla ya existe - no hay problema
 	
 				try {
@@ -42,6 +43,7 @@ public class BaseDeDatos {
 					liga.executeUpdate(comando);
 					System.out.println(comando);
 				} catch (SQLException i) {
+					i.printStackTrace();
 				} // Se lanza si la tabla ya existe - no hay problema
 	
 				try {
@@ -50,9 +52,11 @@ public class BaseDeDatos {
 					jugadores.executeUpdate(comando);
 					System.out.println(comando);
 				} catch (SQLException i) {
+					i.printStackTrace();
 				} // Se lanza si la tabla ya existe - no hay problema
 	
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		
 			equipo = con.createStatement();
@@ -61,7 +65,9 @@ public class BaseDeDatos {
 			equipo.executeUpdate( comando );
 			equipo.close();
 			
-		} catch (SQLException i) {} // Se lanza si la tabla ya existe - no hay problema
+		} catch (SQLException i) { 
+			i.printStackTrace();
+		} // Se lanza si la tabla ya existe - no hay problema
 		
 		try {
 			liga = con.createStatement();
@@ -89,9 +95,11 @@ public class BaseDeDatos {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
-			comando = "INSERT INTO EQUIPOS ( Siglas, Nombre, Puntos, Goles Encajados Totales, Goles Encajados Local, Goles Encajados Visitante, Goles A Favor Totales, Goles A Favor Local, Goles A Favor Visitante, Derrotas Totales, Derrotas Local, Derrotas Visitante, Victorias Totales, Victorias Local, Victorias Visitante, Empates Totales, Empates Local, Empates Visitante, Color, Icono)";
-
-//			comando = "INSERT INTO \"Equipos\" ( `Siglas`, `Nombre`, `Puntos`, `Goles Encajados Totales`, `Goles Encajados Local`, `Goles Encajados Visitante`, `Goles A Favor Totales`, `Goles A Favor Local`, `Goles A Favor Visitante`, `Derrotas Totales`, `Derrotas Local` INTEGER, `Derrotas Visitante`, `Victorias Totales`, `Victorias Local`, `Victorias Visitante`, `Empates Totales`, `Empates Local`, `Empates Visitante`, `Color`, `Icono`)";
+			equipo = con.createStatement();
+		//	comando = "alter table equipos modify puntos default null;";
+		//	comando = "INSERT INTO EQUIPOS ( Siglas, Nombre, Puntos, Goles Encajados Totales, Goles Encajados Local, Goles Encajados Visitante, Goles A Favor Totales, Goles A Favor Local, Goles A Favor Visitante, Derrotas Totales, Derrotas Local, Derrotas Visitante, Victorias Totales, Victorias Local, Victorias Visitante, Empates Totales, Empates Local, Empates Visitante, Color, Icono)";
+			
+			comando = "INSERT INTO \"Equipos\" ( `Siglas`, `Nombre`, `Puntos`, `Goles Encajados Totales`, `Goles Encajados Local`, `Goles Encajados Visitante`, `Goles A Favor Totales`, `Goles A Favor Local`, `Goles A Favor Visitante`, `Derrotas Totales`, `Derrotas Local`, `Derrotas Visitante`, `Victorias Totales`, `Victorias Local`, `Victorias Visitante`, `Empates Totales`, `Empates Local`, `Empates Visitante`, `Color`, `Icono`)";
 			comando += " VALUES (" + e.getSiglas() + "," + e.getNombre() + "," + e.getPuntos() + ","
 					+ e.getGolesEnContraTotales() + "," + e.getGolesEnContraLocal() + ","
 					+ e.getGolesEnContraVisitante() + "," + e.getGolesAFavorTotales() + "," + e.getGolesAFavorLocal()
@@ -99,9 +107,12 @@ public class BaseDeDatos {
 					+ "," + e.getDerrotasVisitante() + "," + e.getVictoriasTotales() + "," + e.getVictoriasLocal() + ","
 					+ e.getVictoriasVisitante() + "," + e.getEmpatesTotales() + "," + e.getEmpatesLocal() + ","
 					+ e.getEmpatesVisitante() + "," + e.getColor().toString() + "," + e.getRutaImagen() + ","
-					+ e.getSiglas() + ")";
+					+ e.getSiglas() + ")"; 
+			System.out.println(comando);
+			equipo.executeUpdate(comando);
 			System.out.println(comando);
 		} catch (Exception o) {
+			o.printStackTrace();
 		}
 		try {
 			Class.forName( "org.sqlite.JDBC" );
@@ -111,7 +122,7 @@ public class BaseDeDatos {
 								comando += "VALUES ("+e.getSiglas()+","+e.getNombre()+","+e.getPuntos()+","+e.getGolesEnContraTotales()+","+e.getGolesEnContraLocal()+","+e.getGolesEnContraVisitante()+","+e.getGolesAFavorTotales()+","+e.getGolesAFavorLocal()+","+e.getGolesAFavorVisitante()+","+e.getDerrotasTotales()+","+e.getDerrotasLocal()+","+e.getDerrotasVisitante()+","+e.getVictoriasTotales()+","+e.getVictoriasLocal()+","+e.getVictoriasVisitante()+","+e.getEmpatesTotales()+","+e.getEmpatesLocal()+","+e.getEmpatesVisitante()+","+e.getColor().toString()+","+e.getRutaImagen()+","+e.getSiglas()+") ;";
 //			equipo.execute(comando);
 			
-			equipo.execute(comando);
+			equipo.executeUpdate(comando);
 			
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block

@@ -66,8 +66,7 @@ public class Juego {
 				"iconos/equipos/vlr.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 		
 		}catch(Exception e) {
-			System.out.println("Error. Equipos ya introducidos a la BD.");
-		}
+e.printStackTrace();		}
 		System.out.println(bd);
 		Inicio i = new Inicio();
 		i.setVisible(true);

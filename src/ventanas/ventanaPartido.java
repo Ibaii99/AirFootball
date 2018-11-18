@@ -16,13 +16,31 @@ import java.awt.FontFormatException;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
+<<<<<<< HEAD
+=======
+import entidades.Equipo;
+import objetos.Pelota;
+
+/** @author Jorge 
+ *  @author ibai
+ */
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 public class ventanaPartido extends JFrame {
 	/** @author Jorge 
 	 * 
 	 */
 	private Graphics2D graphics;  // Objeto gr�fico sobre el que dibujar (del buffer)
+<<<<<<< HEAD
 	private JPanel panel;         // Panel principal
+=======
+	private JPanel panelCampo;         // Panel principal
+	private boolean amistoso;
+	private JLabel equipoLocal=new JLabel("");
+	private JLabel equipoVisitante= new JLabel("");
+	private JLabel pelota = new JLabel("");
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 	
+<<<<<<< HEAD
 	public ventanaPartido() {
 		String nombreFont = "DSEG14Classic-Regular.ttf";  
 		Font f = null;
@@ -36,6 +54,9 @@ public class ventanaPartido extends JFrame {
 		}
 			
 
+=======
+	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p) {
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 		setSize(750, 500);
 		setResizable(false);
 		setVisible(true);
@@ -98,14 +119,66 @@ public class ventanaPartido extends JFrame {
 		label.setBounds(0, 0, 373, 51);
 		panel.add(label);
 		
+<<<<<<< HEAD
 		JLabel lCampo = new JLabel("");
 		lCampo.setIcon(newIconC);
 		lCampo.setBounds(12, 57, 720, 395);
 		getContentPane().add(lCampo);
+=======
+		JLabel label_1 = new JLabel("");
+		label_1.setBounds(12, 5, 40, 40);
+		panel.add(label_1);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setBounds(686, 5, 40, 40);
+		panel.add(label_2);
+		
+		JLabel label_3 = new JLabel("0");
+		label_3.setForeground(Color.RED);
+		label_3.setFont(new Font("Dialog", Font.PLAIN, 28));
+		label_3.setBounds(217, 5, 75, 36);
+		panel.add(label_3);
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 730, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		panelCampo.setLayout(null);
+		
+		equipoLocal = new JLabel("EquipoLocal");
+		equipoLocal.setBounds(eLocal.getBolaEquipo().getX(), eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2, eLocal.getBolaEquipo().getRadio()*2);
+
+//		Metodo original con doubles		
+//		equipoLocal.setBounds(eLocal.getBolaEquipo().getX(), eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2, eLocal.getBolaEquipo().getRadio()*2);
+		panelCampo.add(equipoLocal);
+		
+		equipoVisitante = new JLabel("EquipoVisitante");
+		equipoVisitante.setBounds(544, 91, 84, 55);
+		panelCampo.add(equipoVisitante);
+		
+		pelota = new JLabel("Pelota");
+		pelota.setBounds(203, 85, 77, 61);
+		panelCampo.add(pelota);
+		getContentPane().setLayout(groupLayout);
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 
 	}
 
-	boolean amistoso;
+	
 
 	public boolean isAmistoso() {
 		return amistoso;
