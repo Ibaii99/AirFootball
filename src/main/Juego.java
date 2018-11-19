@@ -32,8 +32,6 @@ public class Juego {
 		Pelota p = new Pelota(Color.blue, "pelota", 30);
 		v = new ventanaPartido(e1, e2, p, true, true, true);
 		v.colocarLablsEnPosInicial();
-		v.actualizarPosicionObjetos();
-		v.pintarLabels();
 		v.setVisible(true);
 	}
 
