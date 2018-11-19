@@ -162,6 +162,30 @@ public abstract class Objetos{
 		return imagenObjeto;
 	}
 
+	public String getRutaImagen() {
+		return rutaImagen;
+	}
+
+
+
+	public double getVelocidad() {
+		return velocidad;
+	}
+
+
+
+	public double getVelocidadAntes() {
+		return velocidadAntes;
+	}
+
+
+
+	public double getRadio() {
+		return radio;
+	}
+
+
+
 	public void setImagenObjeto(ImageIcon imageIcon) {
 		this.imagenObjeto = imageIcon;
 	}

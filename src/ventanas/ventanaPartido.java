@@ -184,10 +184,21 @@ public class ventanaPartido extends JFrame {
 	
 	}
 	
+	/** Metodo que pinta cada label con el color correspondiente
+	 * 	o imagen correspondiente
+	 * @param eLocal	Equio local
+	 * @param eVisitante	Equipo Visitante
+	 * @param p			Pelota
+	 */
 	public void pintarLabels(Equipo eLocal, Equipo eVisitante, Pelota p) {
-		if (eLocal.getBolaEquipo().getImagenObjeto() == null) lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());;
-		if (eVisitante.getBolaEquipo().getImagenObjeto() == null) lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());;
-		if (p.getImagenObjeto()== null) ;
+		if (eLocal.getBolaEquipo().getImagenObjeto() == null) lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
+		if (eVisitante.getBolaEquipo().getImagenObjeto() == null) lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
+		if (p.getImagenObjeto()== null) lblPelota.setBackground(p.getColor());
+		
+		if (eLocal.getBolaEquipo().getImagenObjeto() != null) lblEquipoLocal.setIcon(eLocal.getBolaEquipo().getImagenObjeto());
+		if (eVisitante.getBolaEquipo().getImagenObjeto() != null) lblEquipoVisitante.setIcon(eVisitante.getBolaEquipo().getImagenObjeto());
+		if (p.getImagenObjeto()!= null) lblPelota.setIcon(p.getImagenObjeto());
+		
 	}
 	
 	public void moverEquipo() {

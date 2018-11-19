@@ -18,7 +18,7 @@ class TestPelotasYFisicas{
 	private Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 25);
 	private Equipo e1 = new Equipo("Futbol club Barcelona", "FCB", Color.red, 50, 70);
 	private Equipo e2 = new Equipo("Real Madrid", "RM", Color.white, 50, 70);
-	private ventanaPartido v = new ventanaPartido(e1, e2, p);
+	private ventanaPartido v = new ventanaPartido(e1, e2, p, true, false,false);
 	private FisicasNuevas fisicas = new FisicasNuevas();
 	
 
@@ -52,10 +52,11 @@ class TestPelotasYFisicas{
 	 */
 	@Test
 	void testMovimientoDePelota() {
+		
 		p.setX(20);
 		p.setY(15);
 		p.addVelocidad(1, 5);
-		fisicas.muevePelota(p, 2);
+		fisicas.muevePelota(p, 2, v);
 		assertEquals(22, p.getX());
 		assertEquals(25, p.getY());
 	}
