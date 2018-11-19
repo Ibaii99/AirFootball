@@ -23,10 +23,11 @@ public class Pelota extends Objetos{
 	/** Metodo constructor de la clase pelota SIN imagen y con rebote
 	 * @param color		Color de la pelota
 	 * @param nombre 	Nombre de la pelota
-	 * @param alto 		Altura de la pelota
-	 * @param ancho 	Anchura de la pelota
 	 * @param masa		Masa de la pelota
-	 */	
+	 * @param x			Posicion x inicial de la pelota
+	 * @param y			Posicion y inicial de la pelota
+	 * @param radio		Radio de la pelota
+	 */
 	public Pelota(Color color, String nombre, double x, double y, double radio, double masa) {
 		super(x, y, color, true, nombre, radio, masa, null);
 	}
@@ -34,9 +35,10 @@ public class Pelota extends Objetos{
 	/** Metodo constructor de la clase pelota CON imagen y con rebote
 	 * @param imagen	Ruta de la imagen
 	 * @param nombre 	Nombre de la pelota
-	 * @param alto 		Altura de la pelota
-	 * @param ancho 	Anchura de la pelota
 	 * @param masa		Masa de la pelota
+	 * @param x			Posicion x inicial de la pelota
+	 * @param y			Posicion y inicial de la pelota
+	 * @param radio		Radio de la pelota
 	 */
 	public Pelota(String imagen, String nombre, double x, double y, double radio, double masa) {
 		super(x, y, null, true, nombre, radio, masa, (new ImageIcon(imagen)));

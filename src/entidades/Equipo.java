@@ -50,57 +50,117 @@ public class Equipo{
 	
 	
 
+	/** Constructor de Equipo completo para datos leidos desde BD
+	 * @param siglas
+	 * @param nombre
+	 * @param puntos
+	 * @param color
+	 * @param imagen
+	 * @param rutaImagen
+	 * @param golesEnContraTotales
+	 * @param golesEnContraLocal
+	 * @param golesEnContraVisitante
+	 * @param golesAFavorTotales
+	 * @param golesAFavorVisitante
+	 * @param golesAFavorLocal
+	 * @param victoriasTotales
+	 * @param victoriasLocal
+	 * @param victoriasVisitante
+	 * @param derrotasTotales
+	 * @param derrotasLocal
+	 * @param derrotasVisitante
+	 * @param empatesTotales
+	 * @param empatesLocal
+	 * @param empatesVisitante
+	 */
 	public Equipo(String siglas, String nombre, int puntos, Color color, ImageIcon imagen, String rutaImagen,
-			int golesEnContraTotales, int golesEnContraLocal, int golesEnContraVisitante, int golesAFavorTotales,
-			int golesAFavorVisitante, int golesAFavorLocal, int victoriasTotales, int victoriasLocal,
-			int victoriasVisitante, int derrotasTotales, int derrotasLocal, int derrotasVisitante, int empatesTotales,
-			int empatesLocal, int empatesVisitante) {
-		super();
+		int golesEnContraTotales, int golesEnContraLocal, int golesEnContraVisitante, int golesAFavorTotales,
+		int golesAFavorVisitante, int golesAFavorLocal, int victoriasTotales, int victoriasLocal,
+		int victoriasVisitante, int derrotasTotales, int derrotasLocal, int derrotasVisitante, int empatesTotales,
+		int empatesLocal, int empatesVisitante) {
+			this.siglas = siglas;
+			this.nombre = nombre;
+			this.puntos = puntos;
+			this.color = color;
+			this.imagen = imagen;
+			this.rutaImagen = rutaImagen;
+			this.golesEnContraTotales = golesEnContraTotales;
+			this.golesEnContraLocal = golesEnContraLocal;
+			this.golesEnContraVisitante = golesEnContraVisitante;
+			this.golesAFavorTotales = golesAFavorTotales;
+			this.golesAFavorVisitante = golesAFavorVisitante;
+			this.golesAFavorLocal = golesAFavorLocal;
+			this.victoriasTotales = victoriasTotales;
+			this.victoriasLocal = victoriasLocal;
+			this.victoriasVisitante = victoriasVisitante;
+			this.derrotasTotales = derrotasTotales;
+			this.derrotasLocal = derrotasLocal;
+			this.derrotasVisitante = derrotasVisitante;
+			this.empatesTotales = empatesTotales;
+			this.empatesLocal = empatesLocal;
+			this.empatesVisitante = empatesVisitante;
+	}
+	
+	
+
+	
+	/** Metodo constructor de Equipo con imagen 
+	 * @param nombre	Nombre del equipo
+	 * @param siglas	Siglas del Equipo
+	 * @param imagen	Imagen de la bola
+	 * @param radio		Radio de la bola
+	 * @param masa		Masa de la bola
+	 */
+	public Equipo(String nombre, String siglas, String imagen, double radio, double masa) {
 		this.siglas = siglas;
 		this.nombre = nombre;
-		this.puntos = puntos;
-		this.color = color;
-		this.imagen = imagen;
-		this.rutaImagen = rutaImagen;
-		this.golesEnContraTotales = golesEnContraTotales;
-		this.golesEnContraLocal = golesEnContraLocal;
-		this.golesEnContraVisitante = golesEnContraVisitante;
-		this.golesAFavorTotales = golesAFavorTotales;
-		this.golesAFavorVisitante = golesAFavorVisitante;
-		this.golesAFavorLocal = golesAFavorLocal;
-		this.victoriasTotales = victoriasTotales;
-		this.victoriasLocal = victoriasLocal;
-		this.victoriasVisitante = victoriasVisitante;
-		this.derrotasTotales = derrotasTotales;
-		this.derrotasLocal = derrotasLocal;
-		this.derrotasVisitante = derrotasVisitante;
-		this.empatesTotales = empatesTotales;
-		this.empatesLocal = empatesLocal;
-		this.empatesVisitante = empatesVisitante;
+		this.imagen = new ImageIcon(imagen);
+		bolaEquipo = new Pelota(imagen, nombre, 0, 0, radio, masa);
 	}
 	
-	
-
-	public Equipo(String nombre, ImageIcon imagen) {
-		super();
+	/** Metodo constructor de Equipo con color 
+	 * @param nombre	Nombre del equipo
+	 * @param siglas	Siglas del Equipo
+	 * @param imagen	Imagen de la bola
+	 * @param radio		Radio de la bola
+	 * @param masa		Masa de la bola
+	 */
+	public Equipo(String nombre, String siglas, Color color, double radio, double masa) {
+		this.siglas = siglas;
 		this.nombre = nombre;
-		this.imagen = imagen;
+		this.color = color;
+		bolaEquipo = new Pelota(color, nombre, 0, 0, radio, masa);
 	}
 
 
 
-	public Equipo(String nombre, double radio, Color color, char[] siglas) {
-		bolaEquipo = new Pelota(color,nombre,75);
+	/** Constructor de Equipo sencillo con color y masa por defeto
+	 * @param nombre	Nombre del equipo
+	 * @param siglas	Siglas del equipo
+	 * @param radio		Radio de la bola Equipo
+	 * @param color		Color de la bola de Equipo
+	 */
+	public Equipo(String nombre, String siglas, double radio, Color color) {
+		this.siglas = siglas;
+		bolaEquipo = new Pelota(color,nombre,radio);
 		bolaEquipo.setBota(false);
 		this.color = color;
 	}
 
-	public Equipo(String nombre, double radio, String image, char[] siglas) {
-		bolaEquipo = new Pelota(image,nombre,75);
+	/** Constructor de Equipo sencillo con imagen y masa por defeto
+	 * @param nombre	Nombre del equipo
+	 * @param siglas	Siglas del equipo
+	 * @param radio		Radio de la bola Equipo
+	 * @param image		Ruta de la imagen del equipo
+	 */
+	public Equipo(String nombre, String siglas, double radio, String image) {
+		this.siglas = siglas;
+		bolaEquipo = new Pelota(image,nombre,radio);
 		bolaEquipo.setBota(false);
 		this.imagen = new ImageIcon(image);
 		this.rutaImagen = image;
 	}
+	
 	/** Metodo para añadir puntos al equipo segun el partido
 	 * @param puntos Puntos a sumar, seran 0, 1 o 3
 	 */

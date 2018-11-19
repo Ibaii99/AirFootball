@@ -10,10 +10,7 @@ import objetos.Pelota;
 import ventanas.ventanaPartido;
 
 public class PruebaFisicas {
-	public static void main(String[] args) {
-		BaseDeDatos b = new BaseDeDatos();
-		b.crearTabla();
-	}
+	
 	public void ChocanEntreSi(Pelota p1, Pelota p2) {
 		Point vectorPelota1 = p1.chocaConObjeto(p2);
 		Point vectorPelota2 = p2.chocaConObjeto(p1);
