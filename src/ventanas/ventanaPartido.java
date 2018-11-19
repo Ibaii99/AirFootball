@@ -190,14 +190,17 @@ public class ventanaPartido extends JFrame {
 		lblEquipoLocal.setBounds((int)eLocal.getBolaEquipo().getX(), (int)eLocal.getBolaEquipo().getY(), (int)eLocal.getBolaEquipo().getRadio()*2, (int)eLocal.getBolaEquipo().getRadio()*2);
 		panelCampo.add(lblEquipoLocal);
 		lblEquipoLocal.setText("EQUIPO LOCAL");
+		lblEquipoLocal.setVisible(true);
 		
 		lblEquipoVisitante.setBounds((int)eVisitante.getBolaEquipo().getX(), (int)eVisitante.getBolaEquipo().getY(), (int)eVisitante.getBolaEquipo().getRadio()*2, (int)eVisitante.getBolaEquipo().getRadio()*2);
 		panelCampo.add(lblEquipoVisitante);
 		lblEquipoVisitante.setText("EQUIPOVISITANTE");
+		lblEquipoVisitante.setVisible(true);
 		
 		lblPelota.setBounds((int)p.getX(), (int)p.getY(), (int)p.getRadio()*2, (int)p.getRadio()*2);
 		panelCampo.add(lblPelota);
 		lblPelota.setText("PELOTA");
+		lblPelota.setVisible(true);
 		
 		panelCampo.repaint();
 		panelCampo.revalidate();
