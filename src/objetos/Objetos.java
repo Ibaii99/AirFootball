@@ -11,7 +11,7 @@ import fisicas.Fisicas;
 import fisicas.FisicasNuevas;
 import ventanas.ventanaPartido;
 
-public abstract class Objetos extends FisicasNuevas{
+public abstract class Objetos{
 	
 	protected double masa;
 	protected boolean bota;

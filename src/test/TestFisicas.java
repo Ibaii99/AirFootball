@@ -41,6 +41,7 @@ class TestFisicas {
 	@Test
 	void testMovimiento() {
 		p.addVelocidad(1, 0);
+		p.muevePelota(p, tiempo);
 		
 	}
 	
