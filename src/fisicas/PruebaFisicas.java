@@ -3,10 +3,9 @@ package fisicas;
 import java.awt.Point;
 
 import entidades.BaseDeDatos;
-<<<<<<< HEAD
+
 import entidades.Equipo;
-=======
->>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
+
 import objetos.Pelota;
 import ventanas.ventanaPartido;
 
@@ -38,11 +37,11 @@ public class PruebaFisicas {
 	// Devuelva la direccion y velocidad con la que rebotan las pelotas
 	
 	public void chocaEnVentana(ventanaPartido v, Pelota p) {
-<<<<<<< HEAD
+
 //		if(p.)
-=======
+
 	//	if(p.)
->>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
+
 	}
 	// Metodo de rebota en los laterales
 	// Devuelve la direccion y velocidad con la que rebota la pelota
