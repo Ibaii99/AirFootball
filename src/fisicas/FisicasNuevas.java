@@ -14,7 +14,7 @@ public class FisicasNuevas {
 	// Y el tiempo en el que se calcule eso
 	
 	/** Metodo para cambiar la posición de la pelota, 
-	 *	posicionInicial + velocidad * tiempo = posicionActual
+	 *	 posicionInicial + velocidad * tiempo = posicionActual
 	 * @param p			Pelota a la que vas a cambiar la posicion
 	 * @param tiempo	Tiempo que ha pasado para mover
 	 */
