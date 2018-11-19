@@ -23,6 +23,7 @@ public class FisicasNuevas {
 		p.setyAntes(p.getY());
 		p.setY(p.getVelY()*tiempo);
 		p.setX(p.getVelX()*tiempo);
+		System.out.println(p.getX() + "en metodo");
 	}
 	
 	/** Metodo para cambiar la velocidad de la pelota
@@ -83,8 +84,8 @@ public class FisicasNuevas {
 		// Invierto los vectores de velocidad
 		cambiarVelocidad(p, -p.getVelX(), -p.getY());
 	}
-	
-	public void puntoExactoChoqueConBorde(ventanaPartido v, Pelota p, ) {
+	//Aqui hay que terminar esto
+	public void puntoExactoChoqueConBorde(ventanaPartido v, Pelota p) {
 		boolean hayReboteAntes = false;
 		boolean hayReboteAhora = false;
 		

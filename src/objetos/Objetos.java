@@ -248,8 +248,8 @@ public abstract class Objetos{
 	 * @param velY	Velocidad a a�adir a la velocidad Y
 	 */
 	public void addVelocidad( double velX, double velY) {
-		velX += velX;
-		velY += velY;
+		this.velX += velX;
+		this.velY += velY;
 	}
 
 	/** Calcula el volumen del objeto
