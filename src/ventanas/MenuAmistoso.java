@@ -29,6 +29,23 @@ public class MenuAmistoso extends JFrame {
 	 *
 	 */
 	public String equipoL;
+	public ImageIcon imageIconL;
+	public String getEquipoL() {
+		return equipoL;
+	}
+
+	public void setEquipoL(String equipoL) {
+		this.equipoL = equipoL;
+	}
+
+	public ImageIcon getImageIconL() {
+		return imageIconL;
+	}
+
+	public void setImageIconL(ImageIcon imageIconL) {
+		this.imageIconL = imageIconL;
+	}
+
 	public int anchura;
 	public int altura;
 
@@ -201,6 +218,7 @@ public class MenuAmistoso extends JFrame {
 							String iconoL = rs2.getString("ICONO");
 							System.out.println(iconoL);
 						}
+						lblEqL.setIcon(new ImageIcon(equipoL));
 					} catch (SQLException i) {
 
 					}
@@ -254,8 +272,9 @@ public class MenuAmistoso extends JFrame {
 				
 			
 				
-
-				ImageIcon imageIconL = new ImageIcon(Inicio.class.getResource("/iconos/equipos/rso.png"));
+				setImageIconL(new ImageIcon(equipoL));
+				
+			//	imageIconL = new ImageIcon(Inicio.class.getResource());
 				Image imagenResizL = imageIconL.getImage();
 				Image iResizeoL = imagenResizL.getScaledInstance(ladoIconoH, ladoIconoV, java.awt.Image.SCALE_SMOOTH); // scale
 																														// it
