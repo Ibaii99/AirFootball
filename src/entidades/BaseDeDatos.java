@@ -109,9 +109,7 @@ public class BaseDeDatos {
 					+ e.getEmpatesVisitante() + "','" + e.getColor().toString() + "','" + e.getRutaImagen() + "')"; 
 //			comando = "INSERT INTO Equipos ( 'Siglas', 'Nombre')";
 //			comando += " VALUES (" + e.getSiglas() + ""," + e.getNombre()+")"; 
-			System.out.println(comando);
 			equipo.executeUpdate(comando);
-			System.out.println(comando);
 		} catch (Exception o) {
 			
 		}

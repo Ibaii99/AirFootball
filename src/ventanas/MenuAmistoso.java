@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import objetos.ObjetoCombobox;
+
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.sql.*;
@@ -142,8 +144,11 @@ public class MenuAmistoso extends JFrame {
 				System.out.println(rs.getString("NOMBRE"));
 				 while (rs.next())
 			      {
+					
 			        String nomEq = rs.getString("Nombre");
 			        String iconEq = rs.getString("Icono");
+			        cbLocal.addItem(new ObjetoCombobox(1, nomEq, new ImageIcon(iconEq)));
+			        cbVisitante.addItem(new ObjetoCombobox(2, nomEq, new ImageIcon(iconEq)));
 			        System.out.println(nomEq + " " + iconEq);
 			      }
 	//		      st.close();
