@@ -43,11 +43,8 @@ class TestFisicas {
 	
 	@Test
 	void testMovimiento() {
-		
 		p.addVelocidad(1, 0);
-		System.out.println(p.getX() + "antes de mover");
 		fisicas.muevePelota(p, 2);
-		System.out.println(p.getX() + "despues de mover");
 		assertEquals(2, p.getX());
 		
 	}

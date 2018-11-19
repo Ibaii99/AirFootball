@@ -23,7 +23,6 @@ public class FisicasNuevas {
 		p.setyAntes(p.getY());
 		p.setY(p.getVelY()*tiempo);
 		p.setX(p.getVelX()*tiempo);
-		System.out.println(p.getX() + "en metodo");
 	}
 	
 	/** Metodo para cambiar la velocidad de la pelota
