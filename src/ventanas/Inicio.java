@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
+import java.sql.SQLException;
 
 public class Inicio extends JFrame {
 	/**
@@ -53,8 +54,22 @@ public class Inicio extends JFrame {
 		bAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MenuAmistoso mu = new MenuAmistoso(getSize().width, getSize().height);
-				mu.setVisible(true);
+				MenuAmistoso mu;
+				try {
+					mu = new MenuAmistoso(getSize().width, getSize().height);
+					mu.setVisible(true);
+				} catch (Exception e1) {
+					MenuAmistoso muAlt;
+					try {
+						muAlt = new MenuAmistoso(630, 460);
+						muAlt.setVisible(true);
+					} catch (Exception e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					
+				}
+				
 			}
 		});
 		bAmistoso.setFont(new Font("Arial Black", Font.PLAIN, 16));
