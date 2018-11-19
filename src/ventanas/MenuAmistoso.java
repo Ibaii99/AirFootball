@@ -12,7 +12,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import entidades.Equipo;
 import objetos.ObjetoCombobox;
+import objetos.Pelota;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -20,6 +22,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 
@@ -85,13 +88,7 @@ public class MenuAmistoso extends JFrame {
 		final JButton btnIniciarAmistoso = new JButton("Iniciar amistoso");
 		btnIniciarAmistoso.setBounds(207, 271, 159, 27);
 		panel.add(btnIniciarAmistoso);
-		btnIniciarAmistoso.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-				// ventanaPartido partido = new ventanaPartido(); // aqu� meter quiz� un
-				// constructor entre equipos
-			}
-		});
+		
 		btnIniciarAmistoso.setFont(new Font("Arial Black", Font.PLAIN, 13));
 
 		final JLabel lblVisitante = new JLabel("Visitante");
@@ -287,7 +284,14 @@ public class MenuAmistoso extends JFrame {
 		lblEqV.setIcon(iiResizeoV);
 		cbLocal.setBounds(120, 224, 150, 22);
 		panel.add(cbLocal);
-		
+		btnIniciarAmistoso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				ventanaPartido partido = new ventanaPartido(new Equipo(equipoL, "AAA", 1, Color.BLACK), new Equipo(equipoV, "AAA",1,Color.black), new Pelota(getBackground(), "pelota", 1), false, true, true); // aqu� meter quiz� un
+				partido.setVisible(true);
+				// PRUEBA DE LISTENER DE VENTANAPARTIDO
+			}
+		});
 		panel.add(lblEqL);
 		panel.add(lblEqV);
 
