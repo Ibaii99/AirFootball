@@ -8,7 +8,7 @@ public class ObjetoCombobox {
         this.value = value;
         this.label = label;
     }
-
+ 
     public int getValue() {
         return this.value;
     }
