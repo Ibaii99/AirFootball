@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 
 import entidades.BaseDeDatos;
 import entidades.Equipo;
+import fisicas.FisicasNuevas;
 import ventanas.Inicio;
 public class Juego {
 	
@@ -27,12 +28,37 @@ public class Juego {
 		anyadirTodosLosEquipos(bd);
 		
 		// pruebas de la ventana de juego
-		Equipo e1 = new Equipo("Equipo1", "afc", 60, Color.black);
-		Equipo e2 = new Equipo("Equipo2", "asd", 60, Color.red);
-		Pelota p = new Pelota(Color.blue, "pelota", 30);
-		v = new ventanaPartido(e1, e2, p, true, true, true);
-		v.colocarLablsEnPosInicial();
-		v.setVisible(true);
+
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Equipo e1 = new Equipo("Equipo1", "afc", 60, "iconos/equipos/cel.png");
+				Equipo e2 = new Equipo("Equipo2", "asd", 60, "iconos/equipos/bar.png");
+				Pelota p = new Pelota(Color.blue, "pelota", 19);
+				FisicasNuevas f = new FisicasNuevas();
+				v = new ventanaPartido(e1, e2, p, true, true, true);
+				v.colocarLablsEnPosInicial();
+				v.actualizarPosicionObjetos();
+				v.setVisible(true);
+				while(e2.getBolaEquipo().getX() < v.getAnchuraCampo()) {
+				try {
+					Thread.sleep(80);
+					System.out.println(p.getX()+ "" + p.getY());
+					f.cambiarVelocidad(e2.getBolaEquipo(), 20, 0);
+					System.out.println(p.getX()+ "" + p.getY());
+					f.muevePelota(p, 16, v);
+					System.out.println(p.getX()+ "" + p.getY());
+					v.actualizarPosicionObjetos();
+					System.out.println(p.getX()+ "" + p.getY());
+				//	System.out.println(p.getX() + "de" + v.getAnchuraCampo());
+				} catch (InterruptedException e) { e.printStackTrace();
+				}
+				}System.out.println("ya");
+				
+			}
+		});
+		t.start();
+		
 	}
 
 	private static void anyadirTodosLosEquipos(BaseDeDatos bd) {
