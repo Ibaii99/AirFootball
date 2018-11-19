@@ -27,12 +27,12 @@ public class Juego {
 		anyadirTodosLosEquipos(bd);
 		
 		// pruebas de la ventana de juego
-		Equipo e1 = new Equipo("Equipo1", "afc", 20, Color.black);
-		Equipo e2 = new Equipo("Equipo2", "asd", 20, Color.red);
-		Pelota p = new Pelota(Color.blue, "pelota", 15);
+		Equipo e1 = new Equipo("Equipo1", "afc", 60, Color.black);
+		Equipo e2 = new Equipo("Equipo2", "asd", 60, Color.red);
+		Pelota p = new Pelota(Color.blue, "pelota", 30);
 		v = new ventanaPartido(e1, e2, p, true, true, true);
-		v.pintarLabels();
 		v.colocarLablsEnPosInicial();
+		v.pintarLabels();
 		v.setVisible(true);
 	}
 

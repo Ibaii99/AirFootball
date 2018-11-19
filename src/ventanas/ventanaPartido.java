@@ -45,6 +45,9 @@ public class ventanaPartido extends JFrame {
 	private Pelota p;
 	
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso, boolean esJugadorVSMaquinaEquipoLocal) {
+		
+		setAlwaysOnTop(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.isJugadorEquipoLocal = esJugadorVSMaquinaEquipoLocal;
 		this.isMultijugador = esMultijjugador;
 		this.isAmistoso = esAmistoso;
@@ -52,7 +55,7 @@ public class ventanaPartido extends JFrame {
 		this.eVisitante = eVisitante;
 		this.p = p;
 		setSize(750, 500);
-		setResizable(false);
+		setResizable(true);
 		setVisible(true);
 		ImageIcon iconL = new ImageIcon(ventanaPartido.class.getResource("/iconos/equipos/atl.png"));
 		Image imgL = iconL.getImage();
@@ -82,6 +85,8 @@ public class ventanaPartido extends JFrame {
 		ImageIcon newIcon = new ImageIcon(bi);
 		
 		panelCampo= new JPanel();
+		panelCampo.setBackground(Color.GREEN);
+	
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -125,7 +130,9 @@ public class ventanaPartido extends JFrame {
 					.addContainerGap())
 		);
 		panelCampo.setLayout(null);
-		
+		pintarLabels();
+		colocarLablsEnPosInicial();
+
 //		Metodo original con doubles		
 //		lblEquipoLocal.setBounds(eLocal.getBolaEquipo().getX(), eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2, eLocal.getBolaEquipo().getRadio()*2);
 		getContentPane().setLayout(groupLayout);
@@ -182,12 +189,18 @@ public class ventanaPartido extends JFrame {
 		// añado todo al panel con las posiciones actualizadas
 		lblEquipoLocal.setBounds((int)eLocal.getBolaEquipo().getX(), (int)eLocal.getBolaEquipo().getY(), (int)eLocal.getBolaEquipo().getRadio()*2, (int)eLocal.getBolaEquipo().getRadio()*2);
 		panelCampo.add(lblEquipoLocal);
+		lblEquipoLocal.setText("EQUIPO LOCAL");
 		
 		lblEquipoVisitante.setBounds((int)eVisitante.getBolaEquipo().getX(), (int)eVisitante.getBolaEquipo().getY(), (int)eVisitante.getBolaEquipo().getRadio()*2, (int)eVisitante.getBolaEquipo().getRadio()*2);
 		panelCampo.add(lblEquipoVisitante);
+		lblEquipoVisitante.setText("EQUIPOVISITANTE");
 		
 		lblPelota.setBounds((int)p.getX(), (int)p.getY(), (int)p.getRadio()*2, (int)p.getRadio()*2);
 		panelCampo.add(lblPelota);
+		lblPelota.setText("PELOTA");
+		
+		panelCampo.repaint();
+		panelCampo.revalidate();
 	
 	}
 	
