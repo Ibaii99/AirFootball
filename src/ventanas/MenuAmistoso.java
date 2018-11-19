@@ -46,7 +46,7 @@ public class MenuAmistoso extends JFrame {
 	}
 
 	public MenuAmistoso(int anchura, int altura) throws ClassNotFoundException, SQLException {
-		setSize(anchura, altura);
+		setSize(577, 383);
 		ImageIcon imageIcon = new ImageIcon(MenuAmistoso.class.getResource("/iconos/stadiumAmistoso.png"));
 		Image image = imageIcon.getImage();
 
@@ -68,7 +68,8 @@ public class MenuAmistoso extends JFrame {
 		btnIniciarAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-//				ventanaPartido partido = new ventanaPartido(); // aqu� meter quiz� un constructor entre equipos
+				// ventanaPartido partido = new ventanaPartido(); // aqu� meter quiz� un
+				// constructor entre equipos
 			}
 		});
 		btnIniciarAmistoso.setFont(new Font("Arial Black", Font.PLAIN, 13));
@@ -122,7 +123,7 @@ public class MenuAmistoso extends JFrame {
 		Logger logger = Logger.getLogger("baseDeDatos");
 
 		Connection con = null;
-		
+
 		Statement consulta;
 
 		String comando = "";
@@ -130,34 +131,33 @@ public class MenuAmistoso extends JFrame {
 			Class.forName("org.sqlite.JDBC");
 			con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 		} catch (Exception e3) {
-			e3.printStackTrace();
+			// e3.printStackTrace();
 		}
-				String query = "SELECT NOMBRE, ICONO FROM EQUIPOS;";
-				System.out.println(query);
-				con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
-		//		Statement st = con.createStatement();
-				ResultSet rs = con.createStatement().executeQuery(query);
-				System.out.println(rs.toString());
-				System.out.println(rs);
-		//		System.out.println(rs.isClosed());
-				
-				System.out.println(rs.getString("NOMBRE"));
-				 while (rs.next())
-			      {
-					
-			        String nomEq = rs.getString("Nombre");
-			        String iconEq = rs.getString("Icono");
-			        cbLocal.addItem(new ObjetoCombobox(1, nomEq, new ImageIcon(iconEq)));
-			        cbVisitante.addItem(new ObjetoCombobox(2, nomEq, new ImageIcon(iconEq)));
-			        System.out.println(nomEq + " " + iconEq);
-			      }
-	//		      st.close();
-			      rs.close(); 
-				// consulta.executeUpdate(comando);
-				// comando = "select equipo, icono from equipos";
-				// logger.log(Level.INFO, "BD: " + comando);
-				// System.out.println(consulta.executeUpdate(comando));
-		
+		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS;";
+		System.out.println(query);
+		con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+		// Statement st = con.createStatement();
+		ResultSet rs = con.createStatement().executeQuery(query);
+		System.out.println(rs.toString());
+		System.out.println(rs);
+		// System.out.println(rs.isClosed());
+
+		System.out.println(rs.getString("NOMBRE"));
+		while (rs.next()) {
+
+			String nomEq = rs.getString("Nombre");
+			String iconEq = rs.getString("Icono");
+			cbLocal.addItem(new ObjetoCombobox(1, nomEq, new ImageIcon(iconEq)));
+			cbVisitante.addItem(new ObjetoCombobox(2, nomEq, new ImageIcon(iconEq)));
+			System.out.println(nomEq + " " + iconEq);
+		}
+		// st.close();
+		rs.close();
+		// consulta.executeUpdate(comando);
+		// comando = "select equipo, icono from equipos";
+		// logger.log(Level.INFO, "BD: " + comando);
+		// System.out.println(consulta.executeUpdate(comando));
+
 		ImageIcon imageIconL = new ImageIcon(Inicio.class.getResource("/iconos/equipos/ala.png"));
 		Image imagenResizL = imageIconL.getImage();
 		Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(100 * getWidth() / 626),
@@ -213,6 +213,33 @@ public class MenuAmistoso extends JFrame {
 						(int) Math.round(((getHeight() / 2) + (getHeight() * 0.2))), nuevaAnchuraBtn, nuevaAlturaBtn);
 				btnIniciarAmistoso.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
 
+				String filenameL = cbLocal.getSelectedObjects().toString();
+				try {
+					try {
+						Connection conCB = null;
+						Class.forName("org.sqlite.JDBC");
+						conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+						Statement consultaCB;
+						consultaCB = conCB.createStatement();
+						String comando = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE ="
+								+ cbLocal.getSelectedItem().toString();
+						logger.log(Level.INFO, "BD: " + comando);
+						consultaCB.executeUpdate(comando);
+						ResultSet rs = conCB.createStatement().executeQuery(comando);
+						System.out.println(rs.toString());
+						System.out.println(rs);
+						// System.out.println(rs.isClosed());
+
+						while (rs.next()) {
+							System.out.println(rs.getString("ICONO"));
+						}
+					} catch (SQLException i) {
+
+					}
+				} catch (Exception e) {
+
+				}
+				System.out.println(filenameL);
 				ImageIcon imageIconL = new ImageIcon(Inicio.class.getResource("/iconos/equipos/ala.png"));
 				Image imagenResizL = imageIconL.getImage();
 				Image iResizeoL = imagenResizL.getScaledInstance(ladoIconoH, ladoIconoV, java.awt.Image.SCALE_SMOOTH); // scale
