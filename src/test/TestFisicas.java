@@ -13,6 +13,9 @@ class TestFisicas {
 	private Equipo e2;
 	
 	@Test
+	void testCrearObjetos() {
+		p = new Pelota
+	}
 	
 	@Test
 	void test() {
