@@ -13,7 +13,8 @@ public class FisicasNuevas {
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
 	
-	/** Metodo para cambiar la posición de la pelota, velocidad * tiempo = posicion
+	/** Metodo para cambiar la posición de la pelota, 
+	 *	posicionInicial + velocidad * tiempo = posicionActual
 	 * @param p			Pelota a la que vas a cambiar la posicion
 	 * @param tiempo	Tiempo que ha pasado para mover
 	 */
@@ -21,8 +22,8 @@ public class FisicasNuevas {
 		
 		p.setxAntes(p.getX());
 		p.setyAntes(p.getY());
-		p.setY(p.getVelY()*tiempo);
-		p.setX(p.getVelX()*tiempo);
+		p.setY(p.getY()+(p.getVelY()*tiempo));
+		p.setX(p.getX()+(p.getVelX()*tiempo));
 	}
 	
 	/** Metodo para cambiar la velocidad de la pelota

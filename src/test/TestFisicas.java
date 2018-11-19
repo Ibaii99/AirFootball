@@ -41,12 +41,19 @@ class TestFisicas {
 		assertEquals(50, e1.getBolaEquipo().getMasa());
 	}
 	
+	/**	Comprobación de que una pelota a la que se le da una velocidad de x=1 e y=5 
+	 * 	partiendo de una posicion base de x=20 e y=15 en un periodo de tiempo de 2 se mueve a:
+	 * 	la posicion inicial x + 2
+	 * 	la posicion inicial y + 10 
+	 */
 	@Test
-	void testMovimiento() {
-		p.addVelocidad(1, 0);
+	void testMovimientoDePelota() {
+		p.setX(20);
+		p.setY(15);
+		p.addVelocidad(1, 5);
 		fisicas.muevePelota(p, 2);
-		assertEquals(2, p.getX());
-		
+		assertEquals(22, p.getX());
+		assertEquals(25, p.getY());
 	}
 	
 
