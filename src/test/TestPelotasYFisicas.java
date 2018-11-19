@@ -52,7 +52,6 @@ class TestPelotasYFisicas{
 	 */
 	@Test
 	void testMovimientoDePelota() {
-		
 		p.setX(20);
 		p.setY(15);
 		p.addVelocidad(1, 5);

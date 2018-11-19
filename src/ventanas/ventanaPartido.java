@@ -86,7 +86,7 @@ public class ventanaPartido extends JFrame {
 		
 		panelCampo= new JPanel();
 		panelCampo.setBackground(Color.GREEN);
-	
+		panelCampo.setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -129,7 +129,7 @@ public class ventanaPartido extends JFrame {
 					.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		panelCampo.setLayout(null);
+		
 		pintarLabels();
 		colocarLablsEnPosInicial();
 
