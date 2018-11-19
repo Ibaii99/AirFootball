@@ -29,6 +29,7 @@ public class MenuAmistoso extends JFrame {
 	 *
 	 */
 	public String equipoL;
+	public String equipoV;
 	public ImageIcon imageIconL;
 	public String getEquipoL() {
 		return equipoL;
@@ -116,11 +117,9 @@ public class MenuAmistoso extends JFrame {
 		final JLabel lblEqL = new JLabel("");
 		lblEqL.setBounds(130, 96, 100, 100);
 
-		panel.add(lblEqL);
-
+		
 		final JLabel lblEqV = new JLabel("");
 		lblEqV.setBounds(334, 96, 100, 100);
-		panel.add(lblEqV);
 
 		// Connection conexion;
 		// PreparedStatement consulta1;
@@ -168,7 +167,7 @@ public class MenuAmistoso extends JFrame {
 			String iconEq = rs.getString("Icono");
 			cbLocal.addItem(new ObjetoCombobox(1, nomEq, new ImageIcon(iconEq)));
 			cbVisitante.addItem(new ObjetoCombobox(2, nomEq, new ImageIcon(iconEq)));
-			System.out.println(nomEq + " " + iconEq);
+//			System.out.println(nomEq + " " + iconEq);
 		}
 		// st.close();
 		rs.close();
@@ -177,22 +176,13 @@ public class MenuAmistoso extends JFrame {
 		// logger.log(Level.INFO, "BD: " + comando);
 		// System.out.println(consulta.executeUpdate(comando));
 
-		ImageIcon imageIconL = new ImageIcon(Inicio.class.getResource("/iconos/equipos/ala.png"));
-		Image imagenResizL = imageIconL.getImage();
-		Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(100 * getWidth() / 626),
-				(int) Math.round(100 * getWidth() / 626), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-		ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
-		lblEqL.setIcon(iiResizeoL);
+	
 
-		ImageIcon imageIconV = new ImageIcon(Inicio.class.getResource("/iconos/equipos/ala.png"));
-		Image imagenResizV = imageIconV.getImage();
-		Image iResizeoV = imagenResizL.getScaledInstance((int) Math.round(100 * getWidth() / 626),
-				(int) Math.round(100 * getWidth() / 626), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-		ImageIcon iiResizeoV = new ImageIcon(iResizeoV);
-		lblEqV.setIcon(iiResizeoV);
-
+		equipoL = "/iconos/equipos/ala.png"; 
+		ImageIcon imgI = new ImageIcon(getClass().getResource(equipoL));
 		
-		
+		lblEqL.setIcon(new ImageIcon(getClass().getResource(equipoL)));
+		equipoV = "/iconos/equipos/ala.png"; 
 		cbLocal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String filenameL = cbLocal.getSelectedObjects().toString();
@@ -209,29 +199,102 @@ public class MenuAmistoso extends JFrame {
 						consultaCB.executeUpdate(comando2);
 						ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
 						System.out.println(rs2.toString());
-						System.out.println(rs2);
+//						System.out.println(rs2);
 						// System.out.println(rs.isClosed());
 
 						while (rs2.next()) {
 							
-							equipoL = rs2.getString("ICONO");
+							equipoL = "/"+rs2.getString("ICONO");
 							String iconoL = rs2.getString("ICONO");
-							System.out.println(iconoL);
+						//	System.out.println(equipoL);
 						}
-						lblEqL.setIcon(new ImageIcon(equipoL));
+						rs2.close();
+						ImageIcon imageIconL = new ImageIcon(getClass().getResource(equipoL));
+						Image imagenResizL = imageIconL.getImage();
+						Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(100 * getWidth() / 626),
+								(int) Math.round(100 * getWidth() / 626), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+						ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
+						lblEqL.setIcon(new ImageIcon(getClass().getResource(equipoL)));
+						lblEqL.setIcon(iiResizeoL);
 					} catch (SQLException i) {
 
 					}
 				} catch (Exception e2) {
 
 				}
+			revalidate();
 			}
+			
 		});
+		cbVisitante.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String filenameV = cbVisitante.getSelectedObjects().toString();
+				try {
+					try {
+						Connection conCB = null;
+						Class.forName("org.sqlite.JDBC");
+						conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+						Statement consultaCB;
+						consultaCB = conCB.createStatement();
+						String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '"
+								+ cbVisitante.getSelectedItem().toString()+"'";
+						logger.log(Level.INFO, "BD: " + comando2);
+						consultaCB.executeUpdate(comando2);
+						ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
+						System.out.println(rs2.toString());
+//						System.out.println(rs2);
+						// System.out.println(rs.isClosed());
+
+						while (rs2.next()) {
+							
+							equipoV = "/"+rs2.getString("ICONO");
+							String iconoV = rs2.getString("ICONO");
+						//	System.out.println(equipoL);
+						}
+						rs2.close();
+						ImageIcon imageIconV = new ImageIcon(getClass().getResource(equipoV));
+						Image imagenResizV =imageIconV.getImage();
+						Image iResizeoV = imagenResizV.getScaledInstance((int) Math.round(100 * getWidth() / 626),
+								(int) Math.round(100 * getWidth() / 626), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+						ImageIcon iiResizeoV = new ImageIcon(iResizeoV);
+						lblEqV.setIcon(new ImageIcon(getClass().getResource(equipoV)));
+						lblEqV.setIcon(iiResizeoV);
+					} catch (SQLException i) {
+
+					}
+				} catch (Exception e2) {
+
+				}
+			revalidate();
+			}
+			
+		});
+//		ImageIcon imageIconL = new ImageIcon(equipoL);
+//		Image imagenResizL = imageIconL.getImage();
+//		Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(100 * getWidth() / 626),
+//				(int) Math.round(100 * getWidth() / 626), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+//		ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
+		ImageIcon imageIconV = new ImageIcon(equipoL);
+		Image imagenResizV = imageIconV.getImage();
+		Image iResizeoV = imagenResizV.getScaledInstance((int) Math.round(100 * getWidth() / 626),
+				(int) Math.round(100 * getWidth() / 626), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+		ImageIcon iiResizeoV = new ImageIcon(iResizeoV);
+//		lblEqL.setIcon(iiResizeoL);
+	
+		
+
+		
+		lblEqV.setIcon(iiResizeoV);
 		cbLocal.setBounds(120, 224, 150, 22);
 		panel.add(cbLocal);
+		
+		panel.add(lblEqL);
+		panel.add(lblEqV);
+
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
+				
 				ImageIcon imageIconR = new ImageIcon(Inicio.class.getResource("/iconos/stadiumAmistoso.png"));
 				Image imagenResiz = imageIconR.getImage();
 
@@ -261,19 +324,18 @@ public class MenuAmistoso extends JFrame {
 				cbVisitante.setBounds((int) Math.round(((getWidth() / 2) + (getWidth() * 0.01))),
 						(int) Math.round(((getHeight() / 2) - (getHeight() * 0.01))), nuevaAnchuraCb, nuevaAlturaCb);
 				lblVisitante.setBounds((int) Math.round(((getWidth() / 2) + (getWidth() * 0.05))),
-						(int) Math.round(((getHeight() / 2) - (getHeight() * 0.075))), nuevaAnchura, nuevaAltura);
+						(int) Math.round(((getHeight() / 2) - (getHeight() * 0.295))), nuevaAnchura, nuevaAltura);
 				cbLocal.setBounds((int) Math.round(((getWidth() / 2) - (getWidth() * 0.31))),
 						(int) Math.round(((getHeight() / 2) - (getHeight() * 0.01))), nuevaAnchuraCb, nuevaAlturaCb);
 				lblLocal.setBounds((int) Math.round(((getWidth() / 2) - (getWidth() * 0.25))),
-						(int) Math.round(((getHeight() / 2) - (getHeight() * 0.075))), nuevaAnchura, nuevaAltura);
+						(int) Math.round(((getHeight() / 2) - (getHeight() * 0.295))), nuevaAnchura, nuevaAltura);
 				btnIniciarAmistoso.setBounds((int) Math.round(((getWidth() / 2) - (getWidth() * 0.15))),
 						(int) Math.round(((getHeight() / 2) + (getHeight() * 0.2))), nuevaAnchuraBtn, nuevaAlturaBtn);
 				btnIniciarAmistoso.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
 				
 			
 				
-				setImageIconL(new ImageIcon(equipoL));
-				
+				ImageIcon imageIconL = (ImageIcon) lblEqL.getIcon();
 			//	imageIconL = new ImageIcon(Inicio.class.getResource());
 				Image imagenResizL = imageIconL.getImage();
 				Image iResizeoL = imagenResizL.getScaledInstance(ladoIconoH, ladoIconoV, java.awt.Image.SCALE_SMOOTH); // scale
@@ -286,7 +348,8 @@ public class MenuAmistoso extends JFrame {
 				lblEqL.setBounds((int) Math.round(((getWidth() / 2) - (getWidth() * 0.29))),
 						(int) Math.round(((getHeight() / 2) - (getHeight() * 0.25))), ladoIconoH, ladoIconoV);
 
-				ImageIcon imageIconV = new ImageIcon(Inicio.class.getResource("/iconos/equipos/rso.png"));
+				String localizacion = equipoV;
+				ImageIcon imageIconV = new ImageIcon(Inicio.class.getResource(localizacion));
 				Image imagenResizV = imageIconV.getImage();
 				Image iResizeoV = imagenResizV.getScaledInstance(ladoIconoH, ladoIconoV, java.awt.Image.SCALE_SMOOTH); // scale
 																														// it
