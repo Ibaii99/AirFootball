@@ -114,7 +114,6 @@ public class BaseDeDatos {
 			System.out.println(comando);
 		} catch (Exception o) {
 			
-			o.printStackTrace();
 		}
 //		try {
 //			Class.forName( "org.sqlite.JDBC" );

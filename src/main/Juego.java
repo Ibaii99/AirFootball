@@ -73,10 +73,9 @@ public class Juego {
 			
 			}catch(Exception e) {
 				
-	e.printStackTrace();		
+			
 	}
-			System.out.println(bd);
-			System.out.println("ei");
+		
 			Inicio i = new Inicio();
 			i.setVisible(true);
 	}
