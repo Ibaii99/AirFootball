@@ -112,6 +112,7 @@ public class BaseDeDatos {
 			equipo.executeUpdate(comando);
 			System.out.println(comando);
 		} catch (Exception o) {
+			
 			o.printStackTrace();
 		}
 //		try {
