@@ -72,8 +72,11 @@ public class Juego {
 					"iconos/equipos/vlr.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			
 			}catch(Exception e) {
-	e.printStackTrace();		}
+				
+	e.printStackTrace();		
+	}
 			System.out.println(bd);
+			System.out.println("ei");
 			Inicio i = new Inicio();
 			i.setVisible(true);
 	}
