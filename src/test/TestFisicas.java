@@ -17,6 +17,10 @@ class TestFisicas {
 	private Equipo e2;
 	private ventanaPartido v;
 	
+	
+	/** Aqui se declaran los elementos que se inicializan para hacer los test
+	 *  Before es lo que se va a ejecutar antes de los test, NO ES UN TEST.
+	 */
 	@Before
 	void testCrearObjetos() {
 		p = new Pelota(Color.black, "jabulani", 0, 0, 20, 25);
@@ -25,9 +29,11 @@ class TestFisicas {
 		v = new ventanaPartido(e1, e2, p);
 	}
 	
+	
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void testCambiosDePropiedades() {
+		e1.getBolaEquipo().setMasa(50);
+		assertEquals(50, e1.getBolaEquipo().getMasa());
 	}
 	
 	@Test
