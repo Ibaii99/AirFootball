@@ -10,20 +10,30 @@ import ventanas.ventanaPartido;
  *
  */
 public class FisicasNuevas {
+	private static double TIEMPO = 16;
+	
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
 	
 	/** Metodo para cambiar la posición de la pelota, 
-	 *	 posicionInicial + velocidad * tiempo = posicionActual
+	 *	posicionInicial + velocidad * tiempo = posicionActual
+	 *	Si la pelota sobrepasa los limites del campo no avanza
 	 * @param p			Pelota a la que vas a cambiar la posicion
 	 * @param tiempo	Tiempo que ha pasado para mover
 	 */
-	public void muevePelota(Pelota p, double tiempo) {
-		
+	public void muevePelota(Pelota p, double tiempo, ventanaPartido v) {
 		p.setxAntes(p.getX());
 		p.setyAntes(p.getY());
 		p.setY(p.getY()+(p.getVelY()*tiempo));
 		p.setX(p.getX()+(p.getVelX()*tiempo));
+		
+		if(p.getX() > (v.getAnchuraCampo()-1-p.getRadio())) p.setX(v.getAnchuraCampo()-p.getRadio()-1);
+		if(p.getY() > (v.getAlturaCampo()-1-p.getRadio())) p.setY(v.getAlturaCampo()-p.getRadio()-1);
+		
+		if(p.getY() < 1 + p.getRadio() ) p.setY(p.getRadio()+1);
+		if(p.getX() < 1 + p.getRadio() ) p.setX(p.getRadio()+1);
+		
+		
 	}
 	
 	/** Metodo para cambiar la velocidad de la pelota
@@ -84,18 +94,22 @@ public class FisicasNuevas {
 		// Invierto los vectores de velocidad
 		cambiarVelocidad(p, -p.getVelX(), -p.getY());
 	}
+	
+	private int veces = 1;
 	//Aqui hay que terminar esto
-	public void puntoExactoChoqueConBorde(ventanaPartido v, Pelota p) {
+	public double puntoExactoChoqueConBorde(ventanaPartido v, Pelota p) {
 		boolean hayReboteAntes = false;
 		boolean hayReboteAhora = false;
-		
+		double tiempoExacto = TIEMPO -1/(veces);
 		hayReboteAhora = rebotaeEnBorde(v, p);
 		if(hayReboteAhora) {
 			hayReboteAntes = hayReboteAhora;
 			puntoExactoChoqueConBorde(v, p);
 		} else if (!hayReboteAhora && hayReboteAntes) {
 			
+			
 		}
+		return tiempoExacto;
 	}
 	
 	

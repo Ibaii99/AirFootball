@@ -20,6 +20,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import entidades.Equipo;
 import objetos.Pelota;
+import java.awt.event.KeyAdapter;
 
 /** @author Jorge 
  *  @author ibai
@@ -30,14 +31,19 @@ public class ventanaPartido extends JFrame {
 	private boolean arcade;
 	private Graphics2D graphics;  // Objeto gr�fico sobre el que dibujar (del buffer)
 	private JPanel panelCampo;         // Panel principal
-	private boolean amistoso;
+
 	private JLabel lblEquipoLocal=new JLabel("");
 	private JLabel lblEquipoVisitante= new JLabel("");
 	private JLabel lblPelota = new JLabel("");
+	private boolean isMultijugador;
+	private boolean isAmistoso;
+	private boolean isJugadorEquipoLocal;
+	private static double VELOCIDAD_CON_MOVIMIENTO = 10;
 	
-	
-	
-	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p) {
+	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso, boolean esJugadorVSMaquinaEquipoLocal) {
+		this.isJugadorEquipoLocal = esJugadorVSMaquinaEquipoLocal;
+		this.isMultijugador = esMultijjugador;
+		this.isAmistoso = esAmistoso;
 		setSize(750, 500);
 		setResizable(false);
 		setVisible(true);
@@ -113,12 +119,49 @@ public class ventanaPartido extends JFrame {
 		);
 		panelCampo.setLayout(null);
 		
-		
-		
 //		Metodo original con doubles		
 //		lblEquipoLocal.setBounds(eLocal.getBolaEquipo().getX(), eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2, eLocal.getBolaEquipo().getRadio()*2);
 		getContentPane().setLayout(groupLayout);
 
+		
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int tecla = e.getKeyCode();
+				
+				if(!isMultijugador) {
+					Equipo jugador = null;
+					
+					if(isJugadorEquipoLocal)jugador = eLocal;
+					if(!isJugadorEquipoLocal) jugador = eVisitante;
+					
+					switch (tecla){
+					case 37: jugador.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
+					case 38: jugador.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);	// flecha arriba
+					case 39: jugador.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);	// flecha derecha
+					case 40: jugador.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);	// flecha abajo
+					default: ; }
+				}
+				
+				else if(isMultijugador) {
+					switch (tecla){
+					case 37: eLocal.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
+					case 38: eLocal.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);	// flecha arriba
+					case 39: eLocal.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);	// flecha derecha
+					case 40: eLocal.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);	// flecha abajo
+					
+					case 87: eVisitante.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);// w
+					case 83: eVisitante.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);//s
+					case 68: eVisitante.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);//d
+					case 65: eVisitante.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO);//a			
+					default: ;
+					}
+					
+				
+				}
+				
+			}
+		});
 	}
 
 	/**	Metodo para actualizar las posiciones de los objetos del campo
@@ -141,13 +184,16 @@ public class ventanaPartido extends JFrame {
 	
 	}
 	
+	public void moverEquipo() {
+		
+	}
 
 	public boolean isAmistoso() {
-		return amistoso;
+		return isAmistoso;
 	}
 
 	public void setAmistoso(boolean amistoso) {
-		this.amistoso = amistoso;
+		this.isAmistoso = amistoso;
 	}
 
 	public boolean isLiga() {
