@@ -28,6 +28,7 @@ public class MenuAmistoso extends JFrame {
 	 * @author Jorge
 	 *
 	 */
+	public String equipoL;
 	public int anchura;
 	public int altura;
 
@@ -173,7 +174,7 @@ public class MenuAmistoso extends JFrame {
 		ImageIcon iiResizeoV = new ImageIcon(iResizeoV);
 		lblEqV.setIcon(iiResizeoV);
 
-		String equipoL;
+		
 		
 		cbLocal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -195,7 +196,8 @@ public class MenuAmistoso extends JFrame {
 						// System.out.println(rs.isClosed());
 
 						while (rs2.next()) {
-//							equipoL = rs2.getString("ICONO");
+							
+							equipoL = rs2.getString("ICONO");
 							String iconoL = rs2.getString("ICONO");
 							System.out.println(iconoL);
 						}
