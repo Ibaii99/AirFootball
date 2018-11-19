@@ -12,29 +12,39 @@ import javax.swing.ImageIcon;
 import entidades.BaseDeDatos;
 import entidades.Equipo;
 import ventanas.Inicio;
+
 public class Juego {
-	
-	public static ventanaPartido v;	// la ventana se creara cuando se elijan los equipos con los que se va a jugar
+
+	public static ventanaPartido v; // la ventana se creara cuando se elijan los equipos con los que se va a jugar
 	public Poste posteArribaIzquierda = new Poste(v, true, true);
 	public Poste posteAbajoIzquierda = new Poste(v, true, false);
-	
+
 	public Poste posteArribaDerecha = new Poste(v, false, true);
 	public Poste posteAbajoDerecha = new Poste(v, false, false);
-	
-	
+
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos();
 		anyadirTodosLosEquipos(bd);
 		Inicio l = new Inicio();
 		l.setVisible(true);
 		// pruebas de la ventana de juego
-//		Equipo e1 = new Equipo("Equipo1", "afc", 60, Color.black);
-//		Equipo e2 = new Equipo("Equipo2", "asd", 60, Color.red);
-//		Pelota p = new Pelota(Color.blue, "pelota", 30);
-//		v = new ventanaPartido(e1, e2, p, true, true, true);
-//		v.colocarLablsEnPosInicial();
-//		v.pintarLabels();
-//		v.setVisible(true);
+
+		// Equipo e1 = new Equipo("Equipo1", "afc", 60, Color.black);
+		// Equipo e2 = new Equipo("Equipo2", "asd", 60, Color.red);
+		// Pelota p = new Pelota(Color.blue, "pelota", 30);
+		// v = new ventanaPartido(e1, e2, p, true, true, true);
+		// v.colocarLablsEnPosInicial();
+		// v.pintarLabels();
+		// v.setVisible(true);
+
+		Equipo e1 = new Equipo("Equipo1", "afc", 60, Color.black);
+		Equipo e2 = new Equipo("Equipo2", "asd", 60, Color.red);
+		Pelota p = new Pelota(Color.blue, "pelota", 30);
+		v = new ventanaPartido(e1, e2, p, true, true, true);
+		v.colocarLablsEnPosInicial();
+		v.actualizarPosicionObjetos();
+		v.pintarLabels();
+		v.setVisible(true);
 	}
 
 	private static void anyadirTodosLosEquipos(BaseDeDatos bd) {
@@ -51,9 +61,8 @@ public class Juego {
 					"iconos/equipos/bet.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			bd.anyadirEquipo(new Equipo("CEL", "Celta de Vigo", 0, Color.BLUE, ("iconos/equipos/cel.png"),
 					"iconos/equipos/cel.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-			bd.anyadirEquipo(
-					new Equipo("DEP", "Deportivo de La Coru�a", 0, Color.BLUE, ("iconos/equipos/dep.png"),
-							"iconos/equipos/dep.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+			bd.anyadirEquipo(new Equipo("DEP", "Deportivo de La Coru�a", 0, Color.BLUE, ("iconos/equipos/dep.png"),
+					"iconos/equipos/dep.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			bd.anyadirEquipo(new Equipo("EIB", "SD Eibar", 0, Color.BLUE, ("iconos/equipos/eib.png"),
 					"iconos/equipos/eib.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			bd.anyadirEquipo(new Equipo("ESP", "RCD Espanyol", 0, Color.BLUE, ("iconos/equipos/esp.png"),
@@ -80,31 +89,33 @@ public class Juego {
 					"iconos/equipos/vll.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			bd.anyadirEquipo(new Equipo("VLR", "Villarreal CF", 0, Color.BLUE, ("iconos/equipos/vlr.png"),
 					"iconos/equipos/vlr.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-			
-			}catch(Exception e) {
-				
-			
-	}
-		
-			Inicio i = new Inicio();
-			i.setVisible(true);
+
+		} catch (Exception e) {
+
+		}
+
+		Inicio i = new Inicio();
+		i.setVisible(true);
 	}
 }
-	
-//	(*1)diseño recursivo de funcionameinto del juego
-//			guardo el tiempo de la consulta anterior
+
+// (*1)diseño recursivo de funcionameinto del juego
+// guardo el tiempo de la consulta anterior
 //
-//			con la velocidad de la pelota se donde va a ir y con eso llegara un momento que:
-//			me de que hay o ha habido un rebote:
-//					
-// 					divido el tiempo a la mitad y miro si en ese momento tambn seguia ocurriendo choque(*1) 
-//		[así hasta ir dividiendo todo el rato el tiempo desde el ultimo momento calculado con su tiempo hasta el inicial]
-//					
-//					cuando no hay choque se que el momento anterior es en el que ha habido el choque y devuelvo ese momento
-//					con el tiempo tendre la posicion, vel*tiempo = espacio espacio+= espacio del objeto = posicion futura
-//	
-
-
+// con la velocidad de la pelota se donde va a ir y con eso llegara un momento
+// que:
+// me de que hay o ha habido un rebote:
+//
+// divido el tiempo a la mitad y miro si en ese momento tambn seguia ocurriendo
+// choque(*1)
+// [así hasta ir dividiendo todo el rato el tiempo desde el ultimo momento
+// calculado con su tiempo hasta el inicial]
+//
+// cuando no hay choque se que el momento anterior es en el que ha habido el
+// choque y devuelvo ese momento
+// con el tiempo tendre la posicion, vel*tiempo = espacio espacio+= espacio del
+// objeto = posicion futura
+//
 
 /**
  * (char siglas, String nombre, int puntos, Color color, ImageIcon imagen,
