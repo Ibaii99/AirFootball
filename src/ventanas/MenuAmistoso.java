@@ -20,6 +20,8 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.BorderLayout;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class MenuAmistoso extends JFrame {
 	/**
@@ -59,8 +61,7 @@ public class MenuAmistoso extends JFrame {
 		panel.setLayout(null);
 
 		final JComboBox cbLocal = new JComboBox();
-		cbLocal.setBounds(120, 224, 150, 22);
-		panel.add(cbLocal);
+		
 
 		final JButton btnIniciarAmistoso = new JButton("Iniciar amistoso");
 		btnIniciarAmistoso.setBounds(207, 271, 159, 27);
@@ -172,6 +173,40 @@ public class MenuAmistoso extends JFrame {
 		ImageIcon iiResizeoV = new ImageIcon(iResizeoV);
 		lblEqV.setIcon(iiResizeoV);
 
+		
+		cbLocal.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent arg0) {
+				String filenameL = cbLocal.getSelectedObjects().toString();
+				try {
+					try {
+						Connection conCB = null;
+						Class.forName("org.sqlite.JDBC");
+						conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+						Statement consultaCB;
+						consultaCB = conCB.createStatement();
+						String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '"
+								+ cbLocal.getSelectedItem().toString()+"'";
+						logger.log(Level.INFO, "BD: " + comando2);
+						consultaCB.executeUpdate(comando2);
+						ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
+						System.out.println(rs2.toString());
+						System.out.println(rs2);
+						// System.out.println(rs.isClosed());
+
+						while (rs2.next()) {
+							String iconoL = rs2.getString("ICONO");
+							System.out.println(iconoL);
+						}
+					} catch (SQLException i) {
+
+					}
+				} catch (Exception e) {
+
+				}
+			}
+		});
+		cbLocal.setBounds(120, 224, 150, 22);
+		panel.add(cbLocal);
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
@@ -212,35 +247,11 @@ public class MenuAmistoso extends JFrame {
 				btnIniciarAmistoso.setBounds((int) Math.round(((getWidth() / 2) - (getWidth() * 0.15))),
 						(int) Math.round(((getHeight() / 2) + (getHeight() * 0.2))), nuevaAnchuraBtn, nuevaAlturaBtn);
 				btnIniciarAmistoso.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
+				
+			
+				
 
-				String filenameL = cbLocal.getSelectedObjects().toString();
-				try {
-					try {
-						Connection conCB = null;
-						Class.forName("org.sqlite.JDBC");
-						conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
-						Statement consultaCB;
-						consultaCB = conCB.createStatement();
-						String comando = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE ="
-								+ cbLocal.getSelectedItem().toString();
-						logger.log(Level.INFO, "BD: " + comando);
-						consultaCB.executeUpdate(comando);
-						ResultSet rs = conCB.createStatement().executeQuery(comando);
-						System.out.println(rs.toString());
-						System.out.println(rs);
-						// System.out.println(rs.isClosed());
-
-						while (rs.next()) {
-							System.out.println(rs.getString("ICONO"));
-						}
-					} catch (SQLException i) {
-
-					}
-				} catch (Exception e) {
-
-				}
-				System.out.println(filenameL);
-				ImageIcon imageIconL = new ImageIcon(Inicio.class.getResource("/iconos/equipos/ala.png"));
+				ImageIcon imageIconL = new ImageIcon(Inicio.class.getResource("/iconos/equipos/rso.png"));
 				Image imagenResizL = imageIconL.getImage();
 				Image iResizeoL = imagenResizL.getScaledInstance(ladoIconoH, ladoIconoV, java.awt.Image.SCALE_SMOOTH); // scale
 																														// it
