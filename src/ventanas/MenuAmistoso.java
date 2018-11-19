@@ -166,16 +166,17 @@ public class MenuAmistoso extends JFrame {
 		ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
 		lblEqL.setIcon(iiResizeoL);
 
-		ImageIcon imageIconV = new ImageIcon(Inicio.class.getResource("/iconos/equipos/rso.png"));
+		ImageIcon imageIconV = new ImageIcon(Inicio.class.getResource("/iconos/equipos/ala.png"));
 		Image imagenResizV = imageIconV.getImage();
 		Image iResizeoV = imagenResizL.getScaledInstance((int) Math.round(100 * getWidth() / 626),
 				(int) Math.round(100 * getWidth() / 626), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
 		ImageIcon iiResizeoV = new ImageIcon(iResizeoV);
 		lblEqV.setIcon(iiResizeoV);
 
+		String equipoL;
 		
-		cbLocal.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent arg0) {
+		cbLocal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				String filenameL = cbLocal.getSelectedObjects().toString();
 				try {
 					try {
@@ -194,13 +195,14 @@ public class MenuAmistoso extends JFrame {
 						// System.out.println(rs.isClosed());
 
 						while (rs2.next()) {
+//							equipoL = rs2.getString("ICONO");
 							String iconoL = rs2.getString("ICONO");
 							System.out.println(iconoL);
 						}
 					} catch (SQLException i) {
 
 					}
-				} catch (Exception e) {
+				} catch (Exception e2) {
 
 				}
 			}
