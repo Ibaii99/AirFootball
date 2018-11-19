@@ -40,10 +40,17 @@ public class ventanaPartido extends JFrame {
 	private boolean isJugadorEquipoLocal;
 	private static double VELOCIDAD_CON_MOVIMIENTO = 10;
 	
+	private Equipo eLocal;
+	private Equipo eVisitante;
+	private Pelota p;
+	
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso, boolean esJugadorVSMaquinaEquipoLocal) {
 		this.isJugadorEquipoLocal = esJugadorVSMaquinaEquipoLocal;
 		this.isMultijugador = esMultijjugador;
 		this.isAmistoso = esAmistoso;
+		this.eLocal = eLocal;
+		this.eVisitante = eVisitante;
+		this.p = p;
 		setSize(750, 500);
 		setResizable(false);
 		setVisible(true);
@@ -169,7 +176,7 @@ public class ventanaPartido extends JFrame {
 	 * @param eVisitante	Equipo Visitante
 	 * @param p				Pelota con la que se juega
 	 */
-	public void actualizarPosicionObjetos(Equipo eLocal, Equipo eVisitante, Pelota p) {
+	public void actualizarPosicionObjetos() {
 		panelCampo.removeAll(); // elimino todo los componenetes del panel de juego
 		
 		// añado todo al panel con las posiciones actualizadas
@@ -190,7 +197,7 @@ public class ventanaPartido extends JFrame {
 	 * @param eVisitante	Equipo Visitante
 	 * @param p			Pelota
 	 */
-	public void pintarLabels(Equipo eLocal, Equipo eVisitante, Pelota p) {
+	public void pintarLabels() {
 		if (eLocal.getBolaEquipo().getImagenObjeto() == null) lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
 		if (eVisitante.getBolaEquipo().getImagenObjeto() == null) lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
 		if (p.getImagenObjeto()== null) lblPelota.setBackground(p.getColor());
@@ -205,6 +212,17 @@ public class ventanaPartido extends JFrame {
 		
 	}
 
+	public void colocarLablsEnPosInicial() {
+		p.setX(getAnchuraCampo()/2);
+		p.setY(getAlturaCampo()/2);
+		
+		eLocal.getBolaEquipo().setX(getAnchuraCampo() - getAnchuraCampo()/4);
+		eVisitante.getBolaEquipo().setX(getAnchuraCampo()/4);
+		
+		eLocal.getBolaEquipo().setY(getAlturaCampo()/2);
+		eVisitante.getBolaEquipo().setY(getAlturaCampo()/2);
+	}
+	
 	public boolean isAmistoso() {
 		return isAmistoso;
 	}

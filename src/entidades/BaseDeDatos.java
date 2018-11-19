@@ -106,7 +106,7 @@ public class BaseDeDatos {
 					+ "','" + e.getGolesAFavorVisitante() + "','" + e.getDerrotasTotales() + "','" + e.getDerrotasLocal()
 					+ "','" + e.getDerrotasVisitante() + "','" + e.getVictoriasTotales() + "','" + e.getVictoriasLocal() + "','"
 					+ e.getVictoriasVisitante() + "','" + e.getEmpatesTotales() + "','" + e.getEmpatesLocal() + "','"
-					+ e.getEmpatesVisitante() + "','" + e.getColor().toString() + "','" + e.getRutaImagen() + "')"; 
+					+ e.getEmpatesVisitante() + "','" + e.getBolaEquipo().getColor().toString() + "','" + e.getBolaEquipo().getRutaImagen() + "')"; 
 //			comando = "INSERT INTO Equipos ( 'Siglas', 'Nombre')";
 //			comando += " VALUES (" + e.getSiglas() + ""," + e.getNombre()+")"; 
 			equipo.executeUpdate(comando);

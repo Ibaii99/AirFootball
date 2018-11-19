@@ -31,6 +31,8 @@ public class Juego {
 		Equipo e2 = new Equipo("Equipo2", "asd", 20, Color.red);
 		Pelota p = new Pelota(Color.blue, "pelota", 15);
 		v = new ventanaPartido(e1, e2, p, true, true, true);
+		v.pintarLabels();
+		v.colocarLablsEnPosInicial();
 		v.setVisible(true);
 	}
 
