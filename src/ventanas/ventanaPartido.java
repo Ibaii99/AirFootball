@@ -9,6 +9,9 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.Font;
 import java.awt.BasicStroke;
 import java.awt.Color;
