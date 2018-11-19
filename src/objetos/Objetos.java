@@ -19,6 +19,7 @@ public abstract class Objetos{
 	protected String nombre;
 	protected Color color;
 	protected ImageIcon imagenObjeto;
+	protected String rutaImagen;
 
 ///////////////////////Posicion///////////////////////////////
 	protected double x;
@@ -48,10 +49,11 @@ public abstract class Objetos{
 	 * @param color Color elegido de los de por defecto
 	 * @param bota True si el objeto rebota
 	 * @param nombre Nombre del objeto
-	 * @param alto Altura del objeto
-	 * @param ancho Anchura del objeto
+	 * @param radio Radio del objeto
+	 * @param masa	Masa del objeto
+	 * @param imagen	Imagen del objeto
 	 */
-	public Objetos(double x, double y, Color color, boolean bota, String nombre, double radio, double masa, ImageIcon imagen) {
+	public Objetos(double x, double y, Color color, boolean bota, String nombre, double radio, double masa, String rutaImagen) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -60,7 +62,8 @@ public abstract class Objetos{
 		this.nombre = nombre;
 		this.radio = radio;
 		this.masa = masa;
-		this.imagenObjeto = imagen;
+		this.imagenObjeto = new ImageIcon(rutaImagen);
+		this.rutaImagen = rutaImagen;
 	}
 	
 	

@@ -20,11 +20,6 @@ public class Equipo{
 	private String siglas; // Char para crear un formato de reconocimiento de siglas con lo dado en clase
 	
 	private int puntos;
-	
-	private Color color;
-	private ImageIcon imagen;
-	private String rutaImagen;
-	
 	private ArrayList<Partidos> arrayPartidosJugados;
 	
 ////////////////////////////Atributos para estadísticas///////////////////////////////////////////////////
@@ -73,7 +68,7 @@ public class Equipo{
 	 * @param empatesLocal
 	 * @param empatesVisitante
 	 */
-	public Equipo(String siglas, String nombre, int puntos, Color color, ImageIcon imagen, String rutaImagen,
+	public Equipo(String siglas, String nombre, int puntos, Color color, String imagen, String rutaImagen,
 		int golesEnContraTotales, int golesEnContraLocal, int golesEnContraVisitante, int golesAFavorTotales,
 		int golesAFavorVisitante, int golesAFavorLocal, int victoriasTotales, int victoriasLocal,
 		int victoriasVisitante, int derrotasTotales, int derrotasLocal, int derrotasVisitante, int empatesTotales,
@@ -81,9 +76,7 @@ public class Equipo{
 			this.siglas = siglas;
 			this.nombre = nombre;
 			this.puntos = puntos;
-			this.color = color;
-			this.imagen = imagen;
-			this.rutaImagen = rutaImagen;
+			this.bolaEquipo = new Pelota(color, nombre, Pelota.POSICION_X_POR_DEFECTO, Pelota.POSICION_Y_POR_DEFECTO, Pelota.RADIO_POR_DEFECTO_EQUIPO, Pelota.MASA_POR_DEFECTO, imagen, true);
 			this.golesEnContraTotales = golesEnContraTotales;
 			this.golesEnContraLocal = golesEnContraLocal;
 			this.golesEnContraVisitante = golesEnContraVisitante;
@@ -114,7 +107,6 @@ public class Equipo{
 	public Equipo(String nombre, String siglas, String imagen, double radio, double masa) {
 		this.siglas = siglas;
 		this.nombre = nombre;
-		this.imagen = new ImageIcon(imagen);
 		bolaEquipo = new Pelota(imagen, nombre, 0, 0, radio, masa);
 	}
 	
@@ -128,7 +120,6 @@ public class Equipo{
 	public Equipo(String nombre, String siglas, Color color, double radio, double masa) {
 		this.siglas = siglas;
 		this.nombre = nombre;
-		this.color = color;
 		bolaEquipo = new Pelota(color, nombre, 0, 0, radio, masa);
 	}
 
@@ -144,7 +135,6 @@ public class Equipo{
 		this.siglas = siglas;
 		bolaEquipo = new Pelota(color,nombre,radio);
 		bolaEquipo.setBota(false);
-		this.color = color;
 	}
 
 	/** Constructor de Equipo sencillo con imagen y masa por defeto
@@ -157,8 +147,6 @@ public class Equipo{
 		this.siglas = siglas;
 		bolaEquipo = new Pelota(image,nombre,radio);
 		bolaEquipo.setBota(false);
-		this.imagen = new ImageIcon(image);
-		this.rutaImagen = image;
 	}
 	
 	/** Metodo para añadir puntos al equipo segun el partido
@@ -311,17 +299,7 @@ public class Equipo{
 		return bolaEquipo;
 	}
 
-	public Color getColor() {
-		return color;
-	}
 
-	public ImageIcon getImagen() {
-		return imagen;
-	}
-
-	public String getRutaImagen() {
-		return rutaImagen;
-	}
 	
 	
 

@@ -184,6 +184,12 @@ public class ventanaPartido extends JFrame {
 	
 	}
 	
+	public void pintarLabels(Equipo eLocal, Equipo eVisitante, Pelota p) {
+		if (eLocal.getBolaEquipo().getImagenObjeto() == null) lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());;
+		if (eVisitante.getBolaEquipo().getImagenObjeto() == null) lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());;
+		if (p.getImagenObjeto()== null) ;
+	}
+	
 	public void moverEquipo() {
 		
 	}

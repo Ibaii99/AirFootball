@@ -16,10 +16,22 @@ import ventanas.ventanaPartido;
  */
 public class Pelota extends Objetos{
 	
-	private static double MASA_POR_DEFECTO = 50;			// Masa por defecto de los constructores simples
-	private static double POSICION_Y_POR_DEFECTO = 0;		// Posicion Y por defecto de los constructores simples
-	private static double POSICION_X_POR_DEFECTO = 0;		// Posicion X por defecto de los constructores simples
+	public static double MASA_POR_DEFECTO = 50;			// Masa por defecto de los constructores simples
+	public static double POSICION_Y_POR_DEFECTO = 0;		// Posicion Y por defecto de los constructores simples
+	public static double POSICION_X_POR_DEFECTO = 0;		// Posicion X por defecto de los constructores simples
+	public static double RADIO_POR_DEFECTO_EQUIPO = 40;
 	
+	/** Metodo constructor de la clase pelota con todos los atributos
+	 * @param color		Color de la pelota
+	 * @param nombre 	Nombre de la pelota
+	 * @param masa		Masa de la pelota
+	 * @param x			Posicion x inicial de la pelota
+	 * @param y			Posicion y inicial de la pelota
+	 * @param radio		Radio de la pelota
+	 */
+	public Pelota(Color color, String nombre, double x, double y, double radio, double masa, String imagen, boolean esEquipo) {
+		super(x, y, color, (!esEquipo), nombre, radio, masa, imagen);
+	}
 	/** Metodo constructor de la clase pelota SIN imagen y con rebote
 	 * @param color		Color de la pelota
 	 * @param nombre 	Nombre de la pelota
@@ -41,7 +53,7 @@ public class Pelota extends Objetos{
 	 * @param radio		Radio de la pelota
 	 */
 	public Pelota(String imagen, String nombre, double x, double y, double radio, double masa) {
-		super(x, y, null, true, nombre, radio, masa, (new ImageIcon(imagen)));
+		super(x, y, null, true, nombre, radio, masa, imagen);
 	}
 
 	/** Constructor sencillo de pelota, posiciones y masa por defecto y SIN imagen
@@ -59,7 +71,7 @@ public class Pelota extends Objetos{
 	 * @param radio
 	 */
 	public Pelota(String imagen, String nombre, double radio) {
-		super(POSICION_X_POR_DEFECTO, POSICION_Y_POR_DEFECTO, null, true, nombre, radio, MASA_POR_DEFECTO, (new ImageIcon(imagen)));
+		super(POSICION_X_POR_DEFECTO, POSICION_Y_POR_DEFECTO, null, true, nombre, radio, MASA_POR_DEFECTO, imagen);
 	}
 
 	
