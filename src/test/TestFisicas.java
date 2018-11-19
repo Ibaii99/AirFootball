@@ -17,6 +17,7 @@ class TestFisicas {
 	private Equipo e1 = new Equipo("Futbol club Barcelona", "FCB", Color.red, 50, 70);
 	private Equipo e2 = new Equipo("Real Madrid", "RM", Color.white, 50, 70);
 	private ventanaPartido v = new ventanaPartido(e1, e2, p);
+	private Fisicas
 	
 	
 	/** Comprobación de que los objetos se crean bien y no 
@@ -39,6 +40,7 @@ class TestFisicas {
 	
 	@Test
 	void testMovimiento() {
+		p.addVelocidad(1, 0);
 		
 	}
 	
