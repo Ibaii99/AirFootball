@@ -99,7 +99,7 @@ public class BaseDeDatos {
 		//	comando = "alter table equipos modify puntos default null;";
 		//	comando = "INSERT INTO EQUIPOS ( Siglas, Nombre, Puntos, Goles Encajados Totales, Goles Encajados Local, Goles Encajados Visitante, Goles A Favor Totales, Goles A Favor Local, Goles A Favor Visitante, Derrotas Totales, Derrotas Local, Derrotas Visitante, Victorias Totales, Victorias Local, Victorias Visitante, Empates Totales, Empates Local, Empates Visitante, Color, Icono)";
 			
-			comando = "INSERT INTO \"Equipos\" ( `Siglas`, `Nombre`, `Puntos`, `Goles Encajados Totales`, `Goles Encajados Local`, `Goles Encajados Visitante`, `Goles A Favor Totales`, `Goles A Favor Local`, `Goles A Favor Visitante`, `Derrotas Totales`, `Derrotas Local`, `Derrotas Visitante`, `Victorias Totales`, `Victorias Local`, `Victorias Visitante`, `Empates Totales`, `Empates Local`, `Empates Visitante`, `Color`, `Icono`)";
+			comando = "INSERT INTO \"Equipos\" ( 'Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
 			comando += " VALUES (" + e.getSiglas() + "," + e.getNombre() + "," + e.getPuntos() + ","
 					+ e.getGolesEnContraTotales() + "," + e.getGolesEnContraLocal() + ","
 					+ e.getGolesEnContraVisitante() + "," + e.getGolesAFavorTotales() + "," + e.getGolesAFavorLocal()
@@ -114,23 +114,23 @@ public class BaseDeDatos {
 		} catch (Exception o) {
 			o.printStackTrace();
 		}
-		try {
-			Class.forName( "org.sqlite.JDBC" );
-			con = DriverManager.getConnection( "jdbc:sqlite:airHockey.db" );
-	
-			comando = "INSERT INTO EQUIPOS ( Siglas, Nombre, Puntos, Goles Encajados Totales, Goles Encajados Local, Goles Encajados Visitante, Goles A Favor Totales, Goles A Favor Local, Goles A Favor Visitante, Derrotas Totales, Derrotas Local, Derrotas Visitante, Victorias Totales, Victorias Local, Victorias Visitante, Empates Totales, Empates Local, Empates Visitante, Color, Icono)";
-								comando += "VALUES ("+e.getSiglas()+","+e.getNombre()+","+e.getPuntos()+","+e.getGolesEnContraTotales()+","+e.getGolesEnContraLocal()+","+e.getGolesEnContraVisitante()+","+e.getGolesAFavorTotales()+","+e.getGolesAFavorLocal()+","+e.getGolesAFavorVisitante()+","+e.getDerrotasTotales()+","+e.getDerrotasLocal()+","+e.getDerrotasVisitante()+","+e.getVictoriasTotales()+","+e.getVictoriasLocal()+","+e.getVictoriasVisitante()+","+e.getEmpatesTotales()+","+e.getEmpatesLocal()+","+e.getEmpatesVisitante()+","+e.getColor().toString()+","+e.getRutaImagen()+","+e.getSiglas()+") ;";
-//			equipo.execute(comando);
-			
-			equipo.executeUpdate(comando);
-			
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		try {
+//			Class.forName( "org.sqlite.JDBC" );
+//			con = DriverManager.getConnection( "jdbc:sqlite:airHockey.db" );
+//	
+//			comando = "INSERT INTO EQUIPOS ( Siglas, Nombre, Puntos, Goles Encajados Totales, Goles Encajados Local, Goles Encajados Visitante, Goles A Favor Totales, Goles A Favor Local, Goles A Favor Visitante, Derrotas Totales, Derrotas Local, Derrotas Visitante, Victorias Totales, Victorias Local, Victorias Visitante, Empates Totales, Empates Local, Empates Visitante, Color, Icono)";
+//								comando += "VALUES ("+e.getSiglas()+","+e.getNombre()+","+e.getPuntos()+","+e.getGolesEnContraTotales()+","+e.getGolesEnContraLocal()+","+e.getGolesEnContraVisitante()+","+e.getGolesAFavorTotales()+","+e.getGolesAFavorLocal()+","+e.getGolesAFavorVisitante()+","+e.getDerrotasTotales()+","+e.getDerrotasLocal()+","+e.getDerrotasVisitante()+","+e.getVictoriasTotales()+","+e.getVictoriasLocal()+","+e.getVictoriasVisitante()+","+e.getEmpatesTotales()+","+e.getEmpatesLocal()+","+e.getEmpatesVisitante()+","+e.getColor().toString()+","+e.getRutaImagen()+","+e.getSiglas()+") ;";
+////			equipo.execute(comando);
+//			
+//			equipo.executeUpdate(comando);
+//			
+//		} catch (ClassNotFoundException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		
 	}
 }

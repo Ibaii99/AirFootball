@@ -28,11 +28,11 @@ public class Juego {
 
 	private static void anyadirTodosLosEquipos(BaseDeDatos bd) {
 		try {
-			bd.anyadirEquipo(new Equipo("ALA", "Deportivo Alavï¿½s", 0, Color.BLUE, new ImageIcon("iconos/equipos/ala.png"),
+			bd.anyadirEquipo(new Equipo("ALA", "Deportivo Alavés", 0, Color.BLUE, new ImageIcon("iconos/equipos/ala.png"),
 					"iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			bd.anyadirEquipo(new Equipo("ATH", "Athletic Club", 0, Color.RED, new ImageIcon("iconos/equipos/ath.png"),
 					"iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-			bd.anyadirEquipo(new Equipo("ATM", "Atlï¿½tico de Madrid", 0, Color.RED, new ImageIcon("iconos/equipos/atl.png"),
+			bd.anyadirEquipo(new Equipo("ATM", "Atlético de Madrid", 0, Color.RED, new ImageIcon("iconos/equipos/atl.png"),
 					"iconos/equipos/atl.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			bd.anyadirEquipo(new Equipo("BAR", "FC Barcelona", 0, Color.BLUE, new ImageIcon("iconos/equipos/bar.png"),
 					"iconos/equipos/bar.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
@@ -41,7 +41,7 @@ public class Juego {
 			bd.anyadirEquipo(new Equipo("CEL", "Celta de Vigo", 0, Color.BLUE, new ImageIcon("iconos/equipos/cel.png"),
 					"iconos/equipos/cel.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			bd.anyadirEquipo(
-					new Equipo("DEP", "Deportivo de La Coruï¿½a", 0, Color.BLUE, new ImageIcon("iconos/equipos/dep.png"),
+					new Equipo("DEP", "Deportivo de La Coruña", 0, Color.BLUE, new ImageIcon("iconos/equipos/dep.png"),
 							"iconos/equipos/dep.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			bd.anyadirEquipo(new Equipo("EIB", "SD Eibar", 0, Color.BLUE, new ImageIcon("iconos/equipos/eib.png"),
 					"iconos/equipos/eib.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
@@ -53,7 +53,7 @@ public class Juego {
 					"iconos/equipos/gir.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			bd.anyadirEquipo(new Equipo("HUE", "SD Huesca", 0, Color.BLUE, new ImageIcon("iconos/equipos/hue.png"),
 					"iconos/equipos/hue.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-			bd.anyadirEquipo(new Equipo("LEG", "Leganï¿½s", 0, Color.BLUE, new ImageIcon("iconos/equipos/leg.png"),
+			bd.anyadirEquipo(new Equipo("LEG", "Leganés", 0, Color.BLUE, new ImageIcon("iconos/equipos/leg.png"),
 					"iconos/equipos/leg.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			bd.anyadirEquipo(new Equipo("RAY", "Rayo Vallecano", 0, Color.BLUE, new ImageIcon("iconos/equipos/ray.png"),
 					"iconos/equipos/ray.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
