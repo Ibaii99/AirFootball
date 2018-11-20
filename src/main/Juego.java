@@ -53,19 +53,19 @@ public class Juego {
 				while(e2.getBolaEquipo().getX() < v.getAnchuraCampo()) {
 				try {
 					
-					Thread.sleep(1000);
+					Thread.sleep(500);
 					f.cambiarVelocidad(e2.getBolaEquipo(), 20, 0);
+					p.setVelX(20);
+					f.muevePelota(p, 1.6, v);
 					
-					f.muevePelota(p, 16, v);
-					
-					System.out.println(p.getY()+ "......" + p.getX());
+					System.out.println("y: "+p.getY()+ "...... x: " + p.getX());
 					
 					v.actualizarPosicionObjetos(p, e1, e2);
 					
 				//	System.out.println(p.getX() + "de" + v.getAnchuraCampo());
 				} catch (InterruptedException e) { e.printStackTrace();
 				}
-				}System.out.println("ya");
+				}System.out.println("ya ha llegado al borde de la derecha");
 				
 			}
 		});
