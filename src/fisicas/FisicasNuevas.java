@@ -28,8 +28,8 @@ public class FisicasNuevas {
 		double posicionFuturaX = p.getX()+(p.getVelX()*tiempo);
 		double posicionFuturaY = p.getY()+(p.getVelY()*tiempo);
 		
-		if(posicionFuturaX > (v.getAnchuraCampo()-1-p.getRadio())) posicionFuturaX = (v.getAnchuraCampo()-p.getRadio()-1);
-		if(posicionFuturaY > (v.getAlturaCampo()-1-p.getRadio()))  posicionFuturaY = (v.getAlturaCampo()-p.getRadio()-1);
+		if(posicionFuturaX > (v.getPanelCampo().getSize().getWidth()-1-p.getRadio())) posicionFuturaX = (v.getPanelCampo().getSize().getWidth()-p.getRadio()-1);
+		if(posicionFuturaY > (v.getPanelCampo().getSize().getHeight()-1-p.getRadio()))  posicionFuturaY = (v.getPanelCampo().getSize().getHeight() -p.getRadio()-1);
 		
 		if(posicionFuturaY <  p.getRadio() ) posicionFuturaY = (p.getRadio()+1);
 		if(posicionFuturaX <  p.getRadio() ) posicionFuturaX = (p.getRadio()+1);
@@ -83,8 +83,8 @@ public class FisicasNuevas {
 	 */
 	public boolean rebotaeEnBorde(ventanaPartido v, Pelota p) {
 		boolean hayRebote = false;
-		if(v.getAnchuraCampo()<= (p.getX() + p.getRadio()))hayRebote = true;	//Choca en la derecha
-		if(v.getAlturaCampo() <= (p.getY() + p.getRadio()))hayRebote = true;	//Choca arriba
+		if(v.getPanelCampo().getSize().getWidth()  <= (p.getX() + p.getRadio()))hayRebote = true;	//Choca en la derecha
+		if(v.getPanelCampo().getSize().getHeight() <= (p.getY() + p.getRadio()))hayRebote = true;	//Choca arriba
 		if((p.getX() - p.getRadio()) <= 0)hayRebote = true;						//Choca a la izquierda
 		if((p.getY() - p.getRadio()) <= 0)hayRebote = true;						//Choca abajo
 		return hayRebote;

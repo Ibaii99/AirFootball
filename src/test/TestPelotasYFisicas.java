@@ -100,33 +100,33 @@ class TestPelotasYFisicas{
 		//y le sumo 8 para que comprobar que aun queriendo avanzar 8 veces en esa direccion el programa 
 		//no le va a dejar tener esa posicion
 		
-		for(long e = 0; e < (v.getAnchuraCampo()/2 + 8); e++) {
+		for(long e = 0; e < (v.getPanelCampo().getSize().getWidth()/2 + 8); e++) {
 			//Pongo una pausa para que mostrar las cosas en pantalla sea más claro si se quiere
 				
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e3) {
-				e3.printStackTrace();
-			}
-		
+//			try {
+//				Thread.sleep(50);
+//			} catch (InterruptedException e3) {
+//				e3.printStackTrace();
+//			}
+//		
 			fisicas.cambiarVelocidad(p, 1, 1);
 			
 
 			
 			fisicas.muevePelota(p, 1, v);
 			
-			System.out.println("Movimiento nº "+e+"	x: "+p.getX()+ "...... y: " + p.getY());
-			System.out.println("Tamaño del panel: x: "+ v.getAnchuraCampo() + " y: "+v.getAlturaCampo());
+//			System.out.println("Movimiento nº "+e+"	x: "+p.getX()+ "...... y: " + p.getY());
+//			System.out.println("Tamaño del panel: x: "+ v.getPanelCampo().getSize().getWidth() + " y: "+v.getPanelCampo().getSize().getHeight());
 			v.actualizarPosicionObjetos(p, e1, e2);
 			
 		//	System.out.println(p.getX() + "de" + v.getAnchuraCampo());
 			
 		}
 		
-		System.out.println("ya ha llegado al borde de la derecha");
-		assertEquals(p.getX(), v.getAnchuraCampo()-p.getRadio()- 1);	
-		System.out.println("");
-		assertEquals(p.getY(), v.getAlturaCampo()-p.getRadio() - 1);
+		//System.out.println("ya ha llegado al borde de la derecha");
+		assertEquals(p.getX(), v.getPanelCampo().getSize().getWidth()-p.getRadio()- 1);	
+		
+		assertEquals(p.getY(), v.getPanelCampo().getSize().getHeight()-p.getRadio() - 1);
 		v.dispose();
 		
 	

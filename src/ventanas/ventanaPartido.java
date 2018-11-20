@@ -279,16 +279,16 @@ public class ventanaPartido extends JFrame {
 	}
 
 	public void colocarEnPosInicial(Pelota p, Equipo eLocal, Equipo eVisitante) {
-		p.setX((int)getAnchuraCampo()/2);
-		p.setY((int)getAlturaCampo()/2);
+		p.setX((int)getPanelCampo().getSize().getWidth()/2);
+		p.setY((int)getPanelCampo().getSize().getHeight()/2);
 		
 		//TODO editar esto, no son los objetos son los labels
 		
-		eLocal.getBolaEquipo().setX(getAnchuraCampo() - getAnchuraCampo()/4);
-		eVisitante.getBolaEquipo().setX(getAnchuraCampo()/4);
+		eLocal.getBolaEquipo().setX(getPanelCampo().getSize().getWidth() - getPanelCampo().getSize().getWidth()/4);
+		eVisitante.getBolaEquipo().setX(getPanelCampo().getSize().getWidth()/4);
 		
-		eLocal.getBolaEquipo().setY(getAlturaCampo()/2);
-		eVisitante.getBolaEquipo().setY(getAlturaCampo()/2);
+		eLocal.getBolaEquipo().setY(getPanelCampo().getSize().getHeight()/2);
+		eVisitante.getBolaEquipo().setY(getPanelCampo().getSize().getHeight()/2);
 		
 	}
 	
@@ -477,17 +477,5 @@ public class ventanaPartido extends JFrame {
 //	
 
 
-	/** Devuelve la altura del panel de dibujo de la ventana
-	 * @return	Altura del panel principal (�ltima coordenada y) en p�xels
-	 */
-	public int getAlturaCampo() { 
-		return panelCampo.getHeight();
-	}
-	
-	/** Devuelve la anchura del panel de dibujo de la ventana
-	 * @return	Anchura del panel principal (�ltima coordenada x) en p�xels
-	 */
-	public int getAnchuraCampo() {
-		return panelCampo.getWidth();
-	}
+
 }
