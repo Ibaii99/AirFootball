@@ -43,9 +43,8 @@ public class ventanaPartido extends JFrame {
 	private Equipo eLocal;
 	private Equipo eVisitante;
 	private Pelota p;
-	
+	// modificar constructor ventana, pone pelota en posicion no correcta
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso, boolean esJugadorVSMaquinaEquipoLocal) {
-		
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.isJugadorEquipoLocal = esJugadorVSMaquinaEquipoLocal;
@@ -129,14 +128,13 @@ public class ventanaPartido extends JFrame {
 					.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		
-		pintarLabels();
-		colocarLablsEnPosInicial();
+		getContentPane().setLayout(groupLayout);
+
+
 
 //		Metodo original con doubles		
 //		lblEquipoLocal.setBounds(eLocal.getBolaEquipo().getX(), eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2, eLocal.getBolaEquipo().getRadio()*2);
-		getContentPane().setLayout(groupLayout);
-
+		
 		
 		addKeyListener(new KeyAdapter() {
 			@Override
@@ -183,8 +181,7 @@ public class ventanaPartido extends JFrame {
 	 * @param eVisitante	Equipo Visitante
 	 * @param p				Pelota con la que se juega
 	 */
-	public void actualizarPosicionObjetos() {
-		panelCampo.removeAll(); // elimino todo los componenetes del panel de juego
+	public void actualizarPosicionObjetos(Pelota p, Equipo eLocal, Equipo eVisitante) {
 		
 		// añado todo al panel con las posiciones actualizadas
 		lblEquipoLocal.setBounds((int)eLocal.getBolaEquipo().getX(), (int)eLocal.getBolaEquipo().getY(), (int)eLocal.getBolaEquipo().getRadio()*2, (int)eLocal.getBolaEquipo().getRadio()*2);
@@ -216,7 +213,7 @@ public class ventanaPartido extends JFrame {
 	 * @param eVisitante	Equipo Visitante
 	 * @param p			Pelota
 	 */
-	public void pintarLabels() {
+	public void pintarLabels(Pelota p, Equipo eLocal, Equipo eVisitante) {
 		lblEquipoLocal.setOpaque(true);
 		lblEquipoVisitante.setOpaque(true);
 		lblPelota.setOpaque(true);
@@ -278,15 +275,18 @@ public class ventanaPartido extends JFrame {
 		
 	}
 
-	public void colocarLablsEnPosInicial() {
-		p.setX(getAnchuraCampo()/2);
-		p.setY(getAlturaCampo()/2);
+	public void colocarEnPosInicial(Pelota p, Equipo eLocal, Equipo eVisitante) {
+		p.setX((int)getAnchuraCampo()/2);
+		p.setY((int)getAlturaCampo()/2);
+		
+		//TODO editar esto, no son los objetos son los labels
 		
 		eLocal.getBolaEquipo().setX(getAnchuraCampo() - getAnchuraCampo()/4);
 		eVisitante.getBolaEquipo().setX(getAnchuraCampo()/4);
 		
 		eLocal.getBolaEquipo().setY(getAlturaCampo()/2);
 		eVisitante.getBolaEquipo().setY(getAlturaCampo()/2);
+		
 	}
 	
 	public boolean isAmistoso() {
@@ -312,7 +312,8 @@ public class ventanaPartido extends JFrame {
 	public void setArcade(boolean arcade) {
 		this.arcade = arcade;
 	}
-
+	
+	
 
 
 
@@ -476,14 +477,14 @@ public class ventanaPartido extends JFrame {
 	/** Devuelve la altura del panel de dibujo de la ventana
 	 * @return	Altura del panel principal (�ltima coordenada y) en p�xels
 	 */
-	public int getAlturaCampo() {
-		return panelCampo.getHeight()-1;
+	public int getAlturaCampo() { 
+		return panelCampo.getHeight();
 	}
 	
 	/** Devuelve la anchura del panel de dibujo de la ventana
 	 * @return	Anchura del panel principal (�ltima coordenada x) en p�xels
 	 */
 	public int getAnchuraCampo() {
-		return panelCampo.getWidth()-1;
+		return panelCampo.getWidth();
 	}
 }

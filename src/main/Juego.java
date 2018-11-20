@@ -34,22 +34,34 @@ public class Juego {
 			public void run() {
 				Equipo e1 = new Equipo("Equipo1", "afc", 60, "iconos/equipos/cel.png");
 				Equipo e2 = new Equipo("Equipo2", "asd", 60, "iconos/equipos/bar.png");
-				Pelota p = new Pelota(Color.blue, "pelota", 19);
+				Pelota p = new Pelota(Color.blue, "pelota", 20);
 				FisicasNuevas f = new FisicasNuevas();
+				
 				v = new ventanaPartido(e1, e2, p, true, true, true);
-				v.colocarLablsEnPosInicial();
-				v.actualizarPosicionObjetos();
+				
+				//TODO en actualizar posicion objetos se pone la x y la y de la pelota a 0
+				// si no se pone un sleep no coge bien la anchura y la altura del panel
 				v.setVisible(true);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e3) {
+					e3.printStackTrace();
+				}
+				v.colocarEnPosInicial(p, e1, e2);
+				v.actualizarPosicionObjetos(p, e1, e2);
+				
 				while(e2.getBolaEquipo().getX() < v.getAnchuraCampo()) {
 				try {
-					Thread.sleep(80);
-					System.out.println(p.getX()+ "" + p.getY());
+					
+					Thread.sleep(1000);
 					f.cambiarVelocidad(e2.getBolaEquipo(), 20, 0);
-					System.out.println(p.getX()+ "" + p.getY());
+					
 					f.muevePelota(p, 16, v);
-					System.out.println(p.getX()+ "" + p.getY());
-					v.actualizarPosicionObjetos();
-					System.out.println(p.getX()+ "" + p.getY());
+					
+					System.out.println(p.getY()+ "......" + p.getX());
+					
+					v.actualizarPosicionObjetos(p, e1, e2);
+					
 				//	System.out.println(p.getX() + "de" + v.getAnchuraCampo());
 				} catch (InterruptedException e) { e.printStackTrace();
 				}

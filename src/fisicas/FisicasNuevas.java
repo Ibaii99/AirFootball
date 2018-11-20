@@ -27,13 +27,14 @@ public class FisicasNuevas {
 		
 		double posicionFuturaX = p.getX()+(p.getVelX()*tiempo);
 		double posicionFuturaY = p.getY()+(p.getVelY()*tiempo);
-		System.out.println("v"+p.getVelX()+p.getVelY());
+		
 		if(posicionFuturaX > (v.getAnchuraCampo()-1-p.getRadio())) posicionFuturaX = (v.getAnchuraCampo()-p.getRadio()-1);
 		if(posicionFuturaY > (v.getAlturaCampo()-1-p.getRadio()))  posicionFuturaY = (v.getAlturaCampo()-p.getRadio()-1);
 		
 		if(posicionFuturaY <  p.getRadio() ) posicionFuturaY = (p.getRadio()+1);
 		if(posicionFuturaX <  p.getRadio() ) posicionFuturaX = (p.getRadio()+1);
 		
+		System.out.println(v.getAlturaCampo() + "    " + v.getAnchuraCampo());
 		p.setY(posicionFuturaY);
 		p.setX(posicionFuturaX);
 		
@@ -142,7 +143,7 @@ public class FisicasNuevas {
 	 * @param p
 	 */
 	public void choqueConPalos(ventanaPartido v, Poste paloArribDer, Poste paloAbajoDer, Poste paloArribIzq, Poste paloAbajoIzq, Pelota p) {
-		
+		//TODO el rebote es igual que contra un lateral del campo
 		if(daAlPoste(v, p, paloArribDer)) {
 			
 		}
