@@ -60,5 +60,44 @@ class TestPelotasYFisicas{
 		assertEquals(25, p.getY());
 	}
 	
+	@Test
+	void testAvanceSinPasarseDelTope(){
+		
+				//TODO en actualizar posicion objetos se pone la x y la y de la pelota a 0
+				// si no se pone un sleep no coge bien la anchura y la altura del panel
+				v.setAlwaysOnTop(false);
+				v.setVisible(false);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e3) {
+					e3.printStackTrace();
+				}
+				v.colocarEnPosInicial(p, e1, e2);
+				v.actualizarPosicionObjetos(p, e1, e2);
+				
+				while(e2.getBolaEquipo().getX() < v.getAnchuraCampo()) {
+				try {
+					
+					Thread.sleep(500);
+					fisicas.cambiarVelocidad(p, 20, 0);
+					
+					fisicas.muevePelota(p, 1.6, v);
+					
+					System.out.println("y: "+p.getY()+ "...... x: " + p.getX());
+					
+					v.actualizarPosicionObjetos(p, e1, e2);
+					
+				//	System.out.println(p.getX() + "de" + v.getAnchuraCampo());
+				} catch (InterruptedException e) { e.printStackTrace();
+				}
+				}System.out.println("ya ha llegado al borde de la derecha");
+			v.dispose();
+			
+			assertEquals(p.getX(), p.getxAntes());	
+			assertEquals(p.getY(), p.getyAntes());
+			v=null;
+	}
+	
+	
 
 }
