@@ -34,7 +34,7 @@ public class FisicasNuevas {
 		if(posicionFuturaY <  p.getRadio() ) posicionFuturaY = (p.getRadio()+1);
 		if(posicionFuturaX <  p.getRadio() ) posicionFuturaX = (p.getRadio()+1);
 		
-		System.out.println(v.getAlturaCampo() + "    " + v.getAnchuraCampo());
+		
 		p.setY(posicionFuturaY);
 		p.setX(posicionFuturaX);
 		

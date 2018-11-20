@@ -13,6 +13,10 @@ import fisicas.FisicasNuevas;
 import objetos.Pelota;
 import ventanas.ventanaPartido;
 
+/**
+ * @author ibai
+ *
+ */
 class TestPelotasYFisicas{
 	
 	private Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 25);
@@ -62,41 +66,73 @@ class TestPelotasYFisicas{
 	
 	@Test
 	void testAvanceSinPasarseDelTope(){
+
+		//TODO en actualizar posicion objetos se pone la x y la y de la pelota a 0
+		// si no se pone un sleep no coge bien la anchura y la altura del panel
+		v = new ventanaPartido(e1, e2, p, true, false,false);
+
+		v.setAlwaysOnTop(false);
+		v.setVisible(false);
 		
-				//TODO en actualizar posicion objetos se pone la x y la y de la pelota a 0
-				// si no se pone un sleep no coge bien la anchura y la altura del panel
-				v.setAlwaysOnTop(false);
-				v.setVisible(false);
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e3) {
-					e3.printStackTrace();
-				}
-				v.colocarEnPosInicial(p, e1, e2);
-				v.actualizarPosicionObjetos(p, e1, e2);
+		//hay que dar tiempo a que se genere la ventana para que los tamaños esten cargados
+		//sino va a dar error
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e3) {
+			e3.printStackTrace();
+		}
+		
+		//se colocan los elementos en su posicion ideal
+		v.colocarEnPosInicial(p, e1, e2);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e3) {
+			e3.printStackTrace();
+		}
+		v.actualizarPosicionObjetos(p, e1, e2);
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e3) {
+			e3.printStackTrace();
+		}
+		//como la pelota parte del medio calculo el trayecto que va a hacer, la mitad del campo
+		//y le sumo 8 para que comprobar que aun queriendo avanzar 8 veces en esa direccion el programa 
+		//no le va a dejar tener esa posicion
+		
+		for(long e = 0; e < (v.getAnchuraCampo()/2 + 8); e++) {
+			//Pongo una pausa para que mostrar las cosas en pantalla sea más claro si se quiere
 				
-				while(e2.getBolaEquipo().getX() < v.getAnchuraCampo()) {
-				try {
-					
-					Thread.sleep(500);
-					fisicas.cambiarVelocidad(p, 20, 0);
-					
-					fisicas.muevePelota(p, 1.6, v);
-					
-					System.out.println("y: "+p.getY()+ "...... x: " + p.getX());
-					
-					v.actualizarPosicionObjetos(p, e1, e2);
-					
-				//	System.out.println(p.getX() + "de" + v.getAnchuraCampo());
-				} catch (InterruptedException e) { e.printStackTrace();
-				}
-				}System.out.println("ya ha llegado al borde de la derecha");
-			v.dispose();
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e3) {
+				e3.printStackTrace();
+			}
+		
+			fisicas.cambiarVelocidad(p, 1, 1);
 			
-			assertEquals(p.getX(), p.getxAntes());	
-			assertEquals(p.getY(), p.getyAntes());
-			v=null;
+
+			
+			fisicas.muevePelota(p, 1, v);
+			
+			System.out.println("Movimiento nº "+e+"	x: "+p.getX()+ "...... y: " + p.getY());
+			System.out.println("Tamaño del panel: x: "+ v.getAnchuraCampo() + " y: "+v.getAlturaCampo());
+			v.actualizarPosicionObjetos(p, e1, e2);
+			
+		//	System.out.println(p.getX() + "de" + v.getAnchuraCampo());
+			
+		}
+		
+		System.out.println("ya ha llegado al borde de la derecha");
+		assertEquals(p.getX(), v.getAnchuraCampo()-p.getRadio()- 1);	
+		System.out.println("");
+		assertEquals(p.getY(), v.getAlturaCampo()-p.getRadio() - 1);
+		v.dispose();
+		
+	
+		
 	}
+	
 	
 	
 

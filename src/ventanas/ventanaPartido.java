@@ -15,6 +15,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -53,6 +55,7 @@ public class ventanaPartido extends JFrame {
 		this.eLocal = eLocal;
 		this.eVisitante = eVisitante;
 		this.p = p;
+;
 		setSize(750, 500);
 		setResizable(true);
 		setVisible(true);
