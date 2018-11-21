@@ -32,13 +32,13 @@ public class Juego {
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos();
 		//anyadirTodosLosEquipos(bd);
-		
+		// pruebas de la ventana de juego
 		v = new ventanaPartido(e1, e2, p, true, true, false, f);
 		v.setVisible(true);
 		v.configuracionAntesDePartido(p, e1, e2);
 		
 		
-		// pruebas de la ventana de juego
+		
 
 		
 		
