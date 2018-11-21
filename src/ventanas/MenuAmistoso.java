@@ -346,7 +346,7 @@ public class MenuAmistoso extends JFrame {
 				}
 				Equipo equipoLocal = new Equipo(nomEqL, siglasL, rutaImagenL, 1, 1);
 				Equipo equipoVisitante = new Equipo(nomEqV, siglasV, rutaImagenV, 1, 1);
-				ventanaPartido partido = new ventanaPartido(equipoLocal, equipoVisitante, new Pelota(getBackground(), "pelota", 1), false, true, true, null); // aqu� meter quiz� un
+				ventanaPartido partido = new ventanaPartido(equipoLocal, equipoVisitante, new Pelota(getBackground(), "pelota", 1), false, true, true, new FisicasNuevas()); // aqu� meter quiz� un
 				partido.setVisible(true);
 				// PRUEBA DE LISTENER DE VENTANAPARTIDO 
 			}
