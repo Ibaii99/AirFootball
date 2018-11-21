@@ -88,6 +88,34 @@ public class ventanaPartido extends JFrame {
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
 
+		System.out.println(eLocal.getNombre());
+		ImageIcon iconL = new ImageIcon(getClass().getResource("/"+eLocal.getImagen()));
+		Image imgL = iconL.getImage();
+		BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
+		Graphics gL = biL.createGraphics();
+		gL.drawImage(imgL, 0, 0, 40, 40, null);
+		ImageIcon newIconL = new ImageIcon(biL);
+
+		ImageIcon iconC = new ImageIcon(ventanaPartido.class.getResource("/iconos/campo.png"));
+		Image imgC = iconC.getImage();
+		BufferedImage biC = new BufferedImage(720, 395, BufferedImage.TYPE_INT_ARGB);
+		Graphics gC = biC.createGraphics();
+		gC.drawImage(imgC, 0, 0, 720, 395, null);
+		ImageIcon newIconC = new ImageIcon(biC);
+
+		ImageIcon iconV = new ImageIcon(getClass().getResource("/"+eVisitante.getImagen()));
+		Image imgV = iconV.getImage();
+		BufferedImage biV = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
+		Graphics gV = biV.createGraphics();
+		gV.drawImage(imgV, 0, 0, 40, 40, null);
+		ImageIcon newIconV = new ImageIcon(biV);
+
+		ImageIcon icon = new ImageIcon(ventanaPartido.class.getResource("/iconos/marcadorconnombres.jpg"));
+		Image img = icon.getImage();
+		BufferedImage bi = new BufferedImage(373, 50, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = bi.createGraphics();
+		g.drawImage(img, 0, 0, 373, 50, null);
+		ImageIcon newIcon = new ImageIcon(bi);
 		try {
 			f = Font.createFont(Font.TRUETYPE_FONT, ventanaPartido.class.getResourceAsStream(nombreFont));
 			f = f.deriveFont(Font.PLAIN, 28);
@@ -102,34 +130,7 @@ public class ventanaPartido extends JFrame {
 		lblEquipoVisitante.setText("EQUIPOVISITANTE");
 		lblPelota.setText("PELOTA");
 
-		System.out.println(eLocal.getNombre());
-		ImageIcon iconL = new ImageIcon(ventanaPartido.class.getResource("/iconos/equipos/atl.png"));
-		Image imgL = iconL.getImage();
-		BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
-		Graphics gL = biL.createGraphics();
-		gL.drawImage(imgL, 0, 0, 40, 40, null);
-		ImageIcon newIconL = new ImageIcon(biL);
-
-		ImageIcon iconC = new ImageIcon(ventanaPartido.class.getResource("/iconos/campo.png"));
-		Image imgC = iconC.getImage();
-		BufferedImage biC = new BufferedImage(720, 395, BufferedImage.TYPE_INT_ARGB);
-		Graphics gC = biC.createGraphics();
-		gC.drawImage(imgC, 0, 0, 720, 395, null);
-		ImageIcon newIconC = new ImageIcon(biC);
-
-		ImageIcon iconV = new ImageIcon(ventanaPartido.class.getResource("/iconos/equipos/ath.png"));
-		Image imgV = iconV.getImage();
-		BufferedImage biV = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
-		Graphics gV = biV.createGraphics();
-		gV.drawImage(imgV, 0, 0, 40, 40, null);
-		ImageIcon newIconV = new ImageIcon(biV);
-
-		ImageIcon icon = new ImageIcon(ventanaPartido.class.getResource("/iconos/marcadorconnombres.jpg"));
-		Image img = icon.getImage();
-		BufferedImage bi = new BufferedImage(373, 50, BufferedImage.TYPE_INT_ARGB);
-		Graphics g = bi.createGraphics();
-		g.drawImage(img, 0, 0, 373, 50, null);
-		ImageIcon newIcon = new ImageIcon(bi);
+		
 
 		panelCampo = new JPanel();
 		panelCampo.setBackground(Color.GREEN);
@@ -142,24 +143,25 @@ public class ventanaPartido extends JFrame {
 		panel.setLayout(null);
 
 		JLabel label = new JLabel("0");
+		label.setBounds(346, 5, 75, 36);
 		label.setForeground(Color.RED);
 		label.setFont(f);
-		// label.setFont(new Font("Dialog", Font.PLAIN, 28));
-		label.setBounds(346, 5, 75, 36);
 		panel.add(label);
 
-		JLabel label_1 = new JLabel("");
-		label_1.setBounds(12, 5, 40, 40);
-		panel.add(label_1);
+		JLabel lblEqL = new JLabel("");
+		lblEqL.setBounds(12, 5, 40, 40);
+		lblEqL.setIcon(newIconL);
+		panel.add(lblEqL);
 
-		JLabel label_2 = new JLabel("");
-		label_2.setBounds(686, 5, 40, 40);
-		panel.add(label_2);
+		JLabel lblEqV = new JLabel("");
+		lblEqV.setBounds(686, 5, 40, 40);
+		lblEqV.setIcon(newIconV);
+		panel.add(lblEqV);
 
 		JLabel label_3 = new JLabel("0");
+		label_3.setBounds(217, 5, 75, 36);
 		label_3.setForeground(Color.RED);
 		label_3.setFont(f);
-		label_3.setBounds(217, 5, 75, 36);
 		panel.add(label_3);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
