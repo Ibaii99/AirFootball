@@ -84,11 +84,7 @@ class TestPelotasYFisicas{
 		
 		//se colocan los elementos en su posicion ideal
 		v.colocarEnPosInicial(p, e1, e2);
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e3) {
-			e3.printStackTrace();
-		}
+
 		v.actualizarPosicionObjetos(p, e1, e2);
 		
 		try {
