@@ -22,14 +22,36 @@ public class Juego {
 
 	public Poste posteArribaDerecha = new Poste(v, false, true);
 	public Poste posteAbajoDerecha = new Poste(v, false, false);
+<<<<<<< HEAD
 
+=======
+	
+	
+	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 25);
+	private static Equipo e1 = new Equipo("Futbol club Barcelona", "FCB", Color.red, 50, 70);
+	private static Equipo e2 = new Equipo("Real Madrid", "RM", Color.white, 50, 70);
+	private static FisicasNuevas f = new FisicasNuevas();
+	
+	
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos();
+<<<<<<< HEAD
 		anyadirTodosLosEquipos(bd);
 		Inicio l = new Inicio();
 		l.setVisible(true);
+=======
+		//anyadirTodosLosEquipos(bd);
+		
+		v = new ventanaPartido(e1, e2, p, true, true, false, f);
+		v.setVisible(true);
+		v.configuracionAntesDePartido(p, e1, e2);
+		
+		
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 		// pruebas de la ventana de juego
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// Equipo e1 = new Equipo("Equipo1", "afc", 60, Color.black);
 		// Equipo e2 = new Equipo("Equipo2", "asd", 60, Color.red);
@@ -75,6 +97,9 @@ public class Juego {
 			}
 		});
 		t.start();
+=======
+		
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 		
 >>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 	}
