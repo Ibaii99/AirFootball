@@ -127,6 +127,7 @@ public class FisicasNuevas {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	
+///////////////////////Metodos para cambiar propiedades de las pelotas/////////////////////////////////
 	
 	/** Metodo para cambiar la posición de la pelota, 
 	 *	posicionInicial + velocidad * tiempo = posicionActual
@@ -164,39 +165,8 @@ public class FisicasNuevas {
 		p.setVelX(velX);
 		p.setVelY(velY);
 	}
-	
 
 	
-	
-
-	//TODO
-	private int veces = 1;
-	//Aqui hay que terminar esto
-	public double puntoExactoChoqueConBorde(ventanaPartido v, Pelota p) {
-		boolean hayReboteAntes = false;
-		boolean hayReboteAhora = false;
-		double tiempoExacto = TIEMPO -1/(veces);
-		hayReboteAhora = rebotaeEnBorde(v, p);
-		if(hayReboteAhora) {
-			hayReboteAntes = hayReboteAhora;
-			puntoExactoChoqueConBorde(v, p);
-		} else if (!hayReboteAhora && hayReboteAntes) {
-			
-			
-		}
-		return tiempoExacto;
-	}
-	
-	
-
-
-
-	
-	
-	
-
-
-
 	/** Metodo para saber si un numero es 0, redondeo
 	 * @param num	Numero del que se quiere saber si es muy proximo a 0
 	 * @return		Devuelve: True-> si es 0 / False-> si no es 0
