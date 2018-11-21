@@ -182,16 +182,19 @@ public class ventanaPartido extends JFrame {
 					
 					switch (tecla){
 					case 37: 	jugador.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
-								fisicas.muevePelota(jugador.getBolaEquipo(), FisicasNuevas.TIEMPO, this);
+								mover(jugador);
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
-					case 38:	jugador.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);	// flecha arriba
+					case 38:	jugador.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);	// flecha arriba
+								mover(jugador);
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;					
 					case 39: 	jugador.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);	// flecha derecha
+								mover(jugador);
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
-					case 40:	jugador.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);	// flecha abajo
+					case 40:	jugador.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);	// flecha abajo
+								mover(jugador);			
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
 					default: ; break;}}
@@ -199,37 +202,49 @@ public class ventanaPartido extends JFrame {
 				else if(isMultijugador) {
 					switch (tecla){
 					case 37: 	eLocal.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); 		// flecha izquierda
+								mover(eLocal);			
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
-					case 38: 	eLocal.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);		// flecha arriba
+					case 38: 	eLocal.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);		// flecha arriba
+								mover(eLocal);			
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
-					case 39: 	eLocal.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);		// flecha derecha
+					case 39: 	eLocal.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);		// flecha derecha			
+								mover(eLocal);
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
-					case 40: 	eLocal.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);		// flecha abajo
+					case 40: 	eLocal.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);		// flecha abajo
+								mover(eLocal);			
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
-					case 87: 	eVisitante.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);	// w
+					case 87: 	eVisitante.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);	// w
+								mover(eVisitante);			
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
-					case 83: 	eVisitante.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);	//s
+					case 83: 	eVisitante.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);	//s
+								mover(eVisitante);			
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
 					case 68: 	eVisitante.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);	//d
+								mover(eVisitante);			
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
-					case 65:	eVisitante.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO);	//a			
+					case 65:	eVisitante.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO);	//a					
+								mover(eVisitante);
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
 					default: break;}}
 				actualizarCampo();
 				}});}
 
-	
+	private void mover(Equipo jugador) {
+		fisicas.muevePelota(jugador.getBolaEquipo(), FisicasNuevas.TIEMPO, this);
+		
+	}
 	
 	
 	/**	Metodo para actualizar las posiciones de los objetos del campo
+	 * 	Despues de moverlos los actualiza automaticamente para que se aprecie el movimiento
 	 * @param eLocal		Equipo local
 	 * @param eVisitante	Equipo Visitante
 	 * @param p				Pelota con la que se juega
@@ -239,6 +254,7 @@ public class ventanaPartido extends JFrame {
 		lblEquipoVisitante.setBounds((int)eVisitante.getBolaEquipo().getX(), (int)eVisitante.getBolaEquipo().getY(), (int)eVisitante.getBolaEquipo().getRadio()*2, (int)eVisitante.getBolaEquipo().getRadio()*2);
 		lblEquipoLocal.setBounds((int)eLocal.getBolaEquipo().getX(), (int)eLocal.getBolaEquipo().getY(), (int)eLocal.getBolaEquipo().getRadio()*2, (int)eLocal.getBolaEquipo().getRadio()*2);
 		lblPelota.setBounds((int)p.getX(), (int)p.getY(), (int)p.getRadio()*2, (int)p.getRadio()*2);
+		actualizarCampo();
 	}
 	
 
