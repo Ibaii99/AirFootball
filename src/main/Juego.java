@@ -23,75 +23,18 @@ public class Juego {
 	public Poste posteArribaDerecha = new Poste(v, false, true);
 	public Poste posteAbajoDerecha = new Poste(v, false, false);
 
-	
-	
 	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 25);
 	private static Equipo e1 = new Equipo("Futbol club Barcelona", "FCB", Color.red, 50, 70);
 	private static Equipo e2 = new Equipo("Real Madrid", "RM", Color.white, 50, 70);
 	private static FisicasNuevas f = new FisicasNuevas();
-	
-	
 
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos();
-
 		anyadirTodosLosEquipos(bd);
-		Inicio l = new Inicio();
-		l.setVisible(true);
-
-		//anyadirTodosLosEquipos(bd);
 		// pruebas de la ventana de juego
-		v = new ventanaPartido(e1, e2, p, true, true, false, f);
-		v.setVisible(true);
-		v.configuracionAntesDePartido(p, e1, e2);
-
-		// pruebas de la ventana de juego
-
-
-		// Equipo e1 = new Equipo("Equipo1", "afc", 60, Color.black);
-		// Equipo e2 = new Equipo("Equipo2", "asd", 60, Color.red);
-		// Pelota p = new Pelota(Color.blue, "pelota", 30);
-		// v = new ventanaPartido(e1, e2, p, true, true, true);
-		// v.colocarLablsEnPosInicial();
-		// v.pintarLabels();
+		// v = new ventanaPartido(e1, e2, p, true, true, false, f);
 		// v.setVisible(true);
-
-		Equipo e1 = new Equipo("Equipo1", "afc", 60, Color.black);
-		Equipo e2 = new Equipo("Equipo2", "asd", 60, Color.red);
-		Pelota p = new Pelota(Color.blue, "pelota", 30);
-		v = new ventanaPartido(e1, e2, p, true, true, true);
-		v.colocarLablsEnPosInicial();
-		v.setVisible(true);
-
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Equipo e1 = new Equipo("Equipo1", "afc", 60, "iconos/equipos/cel.png");
-				Equipo e2 = new Equipo("Equipo2", "asd", 60, "iconos/equipos/bar.png");
-				Pelota p = new Pelota(Color.blue, "pelota", 19);
-				FisicasNuevas f = new FisicasNuevas();
-				v = new ventanaPartido(e1, e2, p, true, true, true);
-				v.colocarLablsEnPosInicial();
-				v.actualizarPosicionObjetos();
-				v.setVisible(true);
-				while(e2.getBolaEquipo().getX() < v.getAnchuraCampo()) {
-				try {
-					Thread.sleep(80);
-					System.out.println(p.getX()+ "" + p.getY());
-					f.cambiarVelocidad(e2.getBolaEquipo(), 20, 0);
-					System.out.println(p.getX()+ "" + p.getY());
-					f.muevePelota(p, 16, v);
-					System.out.println(p.getX()+ "" + p.getY());
-					v.actualizarPosicionObjetos();
-					System.out.println(p.getX()+ "" + p.getY());
-				//	System.out.println(p.getX() + "de" + v.getAnchuraCampo());
-				} catch (InterruptedException e) { e.printStackTrace();
-				}
-				}System.out.println("ya");
-				
-			}
-		});
-		t.start();
+		// v.configuracionAntesDePartido(p, e1, e2);
 
 	}
 
