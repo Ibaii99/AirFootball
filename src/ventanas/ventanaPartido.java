@@ -39,6 +39,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import entidades.Equipo;
+import fisicas.FisicasNuevas;
 import objetos.Pelota;
 import java.awt.event.KeyAdapter;
 
@@ -63,20 +64,27 @@ public class ventanaPartido extends JFrame {
 	private Equipo eLocal;
 	private Equipo eVisitante;
 	private Pelota p;
+	private FisicasNuevas fisicas;
 	// modificar constructor ventana, pone pelota en posicion no correcta
-	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso, boolean esJugadorVSMaquinaEquipoLocal) {
+	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso, boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas) {
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.fisicas = fisicas;
 		this.isJugadorEquipoLocal = esJugadorVSMaquinaEquipoLocal;
 		this.isMultijugador = esMultijjugador;
 		this.isAmistoso = esAmistoso;
 		this.eLocal = eLocal;
 		this.eVisitante = eVisitante;
 		this.p = p;
-;
-		setSize(750, 500);
+
+		setSize(900, 600);
 		setResizable(true);
 		setVisible(true);
+		
+		lblEquipoLocal.setText("EQUIPO LOCAL");
+		lblEquipoVisitante.setText("EQUIPOVISITANTE");
+		lblPelota.setText("PELOTA");
+
 		ImageIcon iconL = new ImageIcon(ventanaPartido.class.getResource("/iconos/equipos/atl.png"));
 		Image imgL = iconL.getImage();
 		BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
@@ -97,6 +105,7 @@ public class ventanaPartido extends JFrame {
 		Graphics gV = biV.createGraphics();
 		gV.drawImage(imgV, 0, 0, 40, 40, null);
 		ImageIcon newIconV = new ImageIcon(biV);
+		
 		ImageIcon icon = new ImageIcon(ventanaPartido.class.getResource("/iconos/marcadorconnombres.jpg"));
 		Image img = icon.getImage();
 		BufferedImage bi = new BufferedImage(373, 50, BufferedImage.TYPE_INT_ARGB);
@@ -107,6 +116,9 @@ public class ventanaPartido extends JFrame {
 		panelCampo= new JPanel();
 		panelCampo.setBackground(Color.GREEN);
 		panelCampo.setLayout(null);
+		panelCampo.add(lblEquipoLocal);
+		panelCampo.add(lblEquipoVisitante);
+		panelCampo.add(lblPelota);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -133,11 +145,11 @@ public class ventanaPartido extends JFrame {
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 730, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
+						.addComponent(panelCampo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -146,7 +158,7 @@ public class ventanaPartido extends JFrame {
 					.addContainerGap()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+					.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		getContentPane().setLayout(groupLayout);
@@ -169,64 +181,100 @@ public class ventanaPartido extends JFrame {
 					if(!isJugadorEquipoLocal) jugador = eVisitante;
 					
 					switch (tecla){
-					case 37: jugador.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
-					case 38: jugador.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);	// flecha arriba
-					case 39: jugador.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);	// flecha derecha
-					case 40: jugador.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);	// flecha abajo
-					default: ; }
-				}
-				
+					case 37: 	jugador.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
+								fisicas.muevePelota(jugador.getBolaEquipo(), FisicasNuevas.TIEMPO, this);
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;
+					case 38:	jugador.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);	// flecha arriba
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;					
+					case 39: 	jugador.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);	// flecha derecha
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;
+					case 40:	jugador.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);	// flecha abajo
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;
+					default: ; break;}}
+			
 				else if(isMultijugador) {
 					switch (tecla){
-					case 37: eLocal.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
-					case 38: eLocal.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);	// flecha arriba
-					case 39: eLocal.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);	// flecha derecha
-					case 40: eLocal.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);	// flecha abajo
-					
-					case 87: eVisitante.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);// w
-					case 83: eVisitante.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);//s
-					case 68: eVisitante.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);//d
-					case 65: eVisitante.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO);//a			
-					default: ;
-					}
-					
-				
-				}
-				
-			}
-		});
-	}
+					case 37: 	eLocal.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); 		// flecha izquierda
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;
+					case 38: 	eLocal.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);		// flecha arriba
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;
+					case 39: 	eLocal.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);		// flecha derecha
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;
+					case 40: 	eLocal.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);		// flecha abajo
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;
+					case 87: 	eVisitante.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO);	// w
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;
+					case 83: 	eVisitante.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO);	//s
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;
+					case 68: 	eVisitante.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO);	//d
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;
+					case 65:	eVisitante.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO);	//a			
+								actualizarPosicionObjetos(p, eLocal, eVisitante);
+								break;
+					default: break;}}
+				actualizarCampo();
+				}});}
 
+	
+	
+	
 	/**	Metodo para actualizar las posiciones de los objetos del campo
 	 * @param eLocal		Equipo local
 	 * @param eVisitante	Equipo Visitante
 	 * @param p				Pelota con la que se juega
 	 */
 	public void actualizarPosicionObjetos(Pelota p, Equipo eLocal, Equipo eVisitante) {
-		
 		// añado todo al panel con las posiciones actualizadas
-		lblEquipoLocal.setBounds((int)eLocal.getBolaEquipo().getX(), (int)eLocal.getBolaEquipo().getY(), (int)eLocal.getBolaEquipo().getRadio()*2, (int)eLocal.getBolaEquipo().getRadio()*2);
-		panelCampo.add(lblEquipoLocal);
-		lblEquipoLocal.setText("EQUIPO LOCAL");
-		lblEquipoLocal.setSize((int)eLocal.getBolaEquipo().getRadio()*2, (int)eLocal.getBolaEquipo().getRadio()*2);
-		lblEquipoLocal.setVisible(true);
-		
 		lblEquipoVisitante.setBounds((int)eVisitante.getBolaEquipo().getX(), (int)eVisitante.getBolaEquipo().getY(), (int)eVisitante.getBolaEquipo().getRadio()*2, (int)eVisitante.getBolaEquipo().getRadio()*2);
-		panelCampo.add(lblEquipoVisitante);
-		lblEquipoVisitante.setText("EQUIPOVISITANTE");
-		lblEquipoVisitante.setSize((int)eVisitante.getBolaEquipo().getRadio()*2, (int)eVisitante.getBolaEquipo().getRadio()*2);
-		lblEquipoVisitante.setVisible(true);
-		
+		lblEquipoLocal.setBounds((int)eLocal.getBolaEquipo().getX(), (int)eLocal.getBolaEquipo().getY(), (int)eLocal.getBolaEquipo().getRadio()*2, (int)eLocal.getBolaEquipo().getRadio()*2);
 		lblPelota.setBounds((int)p.getX(), (int)p.getY(), (int)p.getRadio()*2, (int)p.getRadio()*2);
-		panelCampo.add(lblPelota);
-		lblPelota.setText("PELOTA");
-		lblPelota.setVisible(true);
-		lblPelota.setSize((int)p.getRadio()*2, (int)p.getRadio()*2);
-		
+	}
+	
+
+	
+	/** Repintea y revalidea el panel del partido 
+	 *	Para actualizar la posicion de los objetos
+	 */
+	public void actualizarCampo() {
 		panelCampo.repaint();
 		panelCampo.revalidate();
-	
 	}
+
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/** Metodo que configura la ventana antes del partido, asigna:
+	 *  La posicion correspondiente a todos los objetos
+	 *  La posicion correspondiente a los labels
+	 * 	Pone los labels visibles
+	 * 	Pone tamaño correspondiente a los label
+	 * 	Pone color o imagen correspondiente a cada label
+	 * 	Actualiza el campo para que se muestren todos los cambios
+	 * @param p				Pelota del juego
+	 * @param eLocal		Equipo Local
+	 * @param eVisitante	Equipo Visitante
+	 */
+	public void configuracionAntesDePartido(Pelota p, Equipo eLocal, Equipo eVisitante) {
+		colocarEnPosInicial(p, eLocal, eVisitante);
+		actualizarPosicionObjetos(p, eLocal, eVisitante);
+		mostrarElementosDeJuego();
+		actualizarTamanyoLbl(p, eLocal, eVisitante);
+		pintarLabels(p, eLocal, eVisitante);
+		actualizarCampo();
+	}
+	
+//...........................................................................................................//
 	
 	/** Metodo que pinta cada label con el color correspondiente
 	 * 	o imagen correspondiente
@@ -234,24 +282,86 @@ public class ventanaPartido extends JFrame {
 	 * @param eVisitante	Equipo Visitante
 	 * @param p			Pelota
 	 */
-	public void pintarLabels(Pelota p, Equipo eLocal, Equipo eVisitante) {
-		lblEquipoLocal.setOpaque(true);
-		lblEquipoVisitante.setOpaque(true);
-		lblPelota.setOpaque(true);
+	private void pintarLabels(Pelota p, Equipo eLocal, Equipo eVisitante) {
 		if (eLocal.getBolaEquipo().getImagenObjeto() == null) lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
 		if (eVisitante.getBolaEquipo().getImagenObjeto() == null) lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
 		if (p.getImagenObjeto()== null) lblPelota.setBackground(p.getColor());
-		
 		if (eLocal.getBolaEquipo().getImagenObjeto() != null) lblEquipoLocal.setIcon(eLocal.getBolaEquipo().getImagenObjeto());
 		if (eVisitante.getBolaEquipo().getImagenObjeto() != null) lblEquipoVisitante.setIcon(eVisitante.getBolaEquipo().getImagenObjeto());
-		if (p.getImagenObjeto()!= null) lblPelota.setIcon(p.getImagenObjeto());
+		if (p.getImagenObjeto()!= null) lblPelota.setIcon(p.getImagenObjeto());	}
+	
+	/** Metodo para colocar los objetos en la posicion correspondiente segun el campo
+	 * @param p				Pelota
+	 * @param eLocal		Equipo Local
+	 * @param eVisitante	Equipo Visitante
+	 */
+	private void colocarEnPosInicial(Pelota p, Equipo eLocal, Equipo eVisitante) {
+		p.setX((int)getPanelCampo().getSize().getWidth()/2);
+		p.setY((int)getPanelCampo().getSize().getHeight()/2);
 		
+		//TODO editar esto, no son los objetos son los labels
+		
+		eLocal.getBolaEquipo().setX(getPanelCampo().getSize().getWidth() - getPanelCampo().getSize().getWidth()/4);
+		eVisitante.getBolaEquipo().setX(getPanelCampo().getSize().getWidth()/4);
+		
+		eLocal.getBolaEquipo().setY(getPanelCampo().getSize().getHeight()/2);
+		eVisitante.getBolaEquipo().setY(getPanelCampo().getSize().getHeight()/2);
 	}
 	
-	public Graphics2D getGraphics() {
-		return graphics;
+	/**	Actualiza el tamaño de los labels respecto a los objetos originales
+	 * @param p				Pelota
+	 * @param eLocal		Equipo Local
+	 * @param eVisitante	Equipo Visitante
+	 */
+	private void actualizarTamanyoLbl(Pelota p, Equipo eLocal, Equipo eVisitante) {
+		lblEquipoLocal.setSize((int)eLocal.getBolaEquipo().getRadio()*2, (int)eLocal.getBolaEquipo().getRadio()*2);
+		lblEquipoVisitante.setSize((int)eVisitante.getBolaEquipo().getRadio()*2, (int)eVisitante.getBolaEquipo().getRadio()*2);
+		lblPelota.setSize((int)p.getRadio()*2, (int)p.getRadio()*2);			
 	}
 
+	/** Muestra todos los elementos con los que se juega
+	 *  A utilizar antes de los partidos
+	 */
+	private void mostrarElementosDeJuego() {
+		lblEquipoLocal.setVisible(true);
+		lblPelota.setVisible(true);
+		lblEquipoVisitante.setVisible(true);}
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/** Oculta todos los elementos con los que se juega
+	 * 	A utilizar despues de los partidos
+	 */
+	public void ocultarElementosDeJuego() {
+		lblEquipoLocal.setVisible(false);
+		lblPelota.setVisible(false);
+		lblEquipoVisitante.setVisible(false);
+	}
+	
+	//TODO esto es para utilizar si tiene imagen o si tiene tiene color
+	// imagen -> transparente || color-> opaco
+	/** Metodo para poner elementos con los que se juega opacos
+	 */
+	public void elementosAOpaco() {
+		lblEquipoLocal.setOpaque(true);
+		lblEquipoVisitante.setOpaque(true);
+		lblPelota.setOpaque(true);
+	}
+	
+	/** Metodo para poner elementos con los que se juega transparentes
+	 */
+	public void elementosTransparentes() {
+		lblEquipoLocal.setOpaque(false);
+		lblEquipoVisitante.setOpaque(false);
+		lblPelota.setOpaque(false);
+	}
+
+	
+	
+	
+	
+	
+	
 	public JPanel getPanelCampo() {
 		return panelCampo;
 	}
@@ -292,23 +402,7 @@ public class ventanaPartido extends JFrame {
 		return p;
 	}
 
-	public void moverEquipo() {
-		
-	}
 
-	public void colocarEnPosInicial(Pelota p, Equipo eLocal, Equipo eVisitante) {
-		p.setX((int)getPanelCampo().getSize().getWidth()/2);
-		p.setY((int)getPanelCampo().getSize().getHeight()/2);
-		
-		//TODO editar esto, no son los objetos son los labels
-		
-		eLocal.getBolaEquipo().setX(getPanelCampo().getSize().getWidth() - getPanelCampo().getSize().getWidth()/4);
-		eVisitante.getBolaEquipo().setX(getPanelCampo().getSize().getWidth()/4);
-		
-		eLocal.getBolaEquipo().setY(getPanelCampo().getSize().getHeight()/2);
-		eVisitante.getBolaEquipo().setY(getPanelCampo().getSize().getHeight()/2);
-		
-	}
 	
 	public boolean isAmistoso() {
 		return isAmistoso;

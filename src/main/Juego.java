@@ -26,15 +26,18 @@ public class Juego {
 	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 25);
 	private static Equipo e1 = new Equipo("Futbol club Barcelona", "FCB", Color.red, 50, 70);
 	private static Equipo e2 = new Equipo("Real Madrid", "RM", Color.white, 50, 70);
-	
+	private static FisicasNuevas f = new FisicasNuevas();
 	
 	
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos();
 		//anyadirTodosLosEquipos(bd);
 		
-		v = new ventanaPartido(e1, e2, p, true, true, false);
+		v = new ventanaPartido(e1, e2, p, true, true, false, f);
 		v.setVisible(true);
+		v.configuracionAntesDePartido(p, e1, e2);
+		
+		
 		// pruebas de la ventana de juego
 
 		
