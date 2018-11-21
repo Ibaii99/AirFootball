@@ -23,12 +23,12 @@ public class Poste extends Objetos{
 	 * @param esPosteArriba		Booleano para colocar en el eje y el poste segun en que parte este
 	 */
 	public Poste(ventanaPartido v, boolean esPosteIzquierda, boolean esPosteArriba) {
-		super(posicionPoste(v, esPosteIzquierda), ( (v.getAlturaCampo()/2)  + alturaPoste(esPosteArriba)), Color.WHITE, false, "Palo izquierda", RADIO_POSTE, MASA_POSTE, null);
+		super(posicionPoste(v, esPosteIzquierda), ( (v.getPanelCampo().getHeight()/2)  + alturaPoste(esPosteArriba)), Color.WHITE, false, "Palo izquierda", RADIO_POSTE, MASA_POSTE, null);
 	}
 
 
 	private static double posicionPoste(ventanaPartido v,boolean esPosteIzquierda) {
-		double posicion = v.getAnchuraCampo() - RADIO_POSTE;
+		double posicion = v.getPanelCampo().getWidth() - RADIO_POSTE;
 		if(esPosteIzquierda) posicion = RADIO_POSTE;
 		return posicion;
 	}
@@ -52,5 +52,4 @@ public class Poste extends Objetos{
 
 
 	}
-
 
