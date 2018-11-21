@@ -40,12 +40,18 @@ public class Juego {
 		l.setVisible(true);
 
 		//anyadirTodosLosEquipos(bd);
-		
+		// pruebas de la ventana de juego
 		v = new ventanaPartido(e1, e2, p, true, true, false, f);
 		v.setVisible(true);
 		v.configuracionAntesDePartido(p, e1, e2);
+<<<<<<< HEAD
 
 		// pruebas de la ventana de juego
+=======
+		
+		
+		
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 
 		// Equipo e1 = new Equipo("Equipo1", "afc", 60, Color.black);
 		// Equipo e2 = new Equipo("Equipo2", "asd", 60, Color.red);
