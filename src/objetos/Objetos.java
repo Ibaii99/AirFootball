@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 
 import javax.swing.ImageIcon;
 
-import fisicas.Fisicas;
+
 import fisicas.FisicasNuevas;
 import ventanas.ventanaPartido;
 

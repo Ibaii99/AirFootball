@@ -6,7 +6,6 @@ import java.awt.Point;
 
 import javax.swing.ImageIcon;
 
-import fisicas.Fisicas;
 
 import ventanas.ventanaPartido;
 
