@@ -3,6 +3,7 @@ package ventanas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
@@ -22,6 +23,7 @@ import java.awt.image.BufferedImageOp;
 import java.awt.image.ImageObserver;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.RenderableImage;
+import java.io.IOException;
 import java.text.AttributedCharacterIterator;
 import java.util.Map;
 
@@ -30,6 +32,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.FontMetrics;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -63,6 +66,7 @@ public class ventanaPartido extends JFrame {
 	private boolean isJugadorEquipoLocal;
 	private static double VELOCIDAD_CON_MOVIMIENTO = 10;
 
+	private Font f;
 	private Equipo eLocal;
 	private Equipo eVisitante;
 	private Pelota p;
@@ -81,6 +85,15 @@ public class ventanaPartido extends JFrame {
 		this.eVisitante = eVisitante;
 		this.p = p;
 
+		GraphicsEnvironment ge = null;
+		String nombreFont = "DSEG14Classic-Regular.ttf";
+
+		try {
+			f = Font.createFont(Font.TRUETYPE_FONT, ventanaPartido.class.getResourceAsStream(nombreFont));
+			f = f.deriveFont(Font.PLAIN, 28);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		setSize(900, 600);
 		setResizable(true);
 		setVisible(true);
@@ -89,6 +102,7 @@ public class ventanaPartido extends JFrame {
 		lblEquipoVisitante.setText("EQUIPOVISITANTE");
 		lblPelota.setText("PELOTA");
 
+		System.out.println(eLocal.getNombre());
 		ImageIcon iconL = new ImageIcon(ventanaPartido.class.getResource("/iconos/equipos/atl.png"));
 		Image imgL = iconL.getImage();
 		BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
@@ -129,7 +143,8 @@ public class ventanaPartido extends JFrame {
 
 		JLabel label = new JLabel("0");
 		label.setForeground(Color.RED);
-		label.setFont(new Font("Dialog", Font.PLAIN, 28));
+		label.setFont(f);
+		// label.setFont(new Font("Dialog", Font.PLAIN, 28));
 		label.setBounds(346, 5, 75, 36);
 		panel.add(label);
 
@@ -143,7 +158,7 @@ public class ventanaPartido extends JFrame {
 
 		JLabel label_3 = new JLabel("0");
 		label_3.setForeground(Color.RED);
-		label_3.setFont(new Font("Dialog", Font.PLAIN, 28));
+		label_3.setFont(f);
 		label_3.setBounds(217, 5, 75, 36);
 		panel.add(label_3);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());

@@ -426,4 +426,8 @@ public class MenuAmistoso extends JFrame {
 			}
 		});
 	}
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		MenuAmistoso mu = new MenuAmistoso(800, 400);
+		mu.setVisible(true);
+	}
 }
