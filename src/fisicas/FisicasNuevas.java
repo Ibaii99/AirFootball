@@ -24,15 +24,18 @@ public class FisicasNuevas {
 	public void muevePelota(Pelota p, double tiempo, ventanaPartido v) {
 		p.setxAntes(p.getX());
 		p.setyAntes(p.getY());
-		p.setY(p.getY()+(p.getVelY()*tiempo));
-		p.setX(p.getX()+(p.getVelX()*tiempo));
 		
-		if(p.getX() > (v.getAnchuraCampo()-1-p.getRadio())) p.setX(v.getAnchuraCampo()-p.getRadio()-1);
-		if(p.getY() > (v.getAlturaCampo()-1-p.getRadio())) p.setY(v.getAlturaCampo()-p.getRadio()-1);
+		double posicionFuturaX = p.getX()+(p.getVelX()*tiempo);
+		double posicionFuturaY = p.getY()+(p.getVelY()*tiempo);
+		System.out.println("v"+p.getVelX()+p.getVelY());
+		if(posicionFuturaX > (v.getAnchuraCampo()-1-p.getRadio())) posicionFuturaX = (v.getAnchuraCampo()-p.getRadio()-1);
+		if(posicionFuturaY > (v.getAlturaCampo()-1-p.getRadio()))  posicionFuturaY = (v.getAlturaCampo()-p.getRadio()-1);
 		
-		if(p.getY() < 1 + p.getRadio() ) p.setY(p.getRadio()+1);
-		if(p.getX() < 1 + p.getRadio() ) p.setX(p.getRadio()+1);
+		if(posicionFuturaY <  p.getRadio() ) posicionFuturaY = (p.getRadio()+1);
+		if(posicionFuturaX <  p.getRadio() ) posicionFuturaX = (p.getRadio()+1);
 		
+		p.setY(posicionFuturaY);
+		p.setX(posicionFuturaX);
 		
 	}
 	

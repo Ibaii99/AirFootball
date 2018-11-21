@@ -190,17 +190,20 @@ public class ventanaPartido extends JFrame {
 		lblEquipoLocal.setBounds((int)eLocal.getBolaEquipo().getX(), (int)eLocal.getBolaEquipo().getY(), (int)eLocal.getBolaEquipo().getRadio()*2, (int)eLocal.getBolaEquipo().getRadio()*2);
 		panelCampo.add(lblEquipoLocal);
 		lblEquipoLocal.setText("EQUIPO LOCAL");
+		lblEquipoLocal.setSize((int)eLocal.getBolaEquipo().getRadio()*2, (int)eLocal.getBolaEquipo().getRadio()*2);
 		lblEquipoLocal.setVisible(true);
 		
 		lblEquipoVisitante.setBounds((int)eVisitante.getBolaEquipo().getX(), (int)eVisitante.getBolaEquipo().getY(), (int)eVisitante.getBolaEquipo().getRadio()*2, (int)eVisitante.getBolaEquipo().getRadio()*2);
 		panelCampo.add(lblEquipoVisitante);
 		lblEquipoVisitante.setText("EQUIPOVISITANTE");
+		lblEquipoVisitante.setSize((int)eVisitante.getBolaEquipo().getRadio()*2, (int)eVisitante.getBolaEquipo().getRadio()*2);
 		lblEquipoVisitante.setVisible(true);
 		
 		lblPelota.setBounds((int)p.getX(), (int)p.getY(), (int)p.getRadio()*2, (int)p.getRadio()*2);
 		panelCampo.add(lblPelota);
 		lblPelota.setText("PELOTA");
 		lblPelota.setVisible(true);
+		lblPelota.setSize((int)p.getRadio()*2, (int)p.getRadio()*2);
 		
 		panelCampo.repaint();
 		panelCampo.revalidate();
@@ -214,6 +217,9 @@ public class ventanaPartido extends JFrame {
 	 * @param p			Pelota
 	 */
 	public void pintarLabels() {
+		lblEquipoLocal.setOpaque(true);
+		lblEquipoVisitante.setOpaque(true);
+		lblPelota.setOpaque(true);
 		if (eLocal.getBolaEquipo().getImagenObjeto() == null) lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
 		if (eVisitante.getBolaEquipo().getImagenObjeto() == null) lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
 		if (p.getImagenObjeto()== null) lblPelota.setBackground(p.getColor());
@@ -224,6 +230,50 @@ public class ventanaPartido extends JFrame {
 		
 	}
 	
+	public Graphics2D getGraphics() {
+		return graphics;
+	}
+
+	public JPanel getPanelCampo() {
+		return panelCampo;
+	}
+
+	public JLabel getLblEquipoLocal() {
+		return lblEquipoLocal;
+	}
+
+	public JLabel getLblEquipoVisitante() {
+		return lblEquipoVisitante;
+	}
+
+	public JLabel getLblPelota() {
+		return lblPelota;
+	}
+
+	public boolean isMultijugador() {
+		return isMultijugador;
+	}
+
+	public boolean isJugadorEquipoLocal() {
+		return isJugadorEquipoLocal;
+	}
+
+	public static double getVELOCIDAD_CON_MOVIMIENTO() {
+		return VELOCIDAD_CON_MOVIMIENTO;
+	}
+
+	public Equipo geteLocal() {
+		return eLocal;
+	}
+
+	public Equipo geteVisitante() {
+		return eVisitante;
+	}
+
+	public Pelota getP() {
+		return p;
+	}
+
 	public void moverEquipo() {
 		
 	}
