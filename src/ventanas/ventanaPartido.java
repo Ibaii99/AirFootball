@@ -197,7 +197,11 @@ public class ventanaPartido extends JFrame {
 								mover(jugador);			
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
-					default: ; break;}}
+					default: ; 	break;}
+					//Reseteo de velocidades para que no se queden guardadas
+					jugador.getBolaEquipo().setVelX(0);
+					jugador.getBolaEquipo().setVelY(0);	
+				}
 			
 				else if(isMultijugador) {
 					switch (tecla){
@@ -233,7 +237,14 @@ public class ventanaPartido extends JFrame {
 								mover(eVisitante);
 								actualizarPosicionObjetos(p, eLocal, eVisitante);
 								break;
-					default: break;}}
+					default: 	break;}
+					
+					//reseteo de velocidades para que no se queden guardadas
+					eVisitante.getBolaEquipo().setVelX(0);
+					eVisitante.getBolaEquipo().setVelY(0);
+					eLocal.getBolaEquipo().setVelX(0);
+					eLocal.getBolaEquipo().setVelY(0);	
+				}
 				actualizarCampo();
 				}});}
 
