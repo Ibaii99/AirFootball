@@ -33,10 +33,11 @@ public abstract class Objetos{
 	protected double velY;
 	private double velocidad;
 	
-
 	protected double velXAntes = 0;
 	protected double velYAntes = 0;
 	private double velocidadAntes = 0;	
+	
+	private static double VELOCIDAD_MAX = 500;
 ///////////////////////Tamaño//////////////////////////////////////	
 	protected double radio;
 	
@@ -248,18 +249,21 @@ public abstract class Objetos{
 		velY = vectorVel.getY();
 	}
 
-	/** A�ade una velocidad X a la actual del objeto
+	/** A�ade una velocidad X a la actual del objeto a no ser que la velocidad
+	 * 	sea superior a la maxima permitida, que entonces no deja aumentarla;
 	 * @param vel	Velocidad a a�adir a la velocidad X
 	 */
 	public void addVelocidadX( double vel ) {
-		velX += vel;
+		if(velX < VELOCIDAD_MAX) velX += vel;
+		else if ( velX > VELOCIDAD_MAX) velX = VELOCIDAD_MAX;
 	}
-
-	/** A�ade una velocidad Y a la actual del objeto
+	/** A�ade una velocidad Y a la actual del objeto a no ser que la velocidad
+	 * 	sea superior a la maxima permitida, que entonces no deja aumentarla;
 	 * @param vel	Velocidad a a�adir a la velocidad Y
 	 */
 	public void addVelocidadY( double vel ) {
-		velY += vel;
+		if(velY < VELOCIDAD_MAX) velY += vel;
+		else if ( velY > VELOCIDAD_MAX) velY = VELOCIDAD_MAX;;
 	}
 
 	/** A�ade una velocidad a la actual del objeto
