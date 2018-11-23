@@ -27,17 +27,20 @@ public class MenuLiga extends JFrame {
 	 * @throws SQLException
 	 *
 	 */
+	public String equipoL;
+	public ImageIcon imageIconL;
 	public MenuLiga(int anchura, int altura) throws SQLException {
+		
 		try {
-			setSize(425, 342);
+			setSize(anchura, anchura);
 		} catch (Exception e) {
-			setSize(600, 400);
+			setSize(500, 500);
 		}
 		getContentPane().setLayout(null);
 
 		JComboBox cbLiga = new JComboBox();
 
-		cbLiga.setBounds(163, 237, 157, 22);
+		cbLiga.setBounds(Math.round((getWidth()/2)-(75*getWidth()/630)), Math.round(getHeight()/2), Math.round(157*getWidth()/630), Math.round(22*getWidth()/630));
 
 		Logger logger = Logger.getLogger("baseDeDatos");
 
@@ -74,7 +77,7 @@ public class MenuLiga extends JFrame {
 
 		JLabel lblEligeEquipo = new JLabel("Elige equipo:");
 		lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, 17));
-		lblEligeEquipo.setBounds(182, 208, 123, 29);
+		lblEligeEquipo.setBounds(Math.round((getWidth()/2)-(61*getWidth()/630)), Math.round((getHeight()/2)-(208*getHeight()/630)), 123, 29);
 		getContentPane().add(lblEligeEquipo);
 
 		JButton btnIniciarLiga = new JButton("Iniciar liga");
@@ -92,18 +95,22 @@ public class MenuLiga extends JFrame {
 			}
 		});
 		btnVolver.setFont(new Font("Arial Black", Font.PLAIN, 13));
-		btnVolver.setBounds(373, 415, 97, 25);
+		btnVolver.setBounds(Math.round(getWidth()-(130*getWidth()/630)), Math.round(getHeight()-(100*getHeight()/630)), 97, 25);
+	//	btnVolver.setBounds(373, 415, 97, 25);
 		getContentPane().add(btnVolver);
 
 		JLabel icono = new JLabel("");
-		icono.setBounds(182, 96, 112, 112);
-		String equipoL = "/iconos/equipos/ala.png";
+		int xIcono = Math.round(182*getWidth()/630);
+		int yIcono = Math.round(96*getHeight()/630);
+		icono.setBounds(xIcono, yIcono, 112, 112);
+		equipoL = "/iconos/equipos/ala.png";
 		String newequipoL = "";
-		ImageIcon imageIconL = new ImageIcon(getClass().getResource(equipoL));
+		imageIconL = new ImageIcon(getClass().getResource(equipoL));
 		icono.setIcon(imageIconL);
 		cbLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					
 					Connection conCB = null;
 					Class.forName("org.sqlite.JDBC");
 					conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
@@ -116,17 +123,16 @@ public class MenuLiga extends JFrame {
 					ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
 					System.out.println(rs2.toString());
 					while (rs2.next()) {
-						String newequipoL = "/" + rs2.getString("ICONO");
+						equipoL = "/" + rs2.getString("ICONO");
 						String iconoL = rs2.getString("ICONO");
-						System.out.println(newequipoL);
+						System.out.println(equipoL);
 					}
-					ImageIcon newimageIconL = new ImageIcon(getClass().getResource(newequipoL));
-					Image imagenResizL = newimageIconL.getImage();
-					Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(100 * getWidth() / 600),
-							(int) Math.round(100 * getWidth() / 600), java.awt.Image.SCALE_SMOOTH); // scale it the
+					imageIconL = new ImageIcon(getClass().getResource(equipoL));
+					Image imagenResizL = imageIconL.getImage();
+					Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(112 * getWidth() / 600),
+							(int) Math.round(112 * getWidth() / 600), java.awt.Image.SCALE_SMOOTH); // scale it the
 																									// smooth way
 					ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
-					icono.setIcon(new ImageIcon(getClass().getResource(newequipoL))); 
 					icono.setIcon(iiResizeoL);
 
 				} catch (Exception e) {

@@ -222,12 +222,14 @@ public class MenuAmistoso extends JFrame {
 						ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
 						lblEqL.setIcon(new ImageIcon(getClass().getResource(equipoL)));
 						lblEqL.setIcon(iiResizeoL);
+						lblEqL.repaint();
 					} catch (SQLException i) {
 
 					}
 				} catch (Exception e2) {
 
 				}
+				lblEqL.repaint();
 				revalidate();
 			}
 
@@ -266,12 +268,14 @@ public class MenuAmistoso extends JFrame {
 						ImageIcon iiResizeoV = new ImageIcon(iResizeoV);
 						lblEqV.setIcon(new ImageIcon(getClass().getResource(equipoV)));
 						lblEqV.setIcon(iiResizeoV);
+						lblEqV.repaint();
 					} catch (SQLException i) {
 
 					}
 				} catch (Exception e2) {
 
 				}
+				lblEqL.repaint();
 				revalidate();
 			}
 
@@ -415,7 +419,7 @@ public class MenuAmistoso extends JFrame {
 				lblEqL.setIcon(iiResizeoL);
 				lblEqL.setBounds((int) Math.round(((getWidth() / 2) - (getWidth() * 0.29))),
 						(int) Math.round(((getHeight() / 2) - (getHeight() * 0.25))), ladoIconoH, ladoIconoV);
-
+				lblEqL.repaint();
 				String localizacion = equipoV;
 				ImageIcon imageIconV = new ImageIcon(Inicio.class.getResource(localizacion));
 				Image imagenResizV = imageIconV.getImage();
@@ -428,13 +432,10 @@ public class MenuAmistoso extends JFrame {
 				lblEqV.setIcon(iiResizeoV);
 				lblEqV.setBounds((int) Math.round(((getWidth() / 2) + (getWidth() * 0.02))),
 						(int) Math.round(((getHeight() / 2) - (getHeight() * 0.25))), ladoIconoH, ladoIconoV);
-
+				lblEqV.repaint();
 				revalidate();
 			}
 		});
 	}
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		MenuAmistoso mu = new MenuAmistoso(800, 400);
-		mu.setVisible(true);
-	}
+	
 }
