@@ -217,7 +217,7 @@ public class MenuAmistoso extends JFrame {
 						ImageIcon imageIconL = new ImageIcon(getClass().getResource(equipoL));
 						Image imagenResizL = imageIconL.getImage();
 						Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(100 * getWidth() / 626),
-								(int) Math.round(100 * getWidth() / 626), java.awt.Image.SCALE_SMOOTH); // scale it the
+								(int) Math.round(100 * getHeight() / 460), java.awt.Image.SCALE_SMOOTH); // scale it the
 																										// smooth way
 						ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
 						lblEqL.setIcon(new ImageIcon(getClass().getResource(equipoL)));
