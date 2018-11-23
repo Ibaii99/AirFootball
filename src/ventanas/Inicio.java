@@ -21,17 +21,17 @@ public class Inicio extends JFrame {
 	/**
 	 * @author Jorge
 	 */
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public Inicio() {
 		setSize(630, 460);
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		
+
 		final JPanel panel = new JPanel();
-		
+
 		panel.setLayout(null);
-		
+
 		final JButton bLiga = new JButton("Liga");
 		bLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -39,21 +39,21 @@ public class Inicio extends JFrame {
 				try {
 					ml = new MenuLiga(getWidth(), getHeight());
 					ml.setVisible(true);
-				} catch (SQLException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 				dispose();
 			}
 		});
 		bLiga.setFont(new Font("Arial Black", Font.PLAIN, 16));
-		bLiga.setBounds(getWidth()-150, getHeight()-100, 119, 40);
+		bLiga.setBounds(getWidth() - 150, getHeight() - 100, 119, 40);
 		panel.add(bLiga);
 
 		final JButton bCreacion = new JButton("Creación");
 		bCreacion.setFont(new Font("Arial Black", Font.PLAIN, 16));
-		bCreacion.setBounds(getWidth()-150, getHeight()-150, 119, 40);
+		bCreacion.setBounds(getWidth() - 150, getHeight() - 150, 119, 40);
 		panel.add(bCreacion);
 
 		final JButton bAmistoso = new JButton("Amistoso");
@@ -73,49 +73,51 @@ public class Inicio extends JFrame {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
-					
+
 				}
-				
+
 			}
 		});
 		bAmistoso.setFont(new Font("Arial Black", Font.PLAIN, 16));
-		bAmistoso.setBounds(getWidth()-150, getHeight()-250, 119, 40);
+		bAmistoso.setBounds(getWidth() - 150, getHeight() - 250, 119, 40);
 		panel.add(bAmistoso);
 
 		final JButton bArcade = new JButton("Arcade");
 		bArcade.setFont(new Font("Arial Black", Font.PLAIN, 16));
-		bArcade.setBounds(getWidth()-150, getHeight()-200, 119, 40);
+		bArcade.setBounds(getWidth() - 150, getHeight() - 200, 119, 40);
 		panel.add(bArcade);
-		
-		
-		
-		
+
 		final JLabel lPortada = new JLabel("");
 		ImageIcon imageIcon = new ImageIcon(Inicio.class.getResource("/iconos/PORTADA.jpg"));
 		Image image = imageIcon.getImage();
-		
-		Image newimg = image.getScaledInstance(getWidth(), getHeight(),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		imageIcon = new ImageIcon(newimg); 
-	
+
+		Image newimg = image.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH); // scale it the
+																										// smooth way
+		imageIcon = new ImageIcon(newimg);
+
 		lPortada.setIcon(imageIcon);
 		lPortada.setBounds(0, 0, this.getWidth(), this.getHeight());
 		panel.add(lPortada);
-		
+
 		getContentPane().add(panel);
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
-				
-				bLiga.setBounds(getWidth()-150, getHeight()-100, 119, 40);
-				bCreacion.setBounds(getWidth()-150, getHeight()-150, 119, 40);
-				bAmistoso.setBounds(getWidth()-150, getHeight()-250, 119, 40);
-				bArcade.setBounds(getWidth()-150, getHeight()-200, 119, 40);
+
+				bLiga.setBounds(getWidth() - 150, getHeight() - 100, 119, 40);
+				bCreacion.setBounds(getWidth() - 150, getHeight() - 150, 119, 40);
+				bAmistoso.setBounds(getWidth() - 150, getHeight() - 250, 119, 40);
+				bArcade.setBounds(getWidth() - 150, getHeight() - 200, 119, 40);
 				ImageIcon imageIconR = new ImageIcon(Inicio.class.getResource("/iconos/PORTADA.jpg"));
 				Image imagenResiz = imageIconR.getImage();
-				
-				Image iResizeo = imagenResiz.getScaledInstance(getWidth(), getHeight(),  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-				ImageIcon iiResizeo = new ImageIcon(iResizeo); 
-			
+
+				Image iResizeo = imagenResiz.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH); // scale
+																														// it
+																														// the
+																														// smooth
+																														// way
+				ImageIcon iiResizeo = new ImageIcon(iResizeo);
+
 				lPortada.setIcon(iiResizeo);
 				lPortada.setBounds(0, 0, getWidth(), getHeight());
 				getContentPane().revalidate();

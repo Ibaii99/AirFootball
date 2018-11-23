@@ -20,11 +20,16 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
+
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
+
+import javax.swing.JPanel;
 
 public class MenuLiga extends JFrame {
 	/**
@@ -35,7 +40,9 @@ public class MenuLiga extends JFrame {
 	public String equipoL;
 	public ImageIcon imageIconL;
 
-	public MenuLiga(int anchura, int altura) throws SQLException {
+	public MenuLiga(int anchura, int altura) throws SQLException, Exception {
+		JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
+		setContentPane(lblBck);
 
 		try {
 			setSize(590, 578);
@@ -138,42 +145,50 @@ public class MenuLiga extends JFrame {
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout
-				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout
-								.createSequentialGroup()
-								.addGroup(groupLayout
-										.createParallelGroup(Alignment.TRAILING)
-										.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup().addGap(47)
-												.addComponent(icono, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(cbLiga, 0, 247, Short.MAX_VALUE).addGap(76))
-										.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-												.addComponent(btnIniciarLiga, GroupLayout.DEFAULT_SIZE, 200,
-														Short.MAX_VALUE)
-												.addGap(90).addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 97,
-														GroupLayout.PREFERRED_SIZE)))
-								.addGap(6))
-						.addGroup(groupLayout.createSequentialGroup().addGap(226)
-								.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-								.addGap(216)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup().addGap(40)
-				.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addGap(47).addComponent(cbLiga,
-								GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(icono, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)))
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addGap(104)
-								.addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addGap(10))
-						.addGroup(Alignment.TRAILING,
-								groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnIniciarLiga).addGap(54)))));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(47)
+							.addComponent(icono, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(cbLiga, 0, 247, Short.MAX_VALUE)
+							.addGap(76))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnIniciarLiga, GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+							.addGap(90)
+							.addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)))
+					.addGap(6))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(226)
+					.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+					.addGap(216))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(40)
+					.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(47)
+							.addComponent(cbLiga, GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(icono, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(104)
+							.addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+							.addGap(10))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnIniciarLiga)
+							.addGap(54))))
+		);
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
