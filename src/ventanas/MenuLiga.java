@@ -34,9 +34,9 @@ public class MenuLiga extends JFrame {
 	 */
 	public String equipoL;
 	public ImageIcon imageIconL;
+
 	public MenuLiga(int anchura, int altura) throws SQLException {
-		
-		
+
 		try {
 			setSize(590, 578);
 		} catch (Exception e) {
@@ -79,10 +79,11 @@ public class MenuLiga extends JFrame {
 		rs.close();
 
 		JLabel lblEligeEquipo = new JLabel("Elige equipo:");
-		lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17*getWidth()/630)));
+		
 
 		JButton btnIniciarLiga = new JButton("Iniciar liga");
-		btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, 13));
+		lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17 * getWidth() / 630)));
+		btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(13 * getWidth() / 630)));
 
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
@@ -96,8 +97,8 @@ public class MenuLiga extends JFrame {
 		btnVolver.setFont(new Font("Arial Black", Font.PLAIN, 13));
 
 		JLabel icono = new JLabel("");
-		int xIcono = Math.round((getWidth()/2)-(182*getWidth()/630));
-		int yIcono = Math.round((getHeight()/2)-96*getHeight()/630);
+		int xIcono = Math.round((getWidth() / 2) - (182 * getWidth() / 630));
+		int yIcono = Math.round((getHeight() / 2) - 96 * getHeight() / 630);
 		equipoL = "/iconos/equipos/ala.png";
 		String newequipoL = "";
 		imageIconL = new ImageIcon(getClass().getResource(equipoL));
@@ -105,7 +106,7 @@ public class MenuLiga extends JFrame {
 		cbLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					
+
 					Connection conCB = null;
 					Class.forName("org.sqlite.JDBC");
 					conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
@@ -124,8 +125,8 @@ public class MenuLiga extends JFrame {
 					}
 					imageIconL = new ImageIcon(getClass().getResource(equipoL));
 					Image imagenResizL = imageIconL.getImage();
-					Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(112 * getWidth() / 600),
-							(int) Math.round(112 * getWidth() / 600), java.awt.Image.SCALE_SMOOTH); // scale it the
+					Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(200 * getWidth() / 600),
+							(int) Math.round(200 * getWidth() / 600), java.awt.Image.SCALE_SMOOTH); // scale it the
 																									// smooth way
 					ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
 					icono.setIcon(iiResizeoL);
@@ -137,53 +138,56 @@ public class MenuLiga extends JFrame {
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addGap(47)
-							.addComponent(icono, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(cbLiga, 0, 247, Short.MAX_VALUE)
-							.addGap(76))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnIniciarLiga, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-							.addGap(90)
-							.addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)))
-					.addGap(6))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(226)
-					.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-					.addGap(216))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(40)
-					.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(47)
-							.addComponent(cbLiga, GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(icono, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(104)
-							.addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGap(10))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnIniciarLiga)
-							.addGap(54))))
-		);
+		groupLayout
+				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout
+								.createSequentialGroup()
+								.addGroup(groupLayout
+										.createParallelGroup(Alignment.TRAILING)
+										.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup().addGap(47)
+												.addComponent(icono, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(cbLiga, 0, 247, Short.MAX_VALUE).addGap(76))
+										.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+												.addComponent(btnIniciarLiga, GroupLayout.DEFAULT_SIZE, 200,
+														Short.MAX_VALUE)
+												.addGap(90).addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 97,
+														GroupLayout.PREFERRED_SIZE)))
+								.addGap(6))
+						.addGroup(groupLayout.createSequentialGroup().addGap(226)
+								.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+								.addGap(216)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup().addGap(40)
+				.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup().addGap(47).addComponent(cbLiga,
+								GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(icono, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)))
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup().addGap(104)
+								.addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
+								.addGap(10))
+						.addGroup(Alignment.TRAILING,
+								groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnIniciarLiga).addGap(54)))));
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
+				imageIconL = new ImageIcon(getClass().getResource(equipoL));
+				Image imagenResizL = imageIconL.getImage();
+				Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(200 * getWidth() / 600),
+						(int) Math.round(200 * getHeight() / 600), java.awt.Image.SCALE_SMOOTH); // scale it the
+																									// smooth way
+				ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
+				icono.setIcon(iiResizeoL);
+				icono.setSize(cbLiga.getHeight(), cbLiga.getHeight());
+				lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17 * getWidth() / 630)));
+				btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(13 * getWidth() / 630)));
+				cbLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(14 * getWidth() / 630)));
 				revalidate();
 				icono.repaint();
 			}
