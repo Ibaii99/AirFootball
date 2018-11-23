@@ -100,6 +100,7 @@ public class MenuLiga extends JFrame {
 		String equipoL = "/iconos/equipos/ala.png";
 		String newequipoL = "";
 		ImageIcon imageIconL = new ImageIcon(getClass().getResource(equipoL));
+		icono.setIcon(imageIconL);
 		cbLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -125,7 +126,7 @@ public class MenuLiga extends JFrame {
 							(int) Math.round(100 * getWidth() / 600), java.awt.Image.SCALE_SMOOTH); // scale it the
 																									// smooth way
 					ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
-					icono.setIcon(new ImageIcon(getClass().getResource(equipoL)));
+					icono.setIcon(new ImageIcon(getClass().getResource(newequipoL)));
 					icono.setIcon(iiResizeoL);
 
 				} catch (Exception e) {
