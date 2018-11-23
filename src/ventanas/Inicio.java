@@ -35,9 +35,15 @@ public class Inicio extends JFrame {
 		final JButton bLiga = new JButton("Liga");
 		bLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MenuLiga ml = new MenuLiga();
-				ml.setSize(getWidth(), getHeight());
-				ml.setVisible(true);
+				MenuLiga ml;
+				try {
+					ml = new MenuLiga(getWidth(), getHeight());
+					ml.setVisible(true);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				dispose();
 			}
 		});
