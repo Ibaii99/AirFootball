@@ -77,7 +77,12 @@ public class MenuAmistoso extends JFrame {
 	}
 
 	public MenuAmistoso(int anchura, int altura) throws ClassNotFoundException, SQLException {
-		setSize(577, 383);
+		try {
+			setSize(anchura, altura);
+		}catch (Exception e) {
+			setSize(577, 383);
+		}
+		
 		ImageIcon imageIcon = new ImageIcon(MenuAmistoso.class.getResource("/iconos/stadiumAmistoso.png"));
 		Image image = imageIcon.getImage();
 
