@@ -20,6 +20,11 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class MenuLiga extends JFrame {
 	/**
@@ -31,16 +36,14 @@ public class MenuLiga extends JFrame {
 	public ImageIcon imageIconL;
 	public MenuLiga(int anchura, int altura) throws SQLException {
 		
+		
 		try {
-			setSize(anchura, anchura);
+			setSize(590, 578);
 		} catch (Exception e) {
 			setSize(500, 500);
 		}
-		getContentPane().setLayout(null);
 
 		JComboBox cbLiga = new JComboBox();
-
-		cbLiga.setBounds(Math.round((getWidth()/2)-(75*getWidth()/630)), Math.round(getHeight()/2), Math.round(157*getWidth()/630), Math.round(22*getWidth()/630));
 
 		Logger logger = Logger.getLogger("baseDeDatos");
 
@@ -76,14 +79,10 @@ public class MenuLiga extends JFrame {
 		rs.close();
 
 		JLabel lblEligeEquipo = new JLabel("Elige equipo:");
-		lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, 17));
-		lblEligeEquipo.setBounds(Math.round((getWidth()/2)-(61*getWidth()/630)), Math.round((getHeight()/2)-(208*getHeight()/630)), 123, 29);
-		getContentPane().add(lblEligeEquipo);
+		lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17*getWidth()/630)));
 
 		JButton btnIniciarLiga = new JButton("Iniciar liga");
 		btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, 13));
-		btnIniciarLiga.setBounds(182, 273, 112, 25);
-		getContentPane().add(btnIniciarLiga);
 
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
@@ -95,14 +94,10 @@ public class MenuLiga extends JFrame {
 			}
 		});
 		btnVolver.setFont(new Font("Arial Black", Font.PLAIN, 13));
-		btnVolver.setBounds(Math.round(getWidth()-(130*getWidth()/630)), Math.round(getHeight()-(100*getHeight()/630)), 97, 25);
-	//	btnVolver.setBounds(373, 415, 97, 25);
-		getContentPane().add(btnVolver);
 
 		JLabel icono = new JLabel("");
-		int xIcono = Math.round(182*getWidth()/630);
-		int yIcono = Math.round(96*getHeight()/630);
-		icono.setBounds(xIcono, yIcono, 112, 112);
+		int xIcono = Math.round((getWidth()/2)-(182*getWidth()/630));
+		int yIcono = Math.round((getHeight()/2)-96*getHeight()/630);
 		equipoL = "/iconos/equipos/ala.png";
 		String newequipoL = "";
 		imageIconL = new ImageIcon(getClass().getResource(equipoL));
@@ -141,8 +136,59 @@ public class MenuLiga extends JFrame {
 				revalidate();
 			}
 		});
-		getContentPane().add(cbLiga);
-		getContentPane().add(icono);
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addGap(47)
+							.addComponent(icono, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(cbLiga, 0, 247, Short.MAX_VALUE)
+							.addGap(76))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnIniciarLiga, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+							.addGap(90)
+							.addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)))
+					.addGap(6))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(226)
+					.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+					.addGap(216))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(40)
+					.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(47)
+							.addComponent(cbLiga, GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(icono, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(104)
+							.addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(10))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnIniciarLiga)
+							.addGap(54))))
+		);
+		getContentPane().addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent arg0) {
+				revalidate();
+				icono.repaint();
+			}
+		});
+		getContentPane().setLayout(groupLayout);
 
 	}
 }
