@@ -142,7 +142,7 @@ public class MenuAmistoso extends JFrame {
 		// System.out.println(rs);
 		// }
 		// }catch(Exception e) {
-		// System.out.println("no se ha podido añadir equipos");
+		// System.out.println("no se ha podido aï¿½adir equipos");
 		// }
 
 		Logger logger = Logger.getLogger("baseDeDatos");
@@ -357,7 +357,7 @@ public class MenuAmistoso extends JFrame {
 				Equipo equipoVisitante = new Equipo(nomEqV, siglasV, rutaImagenV, 1, 1);
 				Pelota pelotaPartido = new Pelota(getBackground(), "pelota", 1);
 				ventanaPartido partido = new ventanaPartido(equipoLocal, equipoVisitante, pelotaPartido, false, true, true, new FisicasNuevas()); // aquï¿½ meter quizï¿½ un
-				partido.configuracionAntesDePartido(pelotaPartido, equipoLocal, equipoVisitante);
+				partido.configuracionAntesDePartido();
 				partido.setVisible(true);
 				// PRUEBA DE LISTENER DE VENTANAPARTIDO 
 			}

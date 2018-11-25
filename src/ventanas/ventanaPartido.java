@@ -66,7 +66,7 @@ public class ventanaPartido extends JFrame {
 	private boolean isAmistoso;
 	private boolean isJugadorEquipoLocal;
 	private static double VELOCIDAD_CON_MOVIMIENTO = 10;
-
+	private boolean termina;
 	private Font f;
 	private Equipo eLocal;
 	private Equipo eVisitante;
@@ -76,7 +76,8 @@ public class ventanaPartido extends JFrame {
 	
 	// modificar constructor ventana, pone pelota en posicion no correcta
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso,
-			boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas) {
+		boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas) {
+		termina = false;
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.fisicas = fisicas;
@@ -126,7 +127,7 @@ public class ventanaPartido extends JFrame {
 		}
 		setSize(900, 600);
 		setResizable(true);
-		setVisible(true);
+		
 
 		lblEquipoLocal.setText("EQUIPO LOCAL");
 		lblEquipoVisitante.setText("EQUIPOVISITANTE");
@@ -295,12 +296,30 @@ public class ventanaPartido extends JFrame {
 				actualizarCampo();
 			}
 		});
+	
 	}
 	public void EmpezarAJugar() {
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
 		hiloJuego.run();
+		
+		
 	}
 	
+	public Graphics2D getGraphics() {
+		return graphics;
+	}
+	public boolean isTermina() {
+		return termina;
+	}
+	public Font getF() {
+		return f;
+	}
+	public FisicasNuevas getFisicas() {
+		return fisicas;
+	}
+	public HiloJuego getHiloJuego() {
+		return hiloJuego;
+	}
 	private void mover(Equipo jugador) {
 		fisicas.muevePelota(jugador.getBolaEquipo(), FisicasNuevas.TIEMPO, this);
 

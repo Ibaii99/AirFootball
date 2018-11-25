@@ -12,7 +12,6 @@ public class HiloJuego extends Thread {
 	private Equipo eVisitante;
 	private ventanaPartido v;
 
-
 	public HiloJuego(Pelota p, Equipo eLocal, Equipo eVisitante, ventanaPartido v) {
 		this.p = p;
 		this.eLocal = eLocal;
@@ -22,11 +21,20 @@ public class HiloJuego extends Thread {
 	
 	@Override
 	public void run() {
-	
+	while(v.isTermina()) {
 		fisicas.choquePelotaBorde(v, p);
 		fisicas.choquePelotaEquipo(p, eLocal);
 		fisicas.choquePelotaEquipo(p, eVisitante);
 		fisicas.muevePelota(p, fisicas.TIEMPO, v);
 		v.actualizarCampo();
+		System.out.println("x: "+p.getX()+ "  y: "+ p.getY());
+		try {
+			Thread.sleep(60);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 	}
+
 }
