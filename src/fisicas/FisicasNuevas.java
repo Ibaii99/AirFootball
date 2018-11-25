@@ -154,9 +154,7 @@ public class FisicasNuevas {
 		
 	}
 	
-	public double calcTiempoChoque() {
-		return 0;
-	}
+
 	/** Metodo para cambiar la velocidad de la pelota
 	 * @param p		Pelota a la que vas a cambiar la velocidad
 	 * @param velX	Velocidad en x

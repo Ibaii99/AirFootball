@@ -18,23 +18,25 @@ public class HiloJuego extends Thread {
 		this.eVisitante = eVisitante;
 		this.v = v;
 	}
-	
+		
 	@Override
-	public void run() {
-	while(v.isTermina()) {
+	public synchronized void start() {
 		fisicas.choquePelotaBorde(v, p);
 		fisicas.choquePelotaEquipo(p, eLocal);
 		fisicas.choquePelotaEquipo(p, eVisitante);
 		fisicas.muevePelota(p, fisicas.TIEMPO, v);
-		v.actualizarCampo();
-		System.out.println("x: "+p.getX()+ "  y: "+ p.getY());
 		try {
-			Thread.sleep(60);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		v.actualizarPosicionObjetos();
+		v.actualizarCampo();
+		System.out.println("x: "+p.getX()+ "  y: "+ p.getY());	
+		System.out.println("velX: "+p.getVelX() + "  velY: "+p.getVelY());
+		
 		}
 	}
 
-}
+

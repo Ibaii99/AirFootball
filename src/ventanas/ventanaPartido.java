@@ -74,13 +74,10 @@ public class ventanaPartido extends JFrame {
 	private FisicasNuevas fisicas;
 	private HiloJuego hiloJuego;
 	
-	private boolean termina;
-	
 	// modificar constructor ventana, pone pelota en posicion no correcta
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso,
 			boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas) {
 		setAlwaysOnTop(true);
-		termina = false;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.fisicas = fisicas;
 		this.isJugadorEquipoLocal = esJugadorVSMaquinaEquipoLocal;
@@ -217,22 +214,22 @@ public class ventanaPartido extends JFrame {
 					case 37:
 						jugador.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
 						mover(jugador);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					case 38:
 						jugador.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // flecha arriba
 						mover(jugador);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					case 39:
 						jugador.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO); // flecha derecha
 						mover(jugador);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					case 40:
 						jugador.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
 						mover(jugador);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					default:
 						;
@@ -248,42 +245,42 @@ public class ventanaPartido extends JFrame {
 					case 37:
 						eLocal.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
 						mover(eLocal);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					case 38:
 						eLocal.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // flecha arriba
 						mover(eLocal);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					case 39:
 						eLocal.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO); // flecha derecha
 						mover(eLocal);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					case 40:
 						eLocal.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
 						mover(eLocal);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					case 87:
 						eVisitante.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // w
 						mover(eVisitante);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					case 83:
 						eVisitante.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // s
 						mover(eVisitante);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					case 68:
 						eVisitante.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO); // d
 						mover(eVisitante);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					case 65:
 						eVisitante.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // a
 						mover(eVisitante);
-						actualizarPosicionObjetos(p, eLocal, eVisitante);
+						actualizarPosicionObjetos();
 						break;
 					default:
 						break;
@@ -299,10 +296,7 @@ public class ventanaPartido extends JFrame {
 			}
 		});
 	}
-	public void EmpezarAJugar() {
-		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
-		hiloJuego.run();
-	}
+
 	
 	private void mover(Equipo jugador) {
 		fisicas.muevePelota(jugador.getBolaEquipo(), FisicasNuevas.TIEMPO, this);
@@ -320,7 +314,7 @@ public class ventanaPartido extends JFrame {
 	 * @param p
 	 *            Pelota con la que se juega
 	 */
-	public void actualizarPosicionObjetos(Pelota p, Equipo eLocal, Equipo eVisitante) {
+	public void actualizarPosicionObjetos() {
 		// añado todo al panel con las posiciones actualizadas
 		lblEquipoVisitante.setBounds((int) eVisitante.getBolaEquipo().getX(), (int) eVisitante.getBolaEquipo().getY(),
 				(int) eVisitante.getBolaEquipo().getRadio() * 2, (int) eVisitante.getBolaEquipo().getRadio() * 2);
@@ -357,7 +351,7 @@ public class ventanaPartido extends JFrame {
 	 */
 	public void configuracionAntesDePartido() {
 		colocarEnPosInicial(p, eLocal, eVisitante);
-		actualizarPosicionObjetos(p, eLocal, eVisitante);
+		actualizarPosicionObjetos();
 		mostrarElementosDeJuego();
 		actualizarTamanyoLbl(p, eLocal, eVisitante);
 		pintarLabels(p, eLocal, eVisitante);
@@ -537,5 +531,17 @@ public class ventanaPartido extends JFrame {
 
 	public void setArcade(boolean arcade) {
 		this.arcade = arcade;
+	}
+
+	public void EmpezarAJugar() {
+		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
+		for(int e = 0; e < 999999999 ; e++) {
+		hiloJuego.start();
+		try {
+			hiloJuego.sleep(15);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}}
 	}
 }

@@ -36,6 +36,7 @@ public class Juego {
 							"iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
 		 v.setVisible(true);
 		 v.configuracionAntesDePartido();
+		 
 		 v.EmpezarAJugar();
 	}
 
