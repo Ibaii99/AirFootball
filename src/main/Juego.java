@@ -24,18 +24,19 @@ public class Juego {
 	public Poste posteAbajoDerecha = new Poste(v, false, false);
 
 	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 25);
-	private static Equipo e1 = new Equipo("Futbol club Barcelona", "FCB", Color.red, 50, 70);
-	private static Equipo e2 = new Equipo("Real Madrid", "RM", Color.white, 50, 70);
+
 	private static FisicasNuevas f = new FisicasNuevas();
 
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos();
 		anyadirTodosLosEquipos(bd);
 		// pruebas de la ventana de juego
-		// v = new ventanaPartido(e1, e2, p, true, true, false, f);
-		// v.setVisible(true);
-		// v.configuracionAntesDePartido(p, e1, e2);
-
+		 v = new ventanaPartido((new Equipo("ALA", "Deportivo Alav�s", 0, Color.BLUE, ("iconos/equipos/ala.png"),
+					"iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new Equipo("ATH", "Athletic Club", 0, Color.RED, ("iconos/equipos/ath.png"),
+							"iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
+		 v.setVisible(true);
+		 v.configuracionAntesDePartido();
+		 v.EmpezarAJugar();
 	}
 
 	private static void anyadirTodosLosEquipos(BaseDeDatos bd) {
