@@ -28,5 +28,5 @@ public class HiloJuego extends Thread {
 		fisicas.choquePelotaEquipo(p, eVisitante);
 		fisicas.muevePelota(p, fisicas.TIEMPO, v);
 		v.actualizarCampo();
-	
+	}
 }
