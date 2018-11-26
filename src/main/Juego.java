@@ -38,7 +38,7 @@ public class Juego {
 		
 		
 	}
-
+ 
 	private static void anyadirTodosLosEquipos(BaseDeDatos bd) {
 		try {
 			bd.anyadirEquipo(new Equipo("ALA", "Deportivo Alav�s", 0, Color.BLUE, ("iconos/equipos/ala.png"),
