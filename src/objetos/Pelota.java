@@ -15,7 +15,7 @@ import ventanas.ventanaPartido;
  */
 public class Pelota extends Objetos{
 	
-	public static double MASA_POR_DEFECTO = 50;			// Masa por defecto de los constructores simples
+	public static double MASA_POR_DEFECTO = 2;			// Masa por defecto de los constructores simples
 	public static double POSICION_Y_POR_DEFECTO = 0 ;		// Posicion Y por defecto de los constructores simples
 	public static double POSICION_X_POR_DEFECTO = 0 ;		// Posicion X por defecto de los constructores simples
 	public static double RADIO_POR_DEFECTO_EQUIPO = 40;

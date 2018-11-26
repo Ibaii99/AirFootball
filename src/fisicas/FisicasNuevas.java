@@ -36,8 +36,9 @@ public class FisicasNuevas {
 	 */
 	private boolean chocanPelotas(Pelota p1, Equipo equipo) {
 		boolean chocan = false;
-		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
-		if(Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
+		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
+		
+		System.out.println(chocan);
 		return chocan;
 	}
 	
@@ -142,11 +143,11 @@ public class FisicasNuevas {
 		double posicionFuturaX = p.getX()+(p.getVelX()*tiempo);
 		double posicionFuturaY = p.getY()+(p.getVelY()*tiempo);
 		
-		if(posicionFuturaX > (v.getPanelCampo().getSize().getWidth()-1-p.getRadio())) posicionFuturaX = (v.getPanelCampo().getSize().getWidth()-p.getRadio()-1);
-		if(posicionFuturaY > (v.getPanelCampo().getSize().getHeight()-1-p.getRadio()))  posicionFuturaY = (v.getPanelCampo().getSize().getHeight() -p.getRadio()-1);
+		if(posicionFuturaX > (v.getPanelCampo().getSize().getWidth()-1-p.getRadio())) posicionFuturaX = (v.getPanelCampo().getSize().getWidth()-p.getRadio());
+		if(posicionFuturaY > (v.getPanelCampo().getSize().getHeight()-1-p.getRadio()))  posicionFuturaY = (v.getPanelCampo().getSize().getHeight() -p.getRadio());
 		
-		if(posicionFuturaY <  p.getRadio() ) posicionFuturaY = (p.getRadio()+1);
-		if(posicionFuturaX <  p.getRadio() ) posicionFuturaX = (p.getRadio()+1);
+		if(posicionFuturaY <  p.getRadio() ) posicionFuturaY = (p.getRadio());
+		if(posicionFuturaX <  p.getRadio() ) posicionFuturaX = (p.getRadio());
 		
 		
 		p.setY(posicionFuturaY);

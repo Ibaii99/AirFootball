@@ -86,6 +86,9 @@ public class ventanaPartido extends JFrame {
 		this.eLocal = eLocal;
 		this.eVisitante = eVisitante;
 		this.p = p;
+		
+
+		
 
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
@@ -295,11 +298,21 @@ public class ventanaPartido extends JFrame {
 				actualizarCampo();
 			}
 		});
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		configuracionAntesDePartido();
+		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
+		hiloJuego.start();
 	}
 
 	
 	private void mover(Equipo jugador) {
 		fisicas.muevePelota(jugador.getBolaEquipo(), FisicasNuevas.TIEMPO, this);
+		
 
 	}
 
@@ -533,15 +546,5 @@ public class ventanaPartido extends JFrame {
 		this.arcade = arcade;
 	}
 
-	public void EmpezarAJugar() {
-		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
-		for(int e = 0; e < 999999999 ; e++) {
-		hiloJuego.start();
-		try {
-			hiloJuego.sleep(15);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}}
-	}
+	
 }

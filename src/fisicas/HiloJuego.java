@@ -21,20 +21,30 @@ public class HiloJuego extends Thread {
 		
 	@Override
 	public synchronized void start() {
+		while(true) {
 		fisicas.choquePelotaBorde(v, p);
 		fisicas.choquePelotaEquipo(p, eLocal);
+		fisicas.muevePelota(p, fisicas.TIEMPO, v);
 		fisicas.choquePelotaEquipo(p, eVisitante);
 		fisicas.muevePelota(p, fisicas.TIEMPO, v);
+		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(20);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		v.actualizarPosicionObjetos();
 		v.actualizarCampo();
+		System.out.println("--------------------------Pelota-------------------------------------");
 		System.out.println("x: "+p.getX()+ "  y: "+ p.getY());	
 		System.out.println("velX: "+p.getVelX() + "  velY: "+p.getVelY());
+		System.out.println("--------------------------Equipo local -------------------------------------");
+		System.out.println("x: "+eLocal.getBolaEquipo().getX()+ "  y: "+ eLocal.getBolaEquipo().getY());	
+		System.out.println("velX: "+eLocal.getBolaEquipo().getVelX() + "  velY: "+eLocal.getBolaEquipo().getVelY());
+		System.out.println("--------------------------Equipo visitante -------------------------------------");
+		System.out.println("x: "+eVisitante.getBolaEquipo().getX()+ "  y: "+ eVisitante.getBolaEquipo().getY());	
+		System.out.println("velX: "+eVisitante.getBolaEquipo().getVelX() + "  velY: "+eVisitante.getBolaEquipo().getVelY());}
 		
 		}
 	}

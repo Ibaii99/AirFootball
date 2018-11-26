@@ -23,7 +23,7 @@ public class Juego {
 	public Poste posteArribaDerecha = new Poste(v, false, true);
 	public Poste posteAbajoDerecha = new Poste(v, false, false);
 
-	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 25);
+	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 1, null, false);
 
 	private static FisicasNuevas f = new FisicasNuevas();
 
@@ -35,9 +35,8 @@ public class Juego {
 					"iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new Equipo("ATH", "Athletic Club", 0, Color.RED, ("iconos/equipos/ath.png"),
 							"iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
 		 v.setVisible(true);
-		 v.configuracionAntesDePartido();
-		 
-		 v.EmpezarAJugar();
+		// v.configuracionAntesDePartido();
+		
 	}
 
 	private static void anyadirTodosLosEquipos(BaseDeDatos bd) {
