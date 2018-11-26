@@ -14,6 +14,7 @@ public class FisicasNuevas {
 	public static double COEFICIENTE_PERDIDA_PELOTA = 0.99;
 	public static double COEFICIENTE_PERDIDA_EQUIPO = 0.90;
 	public static double VELOCIDAD_MAX_PELOTA = 10;
+	public static double VELOCIDAD_MAX_EQUIPO = 6;
 	
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
@@ -231,12 +232,16 @@ public class FisicasNuevas {
 	}
 	
 	}
-
+//TODO
 	public void cambiarVelocidadEquipo(Equipo e, double velX, double velY) {
 		e.getBolaEquipo().setVelXAntes(e.getBolaEquipo().getVelX());
 		e.getBolaEquipo().setVelYAntes(e.getBolaEquipo().getVelY());
-		e.getBolaEquipo().setVelX(velX);
 		e.getBolaEquipo().setVelY(velY);
+		e.getBolaEquipo().setVelX(velX);
+		if(e.getBolaEquipo().getVelX() > VELOCIDAD_MAX_EQUIPO) e.getBolaEquipo().setVelX(VELOCIDAD_MAX_EQUIPO);
+		if(e.getBolaEquipo().getVelY() > VELOCIDAD_MAX_EQUIPO) e.getBolaEquipo().setVelY(VELOCIDAD_MAX_EQUIPO);
+		if(e.getBolaEquipo().getVelX() < -VELOCIDAD_MAX_EQUIPO) e.getBolaEquipo().setVelX(-VELOCIDAD_MAX_EQUIPO);
+		if(e.getBolaEquipo().getVelY() < -VELOCIDAD_MAX_EQUIPO) e.getBolaEquipo().setVelY(-VELOCIDAD_MAX_EQUIPO);
 	}
 
 
@@ -247,7 +252,7 @@ public class FisicasNuevas {
 	 * @return		Devuelve: True-> si es 0 / False-> si no es 0
 	 */
 	public static boolean igualACero( double num ) {
-		return Math.abs(num)<=1E-12;  // 1 * 10^-12
+		return Math.abs(num)<=1E-9;  // 1 * 10^-12
 	}
 	
 }
