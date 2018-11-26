@@ -37,8 +37,6 @@ public class FisicasNuevas {
 	private boolean chocanPelotas(Pelota p1, Equipo equipo) {
 		boolean chocan = false;
 		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
-		
-		System.out.println(chocan);
 		return chocan;
 	}
 	
@@ -90,6 +88,7 @@ public class FisicasNuevas {
 	 */
 	private void choqueEnBorde(ventanaPartido v, Pelota p) {
 		// Invierto los vectores de velocidad
+		if
 		cambiarVelocidadPelota(p, -p.getVelX(), -p.getY());
 	}
 	
@@ -139,6 +138,7 @@ public class FisicasNuevas {
 	 * @param tiempo	Tiempo que ha pasado para mover
 	 */
 	public void muevePelota(Pelota p, double tiempo, ventanaPartido v) {
+		if(!igualACero(p.getVelX()) && !igualACero(p.getVelY())) {
 		p.setxAntes(p.getX());
 		p.setyAntes(p.getY());
 		
@@ -154,6 +154,11 @@ public class FisicasNuevas {
 		
 		p.setY(posicionFuturaY);
 		p.setX(posicionFuturaX);
+		}if(igualACero(p.getVelX()) && igualACero(p.getVelY())) {
+			p.setY(p.getY());
+			p.setX(p.getX());
+		}
+		
 		
 	}
 	/** Metodo para cambiar la velocidad de la pelota

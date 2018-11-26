@@ -216,23 +216,23 @@ public class ventanaPartido extends JFrame {
 					switch (tecla) {
 					case 37:
 						jugador.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
-						mover(jugador);
-						actualizarPosicionObjetos();
+//						mover(jugador);
+//						actualizarPosicionObjetos();
 						break;
 					case 38:
 						jugador.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // flecha arriba
-						mover(jugador);
-						actualizarPosicionObjetos();
+//						mover(jugador);
+//						actualizarPosicionObjetos();
 						break;
 					case 39:
 						jugador.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO); // flecha derecha
-						mover(jugador);
-						actualizarPosicionObjetos();
+//						mover(jugador);
+//						actualizarPosicionObjetos();
 						break;
 					case 40:
 						jugador.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
-						mover(jugador);
-						actualizarPosicionObjetos();
+//						mover(jugador);
+//						actualizarPosicionObjetos();
 						break;
 					default:
 						;
@@ -247,8 +247,8 @@ public class ventanaPartido extends JFrame {
 					switch (tecla) {
 					case 37:
 						eLocal.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
-						mover(eLocal);
-						actualizarPosicionObjetos();
+//						mover(eLocal);
+//						actualizarPosicionObjetos();
 						break;
 					case 38:
 						eLocal.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // flecha arriba
