@@ -26,7 +26,6 @@ public class Juego {
 	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 1, null, false);
 
 	private static FisicasNuevas f = new FisicasNuevas();
-
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos();
 		anyadirTodosLosEquipos(bd);
