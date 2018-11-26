@@ -290,10 +290,10 @@ public class ventanaPartido extends JFrame {
 					}
 
 					// reseteo de velocidades para que no se queden guardadas
-					eVisitante.getBolaEquipo().setVelX(0);
-					eVisitante.getBolaEquipo().setVelY(0);
-					eLocal.getBolaEquipo().setVelX(0);
-					eLocal.getBolaEquipo().setVelY(0);
+//					eVisitante.getBolaEquipo().setVelX(0);
+//					eVisitante.getBolaEquipo().setVelY(0);
+//					eLocal.getBolaEquipo().setVelX(0);
+//					eLocal.getBolaEquipo().setVelY(0);
 				}
 				actualizarCampo();
 			}

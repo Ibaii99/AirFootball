@@ -29,7 +29,7 @@ public class HiloJuego extends Thread {
 		fisicas.muevePelota(p, fisicas.TIEMPO, v);
 		
 		try {
-			Thread.sleep(20);
+			Thread.sleep(200);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
