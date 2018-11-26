@@ -212,6 +212,7 @@ public class MenuLiga extends JFrame {
 				(int) Math.round(200 * getHeight() / 600), java.awt.Image.SCALE_SMOOTH); // scale it the
 																							// smooth way
 		ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
+		icono.setSize(iiResizeoL.getIconWidth(), iiResizeoL.getIconHeight());
 		icono.setIcon(iiResizeoL);
 	}
 }

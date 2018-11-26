@@ -80,18 +80,32 @@ public class MenuAmistoso extends JFrame {
 
 	/**
 	 * 
-	 * @param Anchura de la ventana en base a listeners de la ventana Inicio
-	 * @param Altura de la ventana en base a listeners de la ventana Inicio
+	 * @param Anchura
+	 *            de la ventana en base a listeners de la ventana Inicio
+	 * @param Altura
+	 *            de la ventana en base a listeners de la ventana Inicio
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	/**
+	 * @param anchura
+	 * @param altura
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	/**
+	 * @param anchura
+	 * @param altura
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
 	public MenuAmistoso(int anchura, int altura) throws ClassNotFoundException, SQLException {
 		try {
 			setSize(anchura, altura);
-		}catch (Exception e) {
-			setSize(577, 383);
+		} catch (Exception e) {
+			setSize(626, 460);
 		}
-		
+
 		ImageIcon imageIcon = new ImageIcon(MenuAmistoso.class.getResource("/iconos/stadiumAmistoso.png"));
 		Image image = imageIcon.getImage();
 
@@ -137,7 +151,6 @@ public class MenuAmistoso extends JFrame {
 		final JLabel lblEqV = new JLabel("");
 		lblEqV.setBounds(334, 96, 100, 100);
 
-
 		Logger logger = Logger.getLogger("baseDeDatos");
 
 		Connection con = null;
@@ -145,6 +158,11 @@ public class MenuAmistoso extends JFrame {
 		Statement consulta;
 
 		String comando = "";
+		/**
+		 * No hago un método para diferentes sentencias SQL porque no realizamos
+		 * exactamente la misma en ningún momento
+		 * 
+		 */
 		try {
 			Class.forName("org.sqlite.JDBC");
 			con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
@@ -152,29 +170,16 @@ public class MenuAmistoso extends JFrame {
 			// e3.printStackTrace();
 		}
 		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS;";
-		System.out.println(query);
 		con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
-		// Statement st = con.createStatement();
 		ResultSet rs = con.createStatement().executeQuery(query);
-		System.out.println(rs.toString());
-		System.out.println(rs);
-		// System.out.println(rs.isClosed());
-
-		System.out.println(rs.getString("NOMBRE"));
 		while (rs.next()) {
 
 			String nomEq = rs.getString("Nombre");
 			String iconEq = rs.getString("Icono");
 			cbLocal.addItem(new ObjetoCombobox(1, nomEq, new ImageIcon(iconEq)));
 			cbVisitante.addItem(new ObjetoCombobox(2, nomEq, new ImageIcon(iconEq)));
-			// System.out.println(nomEq + " " + iconEq);
 		}
-		// st.close();
 		rs.close();
-		// consulta.executeUpdate(comando);
-		// comando = "select equipo, icono from equipos";
-		// logger.log(Level.INFO, "BD: " + comando);
-		// System.out.println(consulta.executeUpdate(comando));
 
 		equipoL = "/iconos/equipos/ala.png";
 		ImageIcon imgI = new ImageIcon(getClass().getResource(equipoL));
@@ -196,25 +201,18 @@ public class MenuAmistoso extends JFrame {
 						logger.log(Level.INFO, "BD: " + comando2);
 						consultaCB.executeUpdate(comando2);
 						ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
-						System.out.println(rs2.toString());
-						// System.out.println(rs2);
-						// System.out.println(rs.isClosed());
-
 						while (rs2.next()) {
 
 							equipoL = "/" + rs2.getString("ICONO");
 							String iconoL = rs2.getString("ICONO");
-							// System.out.println(equipoL);
+
 						}
 						rs2.close();
+
 						ImageIcon imageIconL = new ImageIcon(getClass().getResource(equipoL));
-						Image imagenResizL = imageIconL.getImage();
-						Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(100 * getWidth() / 626),
-								(int) Math.round(100 * getHeight() / 460), java.awt.Image.SCALE_SMOOTH); // scale it the
-																										// smooth way
-						ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
-						lblEqL.setIcon(new ImageIcon(getClass().getResource(equipoL)));
-						lblEqL.setIcon(iiResizeoL);
+						resizeo(imageIconL, lblEqL, (int) Math.round(100 * getWidth() / 626),
+								(int) Math.round(100 * getHeight() / 460));
+
 						lblEqL.repaint();
 					} catch (SQLException i) {
 
@@ -243,24 +241,18 @@ public class MenuAmistoso extends JFrame {
 						consultaCB.executeUpdate(comando2);
 						ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
 						System.out.println(rs2.toString());
-						// System.out.println(rs2);
-						// System.out.println(rs.isClosed());
 
 						while (rs2.next()) {
 
 							equipoV = "/" + rs2.getString("ICONO");
 							String iconoV = rs2.getString("ICONO");
-							// System.out.println(equipoL);
+
 						}
 						rs2.close();
 						ImageIcon imageIconV = new ImageIcon(getClass().getResource(equipoV));
-						Image imagenResizV = imageIconV.getImage();
-						Image iResizeoV = imagenResizV.getScaledInstance((int) Math.round(100 * getWidth() / 626),
-								(int) Math.round(100 * getWidth() / 626), java.awt.Image.SCALE_SMOOTH); // scale it the
-																										// smooth way
-						ImageIcon iiResizeoV = new ImageIcon(iResizeoV);
-						lblEqV.setIcon(new ImageIcon(getClass().getResource(equipoV)));
-						lblEqV.setIcon(iiResizeoV);
+						resizeo(imageIconV, lblEqV, (int) Math.round(100 * getWidth() / 626),
+								(int) Math.round(100 * getWidth() / 626));
+
 						lblEqV.repaint();
 					} catch (SQLException i) {
 
@@ -273,21 +265,7 @@ public class MenuAmistoso extends JFrame {
 			}
 
 		});
-		// ImageIcon imageIconL = new ImageIcon(equipoL);
-		// Image imagenResizL = imageIconL.getImage();
-		// Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(100 *
-		// getWidth() / 626),
-		// (int) Math.round(100 * getWidth() / 626), java.awt.Image.SCALE_SMOOTH); //
-		// scale it the smooth way
-		// ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
-		ImageIcon imageIconV = new ImageIcon(equipoL);
-		Image imagenResizV = imageIconV.getImage();
-		Image iResizeoV = imagenResizV.getScaledInstance((int) Math.round(100 * getWidth() / 626),
-				(int) Math.round(100 * getWidth() / 626), java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-		ImageIcon iiResizeoV = new ImageIcon(iResizeoV);
-		// lblEqL.setIcon(iiResizeoL);
 
-		lblEqV.setIcon(iiResizeoV);
 		cbLocal.setBounds(120, 224, 150, 22);
 		panel.add(cbLocal);
 		btnIniciarAmistoso.addActionListener(new ActionListener() {
@@ -308,13 +286,13 @@ public class MenuAmistoso extends JFrame {
 						consultaL.executeUpdate(comando3);
 						ResultSet rs3 = conL.createStatement().executeQuery(comando3);
 						System.out.println(rs3.toString());
-				
+
 						while (rs3.next()) {
 
 							siglasL = "/" + rs3.getString("SIGLAS");
 							rutaImagenL = rs3.getString("ICONO");
 						}
-						
+
 					} catch (SQLException i) {
 
 					}
@@ -333,13 +311,13 @@ public class MenuAmistoso extends JFrame {
 						consultaV.executeUpdate(comando4);
 						ResultSet rs3 = conV.createStatement().executeQuery(comando4);
 						System.out.println(rs3.toString());
-				
+
 						while (rs3.next()) {
 
 							siglasV = "/" + rs3.getString("SIGLAS");
 							rutaImagenV = rs3.getString("ICONO");
 						}
-						
+
 					} catch (SQLException i) {
 
 					}
@@ -349,10 +327,11 @@ public class MenuAmistoso extends JFrame {
 				Equipo equipoLocal = new Equipo(nomEqL, siglasL, rutaImagenL, 1, 1);
 				Equipo equipoVisitante = new Equipo(nomEqV, siglasV, rutaImagenV, 1, 1);
 				Pelota pelotaPartido = new Pelota(getBackground(), "pelota", 1);
-				ventanaPartido partido = new ventanaPartido(equipoLocal, equipoVisitante, pelotaPartido, false, true, true, f); 
+				ventanaPartido partido = new ventanaPartido(equipoLocal, equipoVisitante, pelotaPartido, false, true,
+						true, f);
 				partido.configuracionAntesDePartido();
 				partido.setVisible(true);
-				// PRUEBA DE LISTENER DE VENTANAPARTIDO 
+				// PRUEBA DE LISTENER DE VENTANAPARTIDO
 			}
 		});
 		panel.add(lblEqL);
@@ -361,19 +340,13 @@ public class MenuAmistoso extends JFrame {
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
-
-				ImageIcon imageIconR = new ImageIcon(Inicio.class.getResource("/iconos/stadiumAmistoso.png"));
-				Image imagenResiz = imageIconR.getImage();
-
-				Image iResizeo = imagenResiz.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
-																														
-				ImageIcon iiResizeo2 = new ImageIcon(iResizeo);
-				panel.setSize(getSize());
-				lblFondo.setIcon(iiResizeo2);
-
+				resizeo(new ImageIcon(Inicio.class.getResource("/iconos/stadiumAmistoso.png")), lblFondo, getWidth(),
+						getHeight());
 				lblFondo.setBounds(0, 0, getWidth(), getHeight());
 				getContentPane().revalidate();
 				getContentPane().setSize(getSize());
+				// Aquí hemos intentado meter una constante (getWidth()/626) pero no nos
+				// funcionaba, ni haciendo un Math.round.
 				int nuevaFuente = (13 * getWidth() / 626);
 				int nuevaAnchura = (80 * getWidth() / 626);
 				int nuevaAltura = (20 * getWidth() / 626);
@@ -383,6 +356,8 @@ public class MenuAmistoso extends JFrame {
 				int nuevaAlturaCb = (22 * getWidth() / 626);
 				int ladoIconoH = (int) Math.round(100 * getWidth() / 626);
 				int ladoIconoV = (int) Math.round(100 * getHeight() * 1.36 / 626);
+				// Inicialización de componentes del NullLayout en función del eje 0,0 de la
+				// ventana
 				lblLocal.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
 				lblVisitante.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
 				cbVisitante.setBounds((int) Math.round(((getWidth() / 2) + (getWidth() * 0.01))),
@@ -398,20 +373,14 @@ public class MenuAmistoso extends JFrame {
 				btnIniciarAmistoso.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
 
 				ImageIcon imageIconL = (ImageIcon) lblEqL.getIcon();
-				// imageIconL = new ImageIcon(Inicio.class.getResource());
-				Image imagenResizL = imageIconL.getImage();
-				Image iResizeoL = imagenResizL.getScaledInstance(ladoIconoH, ladoIconoV, java.awt.Image.SCALE_SMOOTH);
-				ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
-				lblEqL.setIcon(iiResizeoL);
+				resizeo(imageIconL, lblEqL, ladoIconoH, ladoIconoV);
 				lblEqL.setBounds((int) Math.round(((getWidth() / 2) - (getWidth() * 0.29))),
 						(int) Math.round(((getHeight() / 2) - (getHeight() * 0.25))), ladoIconoH, ladoIconoV);
 				lblEqL.repaint();
+				revalidate();
 				String localizacion = equipoV;
 				ImageIcon imageIconV = new ImageIcon(Inicio.class.getResource(localizacion));
-				Image imagenResizV = imageIconV.getImage();
-				Image iResizeoV = imagenResizV.getScaledInstance(ladoIconoH, ladoIconoV, java.awt.Image.SCALE_SMOOTH); 
-				ImageIcon iiResizeoV = new ImageIcon(iResizeoV);
-				lblEqV.setIcon(iiResizeoV);
+				resizeo(imageIconV, lblEqV, ladoIconoH, ladoIconoV);
 				lblEqV.setBounds((int) Math.round(((getWidth() / 2) + (getWidth() * 0.02))),
 						(int) Math.round(((getHeight() / 2) - (getHeight() * 0.25))), ladoIconoH, ladoIconoV);
 				lblEqV.repaint();
@@ -419,9 +388,32 @@ public class MenuAmistoso extends JFrame {
 			}
 		});
 	}
-	public static void main(String[] args) throws ClassNotFoundException, SQLException { //prueba de menuAmistoso para comprobar que carga bien
-		MenuAmistoso mu = new MenuAmistoso (600,500);
+
+	/**
+	 * @param imageIconL
+	 *            Icono del escudo del equipo
+	 * @param jlIcono
+	 *            JLabel donde se encuentra el icono del escudo
+	 * @param anchura
+	 *            a la que queremos ajustar el ImageIcon del escudo
+	 * @param altura
+	 *            a la que queremos ajustar el ImageIcon del escudo
+	 */
+	public void resizeo(ImageIcon imageIconL, JLabel jlIcono, int anchura, int altura) {
+		Image imagenResizL = imageIconL.getImage();
+		Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(anchura), (int) Math.round(altura),
+				java.awt.Image.SCALE_SMOOTH);
+		ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
+		jlIcono.setSize(iiResizeoL.getIconWidth(), iiResizeoL.getIconHeight());
+		jlIcono.setIcon(iiResizeoL);
+		jlIcono.repaint();
+		revalidate();
+	}
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException { // prueba de menuAmistoso para
+																							// comprobar que carga bien
+		MenuAmistoso mu = new MenuAmistoso(626, 460);
 		mu.setVisible(true);
 	}
-	
+
 }
