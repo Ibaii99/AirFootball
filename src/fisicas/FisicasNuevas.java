@@ -11,7 +11,8 @@ import ventanas.ventanaPartido;
  */
 public class FisicasNuevas {
 	public static double TIEMPO = 2;
-	public static double COEFICIENTE_PERDIDA = 0.90;
+	public static double COEFICIENTE_PERDIDA_PELOTA = 0.98;
+	public static double COEFICIENTE_PERDIDA_EQUIPO = 0.90;
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
 	
@@ -48,8 +49,8 @@ public class FisicasNuevas {
 	 */
 	private void cambioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
 		
-		p.setVelX(-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa());
-		p.setVelY(-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa());
+		p.setVelX((-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*2);
+		p.setVelY((-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*2);
 		//capamos la velocidad maxima al radio para que no pasen desapercibidos choques
 		if(p.getVelX() > p.getRadio()) p.setVelX(p.getRadio());
 		if(p.getVelY() > p.getRadio()) p.setVelY(p.getRadio());
@@ -90,8 +91,8 @@ public class FisicasNuevas {
 	 */
 	private void choqueEnBorde(ventanaPartido v, Pelota p) {
 		// Invierto los vectores de velocidad
-		if(igualACero(p.getVelY())&&igualACero(p.getVelX())) {
-			cambiarVelocidadPelota(p, -p.getVelX(), -p.getY());
+		if(!igualACero(p.getVelY())&&!igualACero(p.getVelX())) {
+			cambiarVelocidadPelota(p, -p.getVelXAntes(), -p.getVelXAntes());
 		}
 		cambiarVelocidadPelota(p, 0, 0);
 	}
@@ -111,8 +112,8 @@ public class FisicasNuevas {
 	 */
 	public void choquePelotaPoste(ventanaPartido v, Poste paloArribDer, Poste paloAbajoDer, Poste paloArribIzq, Poste paloAbajoIzq, Pelota p) {
 		if(daAlPoste(v, p, paloArribDer) || daAlPoste(v, p, paloAbajoDer) ||daAlPoste(v, p, paloArribIzq) ||daAlPoste(v, p, paloAbajoIzq)) {
-			p.setVelX(p.getVelXAntes()*COEFICIENTE_PERDIDA);
-			p.setVelY(p.getVelYAntes()*COEFICIENTE_PERDIDA);}
+			p.setVelX(p.getVelXAntes()*COEFICIENTE_PERDIDA_PELOTA);
+			p.setVelY(p.getVelYAntes()*COEFICIENTE_PERDIDA_PELOTA);}
 		}
 	
 	///////////////////////Metodos internos para calcularlo/////////////////////////////////

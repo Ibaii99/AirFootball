@@ -303,12 +303,12 @@ public class ventanaPartido extends JFrame {
 		hiloJuego.start();
 	}
 	public void degradarVelocidad() {
-		eVisitante.getBolaEquipo().setVelY(eVisitante.getBolaEquipo().getVelY()*fisicas.COEFICIENTE_PERDIDA);
-		eVisitante.getBolaEquipo().setVelX(eVisitante.getBolaEquipo().getVelX()*fisicas.COEFICIENTE_PERDIDA);
-		eLocal.getBolaEquipo().setVelY(eLocal.getBolaEquipo().getVelY()*fisicas.COEFICIENTE_PERDIDA);
-		eLocal.getBolaEquipo().setVelX(eLocal.getBolaEquipo().getVelX()*fisicas.COEFICIENTE_PERDIDA);
-		p.setVelY(p.getVelY()*fisicas.COEFICIENTE_PERDIDA);
-		p.setVelX(p.getVelX()*fisicas.COEFICIENTE_PERDIDA);
+		eVisitante.getBolaEquipo().setVelY(eVisitante.getBolaEquipo().getVelY()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		eVisitante.getBolaEquipo().setVelX(eVisitante.getBolaEquipo().getVelX()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		eLocal.getBolaEquipo().setVelY(eLocal.getBolaEquipo().getVelY()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		eLocal.getBolaEquipo().setVelX(eLocal.getBolaEquipo().getVelX()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		p.setVelY(p.getVelY()*fisicas.COEFICIENTE_PERDIDA_PELOTA);
+		p.setVelX(p.getVelX()*fisicas.COEFICIENTE_PERDIDA_PELOTA);
 	}
 
 	
@@ -329,7 +329,8 @@ public class ventanaPartido extends JFrame {
 	 */
 	public void actualizarPosicionObjetos() {
 		// añado todo al panel con las posiciones actualizadas
-		lblEquipoVisitante.setBounds((int) eVisitante.getBolaEquipo().getX(), (int) eVisitante.getBolaEquipo().getY(),
+		
+		lblEquipoVisitante.setBounds((int)( eVisitante.getBolaEquipo().getX()-eVisitante.getBolaEquipo().getRadio()/2), (int) (eVisitante.getBolaEquipo().getY()-eVisitante.getBolaEquipo().getRadio()/2),
 				(int) eVisitante.getBolaEquipo().getRadio() * 2, (int) eVisitante.getBolaEquipo().getRadio() * 2);
 		lblEquipoLocal.setBounds((int) eLocal.getBolaEquipo().getX(), (int) eLocal.getBolaEquipo().getY(),
 				(int) eLocal.getBolaEquipo().getRadio() * 2, (int) eLocal.getBolaEquipo().getRadio() * 2);
