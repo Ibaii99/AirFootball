@@ -12,7 +12,6 @@ import ventanas.ventanaPartido;
 public class FisicasNuevas {
 	public static double TIEMPO = 1;
 	public static double COEFICIENTE_PERDIDA = 0.90;
-	
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
 	
@@ -43,7 +42,7 @@ public class FisicasNuevas {
 	
 	/**	Metodo para cambiar las velocidades de una pelota cuando esta choca con un equipo
 	 *  Suponiendo un choque elastico de velPelo = velPelo*masaPelo - velEqui*masaEqui
-	 *  El equipo no se ver√° afectado por el choque
+	 *  El equipo no se ver· afectado por el choque
 	 * @param p			Pelota que va a sufrir el choque
 	 * @param equipo	Equipo con el que choca la pelota
 	 */
@@ -136,7 +135,7 @@ public class FisicasNuevas {
 	
 ///////////////////////Metodos para cambiar propiedades de las pelotas/////////////////////////////////
 	
-	/** Metodo para cambiar la posici√≥n de la pelota, 
+	/** Metodo para cambiar la posiciÛn de la pelota, 
 	 *	posicionInicial + velocidad * tiempo = posicionActual
 	 *	Si la pelota sobrepasa los limites del campo no avanza
 	 * @param p			Pelota a la que vas a cambiar la posicion

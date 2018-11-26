@@ -94,12 +94,11 @@ public class ventanaPartido extends JFrame {
 		String nombreFont = "DSEG14Classic-Regular.ttf";
 
 		System.out.println(eLocal.getNombre());
-		System.out.println(eLocal.getImagen());
-		ImageIcon iconL = new ImageIcon(getClass().getResource("/" + eLocal.getImagen()));
-		Image imgL = iconL.getImage();
+	//	ImageIcon iconL = new ImageIcon(getClass().getResource("/"+eLocal.getImagen()));
+	//	Image imgL = iconL.getImage();
 		BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
 		Graphics gL = biL.createGraphics();
-		gL.drawImage(imgL, 0, 0, 40, 40, null);
+	//	gL.drawImage(imgL, 0, 0, 40, 40, null);
 		ImageIcon newIconL = new ImageIcon(biL);
 
 		ImageIcon iconC = new ImageIcon(ventanaPartido.class.getResource("/iconos/campo.png"));
@@ -109,11 +108,11 @@ public class ventanaPartido extends JFrame {
 		gC.drawImage(imgC, 0, 0, 720, 395, null);
 		ImageIcon newIconC = new ImageIcon(biC);
 
-		ImageIcon iconV = new ImageIcon(getClass().getResource("/"+eVisitante.getImagen()));
-		Image imgV = iconV.getImage();
+	//	ImageIcon iconV = new ImageIcon(getClass().getResource("/"+eVisitante.getImagen()));
+	//	Image imgV = iconV.getImage();
 		BufferedImage biV = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
 		Graphics gV = biV.createGraphics();
-	 	gV.drawImage(imgV, 0, 0, 40, 40, null);
+	// 	gV.drawImage(imgV, 0, 0, 40, 40, null);
 		ImageIcon newIconV = new ImageIcon(biV);
 
 		ImageIcon icon = new ImageIcon(ventanaPartido.class.getResource("/iconos/marcadorconnombres.jpg"));

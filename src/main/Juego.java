@@ -26,33 +26,17 @@ public class Juego {
 	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 1, null, false);
 
 	private static FisicasNuevas f = new FisicasNuevas();
+
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos();
 		anyadirTodosLosEquipos(bd);
 		// pruebas de la ventana de juego
-<<<<<<< HEAD
-		// v = new ventanaPartido((new Equipo("/ALA", "Deportivo Alav�s", 0, Color.BLUE,
-		// ("iconos/equipos/ala.png"),
-		// "iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new
-		// Equipo("/ATH", "Athletic Club", 0, Color.RED, ("iconos/equipos/ath.png"),
-		// "iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p,
-		// true, true, false, f);
-
-		Equipo eLocal = new Equipo("Deportivo Alavés", "/ALA", ("iconos/equipos/ala.png"), 1, 1);
-//		Equipo a = new Equipo("Deportivo Alavés", "/ALA", 1, ("iconos/equipos/ala.png"));
-		Equipo g = new Equipo("FC Barcelona", "/BAR", ("iconos/equipos/bar.png"),1,1);
-		v = new ventanaPartido(eLocal, g, p, true, true, false, f);
-		v.setVisible(true);
-		// v.configuracionAntesDePartido();
-
-=======
 		 v = new ventanaPartido((new Equipo("ALA", "Deportivo Alav�s", 0, Color.BLUE, ("iconos/equipos/ala.png"),
 					"iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new Equipo("ATH", "Athletic Club", 0, Color.RED, ("iconos/equipos/ath.png"),
 							"iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
 		 v.setVisible(true);
 		
 		
->>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 	}
 
 	private static void anyadirTodosLosEquipos(BaseDeDatos bd) {
