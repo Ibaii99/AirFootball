@@ -10,7 +10,7 @@ import ventanas.ventanaPartido;
  *
  */
 public class FisicasNuevas {
-	public static double TIEMPO = 2;
+	public static double TIEMPO = 1;
 	public static double COEFICIENTE_PERDIDA_PELOTA = 0.98;
 	public static double COEFICIENTE_PERDIDA_EQUIPO = 0.90;
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
@@ -66,33 +66,60 @@ public class FisicasNuevas {
 	 * @param p		Pelota con la que se juega
 	 */
 	public void choquePelotaBorde(ventanaPartido v, Pelota p) {
-		if(rebotaeEnBorde(v, p)) choqueEnBorde(v, p);
+		if(rebotaeEnBordeArribAbaj(v, p)) choqueEnBordeArribaoAbajo(v, p);
+		if(rebotaeEnBordederIzq(v, p)) choqueEnBordeIzquDer(v, p);
 	}
 	
 	///////////////////////Metodos internos para calcularlo/////////////////////////////////
 	
-	/** Metodo para saber si ha ocurrido u ocurre algun choque en los bordes del campo
+	/** Metodo para saber si ha ocurrido u ocurre algun choque en los bordes verticales del campo
 	 * @param v	 Ventana donde se juega el partido
 	 * @param p	 Pelota con la que se esta jugando
 	 * @return	 Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
 	 */
-	private boolean rebotaeEnBorde(ventanaPartido v, Pelota p) {
+	private boolean rebotaeEnBordeArribAbaj(ventanaPartido v, Pelota p) {
 		boolean hayRebote = false;
-		if(v.getPanelCampo().getSize().getWidth()  <= (p.getX() + p.getRadio()+1))hayRebote = true;	//Choca en la derecha
 		if(v.getPanelCampo().getSize().getHeight() <= (p.getY() + p.getRadio()+1))hayRebote = true;	//Choca arriba
-		if((p.getX() - p.getRadio()) <= 0)hayRebote = true;						//Choca a la izquierda
 		if((p.getY() - p.getRadio()) <= 0)hayRebote = true;						//Choca abajo
 		return hayRebote;
 	}
-	
-	/**	Metodo para cambiar posicion si hay choque con un lateral
+	/** Metodo para saber si ha ocurrido u ocurre algun choque en los bordes verticales del campo
+	 * @param v	 Ventana donde se juega el partido
+	 * @param p	 Pelota con la que se esta jugando
+	 * @return	 Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
+	 */
+	private boolean rebotaeEnBordederIzq(ventanaPartido v, Pelota p) {
+		boolean hayRebote = false;
+		if(v.getPanelCampo().getSize().getWidth()  <= (p.getX() + p.getRadio()+1))hayRebote = true;	//Choca en la derecha
+		if((p.getX() - p.getRadio()) <= 0)hayRebote = true;						//Choca a la izquierda
+		return hayRebote;
+	}
+
+	/**	Metodo para cambiar posicion si hay choque Arriba o abajo
+	 *  y reduce la velocidad de la bola como consecuencia del impacto
+	 *  para hacerlo mas real se reduce un 10%
 	 * @param v		Ventana donde ocurre el choque
 	 * @param p		Pelota que genera el choque
 	 */
-	private void choqueEnBorde(ventanaPartido v, Pelota p) {
+	private void choqueEnBordeArribaoAbajo(ventanaPartido v, Pelota p) {
 		// Invierto los vectores de velocidad
 		if(!igualACero(p.getVelY())&&!igualACero(p.getVelX())) {
-			cambiarVelocidadPelota(p, -p.getVelX(), -p.getVelY());
+			cambiarVelocidadPelota(p, p.getVelX()*0.90, -p.getVelY()*0.90);
+		}
+		if(igualACero(p.getVelY())&&igualACero(p.getVelX())) {
+		cambiarVelocidadPelota(p, 0, 0);}
+	}
+
+	/**	Metodo para cambiar posicion si hay choque a la derecha o izquierda
+	 *  y reduce la velocidad de la bola como consecuencia del impacto
+	 *  para hacerlo mas real se reduce un 10%
+	 * @param v		Ventana donde ocurre el choque
+	 * @param p		Pelota que genera el choque
+	 */
+	private void choqueEnBordeIzquDer(ventanaPartido v, Pelota p) {
+		// Invierto los vectores de velocidad
+		if(!igualACero(p.getVelY())&&!igualACero(p.getVelX())) {
+			cambiarVelocidadPelota(p, -p.getVelX()*0.90, p.getVelY()*0.90);
 		}
 		if(igualACero(p.getVelY())&&igualACero(p.getVelX())) {
 		cambiarVelocidadPelota(p, 0, 0);}
