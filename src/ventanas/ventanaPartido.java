@@ -228,7 +228,6 @@ public class ventanaPartido extends JFrame {
 						jugador.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
 						break;
 					default:
-						;
 						break;
 					}
 					// Reseteo de velocidades para que no se queden guardadas
@@ -329,7 +328,7 @@ public class ventanaPartido extends JFrame {
 	 */
 	public void actualizarPosicionObjetos() {
 		// añado todo al panel con las posiciones actualizadas
-		
+
 		lblEquipoVisitante.setBounds((int)( eVisitante.getBolaEquipo().getX()-eVisitante.getBolaEquipo().getRadio()/2), (int) (eVisitante.getBolaEquipo().getY()-eVisitante.getBolaEquipo().getRadio()/2),
 				(int) eVisitante.getBolaEquipo().getRadio() * 2, (int) eVisitante.getBolaEquipo().getRadio() * 2);
 		lblEquipoLocal.setBounds((int) eLocal.getBolaEquipo().getX(), (int) eLocal.getBolaEquipo().getY(),

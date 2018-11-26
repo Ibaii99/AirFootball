@@ -11,8 +11,10 @@ import ventanas.ventanaPartido;
  */
 public class FisicasNuevas {
 	public static double TIEMPO = 1;
-	public static double COEFICIENTE_PERDIDA_PELOTA = 0.98;
+	public static double COEFICIENTE_PERDIDA_PELOTA = 0.99;
 	public static double COEFICIENTE_PERDIDA_EQUIPO = 0.90;
+	public static double VELOCIDAD_MAX_PELOTA = 10;
+	
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
 	
@@ -48,12 +50,7 @@ public class FisicasNuevas {
 	 * @param equipo	Equipo con el que choca la pelota
 	 */
 	private void cambioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
-		
-		p.setVelX((-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*2);
-		p.setVelY((-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*2);
-		//capamos la velocidad maxima al radio para que no pasen desapercibidos choques
-		if(p.getVelX() > p.getRadio()) p.setVelX(p.getRadio());
-		if(p.getVelY() > p.getRadio()) p.setVelY(p.getRadio());
+		cambiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*2, (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*2);//multiplico por dos para que no se quede pegado al jlabel
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -202,8 +199,12 @@ public class FisicasNuevas {
 	public void cambiarVelocidadPelota(Pelota p, double velX, double velY) {
 		p.setVelXAntes(p.getVelX());
 		p.setVelYAntes(p.getVelY());
-		p.setVelX(velX);
 		p.setVelY(velY);
+		p.setVelX(velX);
+		if(p.getVelX() > VELOCIDAD_MAX_PELOTA) p.setVelX(VELOCIDAD_MAX_PELOTA);
+		if(p.getVelY() > VELOCIDAD_MAX_PELOTA) p.setVelY(VELOCIDAD_MAX_PELOTA);
+		if(p.getVelX() < -VELOCIDAD_MAX_PELOTA) p.setVelX(-VELOCIDAD_MAX_PELOTA);
+		if(p.getVelY() < -VELOCIDAD_MAX_PELOTA) p.setVelY(-VELOCIDAD_MAX_PELOTA);
 	}
 
 	
