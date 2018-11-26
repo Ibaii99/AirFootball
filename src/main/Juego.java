@@ -30,6 +30,7 @@ public class Juego {
 		BaseDeDatos bd = new BaseDeDatos();
 		anyadirTodosLosEquipos(bd);
 		// pruebas de la ventana de juego
+<<<<<<< HEAD
 		// v = new ventanaPartido((new Equipo("/ALA", "Deportivo Alav�s", 0, Color.BLUE,
 		// ("iconos/equipos/ala.png"),
 		// "iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new
@@ -44,6 +45,14 @@ public class Juego {
 		v.setVisible(true);
 		// v.configuracionAntesDePartido();
 
+=======
+		 v = new ventanaPartido((new Equipo("ALA", "Deportivo Alav�s", 0, Color.BLUE, ("iconos/equipos/ala.png"),
+					"iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new Equipo("ATH", "Athletic Club", 0, Color.RED, ("iconos/equipos/ath.png"),
+							"iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
+		 v.setVisible(true);
+		
+		
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 	}
 
 	private static void anyadirTodosLosEquipos(BaseDeDatos bd) {

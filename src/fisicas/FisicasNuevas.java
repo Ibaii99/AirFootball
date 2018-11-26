@@ -49,8 +49,8 @@ public class FisicasNuevas {
 	 */
 	private void cambioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
 		
-		p.setVelX(p.getVelX()*p.getMasa() - equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa());
-		p.setVelY(p.getVelY()*p.getMasa() - equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa());
+		p.setVelX(-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa());
+		p.setVelY(-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa());
 		//capamos la velocidad maxima al radio para que no pasen desapercibidos choques
 		if(p.getVelX() > p.getRadio()) p.setVelX(p.getRadio());
 		if(p.getVelY() > p.getRadio()) p.setVelY(p.getRadio());
