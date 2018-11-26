@@ -12,6 +12,7 @@ import ventanas.ventanaPartido;
 public class FisicasNuevas {
 	public static double TIEMPO = 1;
 	public static double COEFICIENTE_PERDIDA = 0.90;
+	
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
 	
