@@ -87,18 +87,7 @@ public class MenuAmistoso extends JFrame {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	/**
-	 * @param anchura
-	 * @param altura
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 */
-	/**
-	 * @param anchura
-	 * @param altura
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 */
+
 	public MenuAmistoso(int anchura, int altura) throws ClassNotFoundException, SQLException {
 		try {
 			setSize(anchura, altura);
