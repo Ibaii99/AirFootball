@@ -35,7 +35,7 @@ public class Juego {
 					"iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new Equipo("ATH", "Athletic Club", 0, Color.RED, ("iconos/equipos/ath.png"),
 							"iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
 		 v.setVisible(true);
-		// v.configuracionAntesDePartido();
+		
 		
 	}
 

@@ -65,7 +65,7 @@ public class ventanaPartido extends JFrame {
 	private boolean isMultijugador;
 	private boolean isAmistoso;
 	private boolean isJugadorEquipoLocal;
-	private static double VELOCIDAD_CON_MOVIMIENTO = 10;
+	private static double VELOCIDAD_CON_MOVIMIENTO = 3;
 
 	private Font f;
 	private Equipo eLocal;
@@ -328,7 +328,7 @@ public class ventanaPartido extends JFrame {
 	 */
 	public void actualizarPosicionObjetos() {
 		// añado todo al panel con las posiciones actualizadas
-		lblEquipoVisitante.setBounds((int) eVisitante.getBolaEquipo().getX(), (int) eVisitante.getBolaEquipo().getY(),
+		lblEquipoVisitante.setBounds((int) eVisitante.getBolaEquipo().getX()/2, (int) eVisitante.getBolaEquipo().getY()/2,
 				(int) eVisitante.getBolaEquipo().getRadio() * 2, (int) eVisitante.getBolaEquipo().getRadio() * 2);
 		lblEquipoLocal.setBounds((int) eLocal.getBolaEquipo().getX(), (int) eLocal.getBolaEquipo().getY(),
 				(int) eLocal.getBolaEquipo().getRadio() * 2, (int) eLocal.getBolaEquipo().getRadio() * 2);
