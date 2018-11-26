@@ -111,6 +111,10 @@ public class MenuLiga extends JFrame {
 		imageIconL = new ImageIcon(getClass().getResource(equipoL));
 		icono.setIcon(imageIconL);
 		cbLiga.addActionListener(new ActionListener() {
+			/* (non-Javadoc)
+			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+			 * 
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 
@@ -130,14 +134,7 @@ public class MenuLiga extends JFrame {
 						String iconoL = rs2.getString("ICONO");
 						System.out.println(equipoL);
 					}
-					imageIconL = new ImageIcon(getClass().getResource(equipoL));
-					Image imagenResizL = imageIconL.getImage();
-					Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(200 * getWidth() / 600),
-							(int) Math.round(200 * getWidth() / 600), java.awt.Image.SCALE_SMOOTH); // scale it the
-																									// smooth way
-					ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
-					icono.setIcon(iiResizeoL);
-
+					resizeo(equipoL, icono);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -192,13 +189,7 @@ public class MenuLiga extends JFrame {
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
-				imageIconL = new ImageIcon(getClass().getResource(equipoL));
-				Image imagenResizL = imageIconL.getImage();
-				Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(200 * getWidth() / 600),
-						(int) Math.round(200 * getHeight() / 600), java.awt.Image.SCALE_SMOOTH); // scale it the
-																									// smooth way
-				ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
-				icono.setIcon(iiResizeoL);
+				resizeo(equipoL, icono);
 				icono.setSize(cbLiga.getHeight(), cbLiga.getHeight());
 				lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17 * getWidth() / 630)));
 				btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(13 * getWidth() / 630)));
@@ -208,6 +199,19 @@ public class MenuLiga extends JFrame {
 			}
 		});
 		getContentPane().setLayout(groupLayout);
-
+		
+	}
+	/**
+	 * @param equipo: Ruta de la imagen que queremos resizear
+	 * @param icono: JLabel donde se encuentra el icono del equipo
+	 */
+	public void resizeo(String equipo, JLabel icono) {
+		imageIconL = new ImageIcon(getClass().getResource(equipo));
+		Image imagenResizL = imageIconL.getImage();
+		Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(200 * getWidth() / 600),
+				(int) Math.round(200 * getHeight() / 600), java.awt.Image.SCALE_SMOOTH); // scale it the
+																							// smooth way
+		ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
+		icono.setIcon(iiResizeoL);
 	}
 }
