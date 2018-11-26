@@ -83,7 +83,7 @@ class TestPelotasYFisicas{
 		}
 		
 		//se colocan los elementos en su posicion ideal
-		v.configuracionAntesDePartido(p, e1, e2);
+		v.configuracionAntesDePartido();
 		
 		try {
 			Thread.sleep(1000);
@@ -103,7 +103,7 @@ class TestPelotasYFisicas{
 //				e3.printStackTrace();
 //			}
 //		
-			fisicas.cambiarVelocidad(p, 1, 1);
+			fisicas.cambiarVelocidadPelota(p, 1, 1);
 			
 
 			
@@ -111,7 +111,7 @@ class TestPelotasYFisicas{
 			
 //			System.out.println("Movimiento nº "+e+"	x: "+p.getX()+ "...... y: " + p.getY());
 //			System.out.println("Tamaño del panel: x: "+ v.getPanelCampo().getSize().getWidth() + " y: "+v.getPanelCampo().getSize().getHeight());
-			v.actualizarPosicionObjetos(p, e1, e2);
+			v.actualizarPosicionObjetos();
 			v.actualizarCampo();
 		//	System.out.println(p.getX() + "de" + v.getAnchuraCampo());
 			

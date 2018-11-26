@@ -10,7 +10,7 @@ import ventanas.ventanaPartido;
  *
  */
 public class FisicasNuevas {
-	public static double TIEMPO = 1;
+	public static double TIEMPO = 2;
 	public static double COEFICIENTE_PERDIDA = 0.90;
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
@@ -36,7 +36,7 @@ public class FisicasNuevas {
 	 */
 	private boolean chocanPelotas(Pelota p1, Equipo equipo) {
 		boolean chocan = false;
-		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
+		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())< (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())< (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
 		return chocan;
 	}
 	
