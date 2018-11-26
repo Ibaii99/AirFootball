@@ -10,7 +10,7 @@ import ventanas.ventanaPartido;
  *
  */
 public class FisicasNuevas {
-	public static double TIEMPO = 1;
+	public static double TIEMPO = 1.5;
 	public static double COEFICIENTE_PERDIDA_PELOTA = 0.99;
 	public static double COEFICIENTE_PERDIDA_EQUIPO = 0.90;
 	public static double VELOCIDAD_MAX_PELOTA = 10;
