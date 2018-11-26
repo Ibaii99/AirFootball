@@ -23,7 +23,7 @@ public class HiloJuego extends Thread {
 	public synchronized void start() {
 		while(true) {
 		try {
-			Thread.sleep(10);
+			Thread.sleep(20);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -92,9 +92,10 @@ public class FisicasNuevas {
 	private void choqueEnBorde(ventanaPartido v, Pelota p) {
 		// Invierto los vectores de velocidad
 		if(!igualACero(p.getVelY())&&!igualACero(p.getVelX())) {
-			cambiarVelocidadPelota(p, -p.getVelXAntes(), -p.getVelXAntes());
+			cambiarVelocidadPelota(p, -p.getVelX(), -p.getVelY());
 		}
-		cambiarVelocidadPelota(p, 0, 0);
+		if(igualACero(p.getVelY())&&igualACero(p.getVelX())) {
+		cambiarVelocidadPelota(p, 0, 0);}
 	}
 	
 	
