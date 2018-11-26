@@ -22,20 +22,25 @@ public class HiloJuego extends Thread {
 	@Override
 	public synchronized void start() {
 		while(true) {
-		fisicas.choquePelotaBorde(v, p);
-		fisicas.choquePelotaEquipo(p, eLocal);
-		fisicas.muevePelota(p, fisicas.TIEMPO, v);
-		fisicas.choquePelotaEquipo(p, eVisitante);
-		fisicas.muevePelota(p, fisicas.TIEMPO, v);
-		
 		try {
-			Thread.sleep(200);
+			Thread.sleep(10);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		fisicas.choquePelotaBorde(v, p);
+		fisicas.choquePelotaEquipo(p, eLocal);
+		fisicas.choquePelotaEquipo(p, eVisitante);
+		
+		fisicas.mueveEquipo(eLocal, fisicas.TIEMPO, v);
+		fisicas.mueveEquipo(eVisitante, fisicas.TIEMPO, v);
+		fisicas.muevePelota(p, fisicas.TIEMPO, v);
+		
+		v.degradarVelocidad();
 		v.actualizarPosicionObjetos();
 		v.actualizarCampo();
+		
 		System.out.println("--------------------------Pelota-------------------------------------");
 		System.out.println("x: "+p.getX()+ "  y: "+ p.getY());	
 		System.out.println("velX: "+p.getVelX() + "  velY: "+p.getVelY());

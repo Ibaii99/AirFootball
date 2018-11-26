@@ -38,8 +38,6 @@ public class FisicasNuevas {
 	private boolean chocanPelotas(Pelota p1, Equipo equipo) {
 		boolean chocan = false;
 		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
-		
-		System.out.println(chocan);
 		return chocan;
 	}
 	
@@ -50,8 +48,12 @@ public class FisicasNuevas {
 	 * @param equipo	Equipo con el que choca la pelota
 	 */
 	private void cambioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
+		
 		p.setVelX(p.getVelX()*p.getMasa() - equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa());
 		p.setVelY(p.getVelY()*p.getMasa() - equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa());
+		//capamos la velocidad maxima al radio para que no pasen desapercibidos choques
+		if(p.getVelX() > p.getRadio()) p.setVelX(p.getRadio());
+		if(p.getVelY() > p.getRadio()) p.setVelY(p.getRadio());
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -76,8 +78,8 @@ public class FisicasNuevas {
 	 */
 	private boolean rebotaeEnBorde(ventanaPartido v, Pelota p) {
 		boolean hayRebote = false;
-		if(v.getPanelCampo().getSize().getWidth()  <= (p.getX() + p.getRadio()))hayRebote = true;	//Choca en la derecha
-		if(v.getPanelCampo().getSize().getHeight() <= (p.getY() + p.getRadio()))hayRebote = true;	//Choca arriba
+		if(v.getPanelCampo().getSize().getWidth()  <= (p.getX() + p.getRadio()+1))hayRebote = true;	//Choca en la derecha
+		if(v.getPanelCampo().getSize().getHeight() <= (p.getY() + p.getRadio()+1))hayRebote = true;	//Choca arriba
 		if((p.getX() - p.getRadio()) <= 0)hayRebote = true;						//Choca a la izquierda
 		if((p.getY() - p.getRadio()) <= 0)hayRebote = true;						//Choca abajo
 		return hayRebote;
@@ -89,7 +91,10 @@ public class FisicasNuevas {
 	 */
 	private void choqueEnBorde(ventanaPartido v, Pelota p) {
 		// Invierto los vectores de velocidad
-		cambiarVelocidad(p, -p.getVelX(), -p.getY());
+		if(igualACero(p.getVelY())&&igualACero(p.getVelX())) {
+			cambiarVelocidadPelota(p, -p.getVelX(), -p.getY());
+		}
+		cambiarVelocidadPelota(p, 0, 0);
 	}
 	
 	
@@ -138,6 +143,7 @@ public class FisicasNuevas {
 	 * @param tiempo	Tiempo que ha pasado para mover
 	 */
 	public void muevePelota(Pelota p, double tiempo, ventanaPartido v) {
+		if(!igualACero(p.getVelX()) && !igualACero(p.getVelY())) {
 		p.setxAntes(p.getX());
 		p.setyAntes(p.getY());
 		
@@ -153,21 +159,58 @@ public class FisicasNuevas {
 		
 		p.setY(posicionFuturaY);
 		p.setX(posicionFuturaX);
+		}if(igualACero(p.getVelX()) && igualACero(p.getVelY())) {
+			p.setY(p.getY());
+			p.setX(p.getX());
+		}
+		
 		
 	}
-	
-
 	/** Metodo para cambiar la velocidad de la pelota
 	 * @param p		Pelota a la que vas a cambiar la velocidad
 	 * @param velX	Velocidad en x
 	 * @param velY	Velocidad en y
 	 */
-	public void cambiarVelocidad(Pelota p, double velX, double velY) {
+	public void cambiarVelocidadPelota(Pelota p, double velX, double velY) {
 		p.setVelXAntes(p.getVelX());
 		p.setVelYAntes(p.getVelY());
 		p.setVelX(velX);
 		p.setVelY(velY);
 	}
+
+	
+	public void mueveEquipo(Equipo e, double tiempo, ventanaPartido v) {
+	if(!igualACero(e.getBolaEquipo().getVelX()) && !igualACero(e.getBolaEquipo().getVelY())) {
+		e.getBolaEquipo().setxAntes(e.getBolaEquipo().getX());
+		e.getBolaEquipo().setyAntes(e.getBolaEquipo().getY());
+		
+		double posicionFuturaX = e.getBolaEquipo().getX()+(e.getBolaEquipo().getVelX()*tiempo);
+		double posicionFuturaY = e.getBolaEquipo().getY()+(e.getBolaEquipo().getVelY()*tiempo);
+		
+		if(posicionFuturaX > (v.getPanelCampo().getSize().getWidth()-1-e.getBolaEquipo().getRadio())) posicionFuturaX = (v.getPanelCampo().getSize().getWidth()-e.getBolaEquipo().getRadio());
+		if(posicionFuturaY > (v.getPanelCampo().getSize().getHeight()-1-e.getBolaEquipo().getRadio()))  posicionFuturaY = (v.getPanelCampo().getSize().getHeight() -e.getBolaEquipo().getRadio());
+		
+		if(posicionFuturaY <  e.getBolaEquipo().getRadio() ) posicionFuturaY = (e.getBolaEquipo().getRadio());
+		if(posicionFuturaX <  e.getBolaEquipo().getRadio() ) posicionFuturaX = (e.getBolaEquipo().getRadio());
+		
+		
+		e.getBolaEquipo().setY(posicionFuturaY);
+		e.getBolaEquipo().setX(posicionFuturaX);	}
+	if(igualACero(e.getBolaEquipo().getVelX()) && igualACero(e.getBolaEquipo().getVelY())) {
+		e.getBolaEquipo().setY(e.getBolaEquipo().getY());
+		e.getBolaEquipo().setX(e.getBolaEquipo().getX());
+	}
+	
+	}
+
+	public void cambiarVelocidadEquipo(Equipo e, double velX, double velY) {
+		e.getBolaEquipo().setVelXAntes(e.getBolaEquipo().getVelX());
+		e.getBolaEquipo().setVelYAntes(e.getBolaEquipo().getVelY());
+		e.getBolaEquipo().setVelX(velX);
+		e.getBolaEquipo().setVelY(velY);
+	}
+
+
 
 	
 	/** Metodo para saber si un numero es 0, redondeo
