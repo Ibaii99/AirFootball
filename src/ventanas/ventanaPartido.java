@@ -252,38 +252,44 @@ public class ventanaPartido extends JFrame {
 						break;
 					case 38:
 						eLocal.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // flecha arriba
-						mover(eLocal);
-						actualizarPosicionObjetos();
+//						mover(eLocal);
+//						actualizarPosicionObjetos();
 						break;
 					case 39:
 						eLocal.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO); // flecha derecha
-						mover(eLocal);
-						actualizarPosicionObjetos();
+//						mover(eLocal);
+//						actualizarPosicionObjetos();
 						break;
 					case 40:
 						eLocal.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
-						mover(eLocal);
-						actualizarPosicionObjetos();
+//						mover(eLocal);
+//						actualizarPosicionObjetos();
 						break;
 					case 87:
+						if(eVisitante.getBolaEquipo().getVelY() < 0) {
+							eLocal.getBolaEquipo().setVelY(0);
+						}
 						eVisitante.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // w
-						mover(eVisitante);
-						actualizarPosicionObjetos();
+//						mover(eVisitante);
+//						actualizarPosicionObjetos();
 						break;
 					case 83:
+						if(eVisitante.getBolaEquipo().getVelY() > 0) {
+							eLocal.getBolaEquipo().setVelY(0);
+						}
 						eVisitante.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // s
-						mover(eVisitante);
-						actualizarPosicionObjetos();
+//						mover(eVisitante);
+//						actualizarPosicionObjetos();
 						break;
 					case 68:
 						eVisitante.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO); // d
-						mover(eVisitante);
-						actualizarPosicionObjetos();
+//						mover(eVisitante);
+//						actualizarPosicionObjetos();
 						break;
 					case 65:
 						eVisitante.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // a
-						mover(eVisitante);
-						actualizarPosicionObjetos();
+						//mover(eVisitante);
+						//actualizarPosicionObjetos();
 						break;
 					default:
 						break;
@@ -308,12 +314,18 @@ public class ventanaPartido extends JFrame {
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
 		hiloJuego.start();
 	}
+	public void degradarVelocidad() {
+		eVisitante.getBolaEquipo().setVelY(eVisitante.getBolaEquipo().getY()*fisicas.COEFICIENTE_PERDIDA);
+		eVisitante.getBolaEquipo().setVelX(eVisitante.getBolaEquipo().getX()*fisicas.COEFICIENTE_PERDIDA);
+		eLocal.getBolaEquipo().setVelY(eLocal.getBolaEquipo().getY()*fisicas.COEFICIENTE_PERDIDA);
+		eLocal.getBolaEquipo().setVelX(eLocal.getBolaEquipo().getX()*fisicas.COEFICIENTE_PERDIDA);
+		p.setVelY(p.getY()*fisicas.COEFICIENTE_PERDIDA);
+		p.setVelX(p.getX()*fisicas.COEFICIENTE_PERDIDA);
+	}
 
 	
-	private void mover(Equipo jugador) {
-		fisicas.muevePelota(jugador.getBolaEquipo(), FisicasNuevas.TIEMPO, this);
-		
-
+	public void mover(Equipo jugador) {
+		fisicas.mueveEquipo(jugador, FisicasNuevas.TIEMPO, this);
 	}
 
 	/**
