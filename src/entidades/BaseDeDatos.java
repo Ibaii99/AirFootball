@@ -1,9 +1,12 @@
 package entidades;
 
+import java.awt.Color;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.ImageIcon;
 
 public class BaseDeDatos {
 	
@@ -191,7 +194,7 @@ public class BaseDeDatos {
 					+ "','" + e.getGolesAFavorVisitante() + "','" + e.getDerrotasTotales() + "','" + e.getDerrotasLocal()
 					+ "','" + e.getDerrotasVisitante() + "','" + e.getVictoriasTotales() + "','" + e.getVictoriasLocal() + "','"
 					+ e.getVictoriasVisitante() + "','" + e.getEmpatesTotales() + "','" + e.getEmpatesLocal() + "','"
-					+ e.getEmpatesVisitante() + "','" + e.getBolaEquipo().getColor().toString() + "','" + e.getBolaEquipo().getRutaImagen() + "')"; 
+					+ e.getEmpatesVisitante() + "','" + e.getBolaEquipo().getColor().getRGB()+ "','" + e.getBolaEquipo().getRutaImagen() + "')"; 
 //			comando = "INSERT INTO Equipos ( 'Siglas', 'Nombre')";
 //			comando += " VALUES (" + e.getSiglas() + ""," + e.getNombre()+")"; 
 			equipo.executeUpdate(comando);
@@ -258,5 +261,38 @@ public class BaseDeDatos {
 //			e1.printStackTrace();
 //		}
 		
+	}
+	
+	/** Metodo para select de equipos que coge los datos del result set y crea un objeto equipo
+	 * @param rs 	Sentencia de select del equipo
+	 * @return		Objeto Equipo
+	 * @throws SQLException
+	 */
+	public Equipo convertirAEquipo(ResultSet rs) throws SQLException {
+		String nombre = rs.getString("Nombre");
+		String siglas= rs.getString("Siglas");
+		int puntos= Integer.parseInt(rs.getString("Puntos"));
+		int get= Integer.parseInt(rs.getString("Goles Encajados Totales"));
+		int gel= Integer.parseInt(rs.getString("Goles Encajados Local"));
+		int gev= Integer.parseInt(rs.getString("Goles Encajados Visitante"));
+		int gaft= Integer.parseInt(rs.getString("Goles A Favor Totales"));
+		int gafl= Integer.parseInt(rs.getString("Goles A Favor Local"));
+		int gafv= Integer.parseInt(rs.getString("Goles A Favor Visitante"));
+		int dt= Integer.parseInt(rs.getString("Derrotas Totales"));
+		int dl= Integer.parseInt(rs.getString("Derrotas Local"));
+		int dv= Integer.parseInt(rs.getString("Derrotas Visitante"));
+		int vt= Integer.parseInt(rs.getString("Victorias Totales"));
+		int vl= Integer.parseInt(rs.getString("Victorias Local"));
+		int vv= Integer.parseInt(rs.getString("Victorias Visitante"));
+		int et= Integer.parseInt(rs.getString("Empates Totales"));
+		int el= Integer.parseInt(rs.getString("Empates Local"));
+		int ev= Integer.parseInt(rs.getString("Empates Visitante"));
+		
+		int colorRGB = Integer.parseInt(rs.getString("Color"));
+		Color color = new Color(colorRGB);
+		
+		String rutaImagen = rs.getString("Icono");
+		
+		return new Equipo(siglas, nombre, puntos,color , rutaImagen, rutaImagen, get, gel, gev, gaft, gafv, gafl, vt, vl, vv, dt, dl, dv, et, el, ev);
 	}
 }

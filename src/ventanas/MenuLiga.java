@@ -31,6 +31,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import entidades.BaseDeDatos;
+import entidades.Equipo;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -101,16 +102,25 @@ public class MenuLiga extends JFrame {
 		btnIniciarLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				java.util.Date d = new java.util.Date();
-				BaseDeDatos base = new BaseDeDatos(sdf.format( d ), cbLiga.getSelectedItem().toString());
 				try {
-					base.crearTablaLiga();
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				BaseDeDatos base = new BaseDeDatos(sdf.format( d ), cbLiga.getSelectedItem().toString());
+				base.crearTablaLiga();
+				Class.forName("org.sqlite.JDBC");
+				Connection con1 = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+				String query1 = "SELECT * FROM EQUIPOS WHERE NOMBRE='" +cbLiga.getSelectedItem().toString() + "'; ";
+				ResultSet rs1 = con1.createStatement().executeQuery(query1);
 				
-			}
-		});
+				Equipo equipo = base.convertirAEquipo(rs1);
+				
+				VentanaLiga v = new VentanaLiga(equipo);
+				
+				
+				con1.close();
+			
+				} catch (Exception e1) {
+					
+					}
+					}});
 		lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17 * getWidth() / 630)));
 		btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(13 * getWidth() / 630)));
 

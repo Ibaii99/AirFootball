@@ -29,6 +29,7 @@ public class Juego {
 	private static FisicasNuevas f = new FisicasNuevas();
 
 	public static void main(String[] args) {
+		
 		BaseDeDatos bd = new BaseDeDatos();
 		anyadirTodosLosEquipos(bd);
 		// pruebas de la ventana de juego
@@ -38,6 +39,7 @@ public class Juego {
 		 v.setVisible(true);
 		 Inicio i = new Inicio();
 		 i.setVisible(true);
+		 
 		
 		
 	}
