@@ -324,7 +324,7 @@ public class MenuAmistoso extends JFrame {
 				
 				ventanaPartido partido = new ventanaPartido(equipoLPrueba, equipoVPrueba, pelotaPartido, true, true,
 						false, f);
-				partido.configuracionAntesDePartido();
+				//partido.configuracionAntesDePartido();
 				try {
 				Thread.sleep(1000);
 				}catch(Exception e) {
