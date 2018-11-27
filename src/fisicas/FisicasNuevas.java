@@ -10,8 +10,12 @@ import ventanas.ventanaPartido;
  *
  */
 public class FisicasNuevas {
-	public static double TIEMPO = 1;
-	public static double COEFICIENTE_PERDIDA = 0.90;
+	public static double TIEMPO = 1.5;
+	public static double COEFICIENTE_PERDIDA_PELOTA = 0.99;
+	public static double COEFICIENTE_PERDIDA_EQUIPO = 0.90;
+	public static double VELOCIDAD_MAX_PELOTA = 10;
+	public static double VELOCIDAD_MAX_EQUIPO = 6;
+	
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
 	
@@ -36,7 +40,7 @@ public class FisicasNuevas {
 	 */
 	private boolean chocanPelotas(Pelota p1, Equipo equipo) {
 		boolean chocan = false;
-		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
+		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())< (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())< (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
 		return chocan;
 	}
 	
@@ -47,12 +51,7 @@ public class FisicasNuevas {
 	 * @param equipo	Equipo con el que choca la pelota
 	 */
 	private void cambioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
-		
-		p.setVelX(-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa());
-		p.setVelY(-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa());
-		//capamos la velocidad maxima al radio para que no pasen desapercibidos choques
-		if(p.getVelX() > p.getRadio()) p.setVelX(p.getRadio());
-		if(p.getVelY() > p.getRadio()) p.setVelY(p.getRadio());
+		cambiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*2, (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*2);//multiplico por dos para que no se quede pegado al jlabel
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,35 +64,63 @@ public class FisicasNuevas {
 	 * @param p		Pelota con la que se juega
 	 */
 	public void choquePelotaBorde(ventanaPartido v, Pelota p) {
-		if(rebotaeEnBorde(v, p)) choqueEnBorde(v, p);
+		if(rebotaeEnBordeArribAbaj(v, p)) choqueEnBordeArribaoAbajo(v, p);
+		if(rebotaeEnBordederIzq(v, p)) choqueEnBordeIzquDer(v, p);
 	}
 	
 	///////////////////////Metodos internos para calcularlo/////////////////////////////////
 	
-	/** Metodo para saber si ha ocurrido u ocurre algun choque en los bordes del campo
+	/** Metodo para saber si ha ocurrido u ocurre algun choque en los bordes verticales del campo
 	 * @param v	 Ventana donde se juega el partido
 	 * @param p	 Pelota con la que se esta jugando
 	 * @return	 Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
 	 */
-	private boolean rebotaeEnBorde(ventanaPartido v, Pelota p) {
+	private boolean rebotaeEnBordeArribAbaj(ventanaPartido v, Pelota p) {
 		boolean hayRebote = false;
-		if(v.getPanelCampo().getSize().getWidth()  <= (p.getX() + p.getRadio()+1))hayRebote = true;	//Choca en la derecha
 		if(v.getPanelCampo().getSize().getHeight() <= (p.getY() + p.getRadio()+1))hayRebote = true;	//Choca arriba
-		if((p.getX() - p.getRadio()) <= 0)hayRebote = true;						//Choca a la izquierda
 		if((p.getY() - p.getRadio()) <= 0)hayRebote = true;						//Choca abajo
 		return hayRebote;
 	}
-	
-	/**	Metodo para cambiar posicion si hay choque con un lateral
+	/** Metodo para saber si ha ocurrido u ocurre algun choque en los bordes verticales del campo
+	 * @param v	 Ventana donde se juega el partido
+	 * @param p	 Pelota con la que se esta jugando
+	 * @return	 Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
+	 */
+	private boolean rebotaeEnBordederIzq(ventanaPartido v, Pelota p) {
+		boolean hayRebote = false;
+		if(v.getPanelCampo().getSize().getWidth()  <= (p.getX() + p.getRadio()+1))hayRebote = true;	//Choca en la derecha
+		if((p.getX() - p.getRadio()) <= 0)hayRebote = true;						//Choca a la izquierda
+		return hayRebote;
+	}
+
+	/**	Metodo para cambiar posicion si hay choque Arriba o abajo
+	 *  y reduce la velocidad de la bola como consecuencia del impacto
+	 *  para hacerlo mas real se reduce un 10%
 	 * @param v		Ventana donde ocurre el choque
 	 * @param p		Pelota que genera el choque
 	 */
-	private void choqueEnBorde(ventanaPartido v, Pelota p) {
+	private void choqueEnBordeArribaoAbajo(ventanaPartido v, Pelota p) {
 		// Invierto los vectores de velocidad
-		if(igualACero(p.getVelY())&&igualACero(p.getVelX())) {
-			cambiarVelocidadPelota(p, -p.getVelX(), -p.getY());
+		if(!igualACero(p.getVelY())&&!igualACero(p.getVelX())) {
+			cambiarVelocidadPelota(p, p.getVelX()*0.90, -p.getVelY()*0.90);
 		}
-		cambiarVelocidadPelota(p, 0, 0);
+		if(igualACero(p.getVelY())&&igualACero(p.getVelX())) {
+		cambiarVelocidadPelota(p, 0, 0);}
+	}
+
+	/**	Metodo para cambiar posicion si hay choque a la derecha o izquierda
+	 *  y reduce la velocidad de la bola como consecuencia del impacto
+	 *  para hacerlo mas real se reduce un 10%
+	 * @param v		Ventana donde ocurre el choque
+	 * @param p		Pelota que genera el choque
+	 */
+	private void choqueEnBordeIzquDer(ventanaPartido v, Pelota p) {
+		// Invierto los vectores de velocidad
+		if(!igualACero(p.getVelY())&&!igualACero(p.getVelX())) {
+			cambiarVelocidadPelota(p, -p.getVelX()*0.90, p.getVelY()*0.90);
+		}
+		if(igualACero(p.getVelY())&&igualACero(p.getVelX())) {
+		cambiarVelocidadPelota(p, 0, 0);}
 	}
 	
 	
@@ -111,8 +138,8 @@ public class FisicasNuevas {
 	 */
 	public void choquePelotaPoste(ventanaPartido v, Poste paloArribDer, Poste paloAbajoDer, Poste paloArribIzq, Poste paloAbajoIzq, Pelota p) {
 		if(daAlPoste(v, p, paloArribDer) || daAlPoste(v, p, paloAbajoDer) ||daAlPoste(v, p, paloArribIzq) ||daAlPoste(v, p, paloAbajoIzq)) {
-			p.setVelX(p.getVelXAntes()*COEFICIENTE_PERDIDA);
-			p.setVelY(p.getVelYAntes()*COEFICIENTE_PERDIDA);}
+			p.setVelX(p.getVelXAntes()*COEFICIENTE_PERDIDA_PELOTA);
+			p.setVelY(p.getVelYAntes()*COEFICIENTE_PERDIDA_PELOTA);}
 		}
 	
 	///////////////////////Metodos internos para calcularlo/////////////////////////////////
@@ -173,8 +200,12 @@ public class FisicasNuevas {
 	public void cambiarVelocidadPelota(Pelota p, double velX, double velY) {
 		p.setVelXAntes(p.getVelX());
 		p.setVelYAntes(p.getVelY());
-		p.setVelX(velX);
 		p.setVelY(velY);
+		p.setVelX(velX);
+		if(p.getVelX() > VELOCIDAD_MAX_PELOTA) p.setVelX(VELOCIDAD_MAX_PELOTA);
+		if(p.getVelY() > VELOCIDAD_MAX_PELOTA) p.setVelY(VELOCIDAD_MAX_PELOTA);
+		if(p.getVelX() < -VELOCIDAD_MAX_PELOTA) p.setVelX(-VELOCIDAD_MAX_PELOTA);
+		if(p.getVelY() < -VELOCIDAD_MAX_PELOTA) p.setVelY(-VELOCIDAD_MAX_PELOTA);
 	}
 
 	
@@ -201,12 +232,16 @@ public class FisicasNuevas {
 	}
 	
 	}
-
+//TODO
 	public void cambiarVelocidadEquipo(Equipo e, double velX, double velY) {
 		e.getBolaEquipo().setVelXAntes(e.getBolaEquipo().getVelX());
 		e.getBolaEquipo().setVelYAntes(e.getBolaEquipo().getVelY());
-		e.getBolaEquipo().setVelX(velX);
 		e.getBolaEquipo().setVelY(velY);
+		e.getBolaEquipo().setVelX(velX);
+		if(e.getBolaEquipo().getVelX() > VELOCIDAD_MAX_EQUIPO) e.getBolaEquipo().setVelX(VELOCIDAD_MAX_EQUIPO);
+		if(e.getBolaEquipo().getVelY() > VELOCIDAD_MAX_EQUIPO) e.getBolaEquipo().setVelY(VELOCIDAD_MAX_EQUIPO);
+		if(e.getBolaEquipo().getVelX() < -VELOCIDAD_MAX_EQUIPO) e.getBolaEquipo().setVelX(-VELOCIDAD_MAX_EQUIPO);
+		if(e.getBolaEquipo().getVelY() < -VELOCIDAD_MAX_EQUIPO) e.getBolaEquipo().setVelY(-VELOCIDAD_MAX_EQUIPO);
 	}
 
 
@@ -217,7 +252,7 @@ public class FisicasNuevas {
 	 * @return		Devuelve: True-> si es 0 / False-> si no es 0
 	 */
 	public static boolean igualACero( double num ) {
-		return Math.abs(num)<=1E-12;  // 1 * 10^-12
+		return Math.abs(num)<=1E-9;  // 1 * 10^-12
 	}
 	
 }

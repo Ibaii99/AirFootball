@@ -23,7 +23,7 @@ public class HiloJuego extends Thread {
 	public synchronized void start() {
 		while(true) {
 		try {
-			Thread.sleep(10);
+			Thread.sleep(15);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,16 +41,16 @@ public class HiloJuego extends Thread {
 		v.actualizarPosicionObjetos();
 		v.actualizarCampo();
 		
-		System.out.println("--------------------------Pelota-------------------------------------");
-		System.out.println("x: "+p.getX()+ "  y: "+ p.getY());	
-		System.out.println("velX: "+p.getVelX() + "  velY: "+p.getVelY());
-		System.out.println("--------------------------Equipo local -------------------------------------");
-		System.out.println("x: "+eLocal.getBolaEquipo().getX()+ "  y: "+ eLocal.getBolaEquipo().getY());	
-		System.out.println("velX: "+eLocal.getBolaEquipo().getVelX() + "  velY: "+eLocal.getBolaEquipo().getVelY());
-		System.out.println("--------------------------Equipo visitante -------------------------------------");
-		System.out.println("x: "+eVisitante.getBolaEquipo().getX()+ "  y: "+ eVisitante.getBolaEquipo().getY());	
-		System.out.println("velX: "+eVisitante.getBolaEquipo().getVelX() + "  velY: "+eVisitante.getBolaEquipo().getVelY());}
-		
+//		System.out.println("--------------------------Pelota-------------------------------------");
+//		System.out.println("x: "+p.getX()+ "  y: "+ p.getY());	
+//		System.out.println("velX: "+p.getVelX() + "  velY: "+p.getVelY() + " color: " + p.getColor());
+//		System.out.println("--------------------------Equipo local -------------------------------------");
+//		System.out.println("x: "+eLocal.getBolaEquipo().getX()+ "  y: "+ eLocal.getBolaEquipo().getY());	
+//		System.out.println("velX: "+eLocal.getBolaEquipo().getVelX() + "  velY: "+eLocal.getBolaEquipo().getVelY()+ " color: " + eLocal.getBolaEquipo().getColor());
+//		System.out.println("--------------------------Equipo visitante -------------------------------------");
+//		System.out.println("x: "+eVisitante.getBolaEquipo().getX()+ "  y: "+ eVisitante.getBolaEquipo().getY());	
+//		System.out.println("velX: "+eVisitante.getBolaEquipo().getVelX() + "  velY: "+eVisitante.getBolaEquipo().getVelY()+ " color: " + eVisitante.getBolaEquipo().getColor());
+//		
 		}
-	}
+	}}
 

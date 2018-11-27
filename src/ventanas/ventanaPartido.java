@@ -199,7 +199,7 @@ public class ventanaPartido extends JFrame {
 		// lblEquipoLocal.setBounds(eLocal.getBolaEquipo().getX(),
 		// eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2,
 		// eLocal.getBolaEquipo().getRadio()*2);
-
+	
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -228,7 +228,6 @@ public class ventanaPartido extends JFrame {
 						jugador.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
 						break;
 					default:
-						;
 						break;
 					}
 					// Reseteo de velocidades para que no se queden guardadas
@@ -239,42 +238,42 @@ public class ventanaPartido extends JFrame {
 				else if (isMultijugador) {
 					switch (tecla) {
 					case 37:
-						if(eLocal.getBolaEquipo().getVelX() < 0)eLocal.getBolaEquipo().setVelX(0);
+						if(eLocal.getBolaEquipo().getVelX() > 0)eLocal.getBolaEquipo().setVelX(0);
 						
 						eLocal.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
 						break;
 					case 38:
-						if(eLocal.getBolaEquipo().getVelY() < 0)eLocal.getBolaEquipo().setVelY(0);
+						if(eLocal.getBolaEquipo().getVelY() > 0)eLocal.getBolaEquipo().setVelY(0);
 						
 						eLocal.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // flecha arriba
 						break;
 					case 39:
-						if(eLocal.getBolaEquipo().getVelX() > 0)eLocal.getBolaEquipo().setVelX(0);
+						if(eLocal.getBolaEquipo().getVelX() < 0)eLocal.getBolaEquipo().setVelX(0);
 						
 						eLocal.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO); // flecha derecha
 						break;
 					case 40:
-						if(eLocal.getBolaEquipo().getVelY() > 0)eLocal.getBolaEquipo().setVelY(0);
+						if(eLocal.getBolaEquipo().getVelY() < 0)eLocal.getBolaEquipo().setVelY(0);
 						
 						eLocal.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
 						break;
 					case 87:
-						if(eVisitante.getBolaEquipo().getVelY() < 0)eVisitante.getBolaEquipo().setVelY(0);
+						if(eVisitante.getBolaEquipo().getVelY() > 0)eVisitante.getBolaEquipo().setVelY(0);
 						
 						eVisitante.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // w
 						break;
 					case 83:
-						if(eVisitante.getBolaEquipo().getVelY() > 0)eVisitante.getBolaEquipo().setVelY(0);
+						if(eVisitante.getBolaEquipo().getVelY() < 0)eVisitante.getBolaEquipo().setVelY(0);
 						
 						eVisitante.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // s
 						break;
 					case 68:
-						if(eVisitante.getBolaEquipo().getVelX() > 0)eVisitante.getBolaEquipo().setVelX(0);
+						if(eVisitante.getBolaEquipo().getVelX() < 0)eVisitante.getBolaEquipo().setVelX(0);
 						
 						eVisitante.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO); // d
 						break;
 					case 65:
-						if(eVisitante.getBolaEquipo().getVelX() < 0)eVisitante.getBolaEquipo().setVelX(0);
+						if(eVisitante.getBolaEquipo().getVelX() > 0)eVisitante.getBolaEquipo().setVelX(0);
 						
 						eVisitante.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // a
 						break;
@@ -290,6 +289,7 @@ public class ventanaPartido extends JFrame {
 				}
 				actualizarCampo();
 			}
+			
 		});
 		try {
 			Thread.sleep(1000);
@@ -302,12 +302,18 @@ public class ventanaPartido extends JFrame {
 		hiloJuego.start();
 	}
 	public void degradarVelocidad() {
-		eVisitante.getBolaEquipo().setVelY(eVisitante.getBolaEquipo().getVelY()*fisicas.COEFICIENTE_PERDIDA);
-		eVisitante.getBolaEquipo().setVelX(eVisitante.getBolaEquipo().getVelX()*fisicas.COEFICIENTE_PERDIDA);
-		eLocal.getBolaEquipo().setVelY(eLocal.getBolaEquipo().getVelY()*fisicas.COEFICIENTE_PERDIDA);
-		eLocal.getBolaEquipo().setVelX(eLocal.getBolaEquipo().getVelX()*fisicas.COEFICIENTE_PERDIDA);
-		p.setVelY(p.getVelY()*fisicas.COEFICIENTE_PERDIDA);
-		p.setVelX(p.getVelX()*fisicas.COEFICIENTE_PERDIDA);
+		eVisitante.getBolaEquipo().setVelYAntes(eVisitante.getBolaEquipo().getVelY());
+		eVisitante.getBolaEquipo().setVelXAntes(eVisitante.getBolaEquipo().getVelX());
+		eLocal.getBolaEquipo().setVelYAntes(eLocal.getBolaEquipo().getVelY());
+		eLocal.getBolaEquipo().setVelXAntes(eLocal.getBolaEquipo().getVelX());
+		p.setVelYAntes(p.getVelY());
+		p.setVelXAntes(p.getVelX());
+		eVisitante.getBolaEquipo().setVelY(eVisitante.getBolaEquipo().getVelY()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		eVisitante.getBolaEquipo().setVelX(eVisitante.getBolaEquipo().getVelX()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		eLocal.getBolaEquipo().setVelY(eLocal.getBolaEquipo().getVelY()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		eLocal.getBolaEquipo().setVelX(eLocal.getBolaEquipo().getVelX()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		p.setVelY(p.getVelY()*fisicas.COEFICIENTE_PERDIDA_PELOTA);
+		p.setVelX(p.getVelX()*fisicas.COEFICIENTE_PERDIDA_PELOTA);
 	}
 
 	
@@ -328,11 +334,12 @@ public class ventanaPartido extends JFrame {
 	 */
 	public void actualizarPosicionObjetos() {
 		// añado todo al panel con las posiciones actualizadas
-		lblEquipoVisitante.setBounds((int) eVisitante.getBolaEquipo().getX()/2, (int) eVisitante.getBolaEquipo().getY()/2,
+
+		lblEquipoVisitante.setBounds((int)( eVisitante.getBolaEquipo().getX()-eVisitante.getBolaEquipo().getRadio()), (int) (eVisitante.getBolaEquipo().getY()-eVisitante.getBolaEquipo().getRadio()),
 				(int) eVisitante.getBolaEquipo().getRadio() * 2, (int) eVisitante.getBolaEquipo().getRadio() * 2);
-		lblEquipoLocal.setBounds((int) eLocal.getBolaEquipo().getX(), (int) eLocal.getBolaEquipo().getY(),
+		lblEquipoLocal.setBounds((int)( eLocal.getBolaEquipo().getX()-eLocal.getBolaEquipo().getRadio()), (int)( eLocal.getBolaEquipo().getY()-eLocal.getBolaEquipo().getRadio()),
 				(int) eLocal.getBolaEquipo().getRadio() * 2, (int) eLocal.getBolaEquipo().getRadio() * 2);
-		lblPelota.setBounds((int) p.getX(), (int) p.getY(), (int) p.getRadio() * 2, (int) p.getRadio() * 2);
+		lblPelota.setBounds((int)( p.getX()-p.getRadio()), (int) (p.getY()-p.getRadio()), (int) p.getRadio() * 2, (int) p.getRadio() * 2);
 		actualizarCampo();
 	}
 
@@ -362,11 +369,11 @@ public class ventanaPartido extends JFrame {
 	 *            Equipo Visitante
 	 */
 	public void configuracionAntesDePartido() {
-		colocarEnPosInicial(p, eLocal, eVisitante);
+		colocarEnPosInicial();
 		actualizarPosicionObjetos();
 		mostrarElementosDeJuego();
-		actualizarTamanyoLbl(p, eLocal, eVisitante);
-		pintarLabels(p, eLocal, eVisitante);
+		actualizarTamanyoLbl();
+		pintarLabels();
 		actualizarCampo();
 	}
 
@@ -383,7 +390,8 @@ public class ventanaPartido extends JFrame {
 	 * @param p
 	 *            Pelota
 	 */
-	private void pintarLabels(Pelota p, Equipo eLocal, Equipo eVisitante) {
+	private void pintarLabels() {
+		elementosAOpaco();
 		if (eLocal.getBolaEquipo().getImagenObjeto() == null)
 			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
 		if (eVisitante.getBolaEquipo().getImagenObjeto() == null)
@@ -408,7 +416,7 @@ public class ventanaPartido extends JFrame {
 	 * @param eVisitante
 	 *            Equipo Visitante
 	 */
-	private void colocarEnPosInicial(Pelota p, Equipo eLocal, Equipo eVisitante) {
+	private void colocarEnPosInicial() {
 		p.setX((int) getPanelCampo().getSize().getWidth() / 2);
 		p.setY((int) getPanelCampo().getSize().getHeight() / 2);
 
@@ -431,7 +439,7 @@ public class ventanaPartido extends JFrame {
 	 * @param eVisitante
 	 *            Equipo Visitante
 	 */
-	private void actualizarTamanyoLbl(Pelota p, Equipo eLocal, Equipo eVisitante) {
+	private void actualizarTamanyoLbl() {
 		lblEquipoLocal.setSize((int) eLocal.getBolaEquipo().getRadio() * 2,
 				(int) eLocal.getBolaEquipo().getRadio() * 2);
 		lblEquipoVisitante.setSize((int) eVisitante.getBolaEquipo().getRadio() * 2,
