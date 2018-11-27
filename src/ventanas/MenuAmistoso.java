@@ -90,7 +90,7 @@ public class MenuAmistoso extends JFrame {
 
 	public MenuAmistoso(int anchura, int altura) throws ClassNotFoundException, SQLException {
 		try {
-			setSize(anchura, altura);
+			setSize(1003, 725);
 		} catch (Exception e) {
 			setSize(626, 460);
 		}
@@ -260,7 +260,7 @@ public class MenuAmistoso extends JFrame {
 		btnIniciarAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				System.out.println(equipoL);
+
 				String nomEqL = cbLocal.getSelectedItem().toString();
 				String nomEqV = cbVisitante.getSelectedItem().toString();
 				try {
@@ -315,10 +315,16 @@ public class MenuAmistoso extends JFrame {
 				}
 				Equipo equipoLocal = new Equipo(nomEqL, siglasL, rutaImagenL, 1, 1);
 				Equipo equipoVisitante = new Equipo(nomEqV, siglasV, rutaImagenV, 1, 1);
-				Pelota pelotaPartido = new Pelota(getBackground(), "pelota", 1);
-				ventanaPartido partido = new ventanaPartido(equipoLocal, equipoVisitante, pelotaPartido, false, true,
-						true, f);
-				partido.configuracionAntesDePartido();
+				Equipo equipoLPrueba = new Equipo(siglasL, nomEqL, 0, Color.RED, (rutaImagenL), rutaImagenL, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+				Equipo equipoVPrueba = new Equipo(siglasV, nomEqV, 0, Color.RED, (rutaImagenV), rutaImagenV, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+				Pelota pelotaPartido = new Pelota(Color.black, "jabulani", 0, 0, 20, 1, null, false);
+
+				
+				ventanaPartido partido = new ventanaPartido(equipoLPrueba, equipoVPrueba, pelotaPartido, true, true,
+						false, f);
+			//	partido.configuracionAntesDePartido();
 				partido.setVisible(true);
 				// PRUEBA DE LISTENER DE VENTANAPARTIDO
 			}

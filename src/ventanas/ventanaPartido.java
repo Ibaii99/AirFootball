@@ -378,12 +378,14 @@ public class ventanaPartido extends JFrame {
 	 *            Equipo Visitante
 	 */
 	public void configuracionAntesDePartido() {
+		
 		colocarEnPosInicial();
 		actualizarPosicionObjetos();
 		mostrarElementosDeJuego();
 		actualizarTamanyoLbl();
 		pintarLabels();
 		actualizarCampo();
+		
 	}
 
 	// ...........................................................................................................//
@@ -433,7 +435,6 @@ public class ventanaPartido extends JFrame {
 		if (eLocal.getBolaEquipo().getImagenObjeto() != null) {
 			elementosTransparentes();
 			String rutaImagenL = "/" + eLocal.getBolaEquipo().getImagenObjeto().toString();
-			System.out.println(rutaImagenL);
 			ImageIcon icEqL = new ImageIcon(this.getClass().getResource(rutaImagenL));
 			lblEquipoLocal.setIcon(icEqL);
 			lblEqL.setIcon(icEqL);
