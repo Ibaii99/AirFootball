@@ -62,6 +62,8 @@ public class ventanaPartido extends JFrame {
 	private JLabel lblEquipoLocal = new JLabel("");
 	private JLabel lblEquipoVisitante = new JLabel("");
 	private JLabel lblPelota = new JLabel("");
+	private JLabel lblEqL = new JLabel("");
+	private JLabel lblEqV = new JLabel("");
 	private boolean isMultijugador;
 	private boolean isAmistoso;
 	private boolean isJugadorEquipoLocal;
@@ -131,8 +133,9 @@ public class ventanaPartido extends JFrame {
 		setResizable(true);
 		setVisible(true);
 
-		lblEquipoLocal.setText("EQUIPO LOCAL");
-		lblEquipoVisitante.setText("EQUIPOVISITANTE");
+		//lblEquipoLocal.setText("EQUIPO LOCAL");
+
+		//lblEquipoVisitante.setText("EQUIPOVISITANTE");
 		lblPelota.setText("PELOTA");
 
 		
@@ -153,12 +156,12 @@ public class ventanaPartido extends JFrame {
 		label.setFont(f);
 		panel.add(label);
 
-		JLabel lblEqL = new JLabel("");
+		
 		lblEqL.setBounds(12, 5, 40, 40);
 		lblEqL.setIcon(newIconL);
 		panel.add(lblEqL);
 
-		JLabel lblEqV = new JLabel("");
+		
 		lblEqV.setBounds(686, 5, 40, 40);
 		lblEqV.setIcon(newIconV);
 		panel.add(lblEqV);
@@ -399,8 +402,13 @@ public class ventanaPartido extends JFrame {
 		if (p.getImagenObjeto() == null)
 			lblPelota.setBackground(p.getColor());
 		if (eLocal.getBolaEquipo().getImagenObjeto() != null)
-			lblEquipoLocal.setIcon(eLocal.getBolaEquipo().getImagenObjeto());
+			System.out.println(eLocal.getBolaEquipo().getImagenObjeto());
+			String rutaImagen = eLocal.getBolaEquipo().getImagenObjeto().toString();
+			ImageIcon icEqL = eLocal.getBolaEquipo().getImagenObjeto();
+			lblEquipoLocal.setIcon(new ImageIcon(this.getClass().getResource(rutaImagen)));
+			lblEqL.setIcon(icEqL);
 		if (eVisitante.getBolaEquipo().getImagenObjeto() != null)
+			System.out.println(eVisitante.getBolaEquipo().getImagenObjeto());
 			lblEquipoVisitante.setIcon(eVisitante.getBolaEquipo().getImagenObjeto());
 		if (p.getImagenObjeto() != null)
 			lblPelota.setIcon(p.getImagenObjeto());
