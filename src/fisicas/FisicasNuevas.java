@@ -46,12 +46,18 @@ public class FisicasNuevas {
 	
 	/**	Metodo para cambiar las velocidades de una pelota cuando esta choca con un equipo
 	 *  Suponiendo un choque elastico de velPelo = velPelo*masaPelo - velEqui*masaEqui
-	 *  El equipo no se verá afectado por el choque
+	 *  El equipo no se verï¿½ afectado por el choque
 	 * @param p			Pelota que va a sufrir el choque
 	 * @param equipo	Equipo con el que choca la pelota
 	 */
 	private void cambioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
+		if(!igualACero(equipo.getBolaEquipo().getVelX())&& !igualACero(equipo.getBolaEquipo().getVelY())) {
 		cambiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*2, (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*2);//multiplico por dos para que no se quede pegado al jlabel
+	}
+		if(igualACero(equipo.getBolaEquipo().getVelX())&& igualACero(equipo.getBolaEquipo().getVelY())) {
+			cambiarVelocidadPelota(p, -(p.getVelX()*3/2),-(p.getVelY()*3/2));//multiplico por dos para que no se quede pegado al jlabel
+		}
+		
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -162,7 +168,7 @@ public class FisicasNuevas {
 	
 ///////////////////////Metodos para cambiar propiedades de las pelotas/////////////////////////////////
 	
-	/** Metodo para cambiar la posición de la pelota, 
+	/** Metodo para cambiar la posiciï¿½n de la pelota, 
 	 *	posicionInicial + velocidad * tiempo = posicionActual
 	 *	Si la pelota sobrepasa los limites del campo no avanza
 	 * @param p			Pelota a la que vas a cambiar la posicion

@@ -18,7 +18,7 @@ import ventanas.ventanaPartido;
  *
  */
 class TestPelotasYFisicas{
-	
+
 	private Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 25);
 	private Equipo e1 = new Equipo("Futbol club Barcelona", "FCB", Color.red, 50, 70);
 	private Equipo e2 = new Equipo("Real Madrid", "RM", Color.white, 50, 70);
@@ -73,6 +73,7 @@ class TestPelotasYFisicas{
 		p.setY(v.getHeight()/2);
 		fisicas.choquePelotaBorde(v, p);
 		fisicas.muevePelota(p, fisicas.TIEMPO, v);
+		assertEquals(p.getX()*0.9, p.getY()*0.9);
 	}
 	
 	
