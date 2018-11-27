@@ -14,13 +14,15 @@ public class BaseDeDatos {
 	private static Statement liga;
 	private static Statement equipo;
 	private static ResultSet rs;
-	private String fecha;
+	private String fechaLiga;
+	private String equipoLiga;
 	
 	/** Constructor para el modo liga
 	 * @param fecha Fecha de creacion de la liga
 	 */
-	public BaseDeDatos(String fecha) {
-		this.fecha = fecha;
+	public BaseDeDatos(String fecha, String equipo) {
+		this.fechaLiga = fecha;
+		this.equipoLiga = equipo;
 	}
 	public BaseDeDatos() {}
 	
@@ -33,7 +35,7 @@ public class BaseDeDatos {
 			try {
 	
 				Class.forName("org.sqlite.JDBC");
-				con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ fecha +".db");
+				con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ equipoLiga + fechaLiga +".db");
 				equipo = con.createStatement();
 				liga = con.createStatement();
 				jugadores = con.createStatement();
@@ -107,7 +109,7 @@ public class BaseDeDatos {
 			try {
 	
 				Class.forName("org.sqlite.JDBC");
-				con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ fecha +".db");
+				con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ fechaLiga +".db");
 				equipo = con.createStatement();
 				liga = con.createStatement();
 				jugadores = con.createStatement();
@@ -177,7 +179,7 @@ public class BaseDeDatos {
 		String comando = "";
 		try {
 			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+fecha+".db");
+			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+fechaLiga+".db");
 			equipo = con.createStatement();
 		//	comando = "alter table equipos modify puntos default null;";
 		//	comando = "INSERT INTO EQUIPOS ( Siglas, Nombre, Puntos, Goles Encajados Totales, Goles Encajados Local, Goles Encajados Visitante, Goles A Favor Totales, Goles A Favor Local, Goles A Favor Visitante, Derrotas Totales, Derrotas Local, Derrotas Visitante, Victorias Totales, Victorias Local, Victorias Visitante, Empates Totales, Empates Local, Empates Visitante, Color, Icono)";

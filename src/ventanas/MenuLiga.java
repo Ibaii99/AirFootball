@@ -101,7 +101,7 @@ public class MenuLiga extends JFrame {
 		btnIniciarLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				java.util.Date d = new java.util.Date();
-				BaseDeDatos base = new BaseDeDatos(sdf.format( d ));
+				BaseDeDatos base = new BaseDeDatos(sdf.format( d ), cbLiga.getSelectedItem().toString());
 				try {
 					base.crearTablaLiga();
 				} catch (ClassNotFoundException e1) {
