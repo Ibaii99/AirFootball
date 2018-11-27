@@ -18,6 +18,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
@@ -90,13 +93,22 @@ public class MenuLiga extends JFrame {
 		rs.close();
 
 		JLabel lblEligeEquipo = new JLabel("Elige equipo:");
+		//TODO
+		//TODO
 		
-
+		SimpleDateFormat sdf = new SimpleDateFormat( "yyyyMMddhhmmss" );
 		JButton btnIniciarLiga = new JButton("Iniciar liga");
 		btnIniciarLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BaseDeDatos base = new BaseDeDatos(new Date(aa, month, day));
-				base.crearTabla();
+				java.util.Date d = new java.util.Date();
+				BaseDeDatos base = new BaseDeDatos(sdf.format( d ));
+				try {
+					base.crearTablaLiga();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17 * getWidth() / 630)));

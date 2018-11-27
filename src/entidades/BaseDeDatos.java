@@ -1,6 +1,7 @@
 package entidades;
 
 import java.sql.*;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,14 +14,17 @@ public class BaseDeDatos {
 	private static Statement liga;
 	private static Statement equipo;
 	private static ResultSet rs;
-	private Date fecha;
+	private String fecha;
 	
-	public BaseDeDatos(Date fecha) {
+	/** Constructor para el modo liga
+	 * @param fecha Fecha de creacion de la liga
+	 */
+	public BaseDeDatos(String fecha) {
 		this.fecha = fecha;
 	}
 	public BaseDeDatos() {}
 	
-	public void crearTablaLiga(Date fecha) throws ClassNotFoundException {
+	public void crearTablaLiga() throws ClassNotFoundException {
 		String comando = "";
 		try {
 		Class.forName( "org.sqlite.JDBC" );
