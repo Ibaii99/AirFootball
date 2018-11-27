@@ -43,7 +43,7 @@ public class MenuLiga extends JFrame {
 	/**
 	 * @author Jorge
 	 * @throws SQLException
-	 *
+	 * @author ibai
 	 */
 	public String equipoL;
 	public ImageIcon imageIconL;
@@ -107,15 +107,18 @@ public class MenuLiga extends JFrame {
 				base.crearTablaLiga();
 				Class.forName("org.sqlite.JDBC");
 				Connection con1 = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+				System.out.println(cbLiga.getSelectedItem().toString());
 				String query1 = "SELECT * FROM EQUIPOS WHERE NOMBRE='" +cbLiga.getSelectedItem().toString() + "'; ";
 				ResultSet rs1 = con1.createStatement().executeQuery(query1);
 				
 				Equipo equipo = base.convertirAEquipo(rs1);
-				
-				VentanaLiga v = new VentanaLiga(equipo);
-				
-				
 				con1.close();
+				VentanaLiga v = new VentanaLiga(equipo);
+				v.setVisible(true);
+				setVisible(false);
+				
+				
+				
 			
 				} catch (Exception e1) {
 					
