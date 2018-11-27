@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,6 +26,9 @@ import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import entidades.BaseDeDatos;
+
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
@@ -89,6 +93,12 @@ public class MenuLiga extends JFrame {
 		
 
 		JButton btnIniciarLiga = new JButton("Iniciar liga");
+		btnIniciarLiga.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BaseDeDatos base = new BaseDeDatos(new Date(aa, month, day));
+				base.crearTabla();
+			}
+		});
 		lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17 * getWidth() / 630)));
 		btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(13 * getWidth() / 630)));
 
