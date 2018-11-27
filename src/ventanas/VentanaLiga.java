@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 
 public class VentanaLiga extends JFrame {
 
@@ -44,6 +45,12 @@ public class VentanaLiga extends JFrame {
 		
 		JPanel panelBotonera = new JPanel();
 		contentPane.add(panelBotonera, BorderLayout.SOUTH);
+		
+		JButton btnGuardar = new JButton("Guardar");
+		panelBotonera.add(btnGuardar);
+		
+		JButton btnCargar = new JButton("Cargar");
+		panelBotonera.add(btnCargar);
 		
 		JPanel panelInformacionEquipo = new JPanel();
 		contentPane.add(panelInformacionEquipo, BorderLayout.NORTH);
@@ -83,6 +90,9 @@ public class VentanaLiga extends JFrame {
 		
 		JLabel lblPuntosAdversario = new JLabel("New label");
 		panelEquipoAdversario.add(lblPuntosAdversario);
+		
+		JButton btnPlay = new JButton("Play");
+		panelInformacionEquipo.add(btnPlay);
 	}
 
 }
