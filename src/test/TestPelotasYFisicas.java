@@ -64,6 +64,20 @@ class TestPelotasYFisicas{
 		assertEquals(25, p.getY());
 	}
 	
+	
+	@Test
+	void probarReboteBordeLateral() {
+		p.setVelX(7);
+		p.setVelY(0);
+		p.setX(v.getWidth());
+		p.setY(v.getHeight()/2);
+		fisicas.choquePelotaBorde(v, p);
+		fisicas.muevePelota(p, fisicas.TIEMPO, v);
+	}
+	
+	
+	
+	
 	@Test
 	void testAvanceSinPasarseDelTope(){
 
@@ -73,7 +87,7 @@ class TestPelotasYFisicas{
 
 		v.setAlwaysOnTop(false);
 		v.setVisible(false);
-		
+				
 		//hay que dar tiempo a que se genere la ventana para que los tamaños esten cargados
 		//sino va a dar error
 		try {
