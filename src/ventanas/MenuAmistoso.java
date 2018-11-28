@@ -225,11 +225,6 @@ public class MenuAmistoso extends JFrame {
 		btnIniciarAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				System.out.println(equipoL);
-				String nomEqL = cbLocal.getSelectedItem().toString();
-				String nomEqV = cbVisitante.getSelectedItem().toString();
-			
-
 				char[] a = {'a','b','c'};
 				
 				Equipo eLocal = bd.convertirAEquipo(cbLocal.getSelectedItem().toString(), new Jugador("", a, 0));
@@ -238,7 +233,13 @@ public class MenuAmistoso extends JFrame {
 				Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
 				
 				ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, false, f);
-			
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				partido.configuracionAntesDePartido();
 				partido.setVisible(true);}}
 				// PRUEBA DE LISTENER DE VENTANAPARTIDO
 			

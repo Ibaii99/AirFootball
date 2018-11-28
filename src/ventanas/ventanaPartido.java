@@ -397,19 +397,19 @@ public class ventanaPartido extends JFrame {
 	 */
 	private void pintarLabels() {
 		elementosAOpaco();
-		if (eLocal.getBolaEquipo().getImagenObjeto() == null)
+		if (eLocal.getBolaEquipo().getRutaImagen() == null)
 			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
-		if (eVisitante.getBolaEquipo().getImagenObjeto() == null)
+		if (eVisitante.getBolaEquipo().getRutaImagen() == null)
 			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
-		if (p.getImagenObjeto() == null)
+		if (p.getRutaImagen() == null)
 			lblPelota.setBackground(p.getColor());
 		
-		if (eLocal.getBolaEquipo().getImagenObjeto() != null)
-			lblEquipoLocal.setIcon(new ImageIcon("/"+this.getClass().getResource(eLocal.getBolaEquipo().getRutaImagen())));
-		if (eVisitante.getBolaEquipo().getImagenObjeto() != null)
-			lblEquipoVisitante.setIcon(new ImageIcon("/"+this.getClass().getResource(eVisitante.getBolaEquipo().getRutaImagen())));
-		if (p.getImagenObjeto() != null)
-			lblPelota.setIcon(new ImageIcon("/"+this.getClass().getResource(p.getRutaImagen())));
+		if (eLocal.getBolaEquipo().getRutaImagen() != null)
+			lblEquipoLocal.setIcon(new ImageIcon(this.getClass().getResource(eLocal.getBolaEquipo().getRutaImagen())));
+		if (eVisitante.getBolaEquipo().getRutaImagen() != null)
+			lblEquipoVisitante.setIcon(new ImageIcon(this.getClass().getResource(eVisitante.getBolaEquipo().getRutaImagen())));
+		if (p.getRutaImagen() != null)
+			lblPelota.setIcon(new ImageIcon(this.getClass().getResource(p.getRutaImagen())));
 	}
 
 	/**
