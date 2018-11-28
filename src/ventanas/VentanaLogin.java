@@ -94,6 +94,7 @@ public class VentanaLogin extends JDialog {
 							Jugador j = new Jugador(tFNombre.getText(), passwordField.getPassword(), 0);
 							bd.anyadirJugador(j);
 							bd.crearTablaEquipos(j);
+							bd.anyadirTodosLosEquipos(j.getCodLiga(), j);
 							//TODO
 							setVisible(false);
 							MenuLiga mL = new MenuLiga(800, 800, j, bd, con);
