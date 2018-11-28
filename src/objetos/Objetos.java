@@ -63,7 +63,7 @@ public abstract class Objetos{
 		this.nombre = nombre;
 		this.radio = radio;
 		this.masa = masa;
-		this.imagenObjeto = new ImageIcon(rutaImagen);
+		this.imagenObjeto = new ImageIcon("\\"+rutaImagen);
 		this.rutaImagen = rutaImagen;
 	}
 	

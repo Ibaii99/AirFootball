@@ -138,7 +138,7 @@ public class ventanaPartido extends JFrame {
 		}
 		setSize(900, 600);
 		setResizable(true);
-		setVisible(true);
+		
 
 		//lblEquipoLocal.setText("EQUIPO LOCAL");
 
@@ -304,8 +304,10 @@ public class ventanaPartido extends JFrame {
 		}
 		configuracionAntesDePartido();
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
+		setVisible(true);
 		hiloJuego.start();
 	}
+	
 	public void degradarVelocidad() {
 		eVisitante.getBolaEquipo().setVelYAntes(eVisitante.getBolaEquipo().getVelY());
 		eVisitante.getBolaEquipo().setVelXAntes(eVisitante.getBolaEquipo().getVelX());
@@ -403,13 +405,13 @@ public class ventanaPartido extends JFrame {
 			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
 		if (p.getRutaImagen() == null)
 			lblPelota.setBackground(p.getColor());
-		
+		//TODO aqui hay fallo
 		if (eLocal.getBolaEquipo().getRutaImagen() != null)
-			lblEquipoLocal.setIcon(new ImageIcon(this.getClass().getResource(eLocal.getBolaEquipo().getRutaImagen())));
+			lblEquipoLocal.setIcon(eLocal.getBolaEquipo().getImagenObjeto());
 		if (eVisitante.getBolaEquipo().getRutaImagen() != null)
-			lblEquipoVisitante.setIcon(new ImageIcon(this.getClass().getResource(eVisitante.getBolaEquipo().getRutaImagen())));
+			lblEquipoVisitante.setIcon(eVisitante.getBolaEquipo().getImagenObjeto());
 		if (p.getRutaImagen() != null)
-			lblPelota.setIcon(new ImageIcon(this.getClass().getResource(p.getRutaImagen())));
+			lblPelota.setIcon(p.getImagenObjeto());
 	}
 
 	/**
