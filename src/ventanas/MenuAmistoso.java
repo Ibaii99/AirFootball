@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import entidades.BaseDeDatos;
 import entidades.Equipo;
 import fisicas.FisicasNuevas;
+import jugador.Jugador;
 import objetos.ObjetoCombobox;
 import objetos.Pelota;
 
@@ -259,64 +260,21 @@ public class MenuAmistoso extends JFrame {
 				System.out.println(equipoL);
 				String nomEqL = cbLocal.getSelectedItem().toString();
 				String nomEqV = cbVisitante.getSelectedItem().toString();
-				try {
-					try {
-						
-						Class.forName("org.sqlite.JDBC");
-						
-						Statement consultaL;
-						consultaL = con.createStatement();
-						String comando3 = "SELECT ICONO, SIGLAS FROM EQUIPOS WHERE NOMBRE = '"
-								+ cbLocal.getSelectedItem().toString() + "'";
-						consultaL.executeUpdate(comando3);
-						ResultSet rs3 = con.createStatement().executeQuery(comando3);
-						System.out.println(rs3.toString());
+			
 
-						while (rs3.next()) {
-
-							siglasL = "/" + rs3.getString("SIGLAS");
-							rutaImagenL = rs3.getString("ICONO");
-						}
-
-					} catch (SQLException i) {
-
-					}
-				} catch (Exception e2) {
-
-				}
-				try {
-					try {
-						Class.forName("org.sqlite.JDBC");
-						Statement consultaV;
-						consultaV = con.createStatement();
-						String comando4 = "SELECT ICONO, SIGLAS FROM EQUIPOS WHERE NOMBRE = '"
-								+ cbVisitante.getSelectedItem().toString() + "'";
-						consultaV.executeUpdate(comando4);
-						ResultSet rs3 = con.createStatement().executeQuery(comando4);
-						System.out.println(rs3.toString());
-
-						while (rs3.next()) {
-
-							siglasV = "/" + rs3.getString("SIGLAS");
-							rutaImagenV = rs3.getString("ICONO");
-						}
-
-					} catch (SQLException i) {
-
-					}
-				} catch (Exception e2) {
-
-				}
-				Equipo equipoLocal = new Equipo(nomEqL, siglasL, rutaImagenL, 1, 1);
-				Equipo equipoVisitante = new Equipo(nomEqV, siglasV, rutaImagenV, 1, 1);
-				Pelota pelotaPartido = new Pelota(getBackground(), "pelota", 1);
-				ventanaPartido partido = new ventanaPartido(equipoLocal, equipoVisitante, pelotaPartido, false, true,
-						true, f);
-				partido.configuracionAntesDePartido();
-				partido.setVisible(true);
+				char[] a = {'a','b','c'};
+				
+				Equipo eLocal = bd.convertirAEquipo(cbLocal.getSelectedItem().toString(), new Jugador("", a, 0));
+				Equipo eVisitante = bd.convertirAEquipo(cbVisitante.getSelectedItem().toString(), new Jugador("", a, 0));
+				
+				Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
+				
+				ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, false, true, true, f);
+			
+				partido.setVisible(true);}}
 				// PRUEBA DE LISTENER DE VENTANAPARTIDO
-			}
-		});
+			
+		);
 		panel.add(lblEqL);
 		panel.add(lblEqV);
 
