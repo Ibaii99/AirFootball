@@ -90,18 +90,22 @@ public class ventanaPartido extends JFrame {
 		this.p = p;
 		
 
-		
+		lblEqV.setBounds(686, 5, 40, 40);
+		lblEqL.setBounds(12, 5, 40, 40);
 
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
 
-		System.out.println(eLocal.getNombre());
-		ImageIcon iconL = new ImageIcon(getClass().getResource("/"+eLocal.getBolaEquipo().getRutaImagen()));
-		Image imgL = iconL.getImage();
-		BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
-		Graphics gL = biL.createGraphics();
-		gL.drawImage(imgL, 0, 0, 40, 40, null);
-		ImageIcon newIconL = new ImageIcon(biL);
+		
+		try {	
+			ImageIcon iconL = new ImageIcon(getClass().getResource("/"+eLocal.getBolaEquipo().getRutaImagen()));
+			Image imgL = iconL.getImage();
+			BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
+			Graphics gL = biL.createGraphics();
+			gL.drawImage(imgL, 0, 0, 40, 40, null);
+			ImageIcon newIconL = new ImageIcon(biL);
+			lblEqL.setIcon(newIconL);} catch(NullPointerException e) {}
+		
 
 		ImageIcon iconC = new ImageIcon(ventanaPartido.class.getResource("/iconos/campo.png"));
 		Image imgC = iconC.getImage();
@@ -109,13 +113,16 @@ public class ventanaPartido extends JFrame {
 		Graphics gC = biC.createGraphics();
 		gC.drawImage(imgC, 0, 0, 720, 395, null);
 		ImageIcon newIconC = new ImageIcon(biC);
+		
 
-		ImageIcon iconV = new ImageIcon(getClass().getResource("/"+eVisitante.getBolaEquipo().getRutaImagen()));
-		Image imgV = iconV.getImage();
-		BufferedImage biV = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
-		Graphics gV = biV.createGraphics();
-	 	gV.drawImage(imgV, 0, 0, 40, 40, null);
-		ImageIcon newIconV = new ImageIcon(biV);
+		try {	
+			ImageIcon iconV = new ImageIcon(getClass().getResource("/"+eVisitante.getBolaEquipo().getRutaImagen()));
+			Image imgV = iconV.getImage();
+			BufferedImage biV = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
+			Graphics gV = biV.createGraphics();
+		 	gV.drawImage(imgV, 0, 0, 40, 40, null);
+			ImageIcon newIconV = new ImageIcon(biV);
+			lblEqV.setIcon(newIconV);} catch(NullPointerException e) {}
 
 		ImageIcon icon = new ImageIcon(ventanaPartido.class.getResource("/iconos/marcadorconnombres.jpg"));
 		Image img = icon.getImage();
@@ -156,14 +163,13 @@ public class ventanaPartido extends JFrame {
 		label.setFont(f);
 		panel.add(label);
 
+
 		
-		lblEqL.setBounds(12, 5, 40, 40);
-		lblEqL.setIcon(newIconL);
+
+		
 		panel.add(lblEqL);
 
 		
-		lblEqV.setBounds(686, 5, 40, 40);
-		lblEqV.setIcon(newIconV);
 		panel.add(lblEqV);
 
 		JLabel label_3 = new JLabel("0");
