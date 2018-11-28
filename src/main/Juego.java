@@ -37,35 +37,36 @@ public class Juego {
 //					"/iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new Equipo("/ATH", "Athletic Club", 0, Color.RED, ("/iconos/equipos/ath.png"),
 //							"/iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
 //		 v.setVisible(true);
-		 char[] con ={ 'p', 'a', 's', 's'};
-		 
 		
-			BaseDeDatos bd = new BaseDeDatos("BETA");
-			Jugador a = new Jugador("IBAI", con);
-			Jugador b = new Jugador("JORGEPRINGAO", con); 
-			
-			bd.crearTabla();
-			bd.crearTablaEquipos(a);
-			bd.crearTablaEquipos(b);
-			
-			bd.anyadirJugador(a);
-			bd.anyadirJugador(b);
-			
-			bd.anyadirLiga("Liga BBVA",a);
-			bd.anyadirLiga("Liga Santander",a);
-			bd.anyadirLiga("Liga Paco Sanz",a);
-			bd.anyadirLiga("Liga Urdangarin",a);
-			
-			anyadirTodosLosEquipos(bd, 1,a);
-			
-			bd.anyadirLiga("Liga PRINGAO",b);
-			bd.anyadirLiga("Liga SUBNORMAL",b);
-			bd.anyadirLiga("Liga STEFEN HAWKINGS",b);
-			bd.anyadirLiga("Liga AQUI TU ERE EL KING",b);
-			anyadirTodosLosEquipos(bd, 1,b);
-			
+	/*	char[] con ={ 'p', 'a', 's', 's'};
+	
+	
+		BaseDeDatos bd = new BaseDeDatos("BETA");
+		Jugador a = new Jugador("IBAI", con);
+		Jugador b = new Jugador("JORGEPRINGAO", con); 
 		
+		bd.crearTabla();
+		bd.crearTablaEquipos(a);
+		bd.crearTablaEquipos(b);
 		
+		bd.anyadirJugador(a);
+		bd.anyadirJugador(b);
+		
+		bd.anyadirLiga("Liga BBVA",a);
+		bd.anyadirLiga("Liga Santander",a);
+		bd.anyadirLiga("Liga Paco Sanz",a);
+		bd.anyadirLiga("Liga Urdangarin",a);
+		
+		anyadirTodosLosEquipos(bd, 1,a);
+		
+		bd.anyadirLiga("Liga PRINGAO",b);
+		bd.anyadirLiga("Liga SUBNORMAL",b);
+		bd.anyadirLiga("Liga STEFEN HAWKINGS",b);
+		bd.anyadirLiga("Liga AQUI TU ERE EL KING",b);
+		anyadirTodosLosEquipos(bd, 1,b);
+		
+	*/
+	
 		Inicio i = new Inicio();
 		i.setVisible(true);
 		 

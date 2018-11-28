@@ -49,7 +49,7 @@ public class MenuLiga extends JFrame {
 	public String equipoL;
 	public ImageIcon imageIconL;
 
-	public MenuLiga(int anchura, int altura, Jugador j) throws SQLException, Exception {
+	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, Connection con) throws SQLException, Exception {
 		JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
 		setContentPane(lblBck);
 
@@ -104,16 +104,15 @@ public class MenuLiga extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				java.util.Date d = new java.util.Date();
 				try {
-				BaseDeDatos base = new BaseDeDatos(j);
 				Class.forName("org.sqlite.JDBC");
-				Connection con1 = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+				
 				System.out.println(cbLiga.getSelectedItem().toString());
 				String query1 = "SELECT * FROM EQUIPOS WHERE NOMBRE='" +cbLiga.getSelectedItem().toString() + "'; ";
 				System.out.println(query1+"asdafad");
-				ResultSet rs1 = con1.createStatement().executeQuery(query1);
+				ResultSet rs1 = con.createStatement().executeQuery(query1);
 				
-				Equipo equipo = base.convertirAEquipo(rs1);
-				con1.close();
+				Equipo equipo = bd.convertirAEquipo(rs1);
+				con.close();
 				rs1.close();
 				VentanaLiga v = new VentanaLiga(equipo);
 				v.setVisible(true);

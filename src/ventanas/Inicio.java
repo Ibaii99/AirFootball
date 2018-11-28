@@ -9,12 +9,16 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+
+import entidades.BaseDeDatos;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Inicio extends JFrame {
@@ -24,7 +28,7 @@ public class Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public Inicio() {
+	public Inicio(BaseDeDatos bd, Connection con) {
 		setSize(630, 460);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -37,7 +41,7 @@ public class Inicio extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				MenuLiga ml;
 				try {
-					ml = new MenuLiga(getWidth(), getHeight());
+					ml = new MenuLiga(getWidth(), getHeight(),bd, con);
 					ml.setVisible(true);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -51,7 +55,7 @@ public class Inicio extends JFrame {
 		bLiga.setBounds(getWidth() - 150, getHeight() - 100, 119, 40);
 		panel.add(bLiga);
 
-		final JButton bCreacion = new JButton("Creación");
+		final JButton bCreacion = new JButton("Creaciï¿½n");
 		bCreacion.setFont(new Font("Arial Black", Font.PLAIN, 16));
 		bCreacion.setBounds(getWidth() - 150, getHeight() - 150, 119, 40);
 		panel.add(bCreacion);
