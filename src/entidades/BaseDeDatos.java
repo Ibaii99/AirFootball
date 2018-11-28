@@ -42,7 +42,7 @@ public class BaseDeDatos {
 			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ jugadorJ.getNombre()+".db");
 			jugador = con.createStatement();
 			String query = "INSERT INTO Jugadores('Nombre','Password') VALUES ('"+jugadorJ.getNombre()+"','"+contrasenya +"')";
-			jugador.executeQuery(query);
+			jugador.execute(query);
 			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -57,9 +57,9 @@ public class BaseDeDatos {
 			String query = "INSERT INTO Liga('CodLiga','fk_Nombre_Jugador', 'Nombre') VALUES ('"+codLiga+"','"+jugadorJ.getNombre()+"','"+nombreLiga +"')";
 			codLiga++;
 			logger.log(Level.INFO, query);
-		//	ResultSet rs = liga.executeQuery(query);
+			liga.execute(query);
+			
 		//	System.out.println(rs.getString("CodLiga"));
-		//	liga.executeQuery(query);
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,7 +79,7 @@ public class BaseDeDatos {
 			equipo = con.createStatement();
 			comando = "CREATE TABLE \"Equipos\" ('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT, PRIMARY KEY('Siglas') )";
 			logger.log(Level.INFO, "BD: " + comando);
-			equipo.executeUpdate(comando);
+			equipo.execute(comando);
 		} catch (SQLException i) {
 			i.printStackTrace();
 		} // Se lanza si la tabla ya existe - no hay problema
@@ -88,7 +88,7 @@ public class BaseDeDatos {
 			liga = con.createStatement();
 			comando = "CREATE TABLE \"Liga\" ( 'CodLiga' INTEGER NOT NULL PRIMARY KEY, 'fk_Nombre_Jugador' TEXT REFERENCES JUGADORES(NOMBRE), 'Nombre' TEXT NOT NULL)";
 			logger.log(Level.INFO, "BD: " + comando);
-			liga.executeUpdate(comando);
+			liga.execute(comando);
 		} catch (SQLException i) {
 			i.printStackTrace();
 		} // Se lanza si la tabla ya existe - no hay problema
@@ -97,7 +97,7 @@ public class BaseDeDatos {
 			jugadores = con.createStatement();
 			comando = "CREATE TABLE \"Jugadores\" ( 'Nombre' TEXT PRIMARY KEY NOT NULL, 'Password' TEXT NOT NULL)";
 			logger.log( Level.INFO, "BD: " + comando );
-			jugadores.executeUpdate( comando );
+			jugadores.execute( comando );
 				} catch (SQLException i) {i.printStackTrace(); }// Se lanza si la tabla ya existe - no hay problema
 		con.close();	
 		}
@@ -123,11 +123,12 @@ public class BaseDeDatos {
 					+ e.getEmpatesVisitante() + "','" + e.getBolaEquipo().getColor().toString() + "','" + e.getBolaEquipo().getRutaImagen() + "')"; 
 //			comando = "INSERT INTO Equipos ( 'Siglas', 'Nombre')";
 //			comando += " VALUES (" + e.getSiglas() + ""," + e.getNombre()+")"; 
-			equipo.executeUpdate(comando);
+			equipo.execute(comando);
+			
 			con.close();
 			
 		} catch (Exception o) {
-			
+			o.printStackTrace();
 		}
 //		try {
 //			Class.forName( "org.sqlite.JDBC" );
