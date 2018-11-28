@@ -32,6 +32,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import entidades.BaseDeDatos;
 import entidades.Equipo;
+import jugador.Jugador;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -48,7 +49,7 @@ public class MenuLiga extends JFrame {
 	public String equipoL;
 	public ImageIcon imageIconL;
 
-	public MenuLiga(int anchura, int altura) throws SQLException, Exception {
+	public MenuLiga(int anchura, int altura, Jugador j) throws SQLException, Exception {
 		JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
 		setContentPane(lblBck);
 
@@ -97,14 +98,13 @@ public class MenuLiga extends JFrame {
 		//TODO
 		//TODO
 		
-		SimpleDateFormat sdf = new SimpleDateFormat( "yyyyMMddhhmmss" );
+		
 		JButton btnIniciarLiga = new JButton("Iniciar liga");
 		btnIniciarLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				java.util.Date d = new java.util.Date();
 				try {
-				BaseDeDatos base = new BaseDeDatos(sdf.format( d ), cbLiga.getSelectedItem().toString());
-				base.crearTablaLiga();
+				BaseDeDatos base = new BaseDeDatos(j.getNombre());
 				Class.forName("org.sqlite.JDBC");
 				Connection con1 = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 				System.out.println(cbLiga.getSelectedItem().toString());
