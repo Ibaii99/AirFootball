@@ -63,26 +63,28 @@ public class BaseDeDatos {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}}
-
 	
-	public void crearTabla() throws ClassNotFoundException {
+	public void crearTablaEquipos(Jugador j) {
+		try {
+			Class.forName("org.sqlite.JDBC");
+			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ nombre +".db");
+			equipo = con.createStatement();
+			String comando = "CREATE TABLE Equipos"+j.getNombre()+"('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT, PRIMARY KEY('Siglas') )";
+			logger.log(Level.INFO, "BD: " + comando);
+			equipo.executeQuery(comando);
+		} catch (Exception i) {
+			i.printStackTrace();
+		} // Se lanza si la tabla ya existe - no hay problema
+	}
+	
+	
+	public void crearTabla() {
 		String comando = "";
 		try {
-		Class.forName( "org.sqlite.JDBC" );
-
 		Class.forName("org.sqlite.JDBC");
 		con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ nombre +".db");
 		System.out.println("inicio");
 		
-		try {
-			equipo = con.createStatement();
-			comando = "CREATE TABLE Equipos('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT, PRIMARY KEY('Siglas') )";
-			logger.log(Level.INFO, "BD: " + comando);
-			equipo.execute(comando);
-		} catch (SQLException i) {
-			i.printStackTrace();
-		} // Se lanza si la tabla ya existe - no hay problema
-
 		try {
 			liga = con.createStatement();
 			comando = "CREATE TABLE Liga( 'CodLiga' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'codLigaJugador' INTEGER, 'fk_Nombre_Jugador' TEXT REFERENCES JUGADORES(NOMBRE), 'Nombre' TEXT NOT NULL)";
@@ -100,7 +102,7 @@ public class BaseDeDatos {
 				} catch (SQLException i) {i.printStackTrace(); }// Se lanza si la tabla ya existe - no hay problema
 		con.close();	
 		}
-			catch (SQLException i) {i.printStackTrace(); }}
+			catch (Exception i) {i.printStackTrace(); }}
 	
 		
 	public void anyadirEquipo(Equipo e, int indiceLiga, Jugador j) {
@@ -112,7 +114,7 @@ public class BaseDeDatos {
 		//	comando = "alter table equipos modify puntos default null;";
 		//	comando = "INSERT INTO EQUIPOS ( Siglas, Nombre, Puntos, Goles Encajados Totales, Goles Encajados Local, Goles Encajados Visitante, Goles A Favor Totales, Goles A Favor Local, Goles A Favor Visitante, Derrotas Totales, Derrotas Local, Derrotas Visitante, Victorias Totales, Victorias Local, Victorias Visitante, Empates Totales, Empates Local, Empates Visitante, Color, Icono)";
 			
-			comando = "INSERT INTO Equipos ('fk_CodLiga', 'fk_Nombre_Jugador','Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
+			comando = "INSERT INTO Equipos"+j.getNombre()+" ('fk_CodLiga', 'fk_Nombre_Jugador','Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
 			comando += " VALUES ('" + indiceLiga + "','"+ j.getNombre()+ "','" +e.getSiglas() + "','" + e.getNombre() + "','" + e.getPuntos() + "','"
 					+ e.getGolesEnContraTotales() + "','" + e.getGolesEnContraLocal() + "','"
 					+ e.getGolesEnContraVisitante() + "','" + e.getGolesAFavorTotales() + "','" + e.getGolesAFavorLocal()
