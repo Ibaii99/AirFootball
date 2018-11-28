@@ -93,6 +93,7 @@ public class VentanaLogin extends JDialog {
 						if(!bd.estaJugadorRegistrado(tFNombre.getText())) {
 							Jugador j = new Jugador(tFNombre.getText(), passwordField.getPassword(), 0);
 							bd.anyadirJugador(j);
+							bd.crearTablaEquipos(j);
 							//TODO
 							setVisible(false);
 							MenuLiga mL = new MenuLiga(800, 800, j, bd, con);
