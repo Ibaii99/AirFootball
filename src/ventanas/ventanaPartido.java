@@ -403,17 +403,13 @@ public class ventanaPartido extends JFrame {
 			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
 		if (p.getImagenObjeto() == null)
 			lblPelota.setBackground(p.getColor());
+		
 		if (eLocal.getBolaEquipo().getImagenObjeto() != null)
-			System.out.println(eLocal.getBolaEquipo().getImagenObjeto());
-			String rutaImagen = eLocal.getBolaEquipo().getImagenObjeto().toString();
-			ImageIcon icEqL = eLocal.getBolaEquipo().getImagenObjeto();
-			lblEquipoLocal.setIcon(new ImageIcon(this.getClass().getResource(rutaImagen)));
-			lblEqL.setIcon(icEqL);
+			lblEquipoLocal.setIcon(new ImageIcon("/"+this.getClass().getResource(eLocal.getBolaEquipo().getRutaImagen())));
 		if (eVisitante.getBolaEquipo().getImagenObjeto() != null)
-			System.out.println(eVisitante.getBolaEquipo().getImagenObjeto());
-			lblEquipoVisitante.setIcon(eVisitante.getBolaEquipo().getImagenObjeto());
+			lblEquipoVisitante.setIcon(new ImageIcon("/"+this.getClass().getResource(eVisitante.getBolaEquipo().getRutaImagen())));
 		if (p.getImagenObjeto() != null)
-			lblPelota.setIcon(p.getImagenObjeto());
+			lblPelota.setIcon(new ImageIcon("/"+this.getClass().getResource(p.getRutaImagen())));
 	}
 
 	/**
