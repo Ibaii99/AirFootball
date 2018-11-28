@@ -83,6 +83,7 @@ public class VentanaLogin extends JDialog {
 			{
 				btnRegister = new JButton("Register");
 				btnRegister.addActionListener(new ActionListener() {
+					
 					public void actionPerformed(ActionEvent e) {
 						//SI el jugador esta entre los nombres de los jugadores de la bd dara error
 						if(bd.estaJugadorRegistrado(tFNombre.getText())) {

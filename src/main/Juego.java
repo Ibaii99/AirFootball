@@ -72,6 +72,7 @@ public class Juego {
 		anyadirTodosLosEquipos(bd, 1,b);
 		
 	*/
+		bd.crearTabla();
 		Connection con = null;
 		try {
 			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ bd.getNombre()+".db");

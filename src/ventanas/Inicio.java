@@ -42,6 +42,7 @@ public class Inicio extends JFrame {
 				
 				try {
 					VentanaLogin v = new VentanaLogin(bd, con);
+					v.setVisible(true);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
