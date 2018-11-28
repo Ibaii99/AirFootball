@@ -20,24 +20,28 @@ public class BaseDeDatos {
 	private static Statement liga;
 	private static Statement equipo;
 	private static Statement jugador;
+	
 	private static ResultSet rs;
 	private static String nombre;
-
+	private static Jugador jugadorJ;
+	private static int codLiga = 1;
 	
 	public BaseDeDatos(Jugador j) {
 		this.nombre = j.getNombre();
+		this.jugadorJ = j;
+		anyadirJugador();
 	}
 	
-	public void anyadirJugador(Jugador j) {
+	public void anyadirJugador() {
 		
 		String contrasenya = "";
-		for(int e = 0; e < j.getPassword().length; e++) {
-			contrasenya += j.getPassword()[e];
+		for(int e = 0; e < jugadorJ.getPassword().length; e++) {
+			contrasenya += jugadorJ.getPassword()[e];
 		}
 		try {
-			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ j.getNombre()+".db");
+			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ jugadorJ.getNombre()+".db");
 			jugador = con.createStatement();
-			String query = "INSERT INTO Jugadores('Nombre','Password') VALUES ('"+j.getNombre()+"','"+contrasenya +"')";
+			String query = "INSERT INTO Jugadores('Nombre','Password') VALUES ('"+jugadorJ.getNombre()+"','"+contrasenya +"')";
 			jugador.executeQuery(query);
 			con.close();
 		} catch (SQLException e) {
@@ -45,17 +49,17 @@ public class BaseDeDatos {
 			e.printStackTrace();
 		}}
 		
-	public void anyadirLiga(Jugador j, String nombreLiga) {
-		
-		String contrasenya = "";
-		for(int e = 0; e < j.getPassword().length; e++) {
-			contrasenya += j.getPassword()[e];
-		}
+	public void anyadirLiga(String nombreLiga) {	
+	
 		try {
-			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ j.getNombre()+".db");
+			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ jugadorJ.getNombre()+".db");
 			liga = con.createStatement();
-			String query = "INSERT INTO Liga('CodLiga','fk_Nombre_Jugador', 'Nombre') VALUES (' ','"+j.getNombre()+"','"+nombreLiga +"')";
-			liga.executeQuery(query);
+			String query = "INSERT INTO Liga('CodLiga','fk_Nombre_Jugador', 'Nombre') VALUES ('"+codLiga+"','"+jugadorJ.getNombre()+"','"+nombreLiga +"')";
+			codLiga++;
+			logger.log(Level.INFO, query);
+		//	ResultSet rs = liga.executeQuery(query);
+		//	System.out.println(rs.getString("CodLiga"));
+		//	liga.executeQuery(query);
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,7 +86,7 @@ public class BaseDeDatos {
 
 		try {
 			liga = con.createStatement();
-			comando = "CREATE TABLE \"Liga\" ( 'CodLiga' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'fk_Nombre_Jugador' TEXT REFERENCES JUGADORES(NOMBRE), 'Nombre' TEXT NOT NULL)";
+			comando = "CREATE TABLE \"Liga\" ( 'CodLiga' INTEGER NOT NULL PRIMARY KEY, 'fk_Nombre_Jugador' TEXT REFERENCES JUGADORES(NOMBRE), 'Nombre' TEXT NOT NULL)";
 			logger.log(Level.INFO, "BD: " + comando);
 			liga.executeUpdate(comando);
 		} catch (SQLException i) {
@@ -120,6 +124,8 @@ public class BaseDeDatos {
 //			comando = "INSERT INTO Equipos ( 'Siglas', 'Nombre')";
 //			comando += " VALUES (" + e.getSiglas() + ""," + e.getNombre()+")"; 
 			equipo.executeUpdate(comando);
+			con.close();
+			
 		} catch (Exception o) {
 			
 		}

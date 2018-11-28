@@ -104,7 +104,7 @@ public class MenuLiga extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				java.util.Date d = new java.util.Date();
 				try {
-				BaseDeDatos base = new BaseDeDatos(j.getNombre());
+				BaseDeDatos base = new BaseDeDatos(j);
 				Class.forName("org.sqlite.JDBC");
 				Connection con1 = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 				System.out.println(cbLiga.getSelectedItem().toString());
