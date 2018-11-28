@@ -7,12 +7,16 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import entidades.BaseDeDatos;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
@@ -25,7 +29,7 @@ public class VentanaLogin extends JDialog {
 	private JPasswordField passwordField;
 
 
-	public VentanaLogin() {
+	public VentanaLogin(BaseDeDatos bd) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -76,11 +80,27 @@ public class VentanaLogin extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnRegister = new JButton("Register");
+				btnRegister.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(bd.estaJugadorRegistrado(tFNombre.getText())) {
+							JOptionPane.showMessageDialog(null, "ESTE JUGADOR YA ESTA REGISTRADO", "ERROR", JOptionPane.WARNING_MESSAGE);
+						}
+						if(!bd.estaJugadorEnBaseDeDatos(tFNombre.getText(), passwordField.getPassword())) {
+							
+						}
+						
+						
+					}
+				});
 			}
+			
 			{
 				btnLogin = new JButton("Login");
 				btnLogin.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						passwordField.getPassword();
+						tFNombre.getText();
+						
 						
 					}
 				});

@@ -63,20 +63,17 @@ public class MenuLiga extends JFrame {
 
 		Logger logger = Logger.getLogger("baseDeDatos");
 
-		Connection con = null;
 
 		Statement consulta;
 
 		String comando = "";
 		try {
 			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 		} catch (Exception e3) {
 			// e3.printStackTrace();
 		}
-		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS;";
+		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS"+j.getNombre()+";";
 		System.out.println(query);
-		con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 		// Statement st = con.createStatement();
 		ResultSet rs = con.createStatement().executeQuery(query);
 		System.out.println(rs.toString());
@@ -93,7 +90,7 @@ public class MenuLiga extends JFrame {
 		}
 		// st.close();
 		rs.close();
-		con.close();
+		
 		JLabel lblEligeEquipo = new JLabel("Elige equipo:");
 		//TODO
 		//TODO
@@ -102,18 +99,10 @@ public class MenuLiga extends JFrame {
 		JButton btnIniciarLiga = new JButton("Iniciar liga");
 		btnIniciarLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				java.util.Date d = new java.util.Date();
 				try {
-				Class.forName("org.sqlite.JDBC");
-				
-				System.out.println(cbLiga.getSelectedItem().toString());
-				String query1 = "SELECT * FROM EQUIPOS WHERE NOMBRE='" +cbLiga.getSelectedItem().toString() + "'; ";
-				System.out.println(query1+"asdafad");
-				ResultSet rs1 = con.createStatement().executeQuery(query1);
-				
-				Equipo equipo = bd.convertirAEquipo(rs1);
+				Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j);
 				con.close();
-				rs1.close();
+				
 				VentanaLiga v = new VentanaLiga(equipo);
 				v.setVisible(true);
 				setVisible(false);
@@ -135,6 +124,7 @@ public class MenuLiga extends JFrame {
 				i.setSize(660, 480);
 				i.setVisible(true);
 				dispose();
+				con.close();
 			}
 		});
 		btnVolver.setFont(new Font("Arial Black", Font.PLAIN, 13));
@@ -154,16 +144,14 @@ public class MenuLiga extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 
-					Connection conCB = null;
 					Class.forName("org.sqlite.JDBC");
-					conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 					Statement consultaCB;
-					consultaCB = conCB.createStatement();
-					String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '" + cbLiga.getSelectedItem().toString()
+					consultaCB = con.createStatement();
+					String comando2 = "SELECT ICONO FROM EQUIPOS"+j.getNombre()+" WHERE NOMBRE = '" + cbLiga.getSelectedItem().toString()
 							+ "'";
 					logger.log(Level.INFO, "BD: " + comando2);
 					consultaCB.executeUpdate(comando2);
-					ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
+					ResultSet rs2 = con.createStatement().executeQuery(comando2);
 					System.out.println(rs2.toString());
 					while (rs2.next()) {
 						equipoL = "/" + rs2.getString("ICONO");

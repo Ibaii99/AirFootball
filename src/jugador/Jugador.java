@@ -12,7 +12,6 @@ public class Jugador {
 	private ArrayList<Pelota> pelotasDesbloqueadas;
 	private String nombre;
 	private char[] password;
-	private ArrayList<Liga> ligasEnCurso;
 	private int codLiga = 0;
 	
 	
@@ -30,9 +29,10 @@ public class Jugador {
 	public void anyadirPelota(Pelota pelota) {
 		pelotasDesbloqueadas.add(pelota);
 	}
-	public Jugador(String nombre, char[] password) {
+	public Jugador(String nombre, char[] password, int numero) {
 		this.password = password;
 		this.nombre = nombre;
+		codLiga = numero;
 	}
 	public int getLigasJugadas() {
 		return ligasJugadas;
@@ -49,9 +49,7 @@ public class Jugador {
 	public char[] getPassword() {
 		return password;
 	}
-	public ArrayList<Liga> getLigasEnCurso() {
-		return ligasEnCurso;
-	}
+
 
 	
 }
