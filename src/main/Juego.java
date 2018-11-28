@@ -82,7 +82,7 @@ public class Juego {
 			e.printStackTrace();
 		}
 		
-		Inicio i = new Inicio(bd, con);
+		Inicio i = new Inicio(bd, con,f);
 		i.setVisible(true);
 		 
 		

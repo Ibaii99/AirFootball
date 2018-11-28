@@ -42,7 +42,8 @@ public class Equipo{
 	private int empatesTotales;
 	private int empatesLocal;
 	private int empatesVisitante;
-	private String imagen;
+	
+
 	
 	
 
@@ -117,7 +118,6 @@ public class Equipo{
 	public Equipo(String nombre, String siglas, String imagen, double radio, double masa) {
 		this.siglas = siglas;
 		this.nombre = nombre;
-		this.setImagen(imagen);
 		bolaEquipo = new Pelota(imagen, nombre, 0, 0, radio, masa);
 	}
 	
@@ -310,19 +310,6 @@ public class Equipo{
 		return bolaEquipo;
 	}
 
-
-
-
-	public String getImagen() {
-		return imagen;
-	}
-
-
-
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
 
 
 	

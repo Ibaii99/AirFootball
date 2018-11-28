@@ -32,7 +32,7 @@ import java.beans.PropertyChangeEvent;
 public class MenuAmistoso extends JFrame {
 	/**
 	 * @author Jorge
-	 *
+	 * @author ibai
 	 *
 	 */
 
@@ -45,52 +45,20 @@ public class MenuAmistoso extends JFrame {
 	public ImageIcon imageIconL;
 	private static FisicasNuevas f = new FisicasNuevas();
 
-	public String getEquipoL() {
-		return equipoL;
-	}
-
-	public void setEquipoL(String equipoL) {
-		this.equipoL = equipoL;
-	}
-
-	public ImageIcon getImageIconL() {
-		return imageIconL;
-	}
-
-	public void setImageIconL(ImageIcon imageIconL) {
-		this.imageIconL = imageIconL;
-	}
-
-	public int anchura;
-	public int altura;
-
-	public int getAnchura() {
-		return anchura;
-	}
-
-	public void setAnchura(int anchura) {
-		this.anchura = anchura;
-	}
-
-	public int getAltura() {
-		return altura;
-	}
-
-	public void setAltura(int altura) {
-		this.altura = altura;
-	}
-
 	/**
 	 * 
 	 * @param Anchura
 	 *            de la ventana en base a listeners de la ventana Inicio
 	 * @param Altura
 	 *            de la ventana en base a listeners de la ventana Inicio
+	 *            
+	 * @param bd		Base de datos del programa
+	 * @param con		Conexion con el archivo Base de Datos
+	 * @param f			Fisicas con las que funciona el juego
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-
-	public MenuAmistoso(int anchura, int altura,BaseDeDatos bd, Connection con) throws ClassNotFoundException, SQLException {
+	public MenuAmistoso(int anchura, int altura,BaseDeDatos bd, Connection con, FisicasNuevas f) throws ClassNotFoundException, SQLException {
 		try {
 			setSize(anchura, altura);
 		} catch (Exception e) {
@@ -269,7 +237,7 @@ public class MenuAmistoso extends JFrame {
 				
 				Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
 				
-				ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, false, true, true, f);
+				ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, false, f);
 			
 				partido.setVisible(true);}}
 				// PRUEBA DE LISTENER DE VENTANAPARTIDO
@@ -350,5 +318,38 @@ public class MenuAmistoso extends JFrame {
 		jlIcono.repaint();
 		revalidate();
 	}
+	public String getEquipoL() {
+		return equipoL;
+	}
 
+	public void setEquipoL(String equipoL) {
+		this.equipoL = equipoL;
+	}
+
+	public ImageIcon getImageIconL() {
+		return imageIconL;
+	}
+
+	public void setImageIconL(ImageIcon imageIconL) {
+		this.imageIconL = imageIconL;
+	}
+
+	public int anchura;
+	public int altura;
+
+	public int getAnchura() {
+		return anchura;
+	}
+
+	public void setAnchura(int anchura) {
+		this.anchura = anchura;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
 }

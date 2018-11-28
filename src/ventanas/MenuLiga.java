@@ -32,6 +32,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import entidades.BaseDeDatos;
 import entidades.Equipo;
+import fisicas.FisicasNuevas;
 import jugador.Jugador;
 
 import java.awt.event.ComponentAdapter;
@@ -49,7 +50,7 @@ public class MenuLiga extends JFrame {
 	public String equipoL;
 	public ImageIcon imageIconL;
 
-	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, Connection con) {
+	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, Connection con, FisicasNuevas f) {
 		try {
 		JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
 		setContentPane(lblBck);
@@ -121,7 +122,7 @@ public class MenuLiga extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Inicio i = new Inicio(bd,con);
+				Inicio i = new Inicio(bd,con, f);
 				i.setSize(660, 480);
 				i.setVisible(true);
 				dispose();

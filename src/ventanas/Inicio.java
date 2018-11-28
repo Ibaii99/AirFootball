@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import entidades.BaseDeDatos;
+import fisicas.FisicasNuevas;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -28,7 +29,7 @@ public class Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public Inicio(BaseDeDatos bd, Connection con) {
+	public Inicio(BaseDeDatos bd, Connection con, FisicasNuevas f) {
 		setSize(630, 460);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -41,7 +42,7 @@ public class Inicio extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
-					VentanaLogin v = new VentanaLogin(bd, con);
+					VentanaLogin v = new VentanaLogin(bd, con,f);
 					v.setVisible(true);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -66,12 +67,12 @@ public class Inicio extends JFrame {
 				dispose();
 				MenuAmistoso mu;
 				try {
-					mu = new MenuAmistoso(getSize().width, getSize().height,bd, con);
+					mu = new MenuAmistoso(getSize().width, getSize().height,bd, con,f);
 					mu.setVisible(true);
 				} catch (Exception e1) {
 					MenuAmistoso muAlt;
 					try {
-						muAlt = new MenuAmistoso(630, 460,bd,con);
+						muAlt = new MenuAmistoso(630, 460,bd,con,f);
 						muAlt.setVisible(true);
 					} catch (Exception e2) {
 						// TODO Auto-generated catch block

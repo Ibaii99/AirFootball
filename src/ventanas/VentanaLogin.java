@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import entidades.BaseDeDatos;
+import fisicas.FisicasNuevas;
 import jugador.Jugador;
 
 import java.awt.event.ActionListener;
@@ -31,7 +32,7 @@ public class VentanaLogin extends JDialog {
 	private JPasswordField passwordField;
 
 
-	public  VentanaLogin(BaseDeDatos bd, Connection con) {
+	public  VentanaLogin(BaseDeDatos bd, Connection con, FisicasNuevas f) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -98,7 +99,7 @@ public class VentanaLogin extends JDialog {
 							bd.anyadirTodosLosEquipos(j.getCodLiga(), j);
 							//TODO
 							setVisible(false);
-							MenuLiga mL = new MenuLiga(800, 800, j, bd, con);
+							MenuLiga mL = new MenuLiga(800, 800, j, bd, con, f);
 							mL.setVisible(true);
 						}
 						
@@ -119,7 +120,7 @@ public class VentanaLogin extends JDialog {
 							Jugador j = bd.convertirAJugador(tFNombre.getText(), passwordField.getPassword());
 							//TODO
 							setVisible(false);
-							MenuLiga mL = new MenuLiga(800, 800, j, bd, con);
+							MenuLiga mL = new MenuLiga(800, 800, j, bd, con,f);
 							mL.setVisible(true);
 						}
 						

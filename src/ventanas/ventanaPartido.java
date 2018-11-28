@@ -96,7 +96,7 @@ public class ventanaPartido extends JFrame {
 		String nombreFont = "DSEG14Classic-Regular.ttf";
 
 		System.out.println(eLocal.getNombre());
-		ImageIcon iconL = new ImageIcon(getClass().getResource("/"+eLocal.getImagen()));
+		ImageIcon iconL = new ImageIcon(getClass().getResource("/"+eLocal.getBolaEquipo().getRutaImagen()));
 		Image imgL = iconL.getImage();
 		BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
 		Graphics gL = biL.createGraphics();
@@ -110,7 +110,7 @@ public class ventanaPartido extends JFrame {
 		gC.drawImage(imgC, 0, 0, 720, 395, null);
 		ImageIcon newIconC = new ImageIcon(biC);
 
-		ImageIcon iconV = new ImageIcon(getClass().getResource("/"+eVisitante.getImagen()));
+		ImageIcon iconV = new ImageIcon(getClass().getResource("/"+eVisitante.getBolaEquipo().getRutaImagen()));
 		Image imgV = iconV.getImage();
 		BufferedImage biV = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
 		Graphics gV = biV.createGraphics();
