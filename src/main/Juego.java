@@ -40,18 +40,29 @@ public class Juego {
 		 char[] con ={ 'p', 'a', 's', 's'};
 		 
 		
-		BaseDeDatos bd = new BaseDeDatos(new Jugador("IBAI", con));
-		try {
-			bd.crearTabla();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		bd.anyadirLiga("Liga BBVA");
-		bd.anyadirLiga("Liga Santander");
-		bd.anyadirLiga("Liga Paco Sanz");
-		bd.anyadirLiga("Liga Urdangarin");
-		anyadirTodosLosEquipos(bd, 1);
-		
+			BaseDeDatos bd = new BaseDeDatos("BETA");
+			try {
+				bd.crearTabla();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			Jugador a = new Jugador("IBAI", con);
+			Jugador b = new Jugador("JORGE PRINGAO", con);
+			bd.anyadirJugador(a);
+			bd.anyadirJugador(b);
+			
+			bd.anyadirLiga("Liga BBVA",a);
+			bd.anyadirLiga("Liga Santander",a);
+			bd.anyadirLiga("Liga Paco Sanz",a);
+			bd.anyadirLiga("Liga Urdangarin",a);
+			anyadirTodosLosEquipos(bd, 1);
+			
+			bd.anyadirLiga("Liga PRINGAO",b);
+			bd.anyadirLiga("Liga SUBNORMAL",b);
+			bd.anyadirLiga("Liga STEFEN HAWKINGS",b);
+			bd.anyadirLiga("Liga AQUI TU ERE EL KING",b);
+			anyadirTodosLosEquipos(bd, 1);
+			
 		
 		
 		Inicio i = new Inicio();

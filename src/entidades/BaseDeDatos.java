@@ -26,13 +26,12 @@ public class BaseDeDatos {
 	private static Jugador jugadorJ;
 	private static int codLiga = 1;
 	
-	public BaseDeDatos(Jugador j) {
-		this.nombre = j.getNombre();
-		this.jugadorJ = j;
-		anyadirJugador();
+	public BaseDeDatos(String nombreBD) {
+		this.nombre = nombreBD;
+		
 	}
 	
-	public void anyadirJugador() {
+	public void anyadirJugador(Jugador jugadorJ) {
 		
 		String contrasenya = "";
 		for(int e = 0; e < jugadorJ.getPassword().length; e++) {
@@ -49,13 +48,13 @@ public class BaseDeDatos {
 			e.printStackTrace();
 		}}
 		
-	public void anyadirLiga(String nombreLiga) {	
+	public void anyadirLiga(String nombreLiga, Jugador jugadorJ) {	
 	
 		try {
-			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ jugadorJ.getNombre()+".db");
+			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ nombre+".db");
 			liga = con.createStatement();
-			String query = "INSERT INTO Liga('CodLiga','fk_Nombre_Jugador', 'Nombre') VALUES ('"+codLiga+"','"+jugadorJ.getNombre()+"','"+nombreLiga +"')";
-			codLiga++;
+			String query = "INSERT INTO Liga('CodLiga','fk_Nombre_Jugador', 'Nombre') VALUES ('"+jugadorJ.getCodLiga()+"','"+jugadorJ.getNombre()+"','"+nombreLiga +"')";
+			jugadorJ.incCodLiga();
 			logger.log(Level.INFO, query);
 			liga.execute(query);
 			
@@ -108,7 +107,7 @@ public class BaseDeDatos {
 		String comando = "";
 		try {
 			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+nombre+".db");
 			equipo = con.createStatement();
 		//	comando = "alter table equipos modify puntos default null;";
 		//	comando = "INSERT INTO EQUIPOS ( Siglas, Nombre, Puntos, Goles Encajados Totales, Goles Encajados Local, Goles Encajados Visitante, Goles A Favor Totales, Goles A Favor Local, Goles A Favor Visitante, Derrotas Totales, Derrotas Local, Derrotas Visitante, Victorias Totales, Victorias Local, Victorias Visitante, Empates Totales, Empates Local, Empates Visitante, Color, Icono)";

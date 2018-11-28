@@ -13,7 +13,16 @@ public class Jugador {
 	private String nombre;
 	private char[] password;
 	private ArrayList<Liga> ligasEnCurso;
+	private int codLiga = 0;
 	
+	
+	public int getCodLiga() {
+		return codLiga;
+	}
+
+	public void incCodLiga() {
+		codLiga++;
+	}
 
 	/** El modo Arcade le dejará al usuario desbloquear pelotas nuevas para elegir
 	 * @param pelota Pelota nueva desbloqueada
