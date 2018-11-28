@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import entidades.BaseDeDatos;
 import entidades.Equipo;
 import fisicas.FisicasNuevas;
 import objetos.ObjetoCombobox;
@@ -88,7 +89,7 @@ public class MenuAmistoso extends JFrame {
 	 * @throws SQLException
 	 */
 
-	public MenuAmistoso(int anchura, int altura) throws ClassNotFoundException, SQLException {
+	public MenuAmistoso(int anchura, int altura,BaseDeDatos bd, Connection con) throws ClassNotFoundException, SQLException {
 		try {
 			setSize(anchura, altura);
 		} catch (Exception e) {
@@ -141,20 +142,17 @@ public class MenuAmistoso extends JFrame {
 		lblEqV.setBounds(334, 96, 100, 100);
 
 		Logger logger = Logger.getLogger("baseDeDatos");
-
-		Connection con = null;
-
+ss
 		Statement consulta;
 
 		String comando = "";
 		/**
-		 * No hago un método para diferentes sentencias SQL porque no realizamos
-		 * exactamente la misma en ningún momento
+		 * No hago un mï¿½todo para diferentes sentencias SQL porque no realizamos
+		 * exactamente la misma en ningï¿½n momento
 		 * 
 		 */
 		try {
 			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 		} catch (Exception e3) {
 			// e3.printStackTrace();
 		}
@@ -334,7 +332,7 @@ public class MenuAmistoso extends JFrame {
 				lblFondo.setBounds(0, 0, getWidth(), getHeight());
 				getContentPane().revalidate();
 				getContentPane().setSize(getSize());
-				// Aquí hemos intentado meter una constante (getWidth()/626) pero no nos
+				// Aquï¿½ hemos intentado meter una constante (getWidth()/626) pero no nos
 				// funcionaba, ni haciendo un Math.round.
 				int nuevaFuente = (13 * getWidth() / 626);
 				int nuevaAnchura = (80 * getWidth() / 626);
@@ -345,7 +343,7 @@ public class MenuAmistoso extends JFrame {
 				int nuevaAlturaCb = (22 * getWidth() / 626);
 				int ladoIconoH = (int) Math.round(100 * getWidth() / 626);
 				int ladoIconoV = (int) Math.round(100 * getHeight() * 1.36 / 626);
-				// Inicialización de componentes del NullLayout en función del eje 0,0 de la
+				// Inicializaciï¿½n de componentes del NullLayout en funciï¿½n del eje 0,0 de la
 				// ventana
 				lblLocal.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
 				lblVisitante.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));

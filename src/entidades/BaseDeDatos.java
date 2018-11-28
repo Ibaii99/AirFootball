@@ -45,7 +45,15 @@ public class BaseDeDatos {
 		Class.forName("org.sqlite.JDBC");
 		con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ nombre +".db");
 		System.out.println("inicio");
-		
+			
+		try{
+			equipo = con.createStatement();
+			comando = "CREATE TABLE Equipos('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT, PRIMARY KEY('Siglas') )";
+			logger.log(Level.INFO, "BD: " + comando);
+			equipo.executeQuery(comando);
+		} catch (Exception i) {
+			i.printStackTrace();
+		} // Se lanza si la tabla ya existe - no hay problema
 		try {
 			liga = con.createStatement();
 			comando = "CREATE TABLE Liga( 'CodLiga' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'codLigaJugador' INTEGER, 'fk_Nombre_Jugador' TEXT REFERENCES JUGADORES(NOMBRE), 'Nombre' TEXT NOT NULL)";
@@ -268,6 +276,7 @@ public class BaseDeDatos {
 		
 		return esta;
 	}
+	
 	public static String getNombre() {
 		return nombre;
 	}
@@ -319,5 +328,9 @@ public class BaseDeDatos {
 
 		}	}
 
+	public void anyadirEquiposStandar() {
+		char [] a= {'a','b'};
+		anyadirTodosLosEquipos(0, new Jugador("",a , 0) );;
+	}
 }
 

@@ -80,7 +80,7 @@ public class Juego {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+		bd.anyadirEquiposStandar();
 		Inicio i = new Inicio(bd, con);
 		i.setVisible(true);
 		 
