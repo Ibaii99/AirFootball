@@ -55,7 +55,7 @@ public class Juego {
 			bd.anyadirLiga("Liga Santander",a);
 			bd.anyadirLiga("Liga Paco Sanz",a);
 			bd.anyadirLiga("Liga Urdangarin",a);
-			anyadirTodosLosEquipos(bd, 1);
+		//	anyadirTodosLosEquipos(bd, 1);
 			
 			bd.anyadirLiga("Liga PRINGAO",b);
 			bd.anyadirLiga("Liga SUBNORMAL",b);
