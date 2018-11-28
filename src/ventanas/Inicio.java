@@ -39,10 +39,9 @@ public class Inicio extends JFrame {
 		final JButton bLiga = new JButton("Liga");
 		bLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MenuLiga ml;
+				
 				try {
-					ml = new MenuLiga(getWidth(), getHeight(),bd, con);
-					ml.setVisible(true);
+					VentanaLogin v = new VentanaLogin(bd, con);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -128,11 +127,5 @@ public class Inicio extends JFrame {
 				getContentPane().setSize(getSize());
 			}
 		});
-	}
-
-	public static void main(String[] args) {
-		Inicio i = new Inicio();
-		i.setVisible(true);
-
 	}
 }

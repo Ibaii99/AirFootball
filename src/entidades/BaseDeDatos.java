@@ -268,4 +268,9 @@ public class BaseDeDatos {
 		
 		return esta;
 	}
+	public static String getNombre() {
+		return nombre;
+	}
+	
+	
 }

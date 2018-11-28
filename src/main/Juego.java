@@ -4,6 +4,9 @@ package main;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import objetos.Pelota;
 import objetos.Poste;
@@ -25,6 +28,9 @@ public class Juego {
 	public Poste posteArribaDerecha = new Poste(v, false, true);
 	public Poste posteAbajoDerecha = new Poste(v, false, false);
 
+	private static BaseDeDatos bd = new BaseDeDatos("Beta");
+
+	
 	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 1, null, false);
 
 	private static FisicasNuevas f = new FisicasNuevas();
@@ -66,8 +72,15 @@ public class Juego {
 		anyadirTodosLosEquipos(bd, 1,b);
 		
 	*/
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ bd.getNombre()+".db");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
-		Inicio i = new Inicio();
+		Inicio i = new Inicio(bd, con);
 		i.setVisible(true);
 		 
 		

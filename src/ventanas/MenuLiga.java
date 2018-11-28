@@ -49,7 +49,8 @@ public class MenuLiga extends JFrame {
 	public String equipoL;
 	public ImageIcon imageIconL;
 
-	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, Connection con) throws SQLException, Exception {
+	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, Connection con) {
+		try {
 		JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
 		setContentPane(lblBck);
 
@@ -120,11 +121,13 @@ public class MenuLiga extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Inicio i = new Inicio();
+				Inicio i = new Inicio(bd,con);
 				i.setSize(660, 480);
 				i.setVisible(true);
 				dispose();
-				con.close();
+				try {
+					con.close();
+				} catch (SQLException e1) {	e1.printStackTrace();}
 			}
 		});
 		btnVolver.setFont(new Font("Arial Black", Font.PLAIN, 13));
@@ -222,7 +225,7 @@ public class MenuLiga extends JFrame {
 				icono.repaint();
 			}
 		});
-		getContentPane().setLayout(groupLayout);
+		getContentPane().setLayout(groupLayout);} catch(Exception excep) {excep.printStackTrace();}
 		
 	}
 	/**
