@@ -142,7 +142,7 @@ public class MenuAmistoso extends JFrame {
 		lblEqV.setBounds(334, 96, 100, 100);
 
 		Logger logger = Logger.getLogger("baseDeDatos");
-ss
+
 		Statement consulta;
 
 		String comando = "";
@@ -157,7 +157,6 @@ ss
 			// e3.printStackTrace();
 		}
 		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS;";
-		con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 		ResultSet rs = con.createStatement().executeQuery(query);
 		while (rs.next()) {
 
@@ -178,16 +177,16 @@ ss
 				String filenameL = cbLocal.getSelectedObjects().toString();
 				try {
 					try {
-						Connection conCB = null;
+						
 						Class.forName("org.sqlite.JDBC");
-						conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+						
 						Statement consultaCB;
-						consultaCB = conCB.createStatement();
+						consultaCB = con.createStatement();
 						String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '"
 								+ cbLocal.getSelectedItem().toString() + "'";
 						logger.log(Level.INFO, "BD: " + comando2);
 						consultaCB.executeUpdate(comando2);
-						ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
+						ResultSet rs2 = con.createStatement().executeQuery(comando2);
 						while (rs2.next()) {
 
 							equipoL = "/" + rs2.getString("ICONO");
@@ -217,16 +216,15 @@ ss
 				String filenameV = cbVisitante.getSelectedObjects().toString();
 				try {
 					try {
-						Connection conCB = null;
+						
 						Class.forName("org.sqlite.JDBC");
-						conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 						Statement consultaCB;
-						consultaCB = conCB.createStatement();
+						consultaCB = con.createStatement();
 						String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '"
 								+ cbVisitante.getSelectedItem().toString() + "'";
 						logger.log(Level.INFO, "BD: " + comando2);
 						consultaCB.executeUpdate(comando2);
-						ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
+						ResultSet rs2 = con.createStatement().executeQuery(comando2);
 						System.out.println(rs2.toString());
 
 						while (rs2.next()) {
@@ -263,15 +261,15 @@ ss
 				String nomEqV = cbVisitante.getSelectedItem().toString();
 				try {
 					try {
-						Connection conL = null;
+						
 						Class.forName("org.sqlite.JDBC");
-						conL = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+						
 						Statement consultaL;
-						consultaL = conL.createStatement();
+						consultaL = con.createStatement();
 						String comando3 = "SELECT ICONO, SIGLAS FROM EQUIPOS WHERE NOMBRE = '"
 								+ cbLocal.getSelectedItem().toString() + "'";
 						consultaL.executeUpdate(comando3);
-						ResultSet rs3 = conL.createStatement().executeQuery(comando3);
+						ResultSet rs3 = con.createStatement().executeQuery(comando3);
 						System.out.println(rs3.toString());
 
 						while (rs3.next()) {
@@ -288,15 +286,13 @@ ss
 				}
 				try {
 					try {
-						Connection conV = null;
 						Class.forName("org.sqlite.JDBC");
-						conV = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 						Statement consultaV;
-						consultaV = conV.createStatement();
+						consultaV = con.createStatement();
 						String comando4 = "SELECT ICONO, SIGLAS FROM EQUIPOS WHERE NOMBRE = '"
 								+ cbVisitante.getSelectedItem().toString() + "'";
 						consultaV.executeUpdate(comando4);
-						ResultSet rs3 = conV.createStatement().executeQuery(comando4);
+						ResultSet rs3 = con.createStatement().executeQuery(comando4);
 						System.out.println(rs3.toString());
 
 						while (rs3.next()) {
@@ -395,12 +391,6 @@ ss
 		jlIcono.setIcon(iiResizeoL);
 		jlIcono.repaint();
 		revalidate();
-	}
-
-	public static void main(String[] args) throws ClassNotFoundException, SQLException { // prueba de menuAmistoso para
-																							// comprobar que carga bien
-		MenuAmistoso mu = new MenuAmistoso(626, 460);
-		mu.setVisible(true);
 	}
 
 }

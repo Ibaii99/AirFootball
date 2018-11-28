@@ -73,6 +73,7 @@ public class Juego {
 		
 	*/
 		bd.crearTabla();
+		bd.anyadirEquiposStandar();
 		Connection con = null;
 		try {
 			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ bd.getNombre()+".db");
@@ -80,7 +81,7 @@ public class Juego {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		bd.anyadirEquiposStandar();
+		
 		Inicio i = new Inicio(bd, con);
 		i.setVisible(true);
 		 

@@ -66,12 +66,12 @@ public class Inicio extends JFrame {
 				dispose();
 				MenuAmistoso mu;
 				try {
-					mu = new MenuAmistoso(getSize().width, getSize().height);
+					mu = new MenuAmistoso(getSize().width, getSize().height,bd, con);
 					mu.setVisible(true);
 				} catch (Exception e1) {
 					MenuAmistoso muAlt;
 					try {
-						muAlt = new MenuAmistoso(630, 460);
+						muAlt = new MenuAmistoso(630, 460,bd,con);
 						muAlt.setVisible(true);
 					} catch (Exception e2) {
 						// TODO Auto-generated catch block
