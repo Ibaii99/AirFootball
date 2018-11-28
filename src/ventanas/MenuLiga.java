@@ -92,7 +92,7 @@ public class MenuLiga extends JFrame {
 		}
 		// st.close();
 		rs.close();
-
+		con.close();
 		JLabel lblEligeEquipo = new JLabel("Elige equipo:");
 		//TODO
 		//TODO
@@ -109,10 +109,12 @@ public class MenuLiga extends JFrame {
 				Connection con1 = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 				System.out.println(cbLiga.getSelectedItem().toString());
 				String query1 = "SELECT * FROM EQUIPOS WHERE NOMBRE='" +cbLiga.getSelectedItem().toString() + "'; ";
+				System.out.println(query1+"asdafad");
 				ResultSet rs1 = con1.createStatement().executeQuery(query1);
 				
 				Equipo equipo = base.convertirAEquipo(rs1);
 				con1.close();
+				rs1.close();
 				VentanaLiga v = new VentanaLiga(equipo);
 				v.setVisible(true);
 				setVisible(false);

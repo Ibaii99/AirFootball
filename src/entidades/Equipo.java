@@ -95,7 +95,16 @@ public class Equipo{
 			this.empatesVisitante = empatesVisitante;
 	}
 	
-	
+	@Override
+	public String toString() {
+		String a = 	this.siglas+"  "+this.nombre+"  "+this.puntos+"  "+this.bolaEquipo.toString()+"  "
+					+this.golesEnContraTotales+"  "+this.golesEnContraLocal+"  "+this.golesEnContraVisitante+"  "
+					+this.golesAFavorTotales+"  "+this.golesAFavorLocal+"  " +this.golesAFavorVisitante+"  "
+					+this.victoriasTotales+"  "+this.victoriasLocal+"  "+this.victoriasVisitante+"  "
+					+this.derrotasTotales+"  "+this.derrotasLocal+"  "+this.derrotasVisitante+"  "
+					+this.empatesTotales+"  "+this.empatesLocal+"  "+this.empatesVisitante;
+		return a;
+	}
 
 	
 	/** Metodo constructor de Equipo con imagen 

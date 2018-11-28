@@ -269,6 +269,7 @@ public class BaseDeDatos {
 	 * @throws SQLException
 	 */
 	public Equipo convertirAEquipo(ResultSet rs) throws SQLException {
+		
 		String nombre = rs.getString("Nombre");
 		String siglas= rs.getString("Siglas");
 		int puntos= Integer.parseInt(rs.getString("Puntos"));
@@ -292,7 +293,7 @@ public class BaseDeDatos {
 		Color color = new Color(colorRGB);
 		
 		String rutaImagen = rs.getString("Icono");
-		
-		return new Equipo(siglas, nombre, puntos,color , rutaImagen, rutaImagen, get, gel, gev, gaft, gafv, gafl, vt, vl, vv, dt, dl, dv, et, el, ev);
-	}
+		Equipo e = new Equipo(siglas, nombre, puntos,color , rutaImagen, rutaImagen, get, gel, gev, gaft, gafv, gafl, vt, vl, vv, dt, dl, dv, et, el, ev);
+		e.toString();
+		return e;	}
 }
