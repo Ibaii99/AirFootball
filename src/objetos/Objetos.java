@@ -37,7 +37,7 @@ public abstract class Objetos{
 	protected double velYAntes = 0;
 	private double velocidadAntes = 0;	
 	
-	private static double VELOCIDAD_MAX = 500;
+	private static double VELOCIDAD_MAX = 2;
 ///////////////////////Tamaño//////////////////////////////////////	
 	protected double radio;
 	
@@ -256,6 +256,7 @@ public abstract class Objetos{
 	public void addVelocidadX( double vel ) {
 		if(velX < VELOCIDAD_MAX) velX += vel;
 		else if ( velX > VELOCIDAD_MAX) velX = VELOCIDAD_MAX;
+		else if(velX < -VELOCIDAD_MAX)velX = -VELOCIDAD_MAX;
 	}
 	/** A�ade una velocidad Y a la actual del objeto a no ser que la velocidad
 	 * 	sea superior a la maxima permitida, que entonces no deja aumentarla;

@@ -67,7 +67,7 @@ public class ventanaPartido extends JFrame {
 	private boolean isMultijugador;
 	private boolean isAmistoso;
 	private boolean isJugadorEquipoLocal;
-	private static double VELOCIDAD_CON_MOVIMIENTO = 1;
+	private static double VELOCIDAD_CON_MOVIMIENTO = 5;
 
 	private Font f;
 	private Equipo eLocal;
@@ -203,43 +203,12 @@ public class ventanaPartido extends JFrame {
 		panel.add(lblNomEqV);
 		getContentPane().setLayout(groupLayout);
 
-	
+
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				int tecla = e.getKeyCode();
-
-				if (!isMultijugador) {
-					Equipo jugador = null;
-
-					if (isJugadorEquipoLocal)
-						jugador = eLocal;
-					if (!isJugadorEquipoLocal)
-						jugador = eVisitante;
-
-					switch (tecla) {
-					case 37:
-						
-						jugador.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
-						break;
-					case 38:
-						jugador.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // flecha arriba
-						break;
-					case 39:
-						jugador.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO); // flecha derecha
-						break;
-					case 40:
-						jugador.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
-						break;
-					default:
-						break;
-					}
-					// Reseteo de velocidades para que no se queden guardadas
-					jugador.getBolaEquipo().setVelX(0);
-					jugador.getBolaEquipo().setVelY(0);
-				}
-
-				else if (isMultijugador) {
+				
 					switch (tecla) {
 					case 37:
 						if(eLocal.getBolaEquipo().getVelX() > 0)eLocal.getBolaEquipo().setVelX(0);
@@ -261,6 +230,15 @@ public class ventanaPartido extends JFrame {
 						
 						eLocal.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
 						break;
+					default : break;
+						}}});
+	
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int tecla = e.getKeyCode();
+				if (isMultijugador) {
+					switch (tecla) {
 					case 87:
 						if(eVisitante.getBolaEquipo().getVelY() > 0)eVisitante.getBolaEquipo().setVelY(0);
 						
