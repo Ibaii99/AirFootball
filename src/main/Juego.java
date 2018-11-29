@@ -39,11 +39,11 @@ public class Juego {
 		
 		
 		// pruebas de la ventana de juego
-//		 v = new ventanaPartido((new Equipo("/ALA", "Deportivo Alav�s", 0, Color.BLUE, ("/iconos/equipos/ala.png"),
-//					"/iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new Equipo("/ATH", "Athletic Club", 0, Color.RED, ("/iconos/equipos/ath.png"),
-//							"/iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
-//		 v.setVisible(true);
-//		
+		 v = new ventanaPartido((new Equipo("/ALA", "Deportivo Alav�s", 0, Color.BLUE, ("/iconos/equipos/ala.png"),
+					"/iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new Equipo("/ATH", "Athletic Club", 0, Color.RED, ("/iconos/equipos/ath.png"),
+							"/iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
+		 v.setVisible(true);
+		v.empieza();
 	/*	char[] con ={ 'p', 'a', 's', 's'};
 	 
 	
@@ -72,18 +72,18 @@ public class Juego {
 		anyadirTodosLosEquipos(bd, 1,b);
 		
 	*/
-		bd.crearTabla();
-		bd.anyadirEquiposStandar();
-		Connection con = null;
-		try {
-			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ bd.getNombre()+".db");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		Inicio i = new Inicio(bd, con,f);
-		i.setVisible(true);
+//		bd.crearTabla();
+//		bd.anyadirEquiposStandar();
+//		Connection con = null;
+//		try {
+//			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ bd.getNombre()+".db");
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		Inicio i = new Inicio(bd, con,f);
+//		i.setVisible(true);
 		 
 		
 	}
