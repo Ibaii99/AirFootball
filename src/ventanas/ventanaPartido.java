@@ -223,21 +223,22 @@ public class ventanaPartido extends JFrame {
 					case 39:
 						if(eLocal.getBolaEquipo().getVelX() < 0)eLocal.getBolaEquipo().setVelX(0);
 						
-						eLocal.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO); // flecha derecha
+						eLocal.getBolaEquipo().addVelocidadX(+VELOCIDAD_CON_MOVIMIENTO); // flecha derecha
 						break;
 					case 40:
 						if(eLocal.getBolaEquipo().getVelY() < 0)eLocal.getBolaEquipo().setVelY(0);
 						
-						eLocal.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
+						eLocal.getBolaEquipo().addVelocidadY(+VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
 						break;
 					default : break;
 						}}});
-	
+		
+		if (isMultijugador) {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				int tecla = e.getKeyCode();
-				if (isMultijugador) {
+				
 					switch (tecla) {
 					case 87:
 						if(eVisitante.getBolaEquipo().getVelY() > 0)eVisitante.getBolaEquipo().setVelY(0);
@@ -247,12 +248,12 @@ public class ventanaPartido extends JFrame {
 					case 83:
 						if(eVisitante.getBolaEquipo().getVelY() < 0)eVisitante.getBolaEquipo().setVelY(0);
 						
-						eVisitante.getBolaEquipo().addVelocidadY(VELOCIDAD_CON_MOVIMIENTO); // s
+						eVisitante.getBolaEquipo().addVelocidadY(+VELOCIDAD_CON_MOVIMIENTO); // s
 						break;
 					case 68:
 						if(eVisitante.getBolaEquipo().getVelX() < 0)eVisitante.getBolaEquipo().setVelX(0);
 						
-						eVisitante.getBolaEquipo().addVelocidadX(VELOCIDAD_CON_MOVIMIENTO); // d
+						eVisitante.getBolaEquipo().addVelocidadX(+VELOCIDAD_CON_MOVIMIENTO); // d
 						break;
 					case 65:
 						if(eVisitante.getBolaEquipo().getVelX() > 0)eVisitante.getBolaEquipo().setVelX(0);
@@ -268,18 +269,18 @@ public class ventanaPartido extends JFrame {
 //					eVisitante.getBolaEquipo().setVelY(0);
 //					eLocal.getBolaEquipo().setVelX(0);
 //					eLocal.getBolaEquipo().setVelY(0);
-				}
+				
 				actualizarCampo();
-			}
+			}}
 			
-		});
+		);}
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		configuracionAntesDePartido();
+	//	configuracionAntesDePartido();
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
 		setVisible(true);
 		

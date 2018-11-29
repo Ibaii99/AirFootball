@@ -36,14 +36,30 @@ public class Juego {
 	private static FisicasNuevas f = new FisicasNuevas();
 
 	public static void main(String[] args) {
+		Equipo e = new Equipo("/ALA", "Deportivo Alav�s", 0, Color.BLUE, ("/iconos/equipos/ala.png"),
+				"/iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		Equipo u = (new Equipo("/ATH", "Athletic Club", 0, Color.RED, ("/iconos/equipos/ath.png"),
+				"/iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+		e.getBolaEquipo().setX(200);
+		u.getBolaEquipo().setX(50);
+		e.getBolaEquipo().setY(200);
+		u.getBolaEquipo().setY(50);
 		
 		
 		// pruebas de la ventana de juego
-		 v = new ventanaPartido((new Equipo("/ALA", "Deportivo Alav�s", 0, Color.BLUE, ("/iconos/equipos/ala.png"),
-					"/iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new Equipo("/ATH", "Athletic Club", 0, Color.RED, ("/iconos/equipos/ath.png"),
-							"/iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
-		 v.setVisible(true);
+		 v = new ventanaPartido(e, u, p, true, true, false, f);
+		 try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 v.configuracionAntesDePartido();
+		 
 		v.empieza();
+		p.setX(20);
+		p.setY(20);
+		v.actualizarCampo();
 	/*	char[] con ={ 'p', 'a', 's', 's'};
 	 
 	

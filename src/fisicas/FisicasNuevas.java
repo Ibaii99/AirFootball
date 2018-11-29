@@ -15,9 +15,9 @@ public class FisicasNuevas {
 	public static double TIEMPO = 1;
 	public static double COEFICIENTE_PERDIDA_PELOTA = 0.991;
 	public static double COEFICIENTE_PERDIDA_EQUIPO = 0.90;
-	public static double VELOCIDAD_MAX_PELOTA = 10;
+	public static double VELOCIDAD_MAX_PELOTA = 6;
 	public static double VELOCIDAD_MAX_EQUIPO = 5;
-	private static double MARGEN_SEGURIDAD_REBOTES = 3;
+	private static double MARGEN_SEGURIDAD_REBOTES = 10;
 	
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
@@ -43,7 +43,7 @@ public class FisicasNuevas {
 	 */
 	private boolean chocanPelotas(Pelota p1, Equipo equipo) {
 		boolean chocan = false;
-		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio() + MARGEN_SEGURIDAD_REBOTES))chocan = true;
+		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
 		if((equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()) < p1.getX() && p1.getX() < (equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio())
 				&& (equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()) < p1.getY() && p1.getY() < (equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio())
 				) chocan = true;
@@ -57,47 +57,41 @@ public class FisicasNuevas {
 	 * @param equipo	Equipo con el que choca la pelota
 	 */
 	private void cambioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
+		p.setxAntes(p.getX());
+		p.setyAntes(p.getY());
+		
 		if(!igualACero(equipo.getBolaEquipo().getVelX())&& !igualACero(equipo.getBolaEquipo().getVelY())) {
-		cambiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa()), (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa()));//multiplico por dos para que no se quede pegado al jlabel
-
+		cambiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*2, (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*2);//multiplico por dos para que no se quede pegado al jlabel
+		
 		}
+		
 		if(igualACero(equipo.getBolaEquipo().getVelX())&& igualACero(equipo.getBolaEquipo().getVelY())) {
-			cambiarVelocidadPelota(p, -(p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getMasa()),-(p.getVelY()*p.getMasa()+equipo.getBolaEquipo().getMasa())); //multiplico por dos para que no se quede pegado al jlabel
+			cambiarVelocidadPelota(p, -(p.getVelX()*p.getMasa() )*0.1,-(p.getVelY()*p.getMasa())*0.1); //multiplico por dos para que no se quede pegado al jlabel
+			
 		}
-		if(p.getVelX()<0)p.setVelX(p.getVelX() -equipo.getBolaEquipo().getRadio());
-		if(p.getVelX()>0)p.setVelX(p.getVelX() +equipo.getBolaEquipo().getRadio());
-		
-		if(p.getVelY()<0)p.setVelY(p.getVelY() -equipo.getBolaEquipo().getRadio());
-		if(p.getVelY()>0)p.setVelY(p.getVelY() +equipo.getBolaEquipo().getRadio());
-			/*
-			if((equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()) < p.getX() && p.getX() < (equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio())
-					&& (equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()) < p.getY() && p.getY() < (equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio())
-					) {
-			
-		if(p.getX() > equipo.getBolaEquipo().getX()) {			// la bola esta a la derecha del equipo
-			p.setX(p.getX());	
-			p.setX(p.getX() +equipo.getBolaEquipo().getRadio());// se calcula la diferencia de posicion y se saca a la pelota de ese sitio
-			
-			if(p.getX() < p.getxAntes())p.setX(p.getxAntes());	//esto significa que la bola sale por el otro sitio
+		if((equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) < p.getX() && p.getX() < (equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES)
+				&& (equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) < p.getY() && p.getY() < (equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES)) { 
 				
-		}	
-		if(p.getX() < equipo.getBolaEquipo().getX()) {		// la bola esta a la izquierda del equipo
-			p.setX(p.getX());
-			p.setX(p.getX()-equipo.getBolaEquipo().getRadio());		// se calcula la diferencia de posicion y se saca a la pelota de ese sitio
+				System.out.println("DENTRO");
+			//TODO
+				if(p.getX() > equipo.getBolaEquipo().getX()-MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getRadio()+equipo.getBolaEquipo().getX() + equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio());}// la bola esta a la derecha del equipo
+				if(p.getX() < equipo.getBolaEquipo().getX()+MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getRadio()+equipo.getBolaEquipo().getX() + equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio());}// la bola esta a la izquierda del equipo
+				if(p.getY() > equipo.getBolaEquipo().getY()-MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getRadio()+equipo.getBolaEquipo().getY() + equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio());}// la bola esta encima del equipo
+				if(p.getY() < equipo.getBolaEquipo().getY()+MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getRadio()+equipo.getBolaEquipo().getY() + equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio());}// la bola esta debajo del equipo
+				//cambioVelocidadesChoquePelotaEquipo(p, equipo);
+//				if(p.getVelX()<0)p.setVelX(p.getVelX() -equipo.getBolaEquipo().getRadio()/2);
+//				if(p.getVelX()>0)p.setVelX(p.getVelX() +equipo.getBolaEquipo().getRadio()/2);
+//				
+//				if(p.getVelY()<0)p.setVelY(p.getVelY() -equipo.getBolaEquipo().getRadio()/2);
+//				if(p.getVelY()>0)p.setVelY(p.getVelY() +equipo.getBolaEquipo().getRadio()/2);
+//				
+			}
 			
-			if(p.getX() > p.getxAntes())p.setX(p.getxAntes());	//esto significa que la bola sale por el otro sitio
-		
-		}
-		if(p.getY() > equipo.getBolaEquipo().getY()) {		// la bola esta encima del equipo
-			p.setY(p.getY());
-			p.setY(p.getY() + equipo.getBolaEquipo().getRadio());}	// se calcula la diferencia de posicion y se saca a la pelota de ese sitio
-		
-		if(p.getY() < equipo.getBolaEquipo().getY()) {		// la bola esta debajo del equipo
-			p.setY(p.getY());
-			p.setX(p.getY()-equipo.getBolaEquipo().getRadio());}		// se calcula la diferencia de posicion y se saca a la pelota de ese sitio
 			
-		}*/
-		
+			
+			System.out.println(equipo.getBolaEquipo().getX() + "   " + equipo.getBolaEquipo().getY());
+			System.out.println(p.getX() + "   " + p.getY());
+			
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
