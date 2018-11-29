@@ -233,9 +233,13 @@ public class MenuAmistoso extends JFrame {
 				Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
 				
 				ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, false, f);
-
-
-				partido.setVisible(true);}}
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}}
 				// PRUEBA DE LISTENER DE VENTANAPARTIDO
 			
 		);

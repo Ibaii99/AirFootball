@@ -305,7 +305,7 @@ public class ventanaPartido extends JFrame {
 		configuracionAntesDePartido();
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
 		setVisible(true);
-		hiloJuego.start();
+	//	hiloJuego.start();
 	}
 	
 	public void degradarVelocidad() {
