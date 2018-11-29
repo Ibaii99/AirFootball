@@ -84,8 +84,8 @@ public class Juego {
 //		
 //		Inicio i = new Inicio(bd, con,f);
 //		i.setVisible(true);
-		 
-		
+//		 
+//		
 	}
 	}
 
