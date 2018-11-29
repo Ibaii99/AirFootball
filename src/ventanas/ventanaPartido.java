@@ -90,8 +90,7 @@ public class ventanaPartido extends JFrame {
 		this.p = p; 
 		
 
-		lblEqV.setBounds(686, 5, 40, 40);
-		lblEqL.setBounds(12, 5, 40, 40);
+
 
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
@@ -305,9 +304,12 @@ public class ventanaPartido extends JFrame {
 		configuracionAntesDePartido();
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
 		setVisible(true);
-	//	hiloJuego.start();
+		
+		
 	}
-	
+	public void empieza() {
+		hiloJuego.start();
+	}
 	public void degradarVelocidad() {
 		eVisitante.getBolaEquipo().setVelYAntes(eVisitante.getBolaEquipo().getVelY());
 		eVisitante.getBolaEquipo().setVelXAntes(eVisitante.getBolaEquipo().getVelX());
@@ -382,6 +384,8 @@ public class ventanaPartido extends JFrame {
 		actualizarTamanyoLbl();
 		pintarLabels();
 		actualizarCampo();
+		
+		
 	}
 
 	// ...........................................................................................................//
@@ -406,12 +410,17 @@ public class ventanaPartido extends JFrame {
 		if (p.getRutaImagen() == null)
 			lblPelota.setBackground(p.getColor());
 		//TODO aqui hay fallo
+		lblEquipoLocal.setBackground(Color.BLACK);
+		lblEquipoVisitante.setBackground(Color.gray);
+		lblPelota.setBackground(Color.BLUE);
+		/*
 		if (eLocal.getBolaEquipo().getRutaImagen() != null)
 			lblEquipoLocal.setIcon(eLocal.getBolaEquipo().getImagenObjeto());
 		if (eVisitante.getBolaEquipo().getRutaImagen() != null)
 			lblEquipoVisitante.setIcon(eVisitante.getBolaEquipo().getImagenObjeto());
 		if (p.getRutaImagen() != null)
 			lblPelota.setIcon(p.getImagenObjeto());
+	*/
 	}
 
 	/**
@@ -427,14 +436,17 @@ public class ventanaPartido extends JFrame {
 	private void colocarEnPosInicial() {
 		p.setX((int) getPanelCampo().getSize().getWidth() / 2);
 		p.setY((int) getPanelCampo().getSize().getHeight() / 2);
-
+		System.out.println(p.getX()+ "  "+ p.getY());
 		// TODO editar esto, no son los objetos son los labels
 
 		eLocal.getBolaEquipo().setX(getPanelCampo().getSize().getWidth() - getPanelCampo().getSize().getWidth() / 4);
 		eVisitante.getBolaEquipo().setX(getPanelCampo().getSize().getWidth() / 4);
-
+		
 		eLocal.getBolaEquipo().setY(getPanelCampo().getSize().getHeight() / 2);
 		eVisitante.getBolaEquipo().setY(getPanelCampo().getSize().getHeight() / 2);
+		
+		System.out.println(eVisitante.getBolaEquipo().getX()+ "  "+eVisitante.getBolaEquipo().getY());
+		System.out.println(eLocal.getBolaEquipo().getX()+ "  "+ eLocal.getBolaEquipo().getY());
 	}
 
 	/**

@@ -183,7 +183,7 @@ public class BaseDeDatos {
 			ResultSet rs = con.createStatement().executeQuery(query1);
 			
 			String nombre = rs.getString("Nombre");
-			String siglas= rs.getString("Siglas");
+			String siglas= "/"+rs.getString("Siglas");
 			int puntos= Integer.parseInt(rs.getString("Puntos"));
 			int get= Integer.parseInt(rs.getString("Goles Encajados Totales"));
 			int gel= Integer.parseInt(rs.getString("Goles Encajados Local"));

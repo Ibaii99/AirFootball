@@ -228,17 +228,15 @@ public class MenuAmistoso extends JFrame {
 				char[] a = {'a','b','c'};
 				
 				Equipo eLocal = bd.convertirAEquipo(cbLocal.getSelectedItem().toString(), new Jugador("", a, 0));
-				Equipo eVisitante = bd.convertirAEquipo(cbVisitante.getSelectedItem().toString(), new Jugador("", a, 0));
+				System.out.println(eLocal.toString());
 				
+				Equipo eVisitante = bd.convertirAEquipo(cbVisitante.getSelectedItem().toString(), new Jugador("", a, 0));
+				System.out.println(eVisitante.toString());
 				Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
 				
 				ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, false, f);
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+
+				
 				}}
 				// PRUEBA DE LISTENER DE VENTANAPARTIDO
 			

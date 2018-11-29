@@ -11,9 +11,9 @@ import ventanas.ventanaPartido;
  */
 public class FisicasNuevas {
 	public static double TIEMPO = 1.5;
-	public static double COEFICIENTE_PERDIDA_PELOTA = 0.99;
+	public static double COEFICIENTE_PERDIDA_PELOTA = 0.991;
 	public static double COEFICIENTE_PERDIDA_EQUIPO = 0.90;
-	public static double VELOCIDAD_MAX_PELOTA = 10;
+	public static double VELOCIDAD_MAX_PELOTA = 5;
 	public static double VELOCIDAD_MAX_EQUIPO = 6;
 	
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
@@ -55,7 +55,7 @@ public class FisicasNuevas {
 		cambiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*2, (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*2);//multiplico por dos para que no se quede pegado al jlabel
 	}
 		if(igualACero(equipo.getBolaEquipo().getVelX())&& igualACero(equipo.getBolaEquipo().getVelY())) {
-			cambiarVelocidadPelota(p, -(p.getVelX()*3/2),-(p.getVelY()*3/2));//multiplico por dos para que no se quede pegado al jlabel
+			cambiarVelocidadPelota(p, -(p.getVelX()*2),-(p.getVelY()*2));//multiplico por dos para que no se quede pegado al jlabel
 		}
 		
 	}
