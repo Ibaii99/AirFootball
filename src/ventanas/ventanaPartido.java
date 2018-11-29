@@ -88,10 +88,18 @@ public class ventanaPartido extends JFrame {
 		this.eLocal = eLocal;
 		this.eVisitante = eVisitante;
 		this.p = p;
+<<<<<<< HEAD
+=======
+		
+
+		lblEqV.setBounds(686, 5, 40, 40);
+		lblEqL.setBounds(12, 5, 40, 40);
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
 
+<<<<<<< HEAD
 		System.out.println(eLocal.getNombre());
 		// ImageIcon iconL = new
 		// ImageIcon(getClass().getResource("/"+eLocal.getImagen()));
@@ -100,6 +108,18 @@ public class ventanaPartido extends JFrame {
 		Graphics gL = biL.createGraphics();
 		// gL.drawImage(imgL, 0, 0, 40, 40, null);
 		ImageIcon newIconL = new ImageIcon(biL);
+=======
+		
+		try {	
+			ImageIcon iconL = new ImageIcon(getClass().getResource("/"+eLocal.getBolaEquipo().getRutaImagen()));
+			Image imgL = iconL.getImage();
+			BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
+			Graphics gL = biL.createGraphics();
+			gL.drawImage(imgL, 0, 0, 40, 40, null);
+			ImageIcon newIconL = new ImageIcon(biL);
+			lblEqL.setIcon(newIconL);} catch(NullPointerException e) {}
+		
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 
 		ImageIcon iconC = new ImageIcon(ventanaPartido.class.getResource("/iconos/campo.png"));
 		Image imgC = iconC.getImage();
@@ -107,7 +127,9 @@ public class ventanaPartido extends JFrame {
 		Graphics gC = biC.createGraphics();
 		gC.drawImage(imgC, 0, 0, 720, 395, null);
 		ImageIcon newIconC = new ImageIcon(biC);
+		
 
+<<<<<<< HEAD
 		// ImageIcon iconV = new
 		// ImageIcon(getClass().getResource("/"+eVisitante.getImagen()));
 		// Image imgV = iconV.getImage();
@@ -115,6 +137,16 @@ public class ventanaPartido extends JFrame {
 		Graphics gV = biV.createGraphics();
 		// gV.drawImage(imgV, 0, 0, 40, 40, null);
 		ImageIcon newIconV = new ImageIcon(biV);
+=======
+		try {	
+			ImageIcon iconV = new ImageIcon(getClass().getResource("/"+eVisitante.getBolaEquipo().getRutaImagen()));
+			Image imgV = iconV.getImage();
+			BufferedImage biV = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
+			Graphics gV = biV.createGraphics();
+		 	gV.drawImage(imgV, 0, 0, 40, 40, null);
+			ImageIcon newIconV = new ImageIcon(biV);
+			lblEqV.setIcon(newIconV);} catch(NullPointerException e) {}
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 
 		ImageIcon icon = new ImageIcon(ventanaPartido.class.getResource("/iconos/marcadorconnombres.jpg"));
 		Image img = icon.getImage();
@@ -130,7 +162,7 @@ public class ventanaPartido extends JFrame {
 		}
 		setSize(900, 600);
 		setResizable(true);
-		setVisible(true);
+		
 
 		// lblEquipoLocal.setText("EQUIPO LOCAL");
 
@@ -153,12 +185,23 @@ public class ventanaPartido extends JFrame {
 		label.setFont(f);
 		panel.add(label);
 
+<<<<<<< HEAD
 		lblEqL.setBounds(12, 5, 40, 40);
 		lblEqL.setIcon(newIconL);
+=======
+
+		
+
+		
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 		panel.add(lblEqL);
 
+<<<<<<< HEAD
 		lblEqV.setBounds(686, 5, 40, 40);
 		lblEqV.setIcon(newIconV);
+=======
+		
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 		panel.add(lblEqV);
 
 		JLabel label_3 = new JLabel("0");
@@ -193,11 +236,15 @@ public class ventanaPartido extends JFrame {
 		panel.add(lblNomEqV);
 		getContentPane().setLayout(groupLayout);
 
+<<<<<<< HEAD
 		// Metodo original con doubles
 		// lblEquipoLocal.setBounds(eLocal.getBolaEquipo().getX(),
 		// eLocal.getBolaEquipo().getY(), eLocal.getBolaEquipo().getRadio()*2,
 		// eLocal.getBolaEquipo().getRadio()*2);
 
+=======
+	
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -305,9 +352,14 @@ public class ventanaPartido extends JFrame {
 		}
 		configuracionAntesDePartido();
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
+		setVisible(true);
 		hiloJuego.start();
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 	public void degradarVelocidad() {
 		eVisitante.getBolaEquipo().setVelYAntes(eVisitante.getBolaEquipo().getVelY());
 		eVisitante.getBolaEquipo().setVelXAntes(eVisitante.getBolaEquipo().getVelX());
@@ -426,12 +478,13 @@ public class ventanaPartido extends JFrame {
 	 */
 	private void pintarLabels() {
 		elementosAOpaco();
-		if (eLocal.getBolaEquipo().getImagenObjeto() == null)
+		if (eLocal.getBolaEquipo().getRutaImagen() == null)
 			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
-		if (eVisitante.getBolaEquipo().getImagenObjeto() == null)
+		if (eVisitante.getBolaEquipo().getRutaImagen() == null)
 			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
-		if (p.getImagenObjeto() == null)
+		if (p.getRutaImagen() == null)
 			lblPelota.setBackground(p.getColor());
+<<<<<<< HEAD
 		if (eLocal.getBolaEquipo().getImagenObjeto() != null) {
 			elementosTransparentes();
 			String rutaImagenL = "/" + eLocal.getBolaEquipo().getImagenObjeto().toString();
@@ -453,6 +506,14 @@ public class ventanaPartido extends JFrame {
 		}
 
 		if (p.getImagenObjeto() != null)
+=======
+		//TODO aqui hay fallo
+		if (eLocal.getBolaEquipo().getRutaImagen() != null)
+			lblEquipoLocal.setIcon(eLocal.getBolaEquipo().getImagenObjeto());
+		if (eVisitante.getBolaEquipo().getRutaImagen() != null)
+			lblEquipoVisitante.setIcon(eVisitante.getBolaEquipo().getImagenObjeto());
+		if (p.getRutaImagen() != null)
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 			lblPelota.setIcon(p.getImagenObjeto());
 	}
 

@@ -9,12 +9,17 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+
+import entidades.BaseDeDatos;
+import fisicas.FisicasNuevas;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Inicio extends JFrame {
@@ -24,7 +29,7 @@ public class Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public Inicio() {
+	public Inicio(BaseDeDatos bd, Connection con, FisicasNuevas f) {
 		setSize(630, 460);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -35,10 +40,10 @@ public class Inicio extends JFrame {
 		final JButton bLiga = new JButton("Liga");
 		bLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MenuLiga ml;
+				
 				try {
-					ml = new MenuLiga(getWidth(), getHeight());
-					ml.setVisible(true);
+					VentanaLogin v = new VentanaLogin(bd, con,f);
+					v.setVisible(true);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -51,7 +56,7 @@ public class Inicio extends JFrame {
 		bLiga.setBounds(getWidth() - 150, getHeight() - 100, 119, 40);
 		panel.add(bLiga);
 
-		final JButton bCreacion = new JButton("Creación");
+		final JButton bCreacion = new JButton("Creaciï¿½n");
 		bCreacion.setFont(new Font("Arial Black", Font.PLAIN, 16));
 		bCreacion.setBounds(getWidth() - 150, getHeight() - 150, 119, 40);
 		panel.add(bCreacion);
@@ -62,12 +67,12 @@ public class Inicio extends JFrame {
 				dispose();
 				MenuAmistoso mu;
 				try {
-					mu = new MenuAmistoso(getSize().width, getSize().height);
+					mu = new MenuAmistoso(getSize().width, getSize().height,bd, con,f);
 					mu.setVisible(true);
 				} catch (Exception e1) {
 					MenuAmistoso muAlt;
 					try {
-						muAlt = new MenuAmistoso(630, 460);
+						muAlt = new MenuAmistoso(630, 460,bd,con,f);
 						muAlt.setVisible(true);
 					} catch (Exception e2) {
 						// TODO Auto-generated catch block
@@ -124,11 +129,5 @@ public class Inicio extends JFrame {
 				getContentPane().setSize(getSize());
 			}
 		});
-	}
-
-	public static void main(String[] args) {
-		Inicio i = new Inicio();
-		i.setVisible(true);
-
 	}
 }

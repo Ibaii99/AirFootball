@@ -12,8 +12,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import entidades.BaseDeDatos;
 import entidades.Equipo;
 import fisicas.FisicasNuevas;
+import jugador.Jugador;
 import objetos.ObjetoCombobox;
 import objetos.Pelota;
 
@@ -30,7 +32,7 @@ import java.beans.PropertyChangeEvent;
 public class MenuAmistoso extends JFrame {
 	/**
 	 * @author Jorge
-	 *
+	 * @author ibai
 	 *
 	 */
 
@@ -43,52 +45,24 @@ public class MenuAmistoso extends JFrame {
 	public ImageIcon imageIconL;
 	private static FisicasNuevas f = new FisicasNuevas();
 
-	public String getEquipoL() {
-		return equipoL;
-	}
-
-	public void setEquipoL(String equipoL) {
-		this.equipoL = equipoL;
-	}
-
-	public ImageIcon getImageIconL() {
-		return imageIconL;
-	}
-
-	public void setImageIconL(ImageIcon imageIconL) {
-		this.imageIconL = imageIconL;
-	}
-
-	public int anchura;
-	public int altura;
-
-	public int getAnchura() {
-		return anchura;
-	}
-
-	public void setAnchura(int anchura) {
-		this.anchura = anchura;
-	}
-
-	public int getAltura() {
-		return altura;
-	}
-
-	public void setAltura(int altura) {
-		this.altura = altura;
-	}
-
 	/**
 	 * 
 	 * @param Anchura
 	 *            de la ventana en base a listeners de la ventana Inicio
 	 * @param Altura
 	 *            de la ventana en base a listeners de la ventana Inicio
+	 * 
+	 * @param bd
+	 *            Base de datos del programa
+	 * @param con
+	 *            Conexion con el archivo Base de Datos
+	 * @param f
+	 *            Fisicas con las que funciona el juego
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-
-	public MenuAmistoso(int anchura, int altura) throws ClassNotFoundException, SQLException {
+	public MenuAmistoso(int anchura, int altura, BaseDeDatos bd, Connection con, FisicasNuevas f)
+			throws ClassNotFoundException, SQLException {
 		try {
 			setSize(1003, 725);
 		} catch (Exception e) {
@@ -142,24 +116,20 @@ public class MenuAmistoso extends JFrame {
 
 		Logger logger = Logger.getLogger("baseDeDatos");
 
-		Connection con = null;
-
 		Statement consulta;
 
 		String comando = "";
 		/**
-		 * No hago un método para diferentes sentencias SQL porque no realizamos
-		 * exactamente la misma en ningún momento
+		 * No hago un mï¿½todo para diferentes sentencias SQL porque no realizamos
+		 * exactamente la misma en ningï¿½n momento
 		 * 
 		 */
 		try {
 			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 		} catch (Exception e3) {
 			// e3.printStackTrace();
 		}
 		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS;";
-		con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 		ResultSet rs = con.createStatement().executeQuery(query);
 		while (rs.next()) {
 
@@ -180,16 +150,16 @@ public class MenuAmistoso extends JFrame {
 				String filenameL = cbLocal.getSelectedObjects().toString();
 				try {
 					try {
-						Connection conCB = null;
+
 						Class.forName("org.sqlite.JDBC");
-						conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
+
 						Statement consultaCB;
-						consultaCB = conCB.createStatement();
+						consultaCB = con.createStatement();
 						String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '"
 								+ cbLocal.getSelectedItem().toString() + "'";
 						logger.log(Level.INFO, "BD: " + comando2);
 						consultaCB.executeUpdate(comando2);
-						ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
+						ResultSet rs2 = con.createStatement().executeQuery(comando2);
 						while (rs2.next()) {
 
 							equipoL = "/" + rs2.getString("ICONO");
@@ -219,16 +189,15 @@ public class MenuAmistoso extends JFrame {
 				String filenameV = cbVisitante.getSelectedObjects().toString();
 				try {
 					try {
-						Connection conCB = null;
+
 						Class.forName("org.sqlite.JDBC");
-						conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 						Statement consultaCB;
-						consultaCB = conCB.createStatement();
+						consultaCB = con.createStatement();
 						String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '"
 								+ cbVisitante.getSelectedItem().toString() + "'";
 						logger.log(Level.INFO, "BD: " + comando2);
 						consultaCB.executeUpdate(comando2);
-						ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
+						ResultSet rs2 = con.createStatement().executeQuery(comando2);
 						System.out.println(rs2.toString());
 
 						while (rs2.next()) {
@@ -275,12 +244,19 @@ public class MenuAmistoso extends JFrame {
 						consultaL.executeUpdate(comando3);
 						ResultSet rs3 = conL.createStatement().executeQuery(comando3);
 						System.out.println(rs3.toString());
+						char[] a = { 'a', 'b', 'c' };
 
-						while (rs3.next()) {
+						Equipo eLocal = bd.convertirAEquipo(cbLocal.getSelectedItem().toString(),
+								new Jugador("", a, 0));
+						Equipo eVisitante = bd.convertirAEquipo(cbVisitante.getSelectedItem().toString(),
+								new Jugador("", a, 0));
 
-							siglasL = "/" + rs3.getString("SIGLAS");
-							rutaImagenL = rs3.getString("ICONO");
-						}
+						Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
+
+						ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true,
+								false, f);
+						siglasL = "/" + rs3.getString("SIGLAS");
+						rutaImagenL = rs3.getString("ICONO");
 
 					} catch (SQLException i) {
 
@@ -321,20 +297,23 @@ public class MenuAmistoso extends JFrame {
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 				Pelota pelotaPartido = new Pelota(Color.black, "jabulani", 0, 0, 20, 1, null, false);
 
-				
 				ventanaPartido partido = new ventanaPartido(equipoLPrueba, equipoVPrueba, pelotaPartido, true, true,
 						false, f);
-				//partido.configuracionAntesDePartido();
+				// partido.configuracionAntesDePartido();
 				try {
-				Thread.sleep(1000);
-				}catch(Exception e) {
-					
+					Thread.sleep(1000);
+				} catch (Exception e) {
+
 				}
-			//	
+				//
 				partido.setVisible(true);
-				// PRUEBA DE LISTENER DE VENTANAPARTIDO
+				partido.setVisible(true);
 			}
-		});
+		}
+
+		// PRUEBA DE LISTENER DE VENTANAPARTIDO
+
+		);
 		panel.add(lblEqL);
 		panel.add(lblEqV);
 
@@ -346,7 +325,7 @@ public class MenuAmistoso extends JFrame {
 				lblFondo.setBounds(0, 0, getWidth(), getHeight());
 				getContentPane().revalidate();
 				getContentPane().setSize(getSize());
-				// Aquí hemos intentado meter una constante (getWidth()/626) pero no nos
+				// Aquï¿½ hemos intentado meter una constante (getWidth()/626) pero no nos
 				// funcionaba, ni haciendo un Math.round.
 				int nuevaFuente = (13 * getWidth() / 626);
 				int nuevaAnchura = (80 * getWidth() / 626);
@@ -357,7 +336,7 @@ public class MenuAmistoso extends JFrame {
 				int nuevaAlturaCb = (22 * getWidth() / 626);
 				int ladoIconoH = (int) Math.round(100 * getWidth() / 626);
 				int ladoIconoV = (int) Math.round(100 * getHeight() * 1.36 / 626);
-				// Inicialización de componentes del NullLayout en función del eje 0,0 de la
+				// Inicializaciï¿½n de componentes del NullLayout en funciï¿½n del eje 0,0 de la
 				// ventana
 				lblLocal.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
 				lblVisitante.setFont(new Font("Arial Black", Font.PLAIN, nuevaFuente));
@@ -411,10 +390,38 @@ public class MenuAmistoso extends JFrame {
 		revalidate();
 	}
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException { // prueba de menuAmistoso para
-																							// comprobar que carga bien
-		MenuAmistoso mu = new MenuAmistoso(626, 460);
-		mu.setVisible(true);
+	public String getEquipoL() {
+		return equipoL;
 	}
 
+	public void setEquipoL(String equipoL) {
+		this.equipoL = equipoL;
+	}
+
+	public ImageIcon getImageIconL() {
+		return imageIconL;
+	}
+
+	public void setImageIconL(ImageIcon imageIconL) {
+		this.imageIconL = imageIconL;
+	}
+
+	public int anchura;
+	public int altura;
+
+	public int getAnchura() {
+		return anchura;
+	}
+
+	public void setAnchura(int anchura) {
+		this.anchura = anchura;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
 }

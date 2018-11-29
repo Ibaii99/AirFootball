@@ -10,10 +10,18 @@ public class Jugador {
 	private int ligasGanadas;
 	
 	private ArrayList<Pelota> pelotasDesbloqueadas;
-	private String Nombre;
-	private char[] Password;
-	private ArrayList<Liga> ligasEnCurso;
+	private String nombre;
+	private char[] password;
+	private int codLiga = 0;
 	
+	
+	public int getCodLiga() {
+		return codLiga;
+	}
+
+	public void incCodLiga() {
+		codLiga++;
+	}
 
 	/** El modo Arcade le dejará al usuario desbloquear pelotas nuevas para elegir
 	 * @param pelota Pelota nueva desbloqueada
@@ -21,4 +29,28 @@ public class Jugador {
 	public void anyadirPelota(Pelota pelota) {
 		pelotasDesbloqueadas.add(pelota);
 	}
+	public Jugador(String nombre, char[] password, int numero) {
+		this.password = password;
+		this.nombre = nombre;
+		codLiga = numero;
+	}
+	public int getLigasJugadas() {
+		return ligasJugadas;
+	}
+	public int getLigasGanadas() {
+		return ligasGanadas;
+	}
+	public ArrayList<Pelota> getPelotasDesbloqueadas() {
+		return pelotasDesbloqueadas;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public char[] getPassword() {
+		return password;
+	}
+
+
+	
 }
+

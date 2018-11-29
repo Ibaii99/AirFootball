@@ -18,7 +18,7 @@ import ventanas.ventanaPartido;
  *
  */
 class TestPelotasYFisicas{
-	
+
 	private Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 25);
 	private Equipo e1 = new Equipo("Futbol club Barcelona", "FCB", Color.red, 50, 70);
 	private Equipo e2 = new Equipo("Real Madrid", "RM", Color.white, 50, 70);
@@ -64,6 +64,21 @@ class TestPelotasYFisicas{
 		assertEquals(25, p.getY());
 	}
 	
+	
+	@Test
+	void probarReboteBordeLateral() {
+		p.setVelX(7);
+		p.setVelY(0);
+		p.setX(v.getWidth());
+		p.setY(v.getHeight()/2);
+		fisicas.choquePelotaBorde(v, p);
+		fisicas.muevePelota(p, fisicas.TIEMPO, v);
+		assertEquals(p.getX()*0.9, p.getY()*0.9);
+	}
+	
+	
+	
+	
 	@Test
 	void testAvanceSinPasarseDelTope(){
 
@@ -73,7 +88,7 @@ class TestPelotasYFisicas{
 
 		v.setAlwaysOnTop(false);
 		v.setVisible(false);
-		
+				
 		//hay que dar tiempo a que se genere la ventana para que los tamaños esten cargados
 		//sino va a dar error
 		try {

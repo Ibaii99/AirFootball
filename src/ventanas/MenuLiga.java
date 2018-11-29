@@ -13,10 +13,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
@@ -25,6 +29,12 @@ import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import entidades.BaseDeDatos;
+import entidades.Equipo;
+import fisicas.FisicasNuevas;
+import jugador.Jugador;
+
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
@@ -35,12 +45,13 @@ public class MenuLiga extends JFrame {
 	/**
 	 * @author Jorge
 	 * @throws SQLException
-	 *
+	 * @author ibai
 	 */
 	public String equipoL;
 	public ImageIcon imageIconL;
 
-	public MenuLiga(int anchura, int altura) throws SQLException, Exception {
+	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, Connection con, FisicasNuevas f) {
+		try {
 		JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
 		setContentPane(lblBck);
 
@@ -54,20 +65,17 @@ public class MenuLiga extends JFrame {
 
 		Logger logger = Logger.getLogger("baseDeDatos");
 
-		Connection con = null;
 
 		Statement consulta;
 
 		String comando = "";
 		try {
 			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 		} catch (Exception e3) {
 			// e3.printStackTrace();
 		}
-		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS;";
+		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS"+j.getNombre()+";";
 		System.out.println(query);
-		con = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 		// Statement st = con.createStatement();
 		ResultSet rs = con.createStatement().executeQuery(query);
 		System.out.println(rs.toString());
@@ -84,21 +92,43 @@ public class MenuLiga extends JFrame {
 		}
 		// st.close();
 		rs.close();
-
-		JLabel lblEligeEquipo = new JLabel("Elige equipo:");
 		
-
+		JLabel lblEligeEquipo = new JLabel("Elige equipo:");
+		//TODO
+		//TODO
+		
+		
 		JButton btnIniciarLiga = new JButton("Iniciar liga");
+		btnIniciarLiga.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+				Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j);
+				con.close();
+				
+				VentanaLiga v = new VentanaLiga(equipo);
+				v.setVisible(true);
+				setVisible(false);
+				
+				
+				
+			
+				} catch (Exception e1) {
+					
+					}
+					}});
 		lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17 * getWidth() / 630)));
 		btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(13 * getWidth() / 630)));
 
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Inicio i = new Inicio();
+				Inicio i = new Inicio(bd,con, f);
 				i.setSize(660, 480);
 				i.setVisible(true);
 				dispose();
+				try {
+					con.close();
+				} catch (SQLException e1) {	e1.printStackTrace();}
 			}
 		});
 		btnVolver.setFont(new Font("Arial Black", Font.PLAIN, 13));
@@ -118,16 +148,14 @@ public class MenuLiga extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 
-					Connection conCB = null;
 					Class.forName("org.sqlite.JDBC");
-					conCB = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
 					Statement consultaCB;
-					consultaCB = conCB.createStatement();
-					String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '" + cbLiga.getSelectedItem().toString()
+					consultaCB = con.createStatement();
+					String comando2 = "SELECT ICONO FROM EQUIPOS"+j.getNombre()+" WHERE NOMBRE = '" + cbLiga.getSelectedItem().toString()
 							+ "'";
 					logger.log(Level.INFO, "BD: " + comando2);
 					consultaCB.executeUpdate(comando2);
-					ResultSet rs2 = conCB.createStatement().executeQuery(comando2);
+					ResultSet rs2 = con.createStatement().executeQuery(comando2);
 					System.out.println(rs2.toString());
 					while (rs2.next()) {
 						equipoL = "/" + rs2.getString("ICONO");
@@ -198,7 +226,7 @@ public class MenuLiga extends JFrame {
 				icono.repaint();
 			}
 		});
-		getContentPane().setLayout(groupLayout);
+		getContentPane().setLayout(groupLayout);} catch(Exception excep) {excep.printStackTrace();}
 		
 	}
 	/**
