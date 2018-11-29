@@ -16,7 +16,7 @@ public class VentanaLiga extends JFrame {
 
 	private JPanel contentPane;
 
-
+ 
 
 	/**
 	 * Create the frame.

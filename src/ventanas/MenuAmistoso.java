@@ -219,7 +219,7 @@ public class MenuAmistoso extends JFrame {
 			}
 
 		});
-
+ 
 		cbLocal.setBounds(120, 224, 150, 22);
 		panel.add(cbLocal);
 		btnIniciarAmistoso.addActionListener(new ActionListener() {

@@ -25,8 +25,8 @@ public class HiloJuego extends Thread {
 		try {
 			Thread.sleep(15);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// TODO Auto-generated catch block 
+			e.printStackTrace(); 
 		}
 
 		fisicas.choquePelotaBorde(v, p);

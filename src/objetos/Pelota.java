@@ -37,7 +37,7 @@ public class Pelota extends Objetos{
 	 * @param masa		Masa de la pelota
 	 * @param x			Posicion x inicial de la pelota
 	 * @param y			Posicion y inicial de la pelota
-	 * @param radio		Radio de la pelota
+	 * @param radio		Radio de la pelota 
 	 */
 	public Pelota(Color color, String nombre, double x, double y, double radio, double masa) {
 		super(x+ radio, y + radio, color, true, nombre, radio, masa, null);

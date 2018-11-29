@@ -106,7 +106,7 @@ public class Inicio extends JFrame {
 
 		getContentPane().add(panel);
 		addComponentListener(new ComponentAdapter() {
-			@Override
+			@Override 
 			public void componentResized(ComponentEvent arg0) {
 
 				bLiga.setBounds(getWidth() - 150, getHeight() - 100, 119, 40);

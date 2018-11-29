@@ -87,7 +87,7 @@ public class ventanaPartido extends JFrame {
 		this.isAmistoso = esAmistoso;
 		this.eLocal = eLocal;
 		this.eVisitante = eVisitante;
-		this.p = p;
+		this.p = p; 
 		
 
 		lblEqV.setBounds(686, 5, 40, 40);
