@@ -1,5 +1,7 @@
 package fisicas;
 
+import javax.swing.plaf.ActionMapUIResource;
+
 import entidades.Equipo;
 import objetos.Pelota;
 import objetos.Poste;
@@ -10,11 +12,12 @@ import ventanas.ventanaPartido;
  *
  */
 public class FisicasNuevas {
-	public static double TIEMPO = 1.5;
+	public static double TIEMPO = 1;
 	public static double COEFICIENTE_PERDIDA_PELOTA = 0.991;
 	public static double COEFICIENTE_PERDIDA_EQUIPO = 0.90;
 	public static double VELOCIDAD_MAX_PELOTA = 5;
-	public static double VELOCIDAD_MAX_EQUIPO = 6;
+	public static double VELOCIDAD_MAX_EQUIPO = 1;
+	private static double MARGEN_SEGURIDAD_REBOTES = 3;
 	
 	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
 	// Y el tiempo en el que se calcule eso
@@ -40,13 +43,14 @@ public class FisicasNuevas {
 	 */
 	private boolean chocanPelotas(Pelota p1, Equipo equipo) {
 		boolean chocan = false;
-		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())< (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())< (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
+		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio() + MARGEN_SEGURIDAD_REBOTES))chocan = true;
 		return chocan;
 	}
 	
 	/**	Metodo para cambiar las velocidades de una pelota cuando esta choca con un equipo
 	 *  Suponiendo un choque elastico de velPelo = velPelo*masaPelo - velEqui*masaEqui
-	 *  El equipo no se ver� afectado por el choque
+	 *  El equipo no se ver� afectado por el choque y si la pelota se metre dentro del equipo
+	 *  se saca
 	 * @param p			Pelota que va a sufrir el choque
 	 * @param equipo	Equipo con el que choca la pelota
 	 */
@@ -56,7 +60,31 @@ public class FisicasNuevas {
 	}
 		if(igualACero(equipo.getBolaEquipo().getVelX())&& igualACero(equipo.getBolaEquipo().getVelY())) {
 			cambiarVelocidadPelota(p, -(p.getVelX()*2),-(p.getVelY()*2));//multiplico por dos para que no se quede pegado al jlabel
+		
+			/*
+		if(p.getX() > equipo.getBolaEquipo().getX()) {			// la bola esta a la derecha del equipo
+			p.setX(p.getX());	
+			p.setX(p.getX() +equipo.getBolaEquipo().getRadio());// se calcula la diferencia de posicion y se saca a la pelota de ese sitio
+			
+			if(p.getX() < p.getxAntes())p.setX(p.getxAntes());	//esto significa que la bola sale por el otro sitio
+				
+		}	
+		if(p.getX() < equipo.getBolaEquipo().getX()) {		// la bola esta a la izquierda del equipo
+			p.setX(p.getX());
+			p.setX(p.getX()-equipo.getBolaEquipo().getRadio());		// se calcula la diferencia de posicion y se saca a la pelota de ese sitio
+			
+			if(p.getX() > p.getxAntes())p.setX(p.getxAntes());	//esto significa que la bola sale por el otro sitio
+		
 		}
+		if(p.getY() > equipo.getBolaEquipo().getY()) {		// la bola esta encima del equipo
+			p.setY(p.getY());
+			p.setY(p.getY() + equipo.getBolaEquipo().getRadio());}	// se calcula la diferencia de posicion y se saca a la pelota de ese sitio
+		
+		if(p.getY() < equipo.getBolaEquipo().getY()) {		// la bola esta debajo del equipo
+			p.setY(p.getY());
+			p.setX(p.getY()-equipo.getBolaEquipo().getRadio());}		// se calcula la diferencia de posicion y se saca a la pelota de ese sitio
+			
+	*/	}
 		
 	}
 	
@@ -233,8 +261,8 @@ public class FisicasNuevas {
 		e.getBolaEquipo().setY(posicionFuturaY);
 		e.getBolaEquipo().setX(posicionFuturaX);	}
 	if(igualACero(e.getBolaEquipo().getVelX()) && igualACero(e.getBolaEquipo().getVelY())) {
-		e.getBolaEquipo().setY(e.getBolaEquipo().getY());
-		e.getBolaEquipo().setX(e.getBolaEquipo().getX());
+		e.getBolaEquipo().setY(e.getBolaEquipo().getyAntes());
+		e.getBolaEquipo().setX(e.getBolaEquipo().getxAntes());
 	}
 	
 	}
@@ -258,7 +286,7 @@ public class FisicasNuevas {
 	 * @return		Devuelve: True-> si es 0 / False-> si no es 0
 	 */
 	public static boolean igualACero( double num ) {
-		return Math.abs(num)<=1E-9;  // 1 * 10^-12
+		return Math.abs(num)<=1E-12;  // 1 * 10^-12
 	}
 	
 }

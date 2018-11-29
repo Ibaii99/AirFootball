@@ -67,7 +67,7 @@ public class ventanaPartido extends JFrame {
 	private boolean isMultijugador;
 	private boolean isAmistoso;
 	private boolean isJugadorEquipoLocal;
-	private static double VELOCIDAD_CON_MOVIMIENTO = 3;
+	private static double VELOCIDAD_CON_MOVIMIENTO = 1;
 
 	private Font f;
 	private Equipo eLocal;
@@ -379,11 +379,13 @@ public class ventanaPartido extends JFrame {
 	 */
 	public void configuracionAntesDePartido() {
 		colocarEnPosInicial();
-		actualizarPosicionObjetos();
+		
 		mostrarElementosDeJuego();
 		actualizarTamanyoLbl();
 		pintarLabels();
+		actualizarPosicionObjetos();
 		actualizarCampo();
+		
 		
 		
 	}
