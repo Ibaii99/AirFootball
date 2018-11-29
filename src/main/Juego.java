@@ -1,4 +1,3 @@
-
 package main;
 
 import java.awt.Color;
@@ -39,13 +38,6 @@ public class Juego {
 		
 		
 		// pruebas de la ventana de juego
-//		 v = new ventanaPartido((new Equipo("/ALA", "Deportivo Alav�s", 0, Color.BLUE, ("iconos/equipos/ala.png"),
-//					"iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new Equipo("/ATH", "Athletic Club", 0, Color.RED, ("iconos/equipos/ath.png"),
-//							"iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
-//		 v.setVisible(true);
-	//	 Inicio i = new Inicio();
-	//	 i.setVisible(true);
-		
 //		 v = new ventanaPartido((new Equipo("/ALA", "Deportivo Alav�s", 0, Color.BLUE, ("/iconos/equipos/ala.png"),
 //					"/iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), (new Equipo("/ATH", "Athletic Club", 0, Color.RED, ("/iconos/equipos/ath.png"),
 //							"/iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)), p, true, true, false, f);
@@ -91,12 +83,13 @@ public class Juego {
 		
 		Inicio i = new Inicio(bd, con,f);
 		i.setVisible(true);
-	
+		 
+		
 	}
 	}
 
 	
- 
+
 // (*1)diseño recursivo de funcionameinto del juego
 // guardo el tiempo de la consulta anterior
 //
@@ -123,36 +116,26 @@ public class Juego {
  * victoriasVisitante, int derrotasTotales, int derrotasLocal, int
  * derrotasVisitante, int empatesTotales, int empatesLocal, int
  * empatesVisitante) {
-=======
 package main;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.io.InputStream;
-
 import objetos.Pelota;
 import objetos.Poste;
 import ventanas.ventanaPartido;
 import javax.swing.ImageIcon;
-
 import entidades.BaseDeDatos;
 import entidades.Equipo;
 import fisicas.FisicasNuevas;
 import ventanas.Inicio;
-
 public class Juego {
-
 	public static ventanaPartido v; // la ventana se creara cuando se elijan los equipos con los que se va a jugar
 	public Poste posteArribaIzquierda = new Poste(v, true, true);
 	public Poste posteAbajoIzquierda = new Poste(v, true, false);
-
 	public Poste posteArribaDerecha = new Poste(v, false, true);
 	public Poste posteAbajoDerecha = new Poste(v, false, false);
-
 	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 1, null, false);
-
 	private static FisicasNuevas f = new FisicasNuevas();
-
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos();
 		anyadirTodosLosEquipos(bd);
@@ -208,16 +191,12 @@ public class Juego {
 					"iconos/equipos/vll.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			bd.anyadirEquipo(new Equipo("VLR", "Villarreal CF", 0, Color.BLUE, ("iconos/equipos/vlr.png"),
 					"iconos/equipos/vlr.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-
 		} catch (Exception e) {
-
 		}
-
 		Inicio i = new Inicio();
 		i.setVisible(true);
 	}
 }
-
 // (*1)diseño recursivo de funcionameinto del juego
 // guardo el tiempo de la consulta anterior
 //
@@ -235,7 +214,6 @@ public class Juego {
 // con el tiempo tendre la posicion, vel*tiempo = espacio espacio+= espacio del
 // objeto = posicion futura
 //
-
 /**
  * (char siglas, String nombre, int puntos, Color color, ImageIcon imagen,
  * String rutaImagen, int golesEnContraTotales, int golesEnContraLocal, int
@@ -244,4 +222,4 @@ public class Juego {
  * victoriasVisitante, int derrotasTotales, int derrotasLocal, int
  * derrotasVisitante, int empatesTotales, int empatesLocal, int
  * empatesVisitante) {
- **/
+**/

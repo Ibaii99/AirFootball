@@ -51,20 +51,16 @@ public class MenuAmistoso extends JFrame {
 	 *            de la ventana en base a listeners de la ventana Inicio
 	 * @param Altura
 	 *            de la ventana en base a listeners de la ventana Inicio
-	 * 
-	 * @param bd
-	 *            Base de datos del programa
-	 * @param con
-	 *            Conexion con el archivo Base de Datos
-	 * @param f
-	 *            Fisicas con las que funciona el juego
+	 *            
+	 * @param bd		Base de datos del programa
+	 * @param con		Conexion con el archivo Base de Datos
+	 * @param f			Fisicas con las que funciona el juego
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public MenuAmistoso(int anchura, int altura, BaseDeDatos bd, Connection con, FisicasNuevas f)
-			throws ClassNotFoundException, SQLException {
+	public MenuAmistoso(int anchura, int altura,BaseDeDatos bd, Connection con, FisicasNuevas f) throws ClassNotFoundException, SQLException {
 		try {
-			setSize(1003, 725);
+			setSize(anchura, altura);
 		} catch (Exception e) {
 			setSize(626, 460);
 		}
@@ -150,9 +146,9 @@ public class MenuAmistoso extends JFrame {
 				String filenameL = cbLocal.getSelectedObjects().toString();
 				try {
 					try {
-
+						
 						Class.forName("org.sqlite.JDBC");
-
+						
 						Statement consultaCB;
 						consultaCB = con.createStatement();
 						String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '"
@@ -189,7 +185,7 @@ public class MenuAmistoso extends JFrame {
 				String filenameV = cbVisitante.getSelectedObjects().toString();
 				try {
 					try {
-
+						
 						Class.forName("org.sqlite.JDBC");
 						Statement consultaCB;
 						consultaCB = con.createStatement();
@@ -229,90 +225,19 @@ public class MenuAmistoso extends JFrame {
 		btnIniciarAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
+				char[] a = {'a','b','c'};
+				
+				Equipo eLocal = bd.convertirAEquipo(cbLocal.getSelectedItem().toString(), new Jugador("", a, 0));
+				Equipo eVisitante = bd.convertirAEquipo(cbVisitante.getSelectedItem().toString(), new Jugador("", a, 0));
+				
+				Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
+				
+				ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, false, f);
 
-				String nomEqL = cbLocal.getSelectedItem().toString();
-				String nomEqV = cbVisitante.getSelectedItem().toString();
-				try {
-					try {
-						Connection conL = null;
-						Class.forName("org.sqlite.JDBC");
-						conL = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
-						Statement consultaL;
-						consultaL = conL.createStatement();
-						String comando3 = "SELECT ICONO, SIGLAS FROM EQUIPOS WHERE NOMBRE = '"
-								+ cbLocal.getSelectedItem().toString() + "'";
-						consultaL.executeUpdate(comando3);
-						ResultSet rs3 = conL.createStatement().executeQuery(comando3);
-						System.out.println(rs3.toString());
-						char[] a = { 'a', 'b', 'c' };
 
-						Equipo eLocal = bd.convertirAEquipo(cbLocal.getSelectedItem().toString(),
-								new Jugador("", a, 0));
-						Equipo eVisitante = bd.convertirAEquipo(cbVisitante.getSelectedItem().toString(),
-								new Jugador("", a, 0));
-
-						Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
-
-						ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true,
-								false, f);
-						siglasL = "/" + rs3.getString("SIGLAS");
-						rutaImagenL = rs3.getString("ICONO");
-
-					} catch (SQLException i) {
-
-					}
-				} catch (Exception e2) {
-
-				}
-				try {
-					try {
-						Connection conV = null;
-						Class.forName("org.sqlite.JDBC");
-						conV = DriverManager.getConnection("jdbc:sqlite:airHockey.db");
-						Statement consultaV;
-						consultaV = conV.createStatement();
-						String comando4 = "SELECT ICONO, SIGLAS FROM EQUIPOS WHERE NOMBRE = '"
-								+ cbVisitante.getSelectedItem().toString() + "'";
-						consultaV.executeUpdate(comando4);
-						ResultSet rs3 = conV.createStatement().executeQuery(comando4);
-						System.out.println(rs3.toString());
-
-						while (rs3.next()) {
-
-							siglasV = "/" + rs3.getString("SIGLAS");
-							rutaImagenV = rs3.getString("ICONO");
-						}
-
-					} catch (SQLException i) {
-
-					}
-				} catch (Exception e2) {
-
-				}
-				Equipo equipoLocal = new Equipo(nomEqL, siglasL, rutaImagenL, 1, 1);
-				Equipo equipoVisitante = new Equipo(nomEqV, siglasV, rutaImagenV, 1, 1);
-				Equipo equipoLPrueba = new Equipo(siglasL, nomEqL, 0, Color.RED, (rutaImagenL), rutaImagenL, 0, 0, 0, 0,
-						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				Equipo equipoVPrueba = new Equipo(siglasV, nomEqV, 0, Color.RED, (rutaImagenV), rutaImagenV, 0, 0, 0, 0,
-						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				Pelota pelotaPartido = new Pelota(Color.black, "jabulani", 0, 0, 20, 1, null, false);
-
-				ventanaPartido partido = new ventanaPartido(equipoLPrueba, equipoVPrueba, pelotaPartido, true, true,
-						false, f);
-				// partido.configuracionAntesDePartido();
-				try {
-					Thread.sleep(1000);
-				} catch (Exception e) {
-
-				}
-				//
-				partido.setVisible(true);
-				partido.setVisible(true);
-			}
-		}
-
-		// PRUEBA DE LISTENER DE VENTANAPARTIDO
-
+				partido.setVisible(true);}}
+				// PRUEBA DE LISTENER DE VENTANAPARTIDO
+			
 		);
 		panel.add(lblEqL);
 		panel.add(lblEqV);
@@ -389,7 +314,6 @@ public class MenuAmistoso extends JFrame {
 		jlIcono.repaint();
 		revalidate();
 	}
-
 	public String getEquipoL() {
 		return equipoL;
 	}
