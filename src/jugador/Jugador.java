@@ -23,7 +23,7 @@ public class Jugador {
 		codLiga++;
 	}
 
-	/** El modo Arcade le dejar· al usuario desbloquear pelotas nuevas para elegir
+	/** El modo Arcade le dejar√° al usuario desbloquear pelotas nuevas para elegir
 	 * @param pelota Pelota nueva desbloqueada
 	 */
 	public void anyadirPelota(Pelota pelota) {
@@ -53,3 +53,4 @@ public class Jugador {
 
 	
 }
+
