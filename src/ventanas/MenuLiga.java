@@ -74,7 +74,7 @@ public class MenuLiga extends JFrame {
 		} catch (Exception e3) {
 			// e3.printStackTrace();
 		}
-		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS"+j.getNombre()+";";
+		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS;";
 		System.out.println(query);
 		// Statement st = con.createStatement();
 		ResultSet rs = con.createStatement().executeQuery(query);
