@@ -177,7 +177,7 @@ public class BaseDeDatos {
 	 */
 	public Equipo convertirAEquipo(String nombreEquipo, Jugador j) {
 		Equipo e = null;
-		try {
+		try { 
 			Class.forName("org.sqlite.JDBC");
 			String query1 = "SELECT * FROM EQUIPOS"+j.getNombre()+" WHERE NOMBRE='" +nombreEquipo + "'; ";
 			ResultSet rs = con.createStatement().executeQuery(query1);

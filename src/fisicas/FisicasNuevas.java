@@ -30,7 +30,7 @@ public class FisicasNuevas {
 	public void choquePelotaEquipo(Pelota p,Equipo equipo) {
 		if(chocanPelotas(p, equipo)) cambioVelocidadesChoquePelotaEquipo(p, equipo);
 	}
-	
+	 
 	///////////////////////Metodos internos para calcularlo/////////////////////////////////
 	
 	/** Metodo para saber si hay o ha habido un choque en las posiciones de la pelota y el equipo

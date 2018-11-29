@@ -49,7 +49,7 @@ public class MenuLiga extends JFrame {
 	 */
 	public String equipoL;
 	public ImageIcon imageIconL;
-
+ 
 	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, Connection con, FisicasNuevas f) {
 		try {
 		JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));

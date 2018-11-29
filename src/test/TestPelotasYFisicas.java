@@ -59,7 +59,7 @@ class TestPelotasYFisicas{
 		p.setX(20);
 		p.setY(15);
 		p.addVelocidad(1, 5);
-		fisicas.muevePelota(p, 2, v);
+		fisicas.muevePelota(p, 2, v); 
 		assertEquals(22, p.getX());
 		assertEquals(25, p.getY());
 	}

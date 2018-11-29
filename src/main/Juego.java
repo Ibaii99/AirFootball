@@ -45,7 +45,7 @@ public class Juego {
 //		 v.setVisible(true);
 //		
 	/*	char[] con ={ 'p', 'a', 's', 's'};
-	
+	 
 	
 		BaseDeDatos bd = new BaseDeDatos("BETA");
 		Jugador a = new Jugador("IBAI", con);
