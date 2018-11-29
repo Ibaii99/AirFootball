@@ -384,6 +384,8 @@ public class ventanaPartido extends JFrame {
 		actualizarTamanyoLbl();
 		pintarLabels();
 		actualizarCampo();
+		
+		
 	}
 
 	// ...........................................................................................................//
