@@ -234,6 +234,7 @@ public class ventanaPartido extends JFrame {
 						}}});
 		
 		if (isMultijugador) {
+			//TODO BOOOLEANS PARA VER SI LAS TECLAS ESTÁN PULSADAS
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
