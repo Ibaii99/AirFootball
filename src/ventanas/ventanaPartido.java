@@ -57,7 +57,7 @@ public class ventanaPartido extends JFrame {
 	private boolean liga;
 	private boolean arcade;
 	private Graphics2D graphics; // Objeto gr�fico sobre el que dibujar (del buffer)
-	private JPanel panelCampo; // Panel principal
+	private JPanel panelCampo ; // Panel principal
 
 	private JLabel lblEquipoLocal = new JLabel("");
 	private JLabel lblEquipoVisitante = new JLabel("");
@@ -282,6 +282,7 @@ public class ventanaPartido extends JFrame {
 		}
 	//	configuracionAntesDePartido();
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
+		configuracionAntesDePartido();
 		setVisible(true);
 		
 		
@@ -328,7 +329,7 @@ public class ventanaPartido extends JFrame {
 		lblEquipoLocal.setBounds((int)( eLocal.getBolaEquipo().getX()-eLocal.getBolaEquipo().getRadio()), (int)( eLocal.getBolaEquipo().getY()-eLocal.getBolaEquipo().getRadio()),
 				(int) eLocal.getBolaEquipo().getRadio() * 2, (int) eLocal.getBolaEquipo().getRadio() * 2);
 		lblPelota.setBounds((int)( p.getX()-p.getRadio()), (int) (p.getY()-p.getRadio()), (int) p.getRadio() * 2, (int) p.getRadio() * 2);
-		actualizarCampo();
+	//	actualizarCampo();
 	}
 
 	/**
@@ -415,19 +416,22 @@ public class ventanaPartido extends JFrame {
 	 *            Equipo Visitante
 	 */
 	private void colocarEnPosInicial() {
+		
 		p.setX((int) getPanelCampo().getSize().getWidth() / 2);
 		p.setY((int) getPanelCampo().getSize().getHeight() / 2);
+		
 		System.out.println(p.getX()+ "  "+ p.getY());
-		// TODO editar esto, no son los objetos son los labels
 
 		eLocal.getBolaEquipo().setX(getPanelCampo().getSize().getWidth() - getPanelCampo().getSize().getWidth() / 4);
 		eVisitante.getBolaEquipo().setX(getPanelCampo().getSize().getWidth() / 4);
 		
 		eLocal.getBolaEquipo().setY(getPanelCampo().getSize().getHeight() / 2);
+		
 		eVisitante.getBolaEquipo().setY(getPanelCampo().getSize().getHeight() / 2);
 		
 		System.out.println(eVisitante.getBolaEquipo().getX()+ "  "+eVisitante.getBolaEquipo().getY());
 		System.out.println(eLocal.getBolaEquipo().getX()+ "  "+ eLocal.getBolaEquipo().getY());
+		
 	}
 
 	/**

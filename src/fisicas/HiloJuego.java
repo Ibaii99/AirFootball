@@ -20,8 +20,9 @@ public class HiloJuego extends Thread {
 	}
 		
 	@Override
-	public synchronized void start() {
+	public void run() {
 		while(true) {
+			
 		try {
 			Thread.sleep(25);
 		} catch (InterruptedException e) {
