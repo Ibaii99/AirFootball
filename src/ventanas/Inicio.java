@@ -130,4 +130,8 @@ public class Inicio extends JFrame {
 			}
 		});
 	}
+	public static void main(String[] args) {
+		Inicio i = new Inicio(null, null, null);
+		i.setVisible(true);
+	}
 }
