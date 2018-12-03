@@ -40,10 +40,10 @@ public class Juego {
 				"/iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		Equipo u = (new Equipo("/ATH", "Athletic Club", 0, Color.RED, ("/iconos/equipos/ath.png"),
 				"/iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-		e.getBolaEquipo().setX(200);
-		u.getBolaEquipo().setX(50);
-		e.getBolaEquipo().setY(200);
-		u.getBolaEquipo().setY(50);
+//		e.getBolaEquipo().setX(200);
+//		u.getBolaEquipo().setX(50);
+//		e.getBolaEquipo().setY(200);
+//		u.getBolaEquipo().setY(50);
 		
 		
 		// pruebas de la ventana de juego
@@ -63,45 +63,61 @@ public class Juego {
 	}
 }
 	/*	char[] con ={ 'p', 'a', 's', 's'};
+=======
+//		 v = new ventanaPartido(e, u, p, true, true, false, f);
+//		 try {
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		 v.configuracionAntesDePartido();
+//		 
+//		v.empieza();
+//		p.setX(20);
+//		p.setY(20);
+//		v.actualizarCampo();
+//		char[] con ={ 'p', 'a', 's', 's'};
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 	 
 	
-		BaseDeDatos bd = new BaseDeDatos("BETA");
-		Jugador a = new Jugador("IBAI", con);
-		Jugador b = new Jugador("JORGEPRINGAO", con); 
-		
-		bd.crearTabla();
-		bd.crearTablaEquipos(a);
-		bd.crearTablaEquipos(b);
-		
-		bd.anyadirJugador(a);
-		bd.anyadirJugador(b);
-		
-		bd.anyadirLiga("Liga BBVA",a);
-		bd.anyadirLiga("Liga Santander",a);
-		bd.anyadirLiga("Liga Paco Sanz",a);
-		bd.anyadirLiga("Liga Urdangarin",a);
-		
-		anyadirTodosLosEquipos(bd, 1,a);
-		
-		bd.anyadirLiga("Liga PRINGAO",b);
-		bd.anyadirLiga("Liga SUBNORMAL",b);
-		bd.anyadirLiga("Liga STEFEN HAWKINGS",b);
-		bd.anyadirLiga("Liga AQUI TU ERE EL KING",b);
-		anyadirTodosLosEquipos(bd, 1,b);
-		
-	*/
+//		BaseDeDatos bd = new BaseDeDatos("BETA");
+//		Jugador a = new Jugador("IBAI", con);
+//		Jugador b = new Jugador("JORGEPRINGAO", con); 
+//		
+//		bd.crearTabla();
+//		bd.crearTablaEquipos(a);
+//		bd.crearTablaEquipos(b);
+//		
+//		bd.anyadirJugador(a);
+//		bd.anyadirJugador(b);
+//		
+//		bd.anyadirLiga("Liga BBVA",a);
+//		bd.anyadirLiga("Liga Santander",a);
+//		bd.anyadirLiga("Liga Paco Sanz",a);
+//		bd.anyadirLiga("Liga Urdangarin",a);
+//		
+//		bd.anyadirTodosLosEquipos( 1,a);
+//		
+//		bd.anyadirLiga("Liga PRINGAO",b);
+//		bd.anyadirLiga("Liga SUBNORMAL",b);
+//		bd.anyadirLiga("Liga STEFEN HAWKINGS",b);
+//		bd.anyadirLiga("Liga AQUI TU ERE EL KING",b);
+//		bd.anyadirTodosLosEquipos( 1,b);
+//		
+//	
 //		bd.crearTabla();
 //		bd.anyadirEquiposStandar();
-//		Connection con = null;
-//		try {
-//			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ bd.getNombre()+".db");
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		Inicio i = new Inicio(bd, con,f);
-//		i.setVisible(true);
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection("jdbc:sqlite:airHockey"+ bd.getNombre()+".db");
+		} catch (SQLException aas) {
+			// TODO Auto-generated catch block
+			aas.printStackTrace();
+		}
+		
+		Inicio i = new Inicio(bd, con,f);
+		i.setVisible(true);
 		 
 		
 	

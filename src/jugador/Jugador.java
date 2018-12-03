@@ -34,6 +34,11 @@ public class Jugador {
 		this.nombre = nombre;
 		codLiga = numero;
 	}
+	public Jugador(String nombre, char[] password) {
+		this.password = password;
+		this.nombre = nombre;
+		codLiga = 0;
+	}
 	public int getLigasJugadas() {
 		return ligasJugadas;
 	}

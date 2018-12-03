@@ -44,9 +44,10 @@ public class FisicasNuevas {
 	private boolean chocanPelotas(Pelota p1, Equipo equipo) {
 		boolean chocan = false;
 		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
+		
 		if((equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()) < p1.getX() && p1.getX() < (equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio())
 				&& (equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()) < p1.getY() && p1.getY() < (equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio())
-				) chocan = true;
+				) chocan = false;
 		return chocan;
 	}
 	/**	Metodo para cambiar las velocidades de una pelota cuando esta choca con un equipo
@@ -60,25 +61,20 @@ public class FisicasNuevas {
 		p.setxAntes(p.getX());
 		p.setyAntes(p.getY());
 		
-		if(!igualACero(equipo.getBolaEquipo().getVelX())&& !igualACero(equipo.getBolaEquipo().getVelY())) {
-		cambiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*2, (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*2);//multiplico por dos para que no se quede pegado al jlabel
-		
-		}
-		
-		if(igualACero(equipo.getBolaEquipo().getVelX())&& igualACero(equipo.getBolaEquipo().getVelY())) {
-			cambiarVelocidadPelota(p, -(p.getVelX()*p.getMasa() )*0.1,-(p.getVelY()*p.getMasa())*0.1); //multiplico por dos para que no se quede pegado al jlabel
-			
-		}
+	
 		if((equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) < p.getX() && p.getX() < (equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES)
 				&& (equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) < p.getY() && p.getY() < (equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES)) { 
 				
 				System.out.println("DENTRO");
+		
 			//TODO
-				if(p.getX() > equipo.getBolaEquipo().getX()-MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getRadio()+equipo.getBolaEquipo().getX() + equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio());}// la bola esta a la derecha del equipo
-				if(p.getX() < equipo.getBolaEquipo().getX()+MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getRadio()+equipo.getBolaEquipo().getX() + equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio());}// la bola esta a la izquierda del equipo
-				if(p.getY() > equipo.getBolaEquipo().getY()-MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getRadio()+equipo.getBolaEquipo().getY() + equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio());}// la bola esta encima del equipo
-				if(p.getY() < equipo.getBolaEquipo().getY()+MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getRadio()+equipo.getBolaEquipo().getY() + equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio());}// la bola esta debajo del equipo
+				
+				if(p.getX() > equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getX()+p.getRadio()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY());}// la bola esta a la derecha del equipo
+				if(p.getX() < equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getX()-p.getRadio()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY());}// la bola esta a la izquierda del equipo
+				if(p.getY() > equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getY()+p.getRadio()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX());}// la bola esta encima del equipo
+				if(p.getY() < equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getY()-p.getRadio()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX());}// la bola esta debajo del equipo
 				//cambioVelocidadesChoquePelotaEquipo(p, equipo);
+
 //				if(p.getVelX()<0)p.setVelX(p.getVelX() -equipo.getBolaEquipo().getRadio()/2);
 //				if(p.getVelX()>0)p.setVelX(p.getVelX() +equipo.getBolaEquipo().getRadio()/2);
 //				
@@ -86,7 +82,16 @@ public class FisicasNuevas {
 //				if(p.getVelY()>0)p.setVelY(p.getVelY() +equipo.getBolaEquipo().getRadio()/2);
 //				
 			}
+		if(!igualACero(equipo.getBolaEquipo().getVelX())&& !igualACero(equipo.getBolaEquipo().getVelY())) {
+			cambiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*4, (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*4);//multiplico por dos para que no se quede pegado al jlabel
 			
+			}
+			
+			if(igualACero(equipo.getBolaEquipo().getVelX())&& igualACero(equipo.getBolaEquipo().getVelY())) {
+				cambiarVelocidadPelota(p, -(p.getVelX()*p.getMasa() )*2,-(p.getVelY()*p.getMasa())*2); //multiplico por dos para que no se quede pegado al jlabel
+				
+			}
+		
 			
 			
 			System.out.println(equipo.getBolaEquipo().getX() + "   " + equipo.getBolaEquipo().getY());
@@ -99,6 +104,10 @@ public class FisicasNuevas {
 	
 	///////////////////////////////PELOTA Y BORDES///////////////////////////////////////
 	
+	public static void setTIEMPO(double tIEMPO) {
+		TIEMPO = tIEMPO;
+	}
+
 	/** Metodo que calcula el choque de la pelota con el borde SOLO si ocurre el choque
 	 * @param v		Ventana con los bordes
 	 * @param p		Pelota con la que se juega
@@ -209,6 +218,7 @@ public class FisicasNuevas {
 	 * @param tiempo	Tiempo que ha pasado para mover
 	 */
 	public void muevePelota(Pelota p, double tiempo, ventanaPartido v) {
+		
 		if(!igualACero(p.getVelX()) && !igualACero(p.getVelY())) {
 		p.setxAntes(p.getX());
 		p.setyAntes(p.getY());
@@ -225,6 +235,7 @@ public class FisicasNuevas {
 		
 		p.setY(posicionFuturaY);
 		p.setX(posicionFuturaX);
+		
 		}if(igualACero(p.getVelX()) && igualACero(p.getVelY())) {
 			p.setY(p.getY());
 			p.setX(p.getX());
