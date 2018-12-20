@@ -298,9 +298,16 @@ public class BaseDeDatos {
 	 *  con ese nombre y contraseña
 	 * @param nombre		Nombre del jugador
 	 * @param contrasenya	Contraseña del jugador
-	 * @return				True si eciste // False si no existe
+	 * @return				True si existe // False si no existe
+	 * @throws SQLException 
 	 */
 	public boolean estaJugadorEnBaseDeDatos(String nombre, char[] password) {
+		try {
+			init();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String contrasenya = "";
 		for(int e = 0; e < password.length; e++) {
 			contrasenya += password[e];}
@@ -314,7 +321,12 @@ public class BaseDeDatos {
 		if(rs != null) esta = true;
 		
 		}catch(Exception u) {u.printStackTrace();}
-		
+		try {
+			close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return esta;
 	}
 
@@ -324,13 +336,19 @@ public class BaseDeDatos {
 	 * @return				True si eciste // False si no existe
 	 */
 	public boolean estaJugadorRegistrado(String nombre) {
+		try {
+			init();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		boolean esta = false;
 		try {
 		Class.forName("org.sqlite.JDBC");
 		String query1 = "SELECT * FROM JUGADORES WHERE NOMBRE='" +nombre + "'; ";
 		ResultSet rs = con.createStatement().executeQuery(query1);
 		if(rs != null) esta = true;
-		
+		close();
 		}catch(Exception u) {u.printStackTrace();}
 		
 		return esta;

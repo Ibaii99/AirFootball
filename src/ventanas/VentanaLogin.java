@@ -14,6 +14,8 @@ import jugador.Jugador;
 
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -86,6 +88,12 @@ public class VentanaLogin extends JDialog {
 				btnRegister.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent e) {
+						try {
+							bd.init();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						//SI el jugador esta entre los nombres de los jugadores de la bd dara error
 						if(bd.estaJugadorRegistrado(tFNombre.getText())) {
 							JOptionPane.showMessageDialog(null, "ESTE JUGADOR YA ESTA REGISTRADO", "ERROR", JOptionPane.WARNING_MESSAGE);
@@ -102,7 +110,12 @@ public class VentanaLogin extends JDialog {
 							MenuLiga mL = new MenuLiga(800, 800, j, bd, f);
 							mL.setVisible(true);
 						}
-						
+						try {
+							bd.close();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						
 					}
 				});
@@ -112,6 +125,12 @@ public class VentanaLogin extends JDialog {
 				btnLogin = new JButton("Login");
 				btnLogin.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							bd.init();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						// SI el jugador no esta registrado con ese nombre y contraseña dara error
 						if(!bd.estaJugadorEnBaseDeDatos(tFNombre.getText(), passwordField.getPassword())) {
 							JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA", "ERROR", JOptionPane.WARNING_MESSAGE);
@@ -123,7 +142,12 @@ public class VentanaLogin extends JDialog {
 							MenuLiga mL = new MenuLiga(800, 800, j, bd,f);
 							mL.setVisible(true);
 						}
-						
+						try {
+							bd.close();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 			}

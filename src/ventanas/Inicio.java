@@ -133,13 +133,14 @@ public class Inicio extends JFrame {
 	}
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos("BETA");
-		
 		Inicio i;
 		try {
 			bd.init();
 			i = new Inicio(bd, new FisicasNuevas());
 			System.out.println(bd.getNombre());
 			i.setVisible(true);
+			bd.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
