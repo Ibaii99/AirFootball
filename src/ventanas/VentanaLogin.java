@@ -112,6 +112,7 @@ public class VentanaLogin extends JDialog {
 				btnLogin = new JButton("Login");
 				btnLogin.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						System.out.println(con);
 						// SI el jugador no esta registrado con ese nombre y contraseña dara error
 						if(!bd.estaJugadorEnBaseDeDatos(tFNombre.getText(), passwordField.getPassword())) {
 							JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA", "ERROR", JOptionPane.WARNING_MESSAGE);

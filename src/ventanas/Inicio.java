@@ -20,6 +20,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Inicio extends JFrame {
@@ -131,7 +132,14 @@ public class Inicio extends JFrame {
 		});
 	}
 	public static void main(String[] args) {
-		Inicio i = new Inicio(null, null, null);
-		i.setVisible(true);
+		BaseDeDatos bd = new BaseDeDatos("BETA");
+		Inicio i;
+		try {
+			i = new Inicio(bd, DriverManager.getConnection("jdbc:sqlite:airHockey" + bd.getNombre() + ".db"), new FisicasNuevas());
+			i.setVisible(true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

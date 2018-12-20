@@ -11,10 +11,13 @@ import entidades.Equipo;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JTable;
 
 public class VentanaLiga extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
 
  
 
@@ -32,6 +35,9 @@ public class VentanaLiga extends JFrame {
 		
 		JPanel panelClasificacion = new JPanel();
 		contentPane.add(panelClasificacion, BorderLayout.CENTER);
+		
+		table = new JTable();
+		panelClasificacion.add(table);
 		
 		JPanel panelBotonera = new JPanel();
 		contentPane.add(panelBotonera, BorderLayout.SOUTH);
@@ -83,6 +89,10 @@ public class VentanaLiga extends JFrame {
 		
 		JButton btnPlay = new JButton("Play");
 		panelInformacionEquipo.add(btnPlay);
+	}
+	
+	private void anadirATabla() {
+		
 	}
 
 }
