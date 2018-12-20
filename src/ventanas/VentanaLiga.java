@@ -2,11 +2,13 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import entidades.BaseDeDatos;
 import entidades.Equipo;
 
 import javax.swing.JLabel;
@@ -18,13 +20,13 @@ public class VentanaLiga extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-
+	private BaseDeDatos bd;
  
 
 	/**
 	 * Create the frame.
 	 */
-	public VentanaLiga(Equipo e) {
+	public VentanaLiga(Equipo e, BaseDeDatos bd) {
 		System.out.println(e.getNombre());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 932, 572);
@@ -92,7 +94,12 @@ public class VentanaLiga extends JFrame {
 	}
 	
 	private void anadirATabla() {
-		
+		try {
+			bd.init();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

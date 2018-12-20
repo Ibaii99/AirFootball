@@ -102,7 +102,7 @@ public class MenuLiga extends JFrame {
 					try {
 						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j);
 						bd.close();
-						VentanaLiga v = new VentanaLiga(equipo);
+						VentanaLiga v = new VentanaLiga(equipo, bd);
 						v.setVisible(true);
 						setVisible(false);
 
