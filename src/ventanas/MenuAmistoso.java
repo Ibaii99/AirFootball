@@ -58,7 +58,7 @@ public class MenuAmistoso extends JFrame {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public MenuAmistoso(int anchura, int altura,BaseDeDatos bd, Connection con, FisicasNuevas f) throws ClassNotFoundException, SQLException {
+	public MenuAmistoso(int anchura, int altura,BaseDeDatos bd, FisicasNuevas f) throws ClassNotFoundException, SQLException {
 		try {
 			setSize(anchura, altura);
 		} catch (Exception e) {
@@ -126,7 +126,7 @@ public class MenuAmistoso extends JFrame {
 			// e3.printStackTrace();
 		}
 		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS;";
-		ResultSet rs = con.createStatement().executeQuery(query);
+		ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 		while (rs.next()) {
 
 			String nomEq = rs.getString("Nombre");
@@ -150,12 +150,12 @@ public class MenuAmistoso extends JFrame {
 						Class.forName("org.sqlite.JDBC");
 						
 						Statement consultaCB;
-						consultaCB = con.createStatement();
+						consultaCB = bd.getCon().createStatement();
 						String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '"
 								+ cbLocal.getSelectedItem().toString() + "'";
 						logger.log(Level.INFO, "BD: " + comando2);
 						consultaCB.executeUpdate(comando2);
-						ResultSet rs2 = con.createStatement().executeQuery(comando2);
+						ResultSet rs2 = bd.getCon().createStatement().executeQuery(comando2);
 						while (rs2.next()) {
 
 							equipoL = "/" + rs2.getString("ICONO");
@@ -188,12 +188,12 @@ public class MenuAmistoso extends JFrame {
 						
 						Class.forName("org.sqlite.JDBC");
 						Statement consultaCB;
-						consultaCB = con.createStatement();
+						consultaCB = bd.getCon().createStatement();
 						String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '"
 								+ cbVisitante.getSelectedItem().toString() + "'";
 						logger.log(Level.INFO, "BD: " + comando2);
 						consultaCB.executeUpdate(comando2);
-						ResultSet rs2 = con.createStatement().executeQuery(comando2);
+						ResultSet rs2 = bd.getCon().createStatement().executeQuery(comando2);
 						System.out.println(rs2.toString());
 
 						while (rs2.next()) {

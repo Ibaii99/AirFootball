@@ -16,6 +16,63 @@ public class BaseDeDatos {
 	private static Logger logger = Logger.getLogger( "baseDeDatos" );
 
 	private static Connection con;
+	public static Logger getLogger() {
+		return logger;
+	}
+	public static void setLogger(Logger logger) {
+		BaseDeDatos.logger = logger;
+	}
+	public static Connection getCon() {
+		return con;
+	}
+	public static void setCon(Connection con) {
+		BaseDeDatos.con = con;
+	}
+	public static Statement getJugadores() {
+		return jugadores;
+	}
+	public static void setJugadores(Statement jugadores) {
+		BaseDeDatos.jugadores = jugadores;
+	}
+	public static Statement getLiga() {
+		return liga;
+	}
+	public static void setLiga(Statement liga) {
+		BaseDeDatos.liga = liga;
+	}
+	public static Statement getEquipo() {
+		return equipo;
+	}
+	public static void setEquipo(Statement equipo) {
+		BaseDeDatos.equipo = equipo;
+	}
+	public static Statement getJugador() {
+		return jugador;
+	}
+	public static void setJugador(Statement jugador) {
+		BaseDeDatos.jugador = jugador;
+	}
+	public static ResultSet getRs() {
+		return rs;
+	}
+	public static void setRs(ResultSet rs) {
+		BaseDeDatos.rs = rs;
+	}
+	public static Jugador getJugadorJ() {
+		return jugadorJ;
+	}
+	public static void setJugadorJ(Jugador jugadorJ) {
+		BaseDeDatos.jugadorJ = jugadorJ;
+	}
+	public static int getCodLiga() {
+		return codLiga;
+	}
+	public static void setCodLiga(int codLiga) {
+		BaseDeDatos.codLiga = codLiga;
+	}
+	public static void setNombre(String nombre) {
+		BaseDeDatos.nombre = nombre;
+	}
 	private static Statement jugadores;
 	private static Statement liga;
 	private static Statement equipo;
@@ -251,6 +308,7 @@ public class BaseDeDatos {
 		try {
 		Class.forName("org.sqlite.JDBC");
 		String query1 = "SELECT * FROM JUGADORES WHERE NOMBRE='" +nombre + "' AND PASSWORD='"+contrasenya+"'; ";
+		System.out.println(con);
 		ResultSet rs = con.createStatement().executeQuery(query1);
 		if(rs != null) esta = true;
 		
@@ -331,6 +389,13 @@ public class BaseDeDatos {
 	public void anyadirEquiposStandar() {
 		char [] a= {'a','b'};
 		anyadirTodosLosEquipos(0, new Jugador("",a , 0) );;
+	}
+	public void init() throws SQLException {
+		con = DriverManager.getConnection("jdbc:sqlite:airHockey" + nombre + ".db");
+	}
+	public void close() throws SQLException {
+		if (con != null)
+		con.close();
 	}
 }
 

@@ -32,7 +32,7 @@ public class VentanaLogin extends JDialog {
 	private JPasswordField passwordField;
 
 
-	public  VentanaLogin(BaseDeDatos bd, Connection con, FisicasNuevas f) {
+	public  VentanaLogin(BaseDeDatos bd, FisicasNuevas f) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,7 +99,7 @@ public class VentanaLogin extends JDialog {
 							bd.anyadirTodosLosEquipos(j.getCodLiga(), j);
 							//TODO
 							setVisible(false);
-							MenuLiga mL = new MenuLiga(800, 800, j, bd, con, f);
+							MenuLiga mL = new MenuLiga(800, 800, j, bd, f);
 							mL.setVisible(true);
 						}
 						
@@ -112,7 +112,6 @@ public class VentanaLogin extends JDialog {
 				btnLogin = new JButton("Login");
 				btnLogin.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						System.out.println(con);
 						// SI el jugador no esta registrado con ese nombre y contraseña dara error
 						if(!bd.estaJugadorEnBaseDeDatos(tFNombre.getText(), passwordField.getPassword())) {
 							JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA", "ERROR", JOptionPane.WARNING_MESSAGE);
@@ -121,7 +120,7 @@ public class VentanaLogin extends JDialog {
 							Jugador j = bd.convertirAJugador(tFNombre.getText(), passwordField.getPassword());
 							//TODO
 							setVisible(false);
-							MenuLiga mL = new MenuLiga(800, 800, j, bd, con,f);
+							MenuLiga mL = new MenuLiga(800, 800, j, bd,f);
 							mL.setVisible(true);
 						}
 						

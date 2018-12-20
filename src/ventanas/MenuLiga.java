@@ -49,189 +49,180 @@ public class MenuLiga extends JFrame {
 	 */
 	public String equipoL;
 	public ImageIcon imageIconL;
- 
-	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, Connection con, FisicasNuevas f) {
+
+	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, FisicasNuevas f) {
 		try {
-		JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
-		setContentPane(lblBck);
+			JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
+			setContentPane(lblBck);
 
-		try {
-			setSize(590, 578);
-		} catch (Exception e) {
-			setSize(500, 500);
-		}
-
-		JComboBox cbLiga = new JComboBox();
-
-		Logger logger = Logger.getLogger("baseDeDatos");
-
-
-		Statement consulta;
-
-		String comando = "";
-		try {
-			Class.forName("org.sqlite.JDBC");
-		} catch (Exception e3) {
-			// e3.printStackTrace();
-		}
-		String query = "SELECT NOMBRE, ICONO FROM EQUIPOS"+j.getNombre()+";";
-		System.out.println(query);
-		// Statement st = con.createStatement();
-		ResultSet rs = con.createStatement().executeQuery(query);
-		System.out.println(rs.toString());
-		System.out.println(rs);
-		// System.out.println(rs.isClosed());
-
-		System.out.println(rs.getString("NOMBRE"));
-		while (rs.next()) {
-
-			String nomEq = rs.getString("Nombre");
-			String iconEq = rs.getString("Icono");
-			cbLiga.addItem(new ObjetoCombobox(1, nomEq, new ImageIcon(iconEq)));
-			// System.out.println(nomEq + " " + iconEq);
-		}
-		// st.close();
-		rs.close();
-		
-		JLabel lblEligeEquipo = new JLabel("Elige equipo:");
-		//TODO
-		//TODO
-		
-		
-		JButton btnIniciarLiga = new JButton("Iniciar liga");
-		btnIniciarLiga.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-				Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j);
-				con.close();
-				
-				VentanaLiga v = new VentanaLiga(equipo);
-				v.setVisible(true);
-				setVisible(false);
-				
-				
-				
-			
-				} catch (Exception e1) {
-					
-					}
-					}});
-		lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17 * getWidth() / 630)));
-		btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(13 * getWidth() / 630)));
-
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Inicio i = new Inicio(bd,con, f);
-				i.setSize(660, 480);
-				i.setVisible(true);
-				dispose();
-				try {
-					con.close();
-				} catch (SQLException e1) {	e1.printStackTrace();}
+			try {
+				setSize(590, 578);
+			} catch (Exception e) {
+				setSize(500, 500);
 			}
-		});
-		btnVolver.setFont(new Font("Arial Black", Font.PLAIN, 13));
 
-		JLabel icono = new JLabel("");
-		int xIcono = Math.round((getWidth() / 2) - (182 * getWidth() / 630));
-		int yIcono = Math.round((getHeight() / 2) - 96 * getHeight() / 630);
-		equipoL = "/iconos/equipos/ala.png";
-		String newequipoL = "";
-		imageIconL = new ImageIcon(getClass().getResource(equipoL));
-		icono.setIcon(imageIconL);
-		cbLiga.addActionListener(new ActionListener() {
-			/* (non-Javadoc)
-			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-			 * 
-			 */
-			public void actionPerformed(ActionEvent arg0) {
-				try {
+			JComboBox cbLiga = new JComboBox();
 
-					Class.forName("org.sqlite.JDBC");
-					Statement consultaCB;
-					consultaCB = con.createStatement();
-					String comando2 = "SELECT ICONO FROM EQUIPOS"+j.getNombre()+" WHERE NOMBRE = '" + cbLiga.getSelectedItem().toString()
-							+ "'";
-					logger.log(Level.INFO, "BD: " + comando2);
-					consultaCB.executeUpdate(comando2);
-					ResultSet rs2 = con.createStatement().executeQuery(comando2);
-					System.out.println(rs2.toString());
-					while (rs2.next()) {
-						equipoL = "/" + rs2.getString("ICONO");
-						String iconoL = rs2.getString("ICONO");
-						System.out.println(equipoL);
+			Logger logger = Logger.getLogger("baseDeDatos");
+
+			Statement consulta;
+
+			String comando = "";
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (Exception e3) {
+				// e3.printStackTrace();
+			}
+			String query = "SELECT NOMBRE, ICONO FROM EQUIPOS" + j.getNombre() + ";";
+			System.out.println(query);
+			// Statement st = con.createStatement();
+			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
+			System.out.println(rs.toString());
+			System.out.println(rs);
+			// System.out.println(rs.isClosed());
+
+			System.out.println(rs.getString("NOMBRE"));
+			while (rs.next()) {
+
+				String nomEq = rs.getString("Nombre");
+				String iconEq = rs.getString("Icono");
+				cbLiga.addItem(new ObjetoCombobox(1, nomEq, new ImageIcon(iconEq)));
+				// System.out.println(nomEq + " " + iconEq);
+			}
+			// st.close();
+			rs.close();
+
+			JLabel lblEligeEquipo = new JLabel("Elige equipo:");
+			// TODO
+			// TODO
+
+			JButton btnIniciarLiga = new JButton("Iniciar liga");
+			btnIniciarLiga.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j);
+						bd.close();
+						VentanaLiga v = new VentanaLiga(equipo);
+						v.setVisible(true);
+						setVisible(false);
+
+					} catch (Exception e1) {
+
 					}
-					resizeo(equipoL, icono);
-				} catch (Exception e) {
-					e.printStackTrace();
 				}
-				revalidate();
-			}
-		});
-		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(47)
-							.addComponent(icono, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(cbLiga, 0, 247, Short.MAX_VALUE)
-							.addGap(76))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnIniciarLiga, GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
-							.addGap(90)
-							.addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)))
-					.addGap(6))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(226)
-					.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-					.addGap(216))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(40)
+			});
+			lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17 * getWidth() / 630)));
+			btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(13 * getWidth() / 630)));
+
+			JButton btnVolver = new JButton("Volver");
+			btnVolver.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Inicio i = new Inicio(bd, f);
+					i.setSize(660, 480);
+					i.setVisible(true);
+					dispose();
+					try {
+						bd.close();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
+			btnVolver.setFont(new Font("Arial Black", Font.PLAIN, 13));
+
+			JLabel icono = new JLabel("");
+			int xIcono = Math.round((getWidth() / 2) - (182 * getWidth() / 630));
+			int yIcono = Math.round((getHeight() / 2) - 96 * getHeight() / 630);
+			equipoL = "/iconos/equipos/ala.png";
+			String newequipoL = "";
+			imageIconL = new ImageIcon(getClass().getResource(equipoL));
+			icono.setIcon(imageIconL);
+			cbLiga.addActionListener(new ActionListener() {
+				/*
+				 * (non-Javadoc)
+				 * 
+				 * @see
+				 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+				 * 
+				 */
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+
+						Class.forName("org.sqlite.JDBC");
+						Statement consultaCB;
+						consultaCB = bd.getCon().createStatement();
+						String comando2 = "SELECT ICONO FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE = '"
+								+ cbLiga.getSelectedItem().toString() + "'";
+						logger.log(Level.INFO, "BD: " + comando2);
+						consultaCB.executeUpdate(comando2);
+						ResultSet rs2 = bd.getCon().createStatement().executeQuery(comando2);
+						System.out.println(rs2.toString());
+						while (rs2.next()) {
+							equipoL = "/" + rs2.getString("ICONO");
+							String iconoL = rs2.getString("ICONO");
+							System.out.println(equipoL);
+						}
+						resizeo(equipoL, icono);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					revalidate();
+				}
+			});
+			GroupLayout groupLayout = new GroupLayout(getContentPane());
+			groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addGroup(groupLayout.createSequentialGroup().addGap(47)
+											.addComponent(icono, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(cbLiga, 0, 247, Short.MAX_VALUE).addGap(76))
+									.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+											.addComponent(btnIniciarLiga, GroupLayout.DEFAULT_SIZE, 367,
+													Short.MAX_VALUE)
+											.addGap(90).addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 97,
+													GroupLayout.PREFERRED_SIZE)))
+							.addGap(6))
+					.addGroup(groupLayout.createSequentialGroup().addGap(226)
+							.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE).addGap(216)));
+			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+					.createSequentialGroup().addGap(40)
 					.addComponent(lblEligeEquipo, GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(47)
-							.addComponent(cbLiga, GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(icono, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)))
+							.addGroup(groupLayout.createSequentialGroup().addGap(47).addComponent(cbLiga,
+									GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+							.addGroup(groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(icono, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(104)
-							.addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-							.addGap(10))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnIniciarLiga)
-							.addGap(54))))
-		);
-		getContentPane().addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent arg0) {
-				resizeo(equipoL, icono);
-				icono.setSize(cbLiga.getHeight(), cbLiga.getHeight());
-				lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17 * getWidth() / 630)));
-				btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(13 * getWidth() / 630)));
-				cbLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(14 * getWidth() / 630)));
-				revalidate();
-				icono.repaint();
-			}
-		});
-		getContentPane().setLayout(groupLayout);} catch(Exception excep) {excep.printStackTrace();}
-		
+							.addGroup(groupLayout.createSequentialGroup().addGap(104)
+									.addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE).addGap(10))
+							.addGroup(groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnIniciarLiga).addGap(54)))));
+			getContentPane().addComponentListener(new ComponentAdapter() {
+				@Override
+				public void componentResized(ComponentEvent arg0) {
+					resizeo(equipoL, icono);
+					icono.setSize(cbLiga.getHeight(), cbLiga.getHeight());
+					lblEligeEquipo.setFont(new Font("Arial Black", Font.PLAIN, Math.round(17 * getWidth() / 630)));
+					btnIniciarLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(13 * getWidth() / 630)));
+					cbLiga.setFont(new Font("Arial Black", Font.PLAIN, Math.round(14 * getWidth() / 630)));
+					revalidate();
+					icono.repaint();
+				}
+			});
+			getContentPane().setLayout(groupLayout);
+		} catch (Exception excep) {
+			excep.printStackTrace();
+		}
+
 	}
+
 	/**
-	 * @param equipo: Ruta de la imagen que queremos resizear
-	 * @param icono: JLabel donde se encuentra el icono del equipo
+	 * @param equipo:
+	 *            Ruta de la imagen que queremos resizear
+	 * @param icono:
+	 *            JLabel donde se encuentra el icono del equipo
 	 */
 	public void resizeo(String equipo, JLabel icono) {
 		imageIconL = new ImageIcon(getClass().getResource(equipo));

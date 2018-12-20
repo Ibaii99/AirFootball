@@ -30,7 +30,7 @@ public class Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public Inicio(BaseDeDatos bd, Connection con, FisicasNuevas f) {
+	public Inicio(BaseDeDatos bd, FisicasNuevas f) {
 		setSize(630, 460);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -43,7 +43,7 @@ public class Inicio extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
-					VentanaLogin v = new VentanaLogin(bd, con,f);
+					VentanaLogin v = new VentanaLogin(bd, f);
 					v.setVisible(true);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -68,12 +68,12 @@ public class Inicio extends JFrame {
 				dispose();
 				MenuAmistoso mu;
 				try {
-					mu = new MenuAmistoso(getSize().width, getSize().height,bd, con,f);
+					mu = new MenuAmistoso(getSize().width, getSize().height,bd, f);
 					mu.setVisible(true);
 				} catch (Exception e1) {
 					MenuAmistoso muAlt;
 					try {
-						muAlt = new MenuAmistoso(630, 460,bd,con,f);
+						muAlt = new MenuAmistoso(630, 460,bd,f);
 						muAlt.setVisible(true);
 					} catch (Exception e2) {
 						// TODO Auto-generated catch block
@@ -133,11 +133,14 @@ public class Inicio extends JFrame {
 	}
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos("BETA");
+		
 		Inicio i;
 		try {
-			i = new Inicio(bd, DriverManager.getConnection("jdbc:sqlite:airHockey" + bd.getNombre() + ".db"), new FisicasNuevas());
+			bd.init();
+			i = new Inicio(bd, new FisicasNuevas());
+			System.out.println(bd.getNombre());
 			i.setVisible(true);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
