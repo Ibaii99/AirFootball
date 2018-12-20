@@ -100,7 +100,7 @@ public class MenuLiga extends JFrame {
 			btnIniciarLiga.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						
+						bd.init();
 						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j);
 						System.out.println(bd);
 						VentanaLiga v = new VentanaLiga(equipo, bd, j);

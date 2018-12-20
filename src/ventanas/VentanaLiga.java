@@ -33,9 +33,16 @@ public class VentanaLiga extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j) {
-		System.out.println(e.getNombre());
+	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j) throws SQLException {
+		try {
+			bd.init();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(bd);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 932, 572);
 		contentPane = new JPanel();
@@ -112,9 +119,15 @@ public class VentanaLiga extends JFrame {
 
 		JButton btnPlay = new JButton("Play");
 		panelInformacionEquipo.add(btnPlay);
+		try {
+			bd.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
-	private void anadirATabla(BaseDeDatos bd) {
+	private void anadirATabla(BaseDeDatos bd) throws SQLException {
 		try {
 			bd.init();
 			Statement consulta;
@@ -149,6 +162,7 @@ public class VentanaLiga extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 }
