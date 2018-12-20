@@ -235,6 +235,7 @@ public class BaseDeDatos {
 	public Equipo convertirAEquipo(String nombreEquipo, Jugador j) {
 		Equipo e = null;
 		try { 
+			init();
 			Class.forName("org.sqlite.JDBC");
 			String query1 = "SELECT * FROM EQUIPOS"+j.getNombre()+" WHERE NOMBRE='" +nombreEquipo + "'; ";
 			ResultSet rs = con.createStatement().executeQuery(query1);
@@ -264,6 +265,7 @@ public class BaseDeDatos {
 			String rutaImagen = rs.getString("Icono");
 			e = new Equipo(siglas, nombre, puntos,color , rutaImagen, rutaImagen, get, gel, gev, gaft, gafv, gafl, vt, vl, vv, dt, dl, dv, et, el, ev);
 			e.toString();
+			close();
 			}
 		catch(Exception ex) {ex.printStackTrace();}
 		
