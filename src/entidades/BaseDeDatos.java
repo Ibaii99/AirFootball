@@ -282,12 +282,13 @@ public class BaseDeDatos {
 			contrasenya += password[e];}
 		if(estaJugadorEnBaseDeDatos(nombre, password)) {
 			try {
+				init();
 				Class.forName("org.sqlite.JDBC");
 				String query1 = "SELECT * FROM JUGADORES WHERE NOMBRE='" +nombre + "' AND PASSWORD='"+contrasenya+"'; ";
 				ResultSet rs = con.createStatement().executeQuery(query1);
 			//	System.out.println(rs.getString("NOMBRE")); Prueba
 				j = new Jugador(nombre, password,rs.getInt("cantidadPartidas"));
-				
+				close();
 			}catch(Exception u) {u.printStackTrace();}}		
 	
 		return j;

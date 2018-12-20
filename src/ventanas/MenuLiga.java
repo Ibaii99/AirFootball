@@ -147,7 +147,7 @@ public class MenuLiga extends JFrame {
 				 */
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-
+						bd.init();
 						Class.forName("org.sqlite.JDBC");
 						Statement consultaCB;
 						consultaCB = bd.getCon().createStatement();
@@ -163,6 +163,7 @@ public class MenuLiga extends JFrame {
 							System.out.println(equipoL);
 						}
 						resizeo(equipoL, icono);
+						bd.close();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
