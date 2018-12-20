@@ -100,11 +100,13 @@ public class MenuLiga extends JFrame {
 			btnIniciarLiga.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
+						
 						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j);
-						bd.close();
+						System.out.println(bd);
 						VentanaLiga v = new VentanaLiga(equipo, bd, j);
 						v.setVisible(true);
-						setVisible(false);
+						dispose();
+						bd.close();
 
 					} catch (Exception e1) {
 

@@ -28,7 +28,6 @@ public class VentanaLiga extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private BaseDeDatos bd;
 	private Jugador j;
 	private DefaultTableModel model;
 
@@ -56,7 +55,7 @@ public class VentanaLiga extends JFrame {
 		model.addColumn("Goles a favor");
 		model.addColumn("Goles en contra");
 		
-		anadirATabla();
+		anadirATabla(bd);
 
 		panelClasificacion.add(table);
 
@@ -115,42 +114,41 @@ public class VentanaLiga extends JFrame {
 		panelInformacionEquipo.add(btnPlay);
 	}
 
-	private void anadirATabla() {
-		System.out.println(bd);
-//		try {
-//			bd.init();
-//			Statement consulta;
-//			String comando = "";
-//			try {
-//				Class.forName("org.sqlite.JDBC");
-//			} catch (Exception e3) {
-//				 e3.printStackTrace();
-//			}
-//			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + ";";
-//			System.out.println(query);
-//			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
-//			System.out.println(rs.toString());
-//			System.out.println(rs);
-//			System.out.println(rs.getString("NOMBRE"));
-//			
-//			while (rs.next()) {
-//
-//				String nombre = rs.getString("Nombre");
-//				int puntos = rs.getInt("Puntos");
-//				int victorias = rs.getInt("Victorias totales");
-//				int empates = rs.getInt("Empates totales");
-//				int derrotas = rs.getInt("Derrotas totales");
-//				int gf = rs.getInt("Goles a favor");
-//				int gc = rs.getInt("Goles en contra");
-//				model.addRow(new Object[] { nombre, puntos, victorias, empates, derrotas, gf, gc });
-//				
-//			}
-//			rs.close();
-//			bd.close();
-//			model.addRow(new Object[] {""});
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+	private void anadirATabla(BaseDeDatos bd) {
+		try {
+			bd.init();
+			Statement consulta;
+			String comando = "";
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (Exception e3) {
+				 e3.printStackTrace();
+			}
+			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + ";";
+			System.out.println(query);
+			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
+			System.out.println(rs.toString());
+			System.out.println(rs);
+			System.out.println(rs.getString("NOMBRE"));
+			
+			while (rs.next()) {
+
+				String nombre = rs.getString("Nombre");
+				int puntos = rs.getInt("Puntos");
+				int victorias = rs.getInt("Victorias totales");
+				int empates = rs.getInt("Empates totales");
+				int derrotas = rs.getInt("Derrotas totales");
+				int gf = rs.getInt("Goles a favor");
+				int gc = rs.getInt("Goles en contra");
+				model.addRow(new Object[] { nombre, puntos, victorias, empates, derrotas, gf, gc });
+				
+			}
+			rs.close();
+			bd.close();
+			model.addRow(new Object[] {""});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
