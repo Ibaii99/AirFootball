@@ -116,10 +116,10 @@ public class VentanaLiga extends JFrame {
 	}
 
 	private void anadirATabla() {
-		try {
+		System.out.println(bd);
+//		try {
 //			bd.init();
 //			Statement consulta;
-//
 //			String comando = "";
 //			try {
 //				Class.forName("org.sqlite.JDBC");
@@ -147,10 +147,10 @@ public class VentanaLiga extends JFrame {
 //			}
 //			rs.close();
 //			bd.close();
-			model.addRow(new Object[] {""});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//			model.addRow(new Object[] {""});
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 }
