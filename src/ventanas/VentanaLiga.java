@@ -13,11 +13,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import entidades.BaseDeDatos;
 import entidades.Equipo;
 import jugador.Jugador;
 import objetos.ObjetoCombobox;
+import objetos.ScrollablePanel;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -52,12 +54,12 @@ public class VentanaLiga extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		JPanel panelClasificacion = new JPanel();
+		ScrollablePanel panelClasificacion = new ScrollablePanel(new BorderLayout());
+		panelClasificacion.setScrollableWidth( ScrollablePanel.ScrollableSizeHint.FIT );
+		panelClasificacion.setScrollableHeight( ScrollablePanel.ScrollableSizeHint.STRETCH );
 		contentPane.add(panelClasificacion, BorderLayout.CENTER);
 		model = new DefaultTableModel();
 		table = new JTable(model);
-		System.out.println(e.getNombre());
-		System.out.println(bd);
 		model.addColumn("Nombre");
 		model.addColumn("Puntos");
 		model.addColumn("Victorias");
@@ -65,16 +67,19 @@ public class VentanaLiga extends JFrame {
 		model.addColumn("Derrotas");
 		model.addColumn("Goles a favor");
 		model.addColumn("Goles en contra");
-		try {
-		table.getTableHeader().setFont(getFont().deriveFont(getFont().getStyle() | Font.BOLD));
-		}catch(Exception eee) {
-			eee.printStackTrace();
+		table.getColumnModel().getColumn(0).setPreferredWidth(200);
+		String header[] = { "Nombre", "Puntos", "Victorias", "Empates", "Derrotas", "Goles a favor",
+				"Goles en contra" };
+		
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			TableColumn column1 = table.getTableHeader().getColumnModel().getColumn(i);
+			column1.setHeaderValue(header[i]);
 		}
-
-
+		table.getTableHeader().setFont(table.getTableHeader().getFont().deriveFont(Font.BOLD));
 		anadirATabla(bd, j);
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.getViewport().add(table);
+		JScrollPane scrollPane = new JScrollPane(table);
+
+		// scrollPane.getViewport().add(table);
 		panelClasificacion.add(scrollPane);
 
 		JPanel panelBotonera = new JPanel();
@@ -137,7 +142,7 @@ public class VentanaLiga extends JFrame {
 
 	private void anadirATabla(BaseDeDatos bd, Jugador j) throws SQLException {
 		try {
-			System.out.println(bd);
+			System.out.println(bd.getNombre());
 			Statement consulta;
 			String comando = "";
 			try {
@@ -146,12 +151,7 @@ public class VentanaLiga extends JFrame {
 				e3.printStackTrace();
 			}
 			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + ";";
-			System.out.println(query);
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
-			System.out.println(rs.toString());
-			System.out.println(rs);
-			System.out.println(rs.getString("NOMBRE"));
-
 			while (rs.next()) {
 
 				String nombre = rs.getString("Nombre");
