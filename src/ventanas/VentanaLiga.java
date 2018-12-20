@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -64,13 +65,16 @@ public class VentanaLiga extends JFrame {
 		model.addColumn("Derrotas");
 		model.addColumn("Goles a favor");
 		model.addColumn("Goles en contra");
-		model.addRow(new Object[] { "Nombre", "Puntos", "Victorias", "Empates", "Derrotas", "Goles a favor", "Goles en contra" });
-        this.setFont(this.getFont().deriveFont(Font.BOLD));
-        revalidate();
-        
+		try {
+		table.getTableHeader().setFont(getFont().deriveFont(getFont().getStyle() | Font.BOLD));
+		}catch(Exception eee) {
+			eee.printStackTrace();
+		}
+
+
 		anadirATabla(bd, j);
-		panelClasificacion.add(table);
-		ScrollPane scrollPane = new ScrollPane();
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.getViewport().add(table);
 		panelClasificacion.add(scrollPane);
 
 		JPanel panelBotonera = new JPanel();
@@ -161,7 +165,7 @@ public class VentanaLiga extends JFrame {
 
 			}
 			rs.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
