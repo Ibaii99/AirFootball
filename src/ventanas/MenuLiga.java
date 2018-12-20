@@ -60,7 +60,7 @@ public class MenuLiga extends JFrame {
 			} catch (Exception e) {
 				setSize(500, 500);
 			}
-
+			bd.init();
 			JComboBox cbLiga = new JComboBox();
 
 			Logger logger = Logger.getLogger("baseDeDatos");
@@ -215,7 +215,12 @@ public class MenuLiga extends JFrame {
 		} catch (Exception excep) {
 			excep.printStackTrace();
 		}
-
+		try {
+			bd.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
