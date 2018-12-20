@@ -356,6 +356,7 @@ public class BaseDeDatos {
 				ResultSet rs = con.createStatement().executeQuery(query1);
 				// System.out.println(rs.getString("NOMBRE")); Prueba
 				j = new Jugador(nombre, password, rs.getInt("cantidadPartidas"));
+				rs.close();
 				close();
 			} catch (Exception u) {
 				u.printStackTrace();

@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -33,7 +34,8 @@ public class VentanaLiga extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 */
 	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j) throws SQLException {
 		try {
@@ -42,7 +44,6 @@ public class VentanaLiga extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		System.out.println(bd);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 932, 572);
 		contentPane = new JPanel();
@@ -54,6 +55,8 @@ public class VentanaLiga extends JFrame {
 		contentPane.add(panelClasificacion, BorderLayout.CENTER);
 		model = new DefaultTableModel();
 		table = new JTable(model);
+		System.out.println(e.getNombre());
+		System.out.println(bd);
 		model.addColumn("Nombre");
 		model.addColumn("Puntos");
 		model.addColumn("Victorias");
@@ -61,11 +64,12 @@ public class VentanaLiga extends JFrame {
 		model.addColumn("Derrotas");
 		model.addColumn("Goles a favor");
 		model.addColumn("Goles en contra");
-		
-		anadirATabla(bd);
-
+		model.addRow(new Object[] { "Nombre", "Puntos", "Victorias", "Empates", "Derrotas", "Goles a favor", "Goles en contra" });
+        this.setFont(this.getFont().deriveFont(Font.BOLD));
+        revalidate();
+        
+		anadirATabla(bd, j);
 		panelClasificacion.add(table);
-
 		ScrollPane scrollPane = new ScrollPane();
 		panelClasificacion.add(scrollPane);
 
@@ -127,15 +131,15 @@ public class VentanaLiga extends JFrame {
 		}
 	}
 
-	private void anadirATabla(BaseDeDatos bd) throws SQLException {
+	private void anadirATabla(BaseDeDatos bd, Jugador j) throws SQLException {
 		try {
-			bd.init();
+			System.out.println(bd);
 			Statement consulta;
 			String comando = "";
 			try {
 				Class.forName("org.sqlite.JDBC");
 			} catch (Exception e3) {
-				 e3.printStackTrace();
+				e3.printStackTrace();
 			}
 			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + ";";
 			System.out.println(query);
@@ -143,7 +147,7 @@ public class VentanaLiga extends JFrame {
 			System.out.println(rs.toString());
 			System.out.println(rs);
 			System.out.println(rs.getString("NOMBRE"));
-			
+
 			while (rs.next()) {
 
 				String nombre = rs.getString("Nombre");
@@ -151,18 +155,17 @@ public class VentanaLiga extends JFrame {
 				int victorias = rs.getInt("Victorias totales");
 				int empates = rs.getInt("Empates totales");
 				int derrotas = rs.getInt("Derrotas totales");
-				int gf = rs.getInt("Goles a favor");
-				int gc = rs.getInt("Goles en contra");
+				int gf = rs.getInt("Goles a favor totales");
+				int gc = rs.getInt("Goles encajados totales");
 				model.addRow(new Object[] { nombre, puntos, victorias, empates, derrotas, gf, gc });
-				
+
 			}
 			rs.close();
-			bd.close();
-			model.addRow(new Object[] {""});
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
