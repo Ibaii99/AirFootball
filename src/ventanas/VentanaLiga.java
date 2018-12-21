@@ -185,7 +185,7 @@ public class VentanaLiga extends JFrame {
 			while (rs2.next()) {
 				tb.setNombre(rs2.getString("Nombre"));
 			}
-			
+
 			rs2.close();
 			// table.setDefaultRenderer(Object.class, new MyTableCellRender());
 		} catch (Exception en) {
@@ -198,19 +198,21 @@ public class VentanaLiga extends JFrame {
 
 class TeamBold extends DefaultTableCellRenderer {
 	private String nombre;
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
 		JLabel parent = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		
 		if (value.equals(nombre))
 			parent.setFont(parent.getFont().deriveFont(Font.BOLD));
 		return parent;
 	}
-	
+
 }
