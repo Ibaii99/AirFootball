@@ -1,11 +1,15 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
@@ -18,6 +22,7 @@ import javax.swing.table.TableColumn;
 import entidades.BaseDeDatos;
 import entidades.Equipo;
 import jugador.Jugador;
+import objetos.MyTableCellRender;
 import objetos.ObjetoCombobox;
 import objetos.ScrollablePanel;
 
@@ -55,8 +60,8 @@ public class VentanaLiga extends JFrame {
 		setContentPane(contentPane);
 
 		ScrollablePanel panelClasificacion = new ScrollablePanel(new BorderLayout());
-		panelClasificacion.setScrollableWidth( ScrollablePanel.ScrollableSizeHint.FIT );
-		panelClasificacion.setScrollableHeight( ScrollablePanel.ScrollableSizeHint.STRETCH );
+		panelClasificacion.setScrollableWidth(ScrollablePanel.ScrollableSizeHint.FIT);
+		panelClasificacion.setScrollableHeight(ScrollablePanel.ScrollableSizeHint.STRETCH);
 		contentPane.add(panelClasificacion, BorderLayout.CENTER);
 		model = new DefaultTableModel();
 		table = new JTable(model);
@@ -70,16 +75,18 @@ public class VentanaLiga extends JFrame {
 		table.getColumnModel().getColumn(0).setPreferredWidth(200);
 		String header[] = { "Nombre", "Puntos", "Victorias", "Empates", "Derrotas", "Goles a favor",
 				"Goles en contra" };
-		
+
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			TableColumn column1 = table.getTableHeader().getColumnModel().getColumn(i);
 			column1.setHeaderValue(header[i]);
 		}
 		table.getTableHeader().setFont(table.getTableHeader().getFont().deriveFont(Font.BOLD));
+		
 		anadirATabla(bd, j);
-		JScrollPane scrollPane = new JScrollPane(table);
+		
+		// model.setRowColour(1, Color.BLUE);
 
-		// scrollPane.getViewport().add(table);
+		JScrollPane scrollPane = new JScrollPane(table);
 		panelClasificacion.add(scrollPane);
 
 		JPanel panelBotonera = new JPanel();
@@ -142,6 +149,8 @@ public class VentanaLiga extends JFrame {
 
 	private void anadirATabla(BaseDeDatos bd, Jugador j) throws SQLException {
 		try {
+			
+			table.setDefaultRenderer(Object.class, new MyTableCellRender());
 			System.out.println(bd.getNombre());
 			Statement consulta;
 			String comando = "";
