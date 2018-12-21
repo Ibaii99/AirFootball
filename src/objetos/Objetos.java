@@ -37,7 +37,7 @@ public abstract class Objetos{
 	protected double velYAntes = 0;
 	private double velocidadAntes = 0;	
 	
-	private static double VELOCIDAD_MAX = 5;
+	private static double VELOCIDAD_MAX = 15;
 ///////////////////////Tamaño//////////////////////////////////////	
 	protected double radio;
 	
