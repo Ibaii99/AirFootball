@@ -67,6 +67,7 @@ public class VentanaLiga extends JFrame {
 		contentPane.add(panelClasificacion, BorderLayout.CENTER);
 		model = new DefaultTableModel();
 		table = new JTable(model);
+		model.addColumn("");
 		model.addColumn("Nombre");
 		model.addColumn("Puntos");
 		model.addColumn("Victorias");
@@ -74,7 +75,8 @@ public class VentanaLiga extends JFrame {
 		model.addColumn("Derrotas");
 		model.addColumn("Goles a favor");
 		model.addColumn("Goles en contra");
-		table.getColumnModel().getColumn(0).setPreferredWidth(200);
+		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
 		String header[] = { "Nombre", "Puntos", "Victorias", "Empates", "Derrotas", "Goles a favor",
 				"Goles en contra" };
 
@@ -169,7 +171,7 @@ public class VentanaLiga extends JFrame {
 				int derrotas = rs.getInt("Derrotas totales");
 				int gf = rs.getInt("Goles a favor totales");
 				int gc = rs.getInt("Goles encajados totales");
-				model.addRow(new Object[] { nombre, puntos, victorias, empates, derrotas, gf, gc });
+				model.addRow(new Object[] { "", nombre, puntos, victorias, empates, derrotas, gf, gc });
 
 			}
 			rs.close();
