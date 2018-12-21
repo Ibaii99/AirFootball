@@ -85,9 +85,7 @@ public class VentanaLiga extends JFrame {
 		table.getTableHeader().setFont(table.getTableHeader().getFont().deriveFont(Font.BOLD));
 
 		anadirATabla(bd, j, e);
-
-		// model.setRowColour(1, Color.BLUE);
-
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		panelClasificacion.add(scrollPane);
 
@@ -184,7 +182,7 @@ public class VentanaLiga extends JFrame {
 			while (rs2.next()) {
 				tb.setNombre(rs2.getString("Nombre"));
 			}
-
+			
 			rs2.close();
 			// table.setDefaultRenderer(Object.class, new MyTableCellRender());
 		} catch (Exception en) {
