@@ -109,7 +109,7 @@ public class VentanaLiga extends JFrame {
 				}
 
 			}
-//			table.setDefaultRenderer(Object.class, new IconTableCellRenderer());
+			// table.setDefaultRenderer(Object.class, new IconTableCellRenderer());
 		} catch (Exception ee) {
 			ee.printStackTrace();
 		}
@@ -234,88 +234,26 @@ class TeamBold extends DefaultTableCellRenderer {
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
+
 		JLabel parent = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		if (value.equals(nombre))
+		if (value.equals(nombre)) {
 			parent.setFont(parent.getFont().deriveFont(Font.BOLD));
+		}
+
+		if (row >= 0 && row < 4) {
+			parent.setBackground(Color.BLUE);
+			parent.setForeground(Color.WHITE);
+		} else if (row >= 4 && row < 6) {
+			parent.setBackground(Color.orange);
+			parent.setForeground(Color.BLACK);
+		} else if (row >= 17 && row < 20) {
+			parent.setBackground(Color.RED);
+			parent.setForeground(Color.WHITE);
+		} else {
+			parent.setForeground(Color.black);
+			parent.setBackground(Color.white);
+		}
 		return parent;
 	}
 
 }
-
-class IconTableCellRenderer extends DefaultTableCellRenderer {
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
-		JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		if (value instanceof Icon) {
-			label.setText(null);
-			label.setIcon((Icon) value);
-		}
-		return label;
-	}
-}
-// class UCLRender extends DefaultTableCellRenderer {
-// /**
-// * @author Jorge
-// */
-// private static final long serialVersionUID = 1L;
-//
-// public UCLRender() {
-// super();
-// setOpaque(true);
-// }
-//
-// public Component getTableCellRendererComponent(JTable table, Object value,
-// boolean isSelected, boolean hasFocus,
-// int row, int column) {
-//
-// try {
-// if (row < 4) { //De momento muestra los equipos clasificados para Champions.
-// setForeground(Color.black);
-// setBackground(Color.cyan);
-// }
-//
-// } catch (Exception s) {
-// s.printStackTrace();
-// }
-// return this;
-// }
-// }
-// class EuropaRenderer extends DefaultTableCellRenderer {
-// JLabel lbl = new JLabel();
-//
-// ImageIcon icon = new ImageIcon(getClass().getResource("EUROPA.png"));
-//
-// public Component getTableCellRendererComponent(JTable table, Object value,
-// boolean isSelected,
-// boolean hasFocus, int row, int column) {
-// lbl.setText((String) value);
-// lbl.setIcon(icon);
-// return lbl;
-// }
-// }
-// class DescensoRenderer extends DefaultTableCellRenderer {
-// JLabel lbl = new JLabel();
-//
-// ImageIcon icon = new ImageIcon(getClass().getResource("Descenso.png"));
-//
-// public Component getTableCellRendererComponent(JTable table, Object value,
-// boolean isSelected,
-// boolean hasFocus, int row, int column) {
-// lbl.setText((String) value);
-// lbl.setIcon(icon);
-// return lbl;
-// }
-// }
-// class UCLRenderer extends DefaultTableCellRenderer {
-// JLabel lbl = new JLabel();
-//
-// ImageIcon icon = new ImageIcon(getClass().getResource("UCL.png"));
-//
-// public Component getTableCellRendererComponent(JTable table, Object value,
-// boolean isSelected,
-// boolean hasFocus, int row, int column) {
-// lbl.setText((String) value);
-// lbl.setIcon(icon);
-// return lbl;
-// }
-// }
