@@ -7,6 +7,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import entidades.BaseDeDatos;
+import jugador.Jugador;
+
 public class MyTableCellRender extends DefaultTableCellRenderer {
 	/**
 	 * @author Jorge
@@ -20,12 +23,17 @@ public class MyTableCellRender extends DefaultTableCellRenderer {
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
+		
 		// if(Integer.parseInt((String)table.getValueAt(row, 0)) <= 4)
 		// {
 		// setForeground(Color.black);
 		// setBackground(Color.red);
 		// }
+		
 		try {
+//			if (value.equals(e.getNombre())) {
+//				
+//			}
 			if (row < 4) { //De momento muestra los equipos clasificados para Champions.
 				setForeground(Color.black);
 				setBackground(Color.cyan);

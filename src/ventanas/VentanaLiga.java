@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -39,6 +40,8 @@ public class VentanaLiga extends JFrame {
 	private JTable table;
 	private Jugador j;
 	private DefaultTableModel model;
+
+	private BaseDeDatos bd;
 
 	/**
 	 * Create the frame.
@@ -81,9 +84,9 @@ public class VentanaLiga extends JFrame {
 			column1.setHeaderValue(header[i]);
 		}
 		table.getTableHeader().setFont(table.getTableHeader().getFont().deriveFont(Font.BOLD));
-		
-		anadirATabla(bd, j);
-		
+
+		anadirATabla(bd, j, e);
+
 		// model.setRowColour(1, Color.BLUE);
 
 		JScrollPane scrollPane = new JScrollPane(table);
@@ -147,10 +150,9 @@ public class VentanaLiga extends JFrame {
 		}
 	}
 
-	private void anadirATabla(BaseDeDatos bd, Jugador j) throws SQLException {
+	private void anadirATabla(BaseDeDatos bd, Jugador j, Equipo e) throws SQLException {
 		try {
-			
-			table.setDefaultRenderer(Object.class, new MyTableCellRender());
+			TeamBold tb = new TeamBold();
 			System.out.println(bd.getNombre());
 			Statement consulta;
 			String comando = "";
@@ -174,11 +176,41 @@ public class VentanaLiga extends JFrame {
 
 			}
 			rs.close();
+			String query2 = "SELECT NOMBRE FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE = '" + e.getNombre() + "';";
 
-		} catch (Exception e) {
-			e.printStackTrace();
+			ResultSet rs2 = bd.getCon().createStatement().executeQuery(query2);
+			System.out.println(rs2);
+			String nombre = null;
+			table.setDefaultRenderer(Object.class, tb);
+			while (rs2.next()) {
+				tb.setNombre(rs2.getString("Nombre"));
+			}
+			
+			rs2.close();
+			// table.setDefaultRenderer(Object.class, new MyTableCellRender());
+		} catch (Exception en) {
+			en.printStackTrace();
 		}
 
 	}
 
+}
+
+class TeamBold extends DefaultTableCellRenderer {
+	private String nombre;
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
+		JLabel parent = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		
+		if (value.equals(nombre))
+			parent.setFont(parent.getFont().deriveFont(Font.BOLD));
+		return parent;
+	}
+	
 }
