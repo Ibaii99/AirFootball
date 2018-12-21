@@ -135,16 +135,16 @@ public class VentanaLiga extends JFrame {
 		JPanel panelEquipoJugador = new JPanel();
 		panelInformacionEquipo.add(panelEquipoJugador);
 
-		JLabel lblEscudoEquipo = new JLabel("New label");
+		JLabel lblEscudoEquipo = new JLabel();
 		panelEquipoJugador.add(lblEscudoEquipo);
 
-		JLabel lblNombEquipo = new JLabel("New label");
+		JLabel lblNombEquipo = new JLabel(e.getNombre());
 		panelEquipoJugador.add(lblNombEquipo);
 
-		JLabel lblTEXTPuntosEquipo = new JLabel("Puntos:");
+		JLabel lblTEXTPuntosEquipo = new JLabel("Puntos: ");
 		panelEquipoJugador.add(lblTEXTPuntosEquipo);
 
-		JLabel lblPuntosEquipo = new JLabel("New label");
+		JLabel lblPuntosEquipo = new JLabel(""+e.getPuntos());
 		panelEquipoJugador.add(lblPuntosEquipo);
 
 		JLabel lblVs = new JLabel("VS");
