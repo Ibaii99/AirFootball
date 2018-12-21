@@ -23,7 +23,6 @@ import javax.swing.table.TableColumn;
 import entidades.BaseDeDatos;
 import entidades.Equipo;
 import jugador.Jugador;
-import objetos.MyTableCellRender;
 import objetos.ObjetoCombobox;
 import objetos.ScrollablePanel;
 
