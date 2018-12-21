@@ -33,8 +33,11 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import java.awt.ScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaLiga extends JFrame {
 
@@ -177,6 +180,13 @@ public class VentanaLiga extends JFrame {
 		panelEquipoAdversario.add(lblPuntosAdversario);
 
 		JButton btnPlay = new JButton("Play");
+		btnPlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (e.getDerrotasTotales()+e.getVictoriasTotales()+e.getEmpatesTotales()==38) {
+					JOptionPane.showMessageDialog(null, "YA HAS TERMINADO LA LIGA", "ERROR", JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});
 		panelInformacionEquipo.add(btnPlay);
 		try {
 			bd.close();
