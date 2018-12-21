@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -87,32 +88,35 @@ public class VentanaLiga extends JFrame {
 			column1.setHeaderValue(header[i]);
 		}
 		table.getTableHeader().setFont(table.getTableHeader().getFont().deriveFont(Font.BOLD));
-
+		// String iUCL = "iconos/UCL.png";
+		// String iEL = "iconos/EUROPA.png";
+		// String iDesc = "iconos/DESCENSO.png";
 		anadirATabla(bd, j, e);
 
-		try {
-			for (int i = 0; i < 20; i++) {
-				if (i < 4) {
-					ImageIcon icon = new ImageIcon("UCL.png");
-					// table.getColumnModel().getColumn(0).setCellRenderer(new UCLRenderer());
-					table.setValueAt(icon, i, 0);
-				}
-				if (i >= 4 && i < 7) {
-					ImageIcon icon = new ImageIcon("EUROPA.png");
-					// table.getColumnModel().getColumn(0).setCellRenderer(new EuropaRenderer());
-					table.setValueAt(icon, i, 0);
-				}
-				if (i >= 17) {
-					ImageIcon icon = new ImageIcon("DESCENSO.png");
-					// table.getColumnModel().getColumn(0).setCellRenderer(new DescensoRenderer());
-					table.setValueAt(icon, i, 0);
-				}
-
-			}
-			// table.setDefaultRenderer(Object.class, new IconTableCellRenderer());
-		} catch (Exception ee) {
-			ee.printStackTrace();
-		}
+		// try {
+		// for (int i = 0; i < 20; i++) {
+		// if (i < 4) {
+		// ImageIcon icon = new
+		// ImageIcon(getClass().getClassLoader().getResource(iUCL));
+		// // table.getColumnModel().getColumn(0).setCellRenderer(new UCLRenderer());
+		// table.setValueAt(icon, i, 0);
+		// } else if (i >= 4 && i < 7) {
+		// ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(iEL));
+		// // table.getColumnModel().getColumn(0).setCellRenderer(new EuropaRenderer());
+		// table.setValueAt(icon, i, 0);
+		// } else if (i >= 17) {
+		// ImageIcon icon = new
+		// ImageIcon(getClass().getClassLoader().getResource(iDesc));
+		// // table.getColumnModel().getColumn(0).setCellRenderer(new
+		// DescensoRenderer());
+		// table.setValueAt(icon, i, 0);
+		// }
+		//
+		// }
+		// // table.setDefaultRenderer(Object.class, new IconTableCellRenderer());
+		// } catch (Exception ee) {
+		// ee.printStackTrace();
+		// }
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		panelClasificacion.add(scrollPane);
@@ -136,6 +140,13 @@ public class VentanaLiga extends JFrame {
 		panelInformacionEquipo.add(panelEquipoJugador);
 
 		JLabel lblEscudoEquipo = new JLabel();
+		ImageIcon imageIconL = null;
+		try {
+			imageIconL = new ImageIcon(getClass().getClassLoader().getResource(e.getBolaEquipo().getRutaImagen()));
+		} catch (Exception ej) {
+			ej.printStackTrace();
+		}
+		resizeo(imageIconL, lblEscudoEquipo, 20, 20);
 		panelEquipoJugador.add(lblEscudoEquipo);
 
 		JLabel lblNombEquipo = new JLabel(e.getNombre());
@@ -144,7 +155,7 @@ public class VentanaLiga extends JFrame {
 		JLabel lblTEXTPuntosEquipo = new JLabel("Puntos: ");
 		panelEquipoJugador.add(lblTEXTPuntosEquipo);
 
-		JLabel lblPuntosEquipo = new JLabel(""+e.getPuntos());
+		JLabel lblPuntosEquipo = new JLabel("" + e.getPuntos());
 		panelEquipoJugador.add(lblPuntosEquipo);
 
 		JLabel lblVs = new JLabel("VS");
@@ -219,6 +230,17 @@ public class VentanaLiga extends JFrame {
 
 	}
 
+	public void resizeo(ImageIcon imageIconL, JLabel jlIcono, int anchura, int altura) {
+		Image imagenResizL = imageIconL.getImage();
+		Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(anchura), (int) Math.round(altura),
+				java.awt.Image.SCALE_SMOOTH);
+		ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
+		jlIcono.setSize(iiResizeoL.getIconWidth(), iiResizeoL.getIconHeight());
+		jlIcono.setIcon(iiResizeoL);
+		jlIcono.repaint();
+		revalidate();
+	}
+
 }
 
 class TeamBold extends DefaultTableCellRenderer {
@@ -236,20 +258,36 @@ class TeamBold extends DefaultTableCellRenderer {
 			int row, int column) {
 
 		JLabel parent = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		JLabel parent2 = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, 0);
+		
 		if (value.equals(nombre)) {
 			parent.setFont(parent.getFont().deriveFont(Font.BOLD));
 		}
+		//System.out.println(parent.toString());
+		if (row >= 0 && row < 4 && column == 0) {
 
-		if (row >= 0 && row < 4) {
+			parent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iconos/UCL.png")));
+			parent2.setText("" + (row + 1));
+			
 			parent.setBackground(Color.BLUE);
 			parent.setForeground(Color.WHITE);
-		} else if (row >= 4 && row < 6) {
+		} else if (row >= 4 && row < 6 && column == 0) {
+			parent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iconos/EUROPA.png")));
+			parent2.setText("" + (row + 1));
 			parent.setBackground(Color.orange);
 			parent.setForeground(Color.BLACK);
-		} else if (row >= 17 && row < 20) {
-			parent.setBackground(Color.RED);
+		} else if (row >= 17 && row < 20 && column == 0) {
+			parent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iconos/DESCENSO.png")));
+			parent2.setText("" + (row + 1));
+			parent.setBackground(new Color(153,0,0));
 			parent.setForeground(Color.WHITE);
-		} else {
+		} else if (column == 0) {
+			parent.setIcon(null);
+			parent2.setText("" + (row + 1));
+			parent.setForeground(Color.black);
+			parent.setBackground(Color.white);
+		} else { 
+			parent.setIcon(null);
 			parent.setForeground(Color.black);
 			parent.setBackground(Color.white);
 		}
