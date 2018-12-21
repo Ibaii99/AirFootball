@@ -45,11 +45,13 @@ public class Inicio extends JFrame {
 				try {
 					VentanaLogin v = new VentanaLogin(bd, f);
 					v.setVisible(true);
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				setVisible(false);
+				
 				dispose();
 			}
 		});
@@ -65,7 +67,7 @@ public class Inicio extends JFrame {
 		final JButton bAmistoso = new JButton("Amistoso");
 		bAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				
 				MenuAmistoso mu;
 				try {
 					mu = new MenuAmistoso(getSize().width, getSize().height,bd, f);
@@ -81,7 +83,7 @@ public class Inicio extends JFrame {
 					}
 
 				}
-
+				dispose();
 			}
 		});
 		bAmistoso.setFont(new Font("Arial Black", Font.PLAIN, 16));

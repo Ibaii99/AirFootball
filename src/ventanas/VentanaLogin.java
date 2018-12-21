@@ -94,13 +94,14 @@ public class VentanaLogin extends JDialog {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+						String name = tFNombre.getText().toUpperCase();
 						//SI el jugador esta entre los nombres de los jugadores de la bd dara error
-						if(bd.estaJugadorRegistrado(tFNombre.getText())) {
+						if(bd.estaJugadorRegistrado(name)) {
 							JOptionPane.showMessageDialog(null, "ESTE JUGADOR YA ESTA REGISTRADO", "ERROR", JOptionPane.WARNING_MESSAGE);
 						}
 						//SI el jugador no esta entre los jugadores de la BD entonces se creara un nuevo objeto Jugador
-						if(!bd.estaJugadorRegistrado(tFNombre.getText())) {
-							Jugador j = new Jugador(tFNombre.getText(), passwordField.getPassword(), 0);
+						if(!bd.estaJugadorRegistrado(name)) {
+							Jugador j = new Jugador(name, passwordField.getPassword(), 0);
 							
 							bd.anyadirJugador(j);
 							bd.crearTablaEquipos(j);
@@ -131,12 +132,13 @@ public class VentanaLogin extends JDialog {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+						String name = tFNombre.getText().toUpperCase();
 						// SI el jugador no esta registrado con ese nombre y contraseña dara error
-						if(!bd.estaJugadorEnBaseDeDatos(tFNombre.getText(), passwordField.getPassword())) {
+						if(!bd.estaJugadorEnBaseDeDatos(name, passwordField.getPassword())) {
 							JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA", "ERROR", JOptionPane.WARNING_MESSAGE);
 						}
-						if(bd.estaJugadorEnBaseDeDatos(tFNombre.getText(), passwordField.getPassword())) {
-							Jugador j = bd.convertirAJugador(tFNombre.getText(), passwordField.getPassword());
+						if(bd.estaJugadorEnBaseDeDatos(name, passwordField.getPassword())) {
+							Jugador j = bd.convertirAJugador(name, passwordField.getPassword());
 							//TODO
 							setVisible(false);
 							MenuLiga mL = new MenuLiga(800, 800, j, bd,f);
