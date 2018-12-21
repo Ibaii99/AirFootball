@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import entidades.BaseDeDatos;
@@ -27,6 +28,7 @@ import objetos.ObjetoCombobox;
 import objetos.ScrollablePanel;
 
 import javax.swing.JLabel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -77,7 +79,7 @@ public class VentanaLiga extends JFrame {
 		model.addColumn("Goles en contra");
 		table.getColumnModel().getColumn(0).setPreferredWidth(20);
 		table.getColumnModel().getColumn(1).setPreferredWidth(200);
-		String header[] = { "Nombre", "Puntos", "Victorias", "Empates", "Derrotas", "Goles a favor",
+		String header[] = { "", "Nombre", "Puntos", "Victorias", "Empates", "Derrotas", "Goles a favor",
 				"Goles en contra" };
 
 		for (int i = 0; i < table.getColumnCount(); i++) {
@@ -87,7 +89,31 @@ public class VentanaLiga extends JFrame {
 		table.getTableHeader().setFont(table.getTableHeader().getFont().deriveFont(Font.BOLD));
 
 		anadirATabla(bd, j, e);
-		
+
+		try {
+			for (int i = 0; i < 20; i++) {
+				if (i < 4) {
+					ImageIcon icon = new ImageIcon("UCL.png");
+					// table.getColumnModel().getColumn(0).setCellRenderer(new UCLRenderer());
+					table.setValueAt(icon, i, 0);
+				}
+				if (i >= 4 && i < 7) {
+					ImageIcon icon = new ImageIcon("EUROPA.png");
+					// table.getColumnModel().getColumn(0).setCellRenderer(new EuropaRenderer());
+					table.setValueAt(icon, i, 0);
+				}
+				if (i >= 17) {
+					ImageIcon icon = new ImageIcon("DESCENSO.png");
+					// table.getColumnModel().getColumn(0).setCellRenderer(new DescensoRenderer());
+					table.setValueAt(icon, i, 0);
+				}
+
+			}
+//			table.setDefaultRenderer(Object.class, new IconTableCellRenderer());
+		} catch (Exception ee) {
+			ee.printStackTrace();
+		}
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		panelClasificacion.add(scrollPane);
 
@@ -184,9 +210,9 @@ public class VentanaLiga extends JFrame {
 			while (rs2.next()) {
 				tb.setNombre(rs2.getString("Nombre"));
 			}
-			
+
 			rs2.close();
-			// table.setDefaultRenderer(Object.class, new MyTableCellRender());
+
 		} catch (Exception en) {
 			en.printStackTrace();
 		}
@@ -215,3 +241,81 @@ class TeamBold extends DefaultTableCellRenderer {
 	}
 
 }
+
+class IconTableCellRenderer extends DefaultTableCellRenderer {
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
+		JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		if (value instanceof Icon) {
+			label.setText(null);
+			label.setIcon((Icon) value);
+		}
+		return label;
+	}
+}
+// class UCLRender extends DefaultTableCellRenderer {
+// /**
+// * @author Jorge
+// */
+// private static final long serialVersionUID = 1L;
+//
+// public UCLRender() {
+// super();
+// setOpaque(true);
+// }
+//
+// public Component getTableCellRendererComponent(JTable table, Object value,
+// boolean isSelected, boolean hasFocus,
+// int row, int column) {
+//
+// try {
+// if (row < 4) { //De momento muestra los equipos clasificados para Champions.
+// setForeground(Color.black);
+// setBackground(Color.cyan);
+// }
+//
+// } catch (Exception s) {
+// s.printStackTrace();
+// }
+// return this;
+// }
+// }
+// class EuropaRenderer extends DefaultTableCellRenderer {
+// JLabel lbl = new JLabel();
+//
+// ImageIcon icon = new ImageIcon(getClass().getResource("EUROPA.png"));
+//
+// public Component getTableCellRendererComponent(JTable table, Object value,
+// boolean isSelected,
+// boolean hasFocus, int row, int column) {
+// lbl.setText((String) value);
+// lbl.setIcon(icon);
+// return lbl;
+// }
+// }
+// class DescensoRenderer extends DefaultTableCellRenderer {
+// JLabel lbl = new JLabel();
+//
+// ImageIcon icon = new ImageIcon(getClass().getResource("Descenso.png"));
+//
+// public Component getTableCellRendererComponent(JTable table, Object value,
+// boolean isSelected,
+// boolean hasFocus, int row, int column) {
+// lbl.setText((String) value);
+// lbl.setIcon(icon);
+// return lbl;
+// }
+// }
+// class UCLRenderer extends DefaultTableCellRenderer {
+// JLabel lbl = new JLabel();
+//
+// ImageIcon icon = new ImageIcon(getClass().getResource("UCL.png"));
+//
+// public Component getTableCellRendererComponent(JTable table, Object value,
+// boolean isSelected,
+// boolean hasFocus, int row, int column) {
+// lbl.setText((String) value);
+// lbl.setIcon(icon);
+// return lbl;
+// }
+// }
