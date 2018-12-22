@@ -161,13 +161,6 @@ public class ventanaPartido extends JFrame {
 
 		
 
-		panelCampo = new JPanel();
-		panelCampo.setBackground(Color.GREEN);
-		panelCampo.setLayout(null);
-		panelCampo.add(lblEquipoLocal);
-		panelCampo.add(lblEquipoVisitante);
-		panelCampo.add(lblPelota);
-
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
@@ -176,16 +169,11 @@ public class ventanaPartido extends JFrame {
 		label.setForeground(Color.RED);
 		label.setFont(f);
 		panel.add(label);
-
-
-		
-
-		
 		panel.add(lblEqL);
-
-		
 		panel.add(lblEqV);
-
+		panelCampo = new JPanel();
+		panelCampo.setBackground(Color.GREEN);
+		panelCampo.setLayout(null);
 		JLabel label_3 = new JLabel("0");
 		label_3.setBounds(327, 5, 75, 36);
 		label_3.setForeground(Color.RED);
@@ -218,10 +206,7 @@ public class ventanaPartido extends JFrame {
 		panel.add(lblNomEqV);
 		getContentPane().setLayout(groupLayout);
 
-		posteArribaIzquierda = new Poste(this, true, true);
-		posteAbajoIzquierda = new Poste(this, true, false);
-		posteArribaDerecha = new Poste(this, false, true);
-		posteAbajoDerecha = new Poste(this, false, false);
+
 
 		addKeyListener(new KeyAdapter() {
 			@Override
@@ -248,6 +233,9 @@ public class ventanaPartido extends JFrame {
 						if(eLocal.getBolaEquipo().getVelY() < 0)eLocal.getBolaEquipo().setVelY(0);
 						
 						eLocal.getBolaEquipo().addVelocidadY(+VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
+						break;
+					case 85:	meterAPanleCampo();
+								configuracionAntesDePartido(); // U 
 						break;
 					default : break;
 						}}});
@@ -295,17 +283,40 @@ public class ventanaPartido extends JFrame {
 			
 		);}
 		
-	
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
-		configuracionAntesDePartido();
+
 		setVisible(true);
 		
 		
 	}
 	public void empieza() {
+		meterAPanleCampo();
 		hiloJuego.start();
 	}
 
+	public void meterAPanleCampo() {
+		posteArribaIzquierda = new Poste(this, true, true);
+		posteAbajoIzquierda = new Poste(this, true, false);
+		posteArribaDerecha = new Poste(this, false, true);
+		posteAbajoDerecha = new Poste(this, false, false);
+
+		panelCampo.add(lblEquipoLocal);
+		panelCampo.add(lblEquipoVisitante);
+		panelCampo.add(lblPelota);
+		panelCampo.add(lblposteArribaIzquierda);
+		panelCampo.add(lblposteAbajoIzquierda);
+		panelCampo.add(lblposteArribaDerecha);
+		panelCampo.add(lblposteAbajoDerecha);
+		
+		mostrarElementosDeJuego();
+		actualizarTamanyoLbl();
+	}
 	public void degradarVelocidad() {
 		eVisitante.getBolaEquipo().setVelYAntes(eVisitante.getBolaEquipo().getVelY());
 		eVisitante.getBolaEquipo().setVelXAntes(eVisitante.getBolaEquipo().getVelX());
@@ -345,7 +356,15 @@ public class ventanaPartido extends JFrame {
 		lblEquipoLocal.setBounds((int)( eLocal.getBolaEquipo().getX()-eLocal.getBolaEquipo().getRadio()), (int)( eLocal.getBolaEquipo().getY()-eLocal.getBolaEquipo().getRadio()),
 				(int) eLocal.getBolaEquipo().getRadio() * 2, (int) eLocal.getBolaEquipo().getRadio() * 2);
 		lblPelota.setBounds((int)( p.getX()-p.getRadio()), (int) (p.getY()-p.getRadio()), (int) p.getRadio() * 2, (int) p.getRadio() * 2);
-
+		
+		lblposteAbajoDerecha.setBounds((int)( posteAbajoDerecha.getX()-posteAbajoDerecha.getRadio()), (int) (posteAbajoDerecha.getY()-posteAbajoDerecha.getRadio()), (int) posteAbajoDerecha.getRadio() * 2, (int) posteAbajoDerecha.getRadio() * 2);
+		
+		lblposteArribaDerecha.setBounds((int)( posteArribaDerecha.getX()-posteArribaDerecha.getRadio()), (int) (posteArribaDerecha.getY()-posteArribaDerecha.getRadio()), (int) posteArribaDerecha.getRadio() * 2, (int) posteArribaDerecha.getRadio() * 2);
+		
+		lblposteAbajoIzquierda.setBounds((int)( posteAbajoIzquierda.getX()-posteAbajoIzquierda.getRadio()), (int) (posteAbajoIzquierda.getY()-posteAbajoIzquierda.getRadio()), (int) posteAbajoIzquierda.getRadio() * 2, (int) posteAbajoIzquierda.getRadio() * 2);
+		
+		lblposteArribaIzquierda.setBounds((int)( posteArribaIzquierda.getX()-posteArribaIzquierda.getRadio()), (int) (posteArribaIzquierda.getY()-posteArribaIzquierda.getRadio()), (int) posteArribaIzquierda.getRadio() * 2, (int) posteArribaIzquierda.getRadio() * 2);
+		
 	}
 
 	/**
@@ -380,9 +399,9 @@ public class ventanaPartido extends JFrame {
 		actualizarTamanyoLbl();
 		pintarLabels();
 		actualizarPosicionObjetos();
-		actualizarCampo();
-		colocarEnPosInicial();
 		
+		colocarEnPosInicial();
+		actualizarCampo();
 		
 		
 	}
@@ -452,8 +471,13 @@ public class ventanaPartido extends JFrame {
 		eLocal.getBolaEquipo().setY(getPanelCampo().getSize().getHeight() / 2);
 		
 		eVisitante.getBolaEquipo().setY(getPanelCampo().getSize().getHeight() / 2);
+		System.out.println("Portería derecha");
+		System.out.println(posteAbajoDerecha.getX()+ "  "+ posteAbajoDerecha.getY());
+		System.out.println(posteArribaDerecha.getX()+ "  "+ posteArribaDerecha.getY());
+		System.out.println("Portería izquierda");
+		System.out.println(posteAbajoIzquierda.getX()+ "  "+ posteAbajoIzquierda.getY());
+		System.out.println(posteArribaIzquierda.getX()+ "  "+ posteArribaIzquierda.getY());
 		
-
 		
 		System.out.println(eVisitante.getBolaEquipo().getX()+ "  "+eVisitante.getBolaEquipo().getY());
 		System.out.println(eLocal.getBolaEquipo().getX()+ "  "+ eLocal.getBolaEquipo().getY());
@@ -511,6 +535,10 @@ public class ventanaPartido extends JFrame {
 		lblEquipoLocal.setVisible(false);
 		lblPelota.setVisible(false);
 		lblEquipoVisitante.setVisible(false);
+		lblposteAbajoDerecha.setVisible(false);
+		lblposteAbajoIzquierda.setVisible(false);
+		lblposteArribaDerecha.setVisible(false);
+		lblposteArribaIzquierda.setVisible(false);
 	}
 
 	// TODO esto es para utilizar si tiene imagen o si tiene tiene color
@@ -520,8 +548,12 @@ public class ventanaPartido extends JFrame {
 	 */
 	public void elementosAOpaco() {
 		lblEquipoLocal.setOpaque(true);
-		lblEquipoVisitante.setOpaque(true);
 		lblPelota.setOpaque(true);
+		lblEquipoVisitante.setOpaque(true);
+		lblposteAbajoDerecha.setOpaque(true);
+		lblposteAbajoIzquierda.setOpaque(true);
+		lblposteArribaDerecha.setOpaque(true);
+		lblposteArribaIzquierda.setOpaque(true);
 	}
 
 	/**
@@ -529,8 +561,12 @@ public class ventanaPartido extends JFrame {
 	 */
 	public void elementosTransparentes() {
 		lblEquipoLocal.setOpaque(false);
-		lblEquipoVisitante.setOpaque(false);
 		lblPelota.setOpaque(false);
+		lblEquipoVisitante.setOpaque(false);
+		lblposteAbajoDerecha.setOpaque(false);
+		lblposteAbajoIzquierda.setOpaque(false);
+		lblposteArribaDerecha.setOpaque(false);
+		lblposteArribaIzquierda.setOpaque(false);
 	}
 
 	public JPanel getPanelCampo() {
