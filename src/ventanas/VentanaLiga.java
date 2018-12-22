@@ -34,6 +34,8 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JTable;
 import java.awt.ScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaLiga extends JFrame {
 
@@ -121,6 +123,11 @@ public class VentanaLiga extends JFrame {
 		contentPane.add(panelBotonera, BorderLayout.SOUTH);
 
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		panelBotonera.add(btnGuardar);
 
 		JButton btnCargar = new JButton("Cargar");
