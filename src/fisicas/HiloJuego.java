@@ -41,7 +41,7 @@ public class HiloJuego extends Thread {
 		v.degradarVelocidad();
 		v.actualizarPosicionObjetos();
 		v.actualizarCampo();
-		
+		v.siEsGolSuma();
 //		System.out.println("--------------------------Pelota-------------------------------------");
 //		System.out.println("x: "+p.getX()+ "  y: "+ p.getY());	
 //		System.out.println("velX: "+p.getVelX() + "  velY: "+p.getVelY() + " color: " + p.getColor());

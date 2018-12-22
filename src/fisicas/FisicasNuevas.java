@@ -187,8 +187,8 @@ public class FisicasNuevas {
 	 */
 	public void choquePelotaPoste(ventanaPartido v, Poste paloArribDer, Poste paloAbajoDer, Poste paloArribIzq, Poste paloAbajoIzq, Pelota p) {
 		if(daAlPoste(v, p, paloArribDer) || daAlPoste(v, p, paloAbajoDer) ||daAlPoste(v, p, paloArribIzq) ||daAlPoste(v, p, paloAbajoIzq)) {
-			p.setVelX(p.getVelXAntes()*COEFICIENTE_PERDIDA_PELOTA);
-			p.setVelY(p.getVelYAntes()*COEFICIENTE_PERDIDA_PELOTA);}
+			p.setVelX(-p.getVelXAntes()*COEFICIENTE_PERDIDA_PELOTA);
+			p.setVelY(-p.getVelYAntes()*COEFICIENTE_PERDIDA_PELOTA);}
 		}
 	
 	///////////////////////Metodos internos para calcularlo/////////////////////////////////
@@ -201,8 +201,8 @@ public class FisicasNuevas {
 	 */
 	public boolean daAlPoste(ventanaPartido v, Pelota pelota, Poste palo) {
 		boolean hayChoque = false;
-		if( Math.abs(palo.getX() - pelota.getX()) <= (pelota.getRadio() + palo.RADIO_POSTE) ) hayChoque = true;
-		if( Math.abs(palo.getY() - pelota.getY()) <= (pelota.getRadio() + palo.RADIO_POSTE) ) hayChoque = true;
+		if( Math.abs(palo.getX() - pelota.getX()) <= (pelota.getRadio() + palo.RADIO_POSTE) && Math.abs(palo.getY() - pelota.getY()) <= (pelota.getRadio() + palo.RADIO_POSTE)) hayChoque = true;
+		
 		return hayChoque;
 	}
 	

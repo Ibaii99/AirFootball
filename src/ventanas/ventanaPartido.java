@@ -43,6 +43,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import entidades.Equipo;
+import entidades.Partidos;
 import fisicas.FisicasNuevas;
 import fisicas.HiloJuego;
 import objetos.Pelota;
@@ -60,7 +61,10 @@ public class ventanaPartido extends JFrame {
 	private boolean arcade;
 	private Graphics2D graphics; // Objeto gr�fico sobre el que dibujar (del buffer)
 	private JPanel panelCampo  = new JPanel(); // Panel principal
-
+	
+	private JLabel lblGolesLocal = new JLabel("");
+	private JLabel lblGolesVisitante = new JLabel("");
+	
 	private JLabel lblEquipoLocal = new JLabel("");
 	private JLabel lblEquipoVisitante = new JLabel("");
 	private JLabel lblPelota = new JLabel("");
@@ -77,17 +81,20 @@ public class ventanaPartido extends JFrame {
 	private Pelota p;
 	private FisicasNuevas fisicas;
 	private HiloJuego hiloJuego;
+	public Partidos partido;
 	
-	public Poste posteArribaIzquierda ;
-	public Poste posteAbajoIzquierda ;
-	public Poste posteArribaDerecha ;
-	public Poste posteAbajoDerecha ;
+	private Poste posteArribaIzquierda ;
+	private Poste posteAbajoIzquierda ;
+	private Poste posteArribaDerecha ;
+	private Poste posteAbajoDerecha ;
 	
 	private JLabel lblposteArribaIzquierda = new JLabel("");
 	private JLabel lblposteAbajoIzquierda = new JLabel("");
 	private JLabel lblposteArribaDerecha = new JLabel("");
 	private JLabel lblposteAbajoDerecha = new JLabel("");
-
+	
+	private int golLocal = 0;
+	private int golVisitante = 0;
 	
 	// modificar constructor ventana, pone pelota en posicion no correcta
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso,
@@ -164,21 +171,21 @@ public class ventanaPartido extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
-		JLabel label = new JLabel("0");
-		label.setBounds(422, 5, 75, 36);
-		label.setForeground(Color.RED);
-		label.setFont(f);
-		panel.add(label);
+	
+		lblGolesVisitante.setBounds(422, 5, 75, 36);
+		lblGolesVisitante.setForeground(Color.RED);
+		lblGolesVisitante.setFont(f);
+		panel.add(lblGolesVisitante);
 		panel.add(lblEqL);
 		panel.add(lblEqV);
 		panelCampo = new JPanel();
 		panelCampo.setBackground(Color.GREEN);
 		panelCampo.setLayout(null);
-		JLabel label_3 = new JLabel("0");
-		label_3.setBounds(327, 5, 75, 36);
-		label_3.setForeground(Color.RED);
-		label_3.setFont(f);
-		panel.add(label_3);
+		
+		lblGolesLocal.setBounds(327, 5, 75, 36);
+		lblGolesLocal.setForeground(Color.RED);
+		lblGolesLocal.setFont(f);
+		panel.add(lblGolesLocal);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
 				groupLayout.createSequentialGroup().addContainerGap()
@@ -313,7 +320,8 @@ public class ventanaPartido extends JFrame {
 		panelCampo.add(lblposteAbajoIzquierda);
 		panelCampo.add(lblposteArribaDerecha);
 		panelCampo.add(lblposteAbajoDerecha);
-		
+		colocarEnPosInicial();
+		actualizarPosicionObjetos();
 		mostrarElementosDeJuego();
 		actualizarTamanyoLbl();
 	}
@@ -398,9 +406,10 @@ public class ventanaPartido extends JFrame {
 		mostrarElementosDeJuego();
 		actualizarTamanyoLbl();
 		pintarLabels();
-		actualizarPosicionObjetos();
+	
 		
 		colocarEnPosInicial();
+		actualizarPosicionObjetos();
 		actualizarCampo();
 		
 		
@@ -525,6 +534,38 @@ public class ventanaPartido extends JFrame {
 		lblposteArribaIzquierda.setVisible(true);
 	}
 
+	public void siEsGolSuma() {
+		if((p.getX()- p.getRadio()) <= 5 && p.getY() <= (posteArribaIzquierda.getY() - posteArribaIzquierda.getRadio()) && p.getY() >= (posteAbajoIzquierda.getY() + posteAbajoIzquierda.getRadio()) ) { 
+			System.out.println("gol");
+			golVisitante +=1;
+			lblGolesVisitante.setText(""+golVisitante);
+			lblGolesLocal.setText(""+golLocal);
+			lblGolesLocal.repaint();
+			lblGolesVisitante.repaint();
+			meterAPanleCampo();
+			configuracionAntesDePartido();
+			fisicas.cambiarVelocidadEquipo(eLocal, 0, 0);
+			fisicas.cambiarVelocidadEquipo(eVisitante, 0, 0);
+			fisicas.cambiarVelocidadPelota(p, 0, 0);
+			actualizarCampo();
+		}
+		if((p.getX()+p.getRadio()) >= (panelCampo.getWidth()-5) && p.getY() <= (posteArribaDerecha.getY() - posteArribaDerecha.getRadio()) && p.getY() >= (posteAbajoDerecha.getY() + posteAbajoDerecha.getRadio()) ) {
+			System.out.println("gol");
+			golLocal +=1;
+			lblGolesVisitante.setText(""+golVisitante);
+			lblGolesLocal.setText(""+golLocal);
+			lblGolesLocal.repaint();
+			lblGolesVisitante.repaint();
+			meterAPanleCampo();
+			configuracionAntesDePartido();
+			fisicas.cambiarVelocidadEquipo(eLocal, 0, 0);
+			fisicas.cambiarVelocidadEquipo(eVisitante, 0, 0);
+			fisicas.cambiarVelocidadPelota(p, 0, 0);
+			actualizarCampo();
+		}
+		//TODO aqui ya termina el partido, se tendria que añadir a la BD y luego ir a la menuliga
+		if(golLocal+golVisitante == 5) partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
+	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
@@ -555,6 +596,7 @@ public class ventanaPartido extends JFrame {
 		lblposteArribaDerecha.setOpaque(true);
 		lblposteArribaIzquierda.setOpaque(true);
 	}
+	
 
 	/**
 	 * Metodo para poner elementos con los que se juega transparentes
