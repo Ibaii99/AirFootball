@@ -29,6 +29,7 @@ import objetos.ObjetoCombobox;
 import objetos.ScrollablePanel;
 
 import javax.swing.JLabel;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -37,6 +38,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class VentanaLiga extends JFrame {
@@ -45,8 +49,9 @@ public class VentanaLiga extends JFrame {
 	private JTable table;
 	private Jugador j;
 	private DefaultTableModel model;
-
+	private JLabel background;
 	private BaseDeDatos bd;
+	
 
 	/**
 	 * Create the frame.
@@ -54,7 +59,16 @@ public class VentanaLiga extends JFrame {
 	 * @throws SQLException
 	 */
 	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j) throws SQLException {
+		
 		try {
+//			try {
+//				BufferedImage img = ImageIO.read(getClass().getClassLoader().getResource("iconos/anoeta.png"));
+//				 background = new JLabel(new ImageIcon(img));
+//			} catch (IOException e1) {
+//				e1.printStackTrace();
+//			}
+//
+//			setContentPane(background);
 			bd.init();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -66,7 +80,7 @@ public class VentanaLiga extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-
+		//getContentPane().add(background);
 		ScrollablePanel panelClasificacion = new ScrollablePanel(new BorderLayout());
 		panelClasificacion.setScrollableWidth(ScrollablePanel.ScrollableSizeHint.FIT);
 		panelClasificacion.setScrollableHeight(ScrollablePanel.ScrollableSizeHint.STRETCH);
@@ -130,7 +144,7 @@ public class VentanaLiga extends JFrame {
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 		panelBotonera.add(btnGuardar);
@@ -187,8 +201,9 @@ public class VentanaLiga extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (e.getDerrotasTotales()+e.getVictoriasTotales()+e.getEmpatesTotales()==38) {
-					JOptionPane.showMessageDialog(null, "YA HAS TERMINADO LA LIGA", "ERROR", JOptionPane.WARNING_MESSAGE);
+				if (e.getDerrotasTotales() + e.getVictoriasTotales() + e.getEmpatesTotales() == 38) {
+					JOptionPane.showMessageDialog(null, "YA HAS TERMINADO LA LIGA", "ERROR",
+							JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
@@ -274,16 +289,16 @@ class TeamBold extends DefaultTableCellRenderer {
 
 		JLabel parent = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 		JLabel parent2 = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, 0);
-		
+
 		if (value.equals(nombre)) {
 			parent.setFont(parent.getFont().deriveFont(Font.BOLD));
 		}
-		//System.out.println(parent.toString());
+		// System.out.println(parent.toString());
 		if (row >= 0 && row < 4 && column == 0) {
 
 			parent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iconos/UCL.png")));
 			parent2.setText("" + (row + 1));
-			
+
 			parent.setBackground(Color.BLUE);
 			parent.setForeground(Color.WHITE);
 		} else if (row >= 4 && row < 6 && column == 0) {
@@ -294,14 +309,14 @@ class TeamBold extends DefaultTableCellRenderer {
 		} else if (row >= 17 && row < 20 && column == 0) {
 			parent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iconos/DESCENSO.png")));
 			parent2.setText("" + (row + 1));
-			parent.setBackground(new Color(153,0,0));
+			parent.setBackground(new Color(153, 0, 0));
 			parent.setForeground(Color.WHITE);
 		} else if (column == 0) {
 			parent.setIcon(null);
 			parent2.setText("" + (row + 1));
 			parent.setForeground(Color.black);
 			parent.setBackground(Color.white);
-		} else { 
+		} else {
 			parent.setIcon(null);
 			parent.setForeground(Color.black);
 			parent.setBackground(Color.white);

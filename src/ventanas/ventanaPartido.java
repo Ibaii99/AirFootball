@@ -127,7 +127,8 @@ public class ventanaPartido extends JFrame {
 			gL.drawImage(imgL, 0, 0, 40, 40, null);
 			ImageIcon newIconL = new ImageIcon(biL);
 			lblEqL.setIcon(newIconL);
-		} catch (NullPointerException e) {
+			revalidate();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
