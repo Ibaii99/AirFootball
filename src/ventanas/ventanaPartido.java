@@ -60,11 +60,11 @@ public class ventanaPartido extends JFrame {
 	private boolean liga;
 	private boolean arcade;
 	private Graphics2D graphics; // Objeto gr�fico sobre el que dibujar (del buffer)
-	private JPanel panelCampo  = new JPanel(); // Panel principal
-	
+	private JPanel panelCampo = new JPanel(); // Panel principal
+
 	private JLabel lblGolesLocal = new JLabel("");
 	private JLabel lblGolesVisitante = new JLabel("");
-	
+
 	private JLabel lblEquipoLocal = new JLabel("");
 	private JLabel lblEquipoVisitante = new JLabel("");
 	private JLabel lblPelota = new JLabel("");
@@ -82,20 +82,20 @@ public class ventanaPartido extends JFrame {
 	private FisicasNuevas fisicas;
 	private HiloJuego hiloJuego;
 	public Partidos partido;
-	
-	private Poste posteArribaIzquierda ;
-	private Poste posteAbajoIzquierda ;
-	private Poste posteArribaDerecha ;
-	private Poste posteAbajoDerecha ;
-	
+
+	private Poste posteArribaIzquierda;
+	private Poste posteAbajoIzquierda;
+	private Poste posteArribaDerecha;
+	private Poste posteAbajoDerecha;
+
 	private JLabel lblposteArribaIzquierda = new JLabel("");
 	private JLabel lblposteAbajoIzquierda = new JLabel("");
 	private JLabel lblposteArribaDerecha = new JLabel("");
 	private JLabel lblposteAbajoDerecha = new JLabel("");
-	
+
 	private int golLocal = 0;
 	private int golVisitante = 0;
-	
+
 	// modificar constructor ventana, pone pelota en posicion no correcta
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso,
 			boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas) {
@@ -107,26 +107,29 @@ public class ventanaPartido extends JFrame {
 		this.isAmistoso = esAmistoso;
 		this.eLocal = eLocal;
 		this.eVisitante = eVisitante;
-		this.p = p; 
-		
-
-
+		this.p = p;
 
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
+		ImageIcon iconL = new ImageIcon(getClass().getClassLoader().getResource(
 
-		
-		try {	
-			ImageIcon iconL = new ImageIcon(getClass().getResource(
-			//		"/"+
-			eLocal.getBolaEquipo().getRutaImagen()));
+				eLocal.getBolaEquipo().getRutaImagen()));
+		System.out.println(iconL);
+
+		try {
+			iconL = new ImageIcon(getClass().getClassLoader().getResource(
+					// "/"+
+					eLocal.getBolaEquipo().getRutaImagen()));
+			// System.out.println(iconL);
 			Image imgL = iconL.getImage();
 			BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
 			Graphics gL = biL.createGraphics();
 			gL.drawImage(imgL, 0, 0, 40, 40, null);
 			ImageIcon newIconL = new ImageIcon(biL);
-			lblEqL.setIcon(newIconL);} catch(NullPointerException e) {}
-		
+			lblEqL.setIcon(newIconL);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 
 		ImageIcon iconC = new ImageIcon(ventanaPartido.class.getResource("/iconos/campo.png"));
 		Image imgC = iconC.getImage();
@@ -134,16 +137,17 @@ public class ventanaPartido extends JFrame {
 		Graphics gC = biC.createGraphics();
 		gC.drawImage(imgC, 0, 0, 720, 395, null);
 		ImageIcon newIconC = new ImageIcon(biC);
-		
 
-		try {	
-			ImageIcon iconV = new ImageIcon(getClass().getResource("/"+eVisitante.getBolaEquipo().getRutaImagen()));
+		try {
+			ImageIcon iconV = new ImageIcon(getClass().getResource("/" + eVisitante.getBolaEquipo().getRutaImagen()));
 			Image imgV = iconV.getImage();
 			BufferedImage biV = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
 			Graphics gV = biV.createGraphics();
-		 	gV.drawImage(imgV, 0, 0, 40, 40, null);
+			gV.drawImage(imgV, 0, 0, 40, 40, null);
 			ImageIcon newIconV = new ImageIcon(biV);
-			lblEqV.setIcon(newIconV);} catch(NullPointerException e) {}
+			lblEqV.setIcon(newIconV);
+		} catch (NullPointerException e) {
+		}
 
 		ImageIcon icon = new ImageIcon(ventanaPartido.class.getResource("/iconos/marcadorconnombres.jpg"));
 		Image img = icon.getImage();
@@ -159,19 +163,15 @@ public class ventanaPartido extends JFrame {
 		}
 		setSize(900, 600);
 		setResizable(true);
-		
 
-		//lblEquipoLocal.setText("EQUIPO LOCAL");
+		// lblEquipoLocal.setText("EQUIPO LOCAL");
 
-		//lblEquipoVisitante.setText("EQUIPOVISITANTE");
+		// lblEquipoVisitante.setText("EQUIPOVISITANTE");
 		lblPelota.setText("PELOTA");
-
-		
 
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
-	
 		lblGolesVisitante.setBounds(422, 5, 75, 36);
 		lblGolesVisitante.setForeground(Color.RED);
 		lblGolesVisitante.setFont(f);
@@ -181,7 +181,7 @@ public class ventanaPartido extends JFrame {
 		panelCampo = new JPanel();
 		panelCampo.setBackground(Color.GREEN);
 		panelCampo.setLayout(null);
-		
+
 		lblGolesLocal.setBounds(327, 5, 75, 36);
 		lblGolesLocal.setForeground(Color.RED);
 		lblGolesLocal.setFont(f);
@@ -199,13 +199,13 @@ public class ventanaPartido extends JFrame {
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE).addContainerGap()));
-		
+
 		String siglasEqL = eLocal.getSiglas();
 		siglasEqL = siglasEqL.substring(1);
-		JLabel lblNomEqL = new JLabel("/"+siglasEqL);
+		JLabel lblNomEqL = new JLabel("/" + siglasEqL);
 		lblNomEqL.setBounds(53, 5, 262, 36);
 		panel.add(lblNomEqL);
-		
+
 		String siglasEqV = eVisitante.getSiglas();
 		siglasEqV = siglasEqV.substring(1);
 		JLabel lblNomEqV = new JLabel("/" + siglasEqV);
@@ -213,66 +213,76 @@ public class ventanaPartido extends JFrame {
 		panel.add(lblNomEqV);
 		getContentPane().setLayout(groupLayout);
 
-
-
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				int tecla = e.getKeyCode();
-				
-					switch (tecla) {
-					case 37:
-						if(eLocal.getBolaEquipo().getVelX() > 0)eLocal.getBolaEquipo().setVelX(0);
-						
-						eLocal.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
-						break;
-					case 38:
-						if(eLocal.getBolaEquipo().getVelY() > 0)eLocal.getBolaEquipo().setVelY(0);
-						
-						eLocal.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // flecha arriba
-						break;
-					case 39:
-						if(eLocal.getBolaEquipo().getVelX() < 0)eLocal.getBolaEquipo().setVelX(0);
-						
-						eLocal.getBolaEquipo().addVelocidadX(+VELOCIDAD_CON_MOVIMIENTO); // flecha derecha
-						break;
-					case 40:
-						if(eLocal.getBolaEquipo().getVelY() < 0)eLocal.getBolaEquipo().setVelY(0);
-						
-						eLocal.getBolaEquipo().addVelocidadY(+VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
-						break;
-					case 85:	meterAPanleCampo();
-								configuracionAntesDePartido(); // U 
-						break;
-					default : break;
-						}}});
-		
+
+				switch (tecla) {
+				case 37:
+					if (eLocal.getBolaEquipo().getVelX() > 0)
+						eLocal.getBolaEquipo().setVelX(0);
+
+					eLocal.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // flecha izquierda
+					break;
+				case 38:
+					if (eLocal.getBolaEquipo().getVelY() > 0)
+						eLocal.getBolaEquipo().setVelY(0);
+
+					eLocal.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // flecha arriba
+					break;
+				case 39:
+					if (eLocal.getBolaEquipo().getVelX() < 0)
+						eLocal.getBolaEquipo().setVelX(0);
+
+					eLocal.getBolaEquipo().addVelocidadX(+VELOCIDAD_CON_MOVIMIENTO); // flecha derecha
+					break;
+				case 40:
+					if (eLocal.getBolaEquipo().getVelY() < 0)
+						eLocal.getBolaEquipo().setVelY(0);
+
+					eLocal.getBolaEquipo().addVelocidadY(+VELOCIDAD_CON_MOVIMIENTO); // flecha abajo
+					break;
+				case 85:
+					meterAPanleCampo();
+					configuracionAntesDePartido(); // U
+					break;
+				default:
+					break;
+				}
+			}
+		});
+
 		if (isMultijugador) {
-			//TODO BOOOLEANS PARA VER SI LAS TECLAS ESTÁN PULSADAS
-		addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				int tecla = e.getKeyCode();
-				
+			// TODO BOOOLEANS PARA VER SI LAS TECLAS ESTÁN PULSADAS
+			addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					int tecla = e.getKeyCode();
+
 					switch (tecla) {
 					case 87:
-						if(eVisitante.getBolaEquipo().getVelY() > 0)eVisitante.getBolaEquipo().setVelY(0);
-						
+						if (eVisitante.getBolaEquipo().getVelY() > 0)
+							eVisitante.getBolaEquipo().setVelY(0);
+
 						eVisitante.getBolaEquipo().addVelocidadY(-VELOCIDAD_CON_MOVIMIENTO); // w
 						break;
 					case 83:
-						if(eVisitante.getBolaEquipo().getVelY() < 0)eVisitante.getBolaEquipo().setVelY(0);
-						
+						if (eVisitante.getBolaEquipo().getVelY() < 0)
+							eVisitante.getBolaEquipo().setVelY(0);
+
 						eVisitante.getBolaEquipo().addVelocidadY(+VELOCIDAD_CON_MOVIMIENTO); // s
 						break;
 					case 68:
-						if(eVisitante.getBolaEquipo().getVelX() < 0)eVisitante.getBolaEquipo().setVelX(0);
-						
+						if (eVisitante.getBolaEquipo().getVelX() < 0)
+							eVisitante.getBolaEquipo().setVelX(0);
+
 						eVisitante.getBolaEquipo().addVelocidadX(+VELOCIDAD_CON_MOVIMIENTO); // d
 						break;
 					case 65:
-						if(eVisitante.getBolaEquipo().getVelX() > 0)eVisitante.getBolaEquipo().setVelX(0);
-						
+						if (eVisitante.getBolaEquipo().getVelX() > 0)
+							eVisitante.getBolaEquipo().setVelX(0);
+
 						eVisitante.getBolaEquipo().addVelocidadX(-VELOCIDAD_CON_MOVIMIENTO); // a
 						break;
 					default:
@@ -280,16 +290,18 @@ public class ventanaPartido extends JFrame {
 					}
 
 					// reseteo de velocidades para que no se queden guardadas
-//					eVisitante.getBolaEquipo().setVelX(0);
-//					eVisitante.getBolaEquipo().setVelY(0);
-//					eLocal.getBolaEquipo().setVelX(0);
-//					eLocal.getBolaEquipo().setVelY(0);
-				
-				actualizarCampo();
-			}}
-			
-		);}
-		
+					// eVisitante.getBolaEquipo().setVelX(0);
+					// eVisitante.getBolaEquipo().setVelY(0);
+					// eLocal.getBolaEquipo().setVelX(0);
+					// eLocal.getBolaEquipo().setVelY(0);
+
+					actualizarCampo();
+				}
+			}
+
+			);
+		}
+
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e1) {
@@ -299,9 +311,9 @@ public class ventanaPartido extends JFrame {
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
 
 		setVisible(true);
-		
-		
+
 	}
+
 	public void empieza() {
 		meterAPanleCampo();
 		hiloJuego.start();
@@ -325,6 +337,7 @@ public class ventanaPartido extends JFrame {
 		mostrarElementosDeJuego();
 		actualizarTamanyoLbl();
 	}
+
 	public void degradarVelocidad() {
 		eVisitante.getBolaEquipo().setVelYAntes(eVisitante.getBolaEquipo().getVelY());
 		eVisitante.getBolaEquipo().setVelXAntes(eVisitante.getBolaEquipo().getVelX());
@@ -332,15 +345,14 @@ public class ventanaPartido extends JFrame {
 		eLocal.getBolaEquipo().setVelXAntes(eLocal.getBolaEquipo().getVelX());
 		p.setVelYAntes(p.getVelY());
 		p.setVelXAntes(p.getVelX());
-		eVisitante.getBolaEquipo().setVelY(eVisitante.getBolaEquipo().getVelY()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
-		eVisitante.getBolaEquipo().setVelX(eVisitante.getBolaEquipo().getVelX()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
-		eLocal.getBolaEquipo().setVelY(eLocal.getBolaEquipo().getVelY()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
-		eLocal.getBolaEquipo().setVelX(eLocal.getBolaEquipo().getVelX()*fisicas.COEFICIENTE_PERDIDA_EQUIPO);
-		p.setVelY(p.getVelY()*fisicas.COEFICIENTE_PERDIDA_PELOTA);
-		p.setVelX(p.getVelX()*fisicas.COEFICIENTE_PERDIDA_PELOTA);
+		eVisitante.getBolaEquipo().setVelY(eVisitante.getBolaEquipo().getVelY() * fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		eVisitante.getBolaEquipo().setVelX(eVisitante.getBolaEquipo().getVelX() * fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		eLocal.getBolaEquipo().setVelY(eLocal.getBolaEquipo().getVelY() * fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		eLocal.getBolaEquipo().setVelX(eLocal.getBolaEquipo().getVelX() * fisicas.COEFICIENTE_PERDIDA_EQUIPO);
+		p.setVelY(p.getVelY() * fisicas.COEFICIENTE_PERDIDA_PELOTA);
+		p.setVelX(p.getVelX() * fisicas.COEFICIENTE_PERDIDA_PELOTA);
 	}
 
-	
 	public void mover(Equipo jugador) {
 		fisicas.mueveEquipo(jugador, FisicasNuevas.TIEMPO, this);
 	}
@@ -359,20 +371,31 @@ public class ventanaPartido extends JFrame {
 	public void actualizarPosicionObjetos() {
 		// añado todo al panel con las posiciones actualizadas
 
-		lblEquipoVisitante.setBounds((int)( eVisitante.getBolaEquipo().getX()-eVisitante.getBolaEquipo().getRadio()), (int) (eVisitante.getBolaEquipo().getY()-eVisitante.getBolaEquipo().getRadio()),
+		lblEquipoVisitante.setBounds((int) (eVisitante.getBolaEquipo().getX() - eVisitante.getBolaEquipo().getRadio()),
+				(int) (eVisitante.getBolaEquipo().getY() - eVisitante.getBolaEquipo().getRadio()),
 				(int) eVisitante.getBolaEquipo().getRadio() * 2, (int) eVisitante.getBolaEquipo().getRadio() * 2);
-		lblEquipoLocal.setBounds((int)( eLocal.getBolaEquipo().getX()-eLocal.getBolaEquipo().getRadio()), (int)( eLocal.getBolaEquipo().getY()-eLocal.getBolaEquipo().getRadio()),
+		lblEquipoLocal.setBounds((int) (eLocal.getBolaEquipo().getX() - eLocal.getBolaEquipo().getRadio()),
+				(int) (eLocal.getBolaEquipo().getY() - eLocal.getBolaEquipo().getRadio()),
 				(int) eLocal.getBolaEquipo().getRadio() * 2, (int) eLocal.getBolaEquipo().getRadio() * 2);
-		lblPelota.setBounds((int)( p.getX()-p.getRadio()), (int) (p.getY()-p.getRadio()), (int) p.getRadio() * 2, (int) p.getRadio() * 2);
-		
-		lblposteAbajoDerecha.setBounds((int)( posteAbajoDerecha.getX()-posteAbajoDerecha.getRadio()), (int) (posteAbajoDerecha.getY()-posteAbajoDerecha.getRadio()), (int) posteAbajoDerecha.getRadio() * 2, (int) posteAbajoDerecha.getRadio() * 2);
-		
-		lblposteArribaDerecha.setBounds((int)( posteArribaDerecha.getX()-posteArribaDerecha.getRadio()), (int) (posteArribaDerecha.getY()-posteArribaDerecha.getRadio()), (int) posteArribaDerecha.getRadio() * 2, (int) posteArribaDerecha.getRadio() * 2);
-		
-		lblposteAbajoIzquierda.setBounds((int)( posteAbajoIzquierda.getX()-posteAbajoIzquierda.getRadio()), (int) (posteAbajoIzquierda.getY()-posteAbajoIzquierda.getRadio()), (int) posteAbajoIzquierda.getRadio() * 2, (int) posteAbajoIzquierda.getRadio() * 2);
-		
-		lblposteArribaIzquierda.setBounds((int)( posteArribaIzquierda.getX()-posteArribaIzquierda.getRadio()), (int) (posteArribaIzquierda.getY()-posteArribaIzquierda.getRadio()), (int) posteArribaIzquierda.getRadio() * 2, (int) posteArribaIzquierda.getRadio() * 2);
-		
+		lblPelota.setBounds((int) (p.getX() - p.getRadio()), (int) (p.getY() - p.getRadio()), (int) p.getRadio() * 2,
+				(int) p.getRadio() * 2);
+
+		lblposteAbajoDerecha.setBounds((int) (posteAbajoDerecha.getX() - posteAbajoDerecha.getRadio()),
+				(int) (posteAbajoDerecha.getY() - posteAbajoDerecha.getRadio()), (int) posteAbajoDerecha.getRadio() * 2,
+				(int) posteAbajoDerecha.getRadio() * 2);
+
+		lblposteArribaDerecha.setBounds((int) (posteArribaDerecha.getX() - posteArribaDerecha.getRadio()),
+				(int) (posteArribaDerecha.getY() - posteArribaDerecha.getRadio()),
+				(int) posteArribaDerecha.getRadio() * 2, (int) posteArribaDerecha.getRadio() * 2);
+
+		lblposteAbajoIzquierda.setBounds((int) (posteAbajoIzquierda.getX() - posteAbajoIzquierda.getRadio()),
+				(int) (posteAbajoIzquierda.getY() - posteAbajoIzquierda.getRadio()),
+				(int) posteAbajoIzquierda.getRadio() * 2, (int) posteAbajoIzquierda.getRadio() * 2);
+
+		lblposteArribaIzquierda.setBounds((int) (posteArribaIzquierda.getX() - posteArribaIzquierda.getRadio()),
+				(int) (posteArribaIzquierda.getY() - posteArribaIzquierda.getRadio()),
+				(int) posteArribaIzquierda.getRadio() * 2, (int) posteArribaIzquierda.getRadio() * 2);
+
 	}
 
 	/**
@@ -389,8 +412,8 @@ public class ventanaPartido extends JFrame {
 	/**
 	 * Metodo que configura la ventana antes del partido, asigna: La posicion
 	 * correspondiente a todos los objetos La posicion correspondiente a los labels
-	 * Pone los labels visibles Pone tamaño correspondiente a los label Pone color
-	 * o imagen correspondiente a cada label Actualiza el campo para que se muestren
+	 * Pone los labels visibles Pone tamaño correspondiente a los label Pone color o
+	 * imagen correspondiente a cada label Actualiza el campo para que se muestren
 	 * todos los cambios
 	 * 
 	 * @param p
@@ -401,18 +424,15 @@ public class ventanaPartido extends JFrame {
 	 *            Equipo Visitante
 	 */
 	public void configuracionAntesDePartido() {
-		
-		
+
 		mostrarElementosDeJuego();
 		actualizarTamanyoLbl();
 		pintarLabels();
-	
-		
+
 		colocarEnPosInicial();
 		actualizarPosicionObjetos();
 		actualizarCampo();
-		
-		
+
 	}
 
 	// ...........................................................................................................//
@@ -436,24 +456,23 @@ public class ventanaPartido extends JFrame {
 			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
 		if (p.getRutaImagen() == null)
 			lblPelota.setBackground(p.getColor());
-		//TODO aqui hay fallo
+		// TODO aqui hay fallo
 		lblEquipoLocal.setBackground(Color.BLACK);
 		lblEquipoVisitante.setBackground(Color.gray);
 		lblPelota.setBackground(Color.BLUE);
-		
+
 		lblposteAbajoDerecha.setBackground(Color.WHITE);
 		lblposteArribaDerecha.setBackground(Color.WHITE);
-		
+
 		lblposteAbajoIzquierda.setBackground(Color.WHITE);
 		lblposteArribaIzquierda.setBackground(Color.WHITE);
 		/*
-		if (eLocal.getBolaEquipo().getRutaImagen() != null)
-			lblEquipoLocal.setIcon(eLocal.getBolaEquipo().getImagenObjeto());
-		if (eVisitante.getBolaEquipo().getRutaImagen() != null)
-			lblEquipoVisitante.setIcon(eVisitante.getBolaEquipo().getImagenObjeto());
-		if (p.getRutaImagen() != null)
-			lblPelota.setIcon(p.getImagenObjeto());
-	*/
+		 * if (eLocal.getBolaEquipo().getRutaImagen() != null)
+		 * lblEquipoLocal.setIcon(eLocal.getBolaEquipo().getImagenObjeto()); if
+		 * (eVisitante.getBolaEquipo().getRutaImagen() != null)
+		 * lblEquipoVisitante.setIcon(eVisitante.getBolaEquipo().getImagenObjeto()); if
+		 * (p.getRutaImagen() != null) lblPelota.setIcon(p.getImagenObjeto());
+		 */
 	}
 
 	/**
@@ -467,30 +486,30 @@ public class ventanaPartido extends JFrame {
 	 *            Equipo Visitante
 	 */
 	private void colocarEnPosInicial() {
-		
-		System.out.println(p.getX()+ "  "+ p.getY());
+
+		System.out.println(p.getX() + "  " + p.getY());
 		p.setX((int) getPanelCampo().getSize().getWidth() / 2);
 		p.setY((int) getPanelCampo().getSize().getHeight() / 2);
-		
-		System.out.println(p.getX()+ "  "+ p.getY());
 
-		eVisitante.getBolaEquipo().setX(getPanelCampo().getSize().getWidth() - getPanelCampo().getSize().getWidth() / 4);
+		System.out.println(p.getX() + "  " + p.getY());
+
+		eVisitante.getBolaEquipo()
+				.setX(getPanelCampo().getSize().getWidth() - getPanelCampo().getSize().getWidth() / 4);
 		eLocal.getBolaEquipo().setX(getPanelCampo().getSize().getWidth() / 4);
-		
+
 		eLocal.getBolaEquipo().setY(getPanelCampo().getSize().getHeight() / 2);
-		
+
 		eVisitante.getBolaEquipo().setY(getPanelCampo().getSize().getHeight() / 2);
 		System.out.println("Portería derecha");
-		System.out.println(posteAbajoDerecha.getX()+ "  "+ posteAbajoDerecha.getY());
-		System.out.println(posteArribaDerecha.getX()+ "  "+ posteArribaDerecha.getY());
+		System.out.println(posteAbajoDerecha.getX() + "  " + posteAbajoDerecha.getY());
+		System.out.println(posteArribaDerecha.getX() + "  " + posteArribaDerecha.getY());
 		System.out.println("Portería izquierda");
-		System.out.println(posteAbajoIzquierda.getX()+ "  "+ posteAbajoIzquierda.getY());
-		System.out.println(posteArribaIzquierda.getX()+ "  "+ posteArribaIzquierda.getY());
-		
-		
-		System.out.println(eVisitante.getBolaEquipo().getX()+ "  "+eVisitante.getBolaEquipo().getY());
-		System.out.println(eLocal.getBolaEquipo().getX()+ "  "+ eLocal.getBolaEquipo().getY());
-		
+		System.out.println(posteAbajoIzquierda.getX() + "  " + posteAbajoIzquierda.getY());
+		System.out.println(posteArribaIzquierda.getX() + "  " + posteArribaIzquierda.getY());
+
+		System.out.println(eVisitante.getBolaEquipo().getX() + "  " + eVisitante.getBolaEquipo().getY());
+		System.out.println(eLocal.getBolaEquipo().getX() + "  " + eLocal.getBolaEquipo().getY());
+
 	}
 
 	/**
@@ -509,15 +528,13 @@ public class ventanaPartido extends JFrame {
 		lblEquipoVisitante.setSize((int) eVisitante.getBolaEquipo().getRadio() * 2,
 				(int) eVisitante.getBolaEquipo().getRadio() * 2);
 		lblPelota.setSize((int) p.getRadio() * 2, (int) p.getRadio() * 2);
-		
+
 		lblposteArribaIzquierda.setSize((int) posteArribaIzquierda.getRadio() * 2,
 				(int) posteArribaIzquierda.getRadio() * 2);
-		lblposteArribaDerecha.setSize((int) posteArribaDerecha.getRadio() * 2,
-				(int) posteArribaDerecha.getRadio() * 2);
+		lblposteArribaDerecha.setSize((int) posteArribaDerecha.getRadio() * 2, (int) posteArribaDerecha.getRadio() * 2);
 		lblposteAbajoIzquierda.setSize((int) posteAbajoIzquierda.getRadio() * 2,
 				(int) posteAbajoIzquierda.getRadio() * 2);
-		lblposteAbajoDerecha.setSize((int) posteAbajoDerecha.getRadio() * 2,
-				(int) posteAbajoDerecha.getRadio() * 2);
+		lblposteAbajoDerecha.setSize((int) posteAbajoDerecha.getRadio() * 2, (int) posteAbajoDerecha.getRadio() * 2);
 	}
 
 	/**
@@ -535,11 +552,13 @@ public class ventanaPartido extends JFrame {
 	}
 
 	public void siEsGolSuma() {
-		if((p.getX()- p.getRadio()) <= 5 && p.getY() <= (posteArribaIzquierda.getY() - posteArribaIzquierda.getRadio()) && p.getY() >= (posteAbajoIzquierda.getY() + posteAbajoIzquierda.getRadio()) ) { 
+		if ((p.getX() - p.getRadio()) <= 5
+				&& p.getY() <= (posteArribaIzquierda.getY() - posteArribaIzquierda.getRadio())
+				&& p.getY() >= (posteAbajoIzquierda.getY() + posteAbajoIzquierda.getRadio())) {
 			System.out.println("gol");
-			golVisitante +=1;
-			lblGolesVisitante.setText(""+golVisitante);
-			lblGolesLocal.setText(""+golLocal);
+			golVisitante += 1;
+			lblGolesVisitante.setText("" + golVisitante);
+			lblGolesLocal.setText("" + golLocal);
 			lblGolesLocal.repaint();
 			lblGolesVisitante.repaint();
 			meterAPanleCampo();
@@ -549,11 +568,13 @@ public class ventanaPartido extends JFrame {
 			fisicas.cambiarVelocidadPelota(p, 0, 0);
 			actualizarCampo();
 		}
-		if((p.getX()+p.getRadio()) >= (panelCampo.getWidth()-5) && p.getY() <= (posteArribaDerecha.getY() - posteArribaDerecha.getRadio()) && p.getY() >= (posteAbajoDerecha.getY() + posteAbajoDerecha.getRadio()) ) {
+		if ((p.getX() + p.getRadio()) >= (panelCampo.getWidth() - 5)
+				&& p.getY() <= (posteArribaDerecha.getY() - posteArribaDerecha.getRadio())
+				&& p.getY() >= (posteAbajoDerecha.getY() + posteAbajoDerecha.getRadio())) {
 			System.out.println("gol");
-			golLocal +=1;
-			lblGolesVisitante.setText(""+golVisitante);
-			lblGolesLocal.setText(""+golLocal);
+			golLocal += 1;
+			lblGolesVisitante.setText("" + golVisitante);
+			lblGolesLocal.setText("" + golLocal);
 			lblGolesLocal.repaint();
 			lblGolesVisitante.repaint();
 			meterAPanleCampo();
@@ -563,8 +584,10 @@ public class ventanaPartido extends JFrame {
 			fisicas.cambiarVelocidadPelota(p, 0, 0);
 			actualizarCampo();
 		}
-		//TODO aqui ya termina el partido, se tendria que añadir a la BD y luego ir a la menuliga
-		if(golLocal+golVisitante == 5) partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
+		// TODO aqui ya termina el partido, se tendria que añadir a la BD y luego ir a
+		// la menuliga
+		if (golLocal + golVisitante == 5)
+			partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -596,7 +619,6 @@ public class ventanaPartido extends JFrame {
 		lblposteArribaDerecha.setOpaque(true);
 		lblposteArribaIzquierda.setOpaque(true);
 	}
-	
 
 	/**
 	 * Metodo para poner elementos con los que se juega transparentes
@@ -674,18 +696,21 @@ public class ventanaPartido extends JFrame {
 	public Poste getPosteArribaIzquierda() {
 		return posteArribaIzquierda;
 	}
+
 	public Poste getPosteAbajoIzquierda() {
 		return posteAbajoIzquierda;
 	}
+
 	public Poste getPosteArribaDerecha() {
 		return posteArribaDerecha;
 	}
+
 	public Poste getPosteAbajoDerecha() {
 		return posteAbajoDerecha;
 	}
+
 	public void setArcade(boolean arcade) {
 		this.arcade = arcade;
 	}
 
-	
 }
