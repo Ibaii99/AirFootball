@@ -51,14 +51,18 @@ public class MenuAmistoso extends JFrame {
 	 *            de la ventana en base a listeners de la ventana Inicio
 	 * @param Altura
 	 *            de la ventana en base a listeners de la ventana Inicio
-	 *            
-	 * @param bd		Base de datos del programa
-	 * @param con		Conexion con el archivo Base de Datos
-	 * @param f			Fisicas con las que funciona el juego
+	 * 
+	 * @param bd
+	 *            Base de datos del programa
+	 * @param con
+	 *            Conexion con el archivo Base de Datos
+	 * @param f
+	 *            Fisicas con las que funciona el juego
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public MenuAmistoso(int anchura, int altura,BaseDeDatos bd, FisicasNuevas f) throws ClassNotFoundException, SQLException {
+	public MenuAmistoso(int anchura, int altura, BaseDeDatos bd, FisicasNuevas f)
+			throws ClassNotFoundException, SQLException {
 		try {
 			setSize(anchura, altura);
 		} catch (Exception e) {
@@ -122,6 +126,7 @@ public class MenuAmistoso extends JFrame {
 		 */
 		try {
 			Class.forName("org.sqlite.JDBC");
+			bd.init();
 		} catch (Exception e3) {
 			// e3.printStackTrace();
 		}
@@ -135,6 +140,7 @@ public class MenuAmistoso extends JFrame {
 			cbVisitante.addItem(new ObjetoCombobox(2, nomEq, new ImageIcon(iconEq)));
 		}
 		rs.close();
+		bd.close();
 
 		equipoL = "/iconos/equipos/ala.png";
 		ImageIcon imgI = new ImageIcon(getClass().getResource(equipoL));
@@ -146,9 +152,9 @@ public class MenuAmistoso extends JFrame {
 				String filenameL = cbLocal.getSelectedObjects().toString();
 				try {
 					try {
-						
+
 						Class.forName("org.sqlite.JDBC");
-						
+						bd.init();
 						Statement consultaCB;
 						consultaCB = bd.getCon().createStatement();
 						String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '"
@@ -163,7 +169,7 @@ public class MenuAmistoso extends JFrame {
 
 						}
 						rs2.close();
-
+						bd.close();
 						ImageIcon imageIconL = new ImageIcon(getClass().getResource(equipoL));
 						resizeo(imageIconL, lblEqL, (int) Math.round(100 * getWidth() / 626),
 								(int) Math.round(100 * getHeight() / 460));
@@ -185,8 +191,9 @@ public class MenuAmistoso extends JFrame {
 				String filenameV = cbVisitante.getSelectedObjects().toString();
 				try {
 					try {
-						
+
 						Class.forName("org.sqlite.JDBC");
+						bd.init();
 						Statement consultaCB;
 						consultaCB = bd.getCon().createStatement();
 						String comando2 = "SELECT ICONO FROM EQUIPOS WHERE NOMBRE = '"
@@ -203,11 +210,13 @@ public class MenuAmistoso extends JFrame {
 
 						}
 						rs2.close();
+
 						ImageIcon imageIconV = new ImageIcon(getClass().getResource(equipoV));
 						resizeo(imageIconV, lblEqV, (int) Math.round(100 * getWidth() / 626),
 								(int) Math.round(100 * getWidth() / 626));
 
 						lblEqV.repaint();
+						bd.close();
 					} catch (SQLException i) {
 
 					}
@@ -219,21 +228,22 @@ public class MenuAmistoso extends JFrame {
 			}
 
 		});
- 
+
 		cbLocal.setBounds(120, 224, 150, 22);
 		panel.add(cbLocal);
 		btnIniciarAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				char[] a = {'a','b','c'};
-				
+				char[] a = { 'a', 'b', 'c' };
+
 				Equipo eLocal = bd.convertirAEquipo(cbLocal.getSelectedItem().toString(), new Jugador("", a, 0));
 				System.out.println(eLocal.toString());
-				
-				Equipo eVisitante = bd.convertirAEquipo(cbVisitante.getSelectedItem().toString(), new Jugador("", a, 0));
+
+				Equipo eVisitante = bd.convertirAEquipo(cbVisitante.getSelectedItem().toString(),
+						new Jugador("", a, 0));
 				System.out.println(eVisitante.toString());
 				Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
-				
+
 				ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, false, f);
 				try {
 					Thread.sleep(2000);
@@ -241,12 +251,13 @@ public class MenuAmistoso extends JFrame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 				partido.empieza();
-				
-				}}
-				// PRUEBA DE LISTENER DE VENTANAPARTIDO
-			
+
+			}
+		}
+		// PRUEBA DE LISTENER DE VENTANAPARTIDO
+
 		);
 		panel.add(lblEqL);
 		panel.add(lblEqV);
@@ -323,6 +334,7 @@ public class MenuAmistoso extends JFrame {
 		jlIcono.repaint();
 		revalidate();
 	}
+
 	public String getEquipoL() {
 		return equipoL;
 	}
