@@ -166,7 +166,8 @@ public class ventanaPartido extends JFrame {
 		lblGolesVisitante.setFont(f);
 		panel.add(lblGolesVisitante);
 		panel.add(lblEqL);
-//		lblEqV.setBounds(460, 64, 45, 45);
+		lblEqV.setBounds(600, 0, 45, 45);
+		lblEqV.repaint();
 		panel.add(lblEqV);
 		panelCampo = new JPanel();
 		panelCampo.setBackground(Color.GREEN);
