@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.List;
@@ -33,6 +34,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -51,7 +53,6 @@ public class VentanaLiga extends JFrame {
 	private DefaultTableModel model;
 	private JLabel background;
 	private BaseDeDatos bd;
-	
 
 	/**
 	 * Create the frame.
@@ -59,16 +60,18 @@ public class VentanaLiga extends JFrame {
 	 * @throws SQLException
 	 */
 	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j) throws SQLException {
-		
+
 		try {
-//			try {
-//				BufferedImage img = ImageIO.read(getClass().getClassLoader().getResource("iconos/anoeta.png"));
-//				 background = new JLabel(new ImageIcon(img));
-//			} catch (IOException e1) {
-//				e1.printStackTrace();
-//			}
-//
-//			setContentPane(background);
+			
+			// try {
+			// BufferedImage img =
+			// ImageIO.read(getClass().getClassLoader().getResource("iconos/anoeta.png"));
+			// background = new JLabel(new ImageIcon(img));
+			// } catch (IOException e1) {
+			// e1.printStackTrace();
+			// }
+			//
+			// setContentPane(background);
 			bd.init();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -77,14 +80,19 @@ public class VentanaLiga extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 932, 572);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		//getContentPane().add(background);
+		JLabel background_1 = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("iconos/anoeta.png")));
+		setContentPane(background_1);
+//		getContentPane().add(background_1);
+		background_1.setLayout(null);
+		((JComponent) getContentPane()).setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().setLayout(new BorderLayout(0, 0));
+//		setContentPane(contentPane);
+		// getContentPane().add(background);
 		ScrollablePanel panelClasificacion = new ScrollablePanel(new BorderLayout());
+		
 		panelClasificacion.setScrollableWidth(ScrollablePanel.ScrollableSizeHint.FIT);
 		panelClasificacion.setScrollableHeight(ScrollablePanel.ScrollableSizeHint.STRETCH);
-		contentPane.add(panelClasificacion, BorderLayout.CENTER);
+		getContentPane().add(panelClasificacion, BorderLayout.CENTER);
 		model = new DefaultTableModel();
 		table = new JTable(model);
 		model.addColumn("");
@@ -139,7 +147,7 @@ public class VentanaLiga extends JFrame {
 		panelClasificacion.add(scrollPane);
 
 		JPanel panelBotonera = new JPanel();
-		contentPane.add(panelBotonera, BorderLayout.SOUTH);
+		getContentPane().add(panelBotonera, BorderLayout.SOUTH);
 
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
@@ -153,7 +161,7 @@ public class VentanaLiga extends JFrame {
 		panelBotonera.add(btnCargar);
 
 		JPanel panelInformacionEquipo = new JPanel();
-		contentPane.add(panelInformacionEquipo, BorderLayout.NORTH);
+		getContentPane().add(panelInformacionEquipo, BorderLayout.NORTH);
 
 		JLabel lblProximoEvento = new JLabel("Proximo Evento: ");
 		panelInformacionEquipo.add(lblProximoEvento);
@@ -214,6 +222,11 @@ public class VentanaLiga extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+//		JLabel background_1 = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("iconos/anoeta.png")));
+//		setContentPane(background_1);
+////		getContentPane().add(background_1);
+//		background_1.setLayout(null);
+		
 	}
 
 	private void anadirATabla(BaseDeDatos bd, Jugador j, Equipo e) throws SQLException {
@@ -257,6 +270,7 @@ public class VentanaLiga extends JFrame {
 		} catch (Exception en) {
 			en.printStackTrace();
 		}
+		
 
 	}
 
