@@ -199,6 +199,10 @@ public class ventanaPartido extends JFrame {
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE).addContainerGap()));
+		
+		JLabel lblPresionaUMayuscula = new JLabel("PRESIONA U MAYUSCULA PARA RECOLOCAR COMPONENTES");
+		lblPresionaUMayuscula.setBounds(185, 463, 380, 16);
+		panelCampo.add(lblPresionaUMayuscula);
 
 		String siglasEqL = eLocal.getSiglas();
 		siglasEqL = siglasEqL.substring(1);
@@ -712,5 +716,4 @@ public class ventanaPartido extends JFrame {
 	public void setArcade(boolean arcade) {
 		this.arcade = arcade;
 	}
-
 }
