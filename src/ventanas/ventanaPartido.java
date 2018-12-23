@@ -112,25 +112,16 @@ public class ventanaPartido extends JFrame {
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
 		ImageIcon iconL = new ImageIcon(getClass().getClassLoader().getResource(
-
 				eLocal.getBolaEquipo().getRutaImagen()));
 		System.out.println(iconL);
 
+		ImageIcon imageIconL = null;
 		try {
-			iconL = new ImageIcon(getClass().getClassLoader().getResource(
-					// "/"+
-					eLocal.getBolaEquipo().getRutaImagen()));
-			// System.out.println(iconL);
-			Image imgL = iconL.getImage();
-			BufferedImage biL = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
-			Graphics gL = biL.createGraphics();
-			gL.drawImage(imgL, 0, 0, 40, 40, null);
-			ImageIcon newIconL = new ImageIcon(biL);
-			lblEqL.setIcon(newIconL);
-			revalidate();
-		} catch (Exception e) {
-			e.printStackTrace();
+			imageIconL = new ImageIcon(getClass().getClassLoader().getResource(eLocal.getBolaEquipo().getRutaImagen()));
+		} catch (Exception ej) {
+			ej.printStackTrace();
 		}
+		resizeo(imageIconL, lblEqL, 45, 45);
 
 		ImageIcon iconC = new ImageIcon(ventanaPartido.class.getResource("/iconos/campo.png"));
 		Image imgC = iconC.getImage();
@@ -139,16 +130,13 @@ public class ventanaPartido extends JFrame {
 		gC.drawImage(imgC, 0, 0, 720, 395, null);
 		ImageIcon newIconC = new ImageIcon(biC);
 
+		ImageIcon imageIconV = null;
 		try {
-			ImageIcon iconV = new ImageIcon(getClass().getResource("/" + eVisitante.getBolaEquipo().getRutaImagen()));
-			Image imgV = iconV.getImage();
-			BufferedImage biV = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
-			Graphics gV = biV.createGraphics();
-			gV.drawImage(imgV, 0, 0, 40, 40, null);
-			ImageIcon newIconV = new ImageIcon(biV);
-			lblEqV.setIcon(newIconV);
-		} catch (NullPointerException e) {
+			imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
+		} catch (Exception ej) {
+			ej.printStackTrace();
 		}
+		resizeo(imageIconV, lblEqV, 45, 45);
 
 		ImageIcon icon = new ImageIcon(ventanaPartido.class.getResource("/iconos/marcadorconnombres.jpg"));
 		Image img = icon.getImage();
@@ -178,6 +166,7 @@ public class ventanaPartido extends JFrame {
 		lblGolesVisitante.setFont(f);
 		panel.add(lblGolesVisitante);
 		panel.add(lblEqL);
+//		lblEqV.setBounds(460, 64, 45, 45);
 		panel.add(lblEqV);
 		panelCampo = new JPanel();
 		panelCampo.setBackground(Color.GREEN);
@@ -213,6 +202,7 @@ public class ventanaPartido extends JFrame {
 		String siglasEqV = eVisitante.getSiglas();
 //		siglasEqV = siglasEqV.substring(1);
 		JLabel lblNomEqV = new JLabel(siglasEqV);
+//		lblEqV.setBounds(460, 64, 45, 45);
 		lblNomEqV.setBounds(464, 5, 262, 36);
 		panel.add(lblNomEqV);
 		getContentPane().setLayout(groupLayout);
@@ -715,5 +705,15 @@ public class ventanaPartido extends JFrame {
 
 	public void setArcade(boolean arcade) {
 		this.arcade = arcade;
+	}
+	public void resizeo(ImageIcon imageIconL, JLabel jlIcono, int anchura, int altura) {
+		Image imagenResizL = imageIconL.getImage();
+		Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(anchura), (int) Math.round(altura),
+				java.awt.Image.SCALE_SMOOTH);
+		ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
+		jlIcono.setSize(iiResizeoL.getIconWidth(), iiResizeoL.getIconHeight());
+		jlIcono.setIcon(iiResizeoL);
+		jlIcono.repaint();
+		revalidate();
 	}
 }
