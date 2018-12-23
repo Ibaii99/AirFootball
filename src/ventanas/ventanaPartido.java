@@ -205,14 +205,13 @@ public class ventanaPartido extends JFrame {
 		panelCampo.add(lblPresionaUMayuscula);
 
 		String siglasEqL = eLocal.getSiglas();
-		siglasEqL = siglasEqL.substring(1);
-		JLabel lblNomEqL = new JLabel("/" + siglasEqL);
+		JLabel lblNomEqL = new JLabel(siglasEqL);
 		lblNomEqL.setBounds(53, 5, 262, 36);
 		panel.add(lblNomEqL);
 
 		String siglasEqV = eVisitante.getSiglas();
-		siglasEqV = siglasEqV.substring(1);
-		JLabel lblNomEqV = new JLabel("/" + siglasEqV);
+//		siglasEqV = siglasEqV.substring(1);
+		JLabel lblNomEqV = new JLabel(siglasEqV);
 		lblNomEqV.setBounds(464, 5, 262, 36);
 		panel.add(lblNomEqV);
 		getContentPane().setLayout(groupLayout);
