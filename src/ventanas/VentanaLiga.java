@@ -128,6 +128,11 @@ public class VentanaLiga extends JFrame {
 		contentPane.add(panelBotonera, BorderLayout.SOUTH);
 
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		panelBotonera.add(btnGuardar);
 
 		JButton btnCargar = new JButton("Cargar");

@@ -33,7 +33,7 @@ public class HiloJuego extends Thread {
 		fisicas.choquePelotaBorde(v, p);
 		fisicas.choquePelotaEquipo(p, eLocal);
 		fisicas.choquePelotaEquipo(p, eVisitante);
-	
+		fisicas.choquePelotaPoste(v, v.getPosteArribaDerecha(), v.getPosteAbajoDerecha(), v.getPosteArribaIzquierda(), v.getPosteAbajoIzquierda(), p);
 		fisicas.mueveEquipo(eLocal, fisicas.TIEMPO, v);
 		fisicas.mueveEquipo(eVisitante, fisicas.TIEMPO, v);
 		fisicas.muevePelota(p, fisicas.TIEMPO, v);
@@ -41,7 +41,7 @@ public class HiloJuego extends Thread {
 		v.degradarVelocidad();
 		v.actualizarPosicionObjetos();
 		v.actualizarCampo();
-		
+		v.siEsGolSuma();
 //		System.out.println("--------------------------Pelota-------------------------------------");
 //		System.out.println("x: "+p.getX()+ "  y: "+ p.getY());	
 //		System.out.println("velX: "+p.getVelX() + "  velY: "+p.getVelY() + " color: " + p.getColor());

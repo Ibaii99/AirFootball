@@ -69,10 +69,10 @@ public class FisicasNuevas {
 		
 			//TODO
 				
-				if(p.getX() > equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getX()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY());}// la bola esta a la derecha del equipo
-				if(p.getX() < equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getX()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY());}// la bola esta a la izquierda del equipo
-				if(p.getY() > equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getY()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX());}// la bola esta encima del equipo
-				if(p.getY() < equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getY()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX());}// la bola esta debajo del equipo
+				if(p.getX() > equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getX()+p.getRadio()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY());}// la bola esta a la derecha del equipo
+				if(p.getX() < equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getX()-p.getRadio()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY());}// la bola esta a la izquierda del equipo
+				if(p.getY() > equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getY()+p.getRadio()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX());}// la bola esta encima del equipo
+				if(p.getY() < equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getY()-p.getRadio()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX());}// la bola esta debajo del equipo
 				//cambioVelocidadesChoquePelotaEquipo(p, equipo);
 
 //				if(p.getVelX()<0)p.setVelX(p.getVelX() -equipo.getBolaEquipo().getRadio()/2);
@@ -83,7 +83,7 @@ public class FisicasNuevas {
 //				
 			}
 		if(!igualACero(equipo.getBolaEquipo().getVelX())&& !igualACero(equipo.getBolaEquipo().getVelY())) {
-			cambiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*4, (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*4);//multiplico por 4 para que no se quede pegado al jlabel
+			cambiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*4, (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*4);//multiplico por dos para que no se quede pegado al jlabel
 			
 			}
 			
@@ -187,8 +187,8 @@ public class FisicasNuevas {
 	 */
 	public void choquePelotaPoste(ventanaPartido v, Poste paloArribDer, Poste paloAbajoDer, Poste paloArribIzq, Poste paloAbajoIzq, Pelota p) {
 		if(daAlPoste(v, p, paloArribDer) || daAlPoste(v, p, paloAbajoDer) ||daAlPoste(v, p, paloArribIzq) ||daAlPoste(v, p, paloAbajoIzq)) {
-			p.setVelX(p.getVelXAntes()*COEFICIENTE_PERDIDA_PELOTA);
-			p.setVelY(p.getVelYAntes()*COEFICIENTE_PERDIDA_PELOTA);}
+			p.setVelX(-p.getVelXAntes()*COEFICIENTE_PERDIDA_PELOTA);
+			p.setVelY(-p.getVelYAntes()*COEFICIENTE_PERDIDA_PELOTA);}
 		}
 	
 	///////////////////////Metodos internos para calcularlo/////////////////////////////////
@@ -201,8 +201,8 @@ public class FisicasNuevas {
 	 */
 	public boolean daAlPoste(ventanaPartido v, Pelota pelota, Poste palo) {
 		boolean hayChoque = false;
-		if( Math.abs(palo.getX() - pelota.getX()) <= (pelota.getRadio() + palo.RADIO_POSTE) ) hayChoque = true;
-		if( Math.abs(palo.getY() - pelota.getY()) <= (pelota.getRadio() + palo.RADIO_POSTE) ) hayChoque = true;
+		if( Math.abs(palo.getX() - pelota.getX()) <= (pelota.getRadio() + palo.RADIO_POSTE) && Math.abs(palo.getY() - pelota.getY()) <= (pelota.getRadio() + palo.RADIO_POSTE)) hayChoque = true;
+		
 		return hayChoque;
 	}
 	

@@ -22,11 +22,7 @@ import ventanas.Inicio;
 public class Juego {
 
 	public static ventanaPartido v; // la ventana se creara cuando se elijan los equipos con los que se va a jugar
-	public Poste posteArribaIzquierda = new Poste(v, true, true);
-	public Poste posteAbajoIzquierda = new Poste(v, true, false);
 
-	public Poste posteArribaDerecha = new Poste(v, false, true);
-	public Poste posteAbajoDerecha = new Poste(v, false, false);
 
 	private static BaseDeDatos bd = new BaseDeDatos("Beta");
 
@@ -40,25 +36,21 @@ public class Juego {
 				"/iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		Equipo u = (new Equipo("ATH", "Athletic Club", 0, Color.RED, ("/iconos/equipos/ath.png"),
 				"/iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-//		e.getBolaEquipo().setX(200);
-//		u.getBolaEquipo().setX(50);
-//		e.getBolaEquipo().setY(200);
-//		u.getBolaEquipo().setY(50);
+
 		
 		
 		// pruebas de la ventana de juego
 		 v = new ventanaPartido(e, u, p, true, true, false, f);
 		 try {
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		 v.configuracionAntesDePartido();
+	
 		 
 		v.empieza();
-		p.setX(20);
-		p.setY(20);
+
 		v.actualizarCampo();
 	}
 }
