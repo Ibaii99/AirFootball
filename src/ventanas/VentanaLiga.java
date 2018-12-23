@@ -62,7 +62,7 @@ public class VentanaLiga extends JFrame {
 	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j) throws SQLException {
 
 		try {
-			
+
 			// try {
 			// BufferedImage img =
 			// ImageIO.read(getClass().getClassLoader().getResource("iconos/anoeta.png"));
@@ -82,14 +82,14 @@ public class VentanaLiga extends JFrame {
 		contentPane = new JPanel();
 		JLabel background_1 = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("iconos/anoeta.png")));
 		setContentPane(background_1);
-//		getContentPane().add(background_1);
+		// getContentPane().add(background_1);
 		background_1.setLayout(null);
 		((JComponent) getContentPane()).setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().setLayout(new BorderLayout(0, 0));
-//		setContentPane(contentPane);
+		// setContentPane(contentPane);
 		// getContentPane().add(background);
 		ScrollablePanel panelClasificacion = new ScrollablePanel(new BorderLayout());
-		
+
 		panelClasificacion.setScrollableWidth(ScrollablePanel.ScrollableSizeHint.FIT);
 		panelClasificacion.setScrollableHeight(ScrollablePanel.ScrollableSizeHint.STRETCH);
 		getContentPane().add(panelClasificacion, BorderLayout.CENTER);
@@ -161,6 +161,7 @@ public class VentanaLiga extends JFrame {
 		panelBotonera.add(btnCargar);
 
 		JPanel panelInformacionEquipo = new JPanel();
+
 		getContentPane().add(panelInformacionEquipo, BorderLayout.NORTH);
 
 		JLabel lblProximoEvento = new JLabel("Proximo Evento: ");
@@ -222,11 +223,12 @@ public class VentanaLiga extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-//		JLabel background_1 = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("iconos/anoeta.png")));
-//		setContentPane(background_1);
-////		getContentPane().add(background_1);
-//		background_1.setLayout(null);
-		
+		// JLabel background_1 = new JLabel(new
+		// ImageIcon(getClass().getClassLoader().getResource("iconos/anoeta.png")));
+		// setContentPane(background_1);
+		//// getContentPane().add(background_1);
+		// background_1.setLayout(null);
+
 	}
 
 	private void anadirATabla(BaseDeDatos bd, Jugador j, Equipo e) throws SQLException {
@@ -270,7 +272,6 @@ public class VentanaLiga extends JFrame {
 		} catch (Exception en) {
 			en.printStackTrace();
 		}
-		
 
 	}
 
