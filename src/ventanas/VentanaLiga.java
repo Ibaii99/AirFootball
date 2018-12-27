@@ -231,6 +231,13 @@ public class VentanaLiga extends JFrame {
 
 	}
 
+	/**
+	 * Método burbuja para añadir a la tabla a la que se pasa la base de datos, el jugador, y el equipo escogido
+	 * @param bd Base de datos
+	 * @param j Jugador
+	 * @param e Equipo escogido
+	 * @throws SQLException 
+	 */
 	private void anadirATabla(BaseDeDatos bd, Jugador j, Equipo e) throws SQLException {
 		try {
 			TeamBold tb = new TeamBold();
@@ -242,7 +249,7 @@ public class VentanaLiga extends JFrame {
 			} catch (Exception e3) {
 				e3.printStackTrace();
 			}
-			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + ";";
+			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " ORDER BY PUNTOS DESC;"; //Método burbuja para ordenar equipos por puntos.
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 			while (rs.next()) {
 
