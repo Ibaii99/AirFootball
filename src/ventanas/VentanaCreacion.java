@@ -209,8 +209,12 @@ public class VentanaCreacion extends JFrame {
 
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
+			public void actionPerformed(ActionEvent e){
+				try {
+				bd.init();
+				}catch(Exception e3) {
+					
+				}
 				File source = fc.getSelectedFile();
 				Path destino = null; // Universalizamos el selector de imagen. Todo icono escogido se mueve a SRC
 										// para que otro usuario pueda acceder a él desde otro ordenador.
@@ -231,12 +235,19 @@ public class VentanaCreacion extends JFrame {
 				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
 					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
 					try {
-						VentanaLiga vl = new VentanaLiga(e1, bd, j);
+						
 						eliminarEquipo(bd, cbSustituye.getSelectedItem().toString(), j, cbSustituye);
 						anyadirEquipo(bd, e1, j);
+						VentanaLiga vl = new VentanaLiga(e1, bd, j);
+						vl.setVisible(true);
 					} catch (SQLException e2) {
 
 					}
+				}
+				try {
+					bd.close();
+				}catch (Exception eee){
+					eee.printStackTrace();
 				}
 			}
 		});
