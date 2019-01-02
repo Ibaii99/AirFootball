@@ -3,12 +3,15 @@ package ventanas;
 import javax.swing.JFrame;
 
 import entidades.BaseDeDatos;
+import entidades.Equipo;
 import fisicas.FisicasNuevas;
 import jugador.Jugador;
 import objetos.ObjetoCombobox;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
@@ -31,6 +34,11 @@ import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,6 +53,7 @@ public class VentanaCreacion extends JFrame {
 	private JPasswordField passwordField;
 
 	public VentanaCreacion(BaseDeDatos bd, FisicasNuevas f) {
+		JFileChooser fc = new JFileChooser();
 		setSize(550, 239);
 
 		JPanel panel = new JPanel();
@@ -97,7 +106,7 @@ public class VentanaCreacion extends JFrame {
 
 		btnExaminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser fc = new JFileChooser();
+
 				FileNameExtensionFilter png = new FileNameExtensionFilter("Imágenes(.png)", "png");
 				fc.addChoosableFileFilter(png);
 				FileNameExtensionFilter jpg = new FileNameExtensionFilter("Imágenes(.jpg)", "jpg");
@@ -108,91 +117,86 @@ public class VentanaCreacion extends JFrame {
 				int seleccion = fc.showOpenDialog(getContentPane());
 				if (seleccion == JFileChooser.APPROVE_OPTION) {
 					File fichero = fc.getSelectedFile();
-					lblLocalizacionIcono.setText(fichero.getAbsolutePath());
+					System.out.println(fichero.getPath());
+					System.out.println(fichero.getName());
+					lblLocalizacionIcono.setText(fichero.getName());
 				}
 				fc.setBounds(600, 100, 600, 300);
 				fc.setVisible(true);
 			}
 		});
-		
+
 		JLabel lblUsuario = new JLabel("Usuario:");
-		
+
 		tfUsuario = new JTextField();
 		tfUsuario.setColumns(10);
-		
+
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-		
+
 		passwordField = new JPasswordField();
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
+				.createSequentialGroup().addContainerGap()
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
+						.addComponent(lblUsuario, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGap(34).addComponent(tfUsuario, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(lblContrasea, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblUsuario, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGap(34)
-							.addComponent(tfUsuario, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblContrasea, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED))
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblEscudo, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 176,
+												Short.MAX_VALUE)
+										.addComponent(lblNombre, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 176,
+												Short.MAX_VALUE))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addComponent(tfNombre, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+										.addGroup(gl_panel.createSequentialGroup()
+												.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(lblLocalizacionIcono, GroupLayout.PREFERRED_SIZE, 131,
+														GroupLayout.PREFERRED_SIZE))))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblEscudo, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-								.addComponent(lblNombre, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(tfNombre, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblLocalizacionIcono, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblSiglas, GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+								.addComponent(lblSiglas, GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
 						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-							.addGap(18)
-							.addComponent(cbSustituye, 0, 242, Short.MAX_VALUE)))
-					.addGap(106))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(5)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tfNombre)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(6)
-							.addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblEscudo)
-							.addGap(15))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblLocalizacionIcono, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-								.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGap(10)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tfSiglas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblSiglas))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-						.addComponent(cbSustituye))
-					.addGap(6)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblUsuario)
-						.addComponent(tfUsuario)
-						.addComponent(lblContrasea)
-						.addComponent(passwordField)))
-		);
+								.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+								.addGap(18).addComponent(cbSustituye, 0, 242, Short.MAX_VALUE)))
+				.addGap(106)));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup().addGap(5)
+						.addGroup(
+								gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(tfNombre)
+										.addGroup(gl_panel.createSequentialGroup().addGap(6).addComponent(lblNombre,
+												GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel.createSequentialGroup().addComponent(lblEscudo).addGap(15))
+								.addGroup(gl_panel.createSequentialGroup()
+										.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+												.addComponent(lblLocalizacionIcono, Alignment.LEADING,
+														GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+												.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addGap(10)))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(tfSiglas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblSiglas))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(
+								gl_panel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 22,
+												Short.MAX_VALUE)
+										.addComponent(cbSustituye))
+						.addGap(6).addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblUsuario)
+								.addComponent(tfUsuario).addComponent(lblContrasea).addComponent(passwordField))));
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
@@ -204,18 +208,40 @@ public class VentanaCreacion extends JFrame {
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Path destino = null;
-				try {
-					destino = Paths.get("iconos/", lblLocalizacionIcono.getName());
-//					 Files.copy(lblLocalizacionIcono.toPath(), destino,
-//					 StandardCopyOption.REPLACE_EXISTING);
-				} catch (Exception ex) {
+				Jugador j = new Jugador(tfUsuario.getText(), passwordField.getPassword());
 
+				File source = fc.getSelectedFile();
+				File dest = new File("iconos/equipos/" + lblLocalizacionIcono.getName());
+				try {
+					copyFileUsingStream(source, dest);
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
+				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText(), 0, Color.black,
+						"iconos/equipos/" + lblLocalizacionIcono.getName(),
+						"iconos/equipos/" + lblLocalizacionIcono.getName(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						0);
 			}
 		});
 		panel_1.add(btnSiguiente);
 
+	}
+
+	private static void copyFileUsingStream(File source, File dest) throws IOException {
+		InputStream is = null;
+		OutputStream os = null;
+		try {
+			is = new FileInputStream(source);
+			os = new FileOutputStream(dest);
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = is.read(buffer)) > 0) {
+				os.write(buffer, 0, length);
+			}
+		} finally {
+			is.close();
+			os.close();
+		}
 	}
 }
 
