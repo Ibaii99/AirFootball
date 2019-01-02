@@ -231,6 +231,7 @@ public class VentanaCreacion extends JFrame {
 				if (!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
 					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
 							"ERROR", JOptionPane.WARNING_MESSAGE);
+					System.out.println("No registrado");
 				}
 				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
 					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
