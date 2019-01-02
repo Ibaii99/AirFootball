@@ -31,14 +31,21 @@ import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class VentanaCreacion extends JFrame {
 	private JTextField tfNombre;
 	private JTextField tfSiglas;
+	private JTextField tfUsuario;
+	private JPasswordField passwordField;
 
 	public VentanaCreacion(BaseDeDatos bd, FisicasNuevas f) {
-		setSize(550, 230);
+		setSize(550, 239);
 
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -52,7 +59,6 @@ public class VentanaCreacion extends JFrame {
 		JLabel lblEscudo = new JLabel("Escudo:");
 
 		JButton btnExaminar = new JButton("Examinar...");
-		
 
 		JLabel lblSiglas = new JLabel("Siglas:");
 
@@ -69,11 +75,6 @@ public class VentanaCreacion extends JFrame {
 			Statement consulta;
 
 			String comando = "";
-			/**
-			 * No hago un m�todo para diferentes sentencias SQL porque no realizamos
-			 * exactamente la misma en ning�n momento
-			 * 
-			 */
 			try {
 				Class.forName("org.sqlite.JDBC");
 				bd.init();
@@ -91,7 +92,7 @@ public class VentanaCreacion extends JFrame {
 		} catch (SQLException sql) {
 			sql.printStackTrace();
 		}
-		
+
 		JLabel lblLocalizacionIcono = new JLabel("");
 
 		btnExaminar.addActionListener(new ActionListener() {
@@ -113,6 +114,15 @@ public class VentanaCreacion extends JFrame {
 				fc.setVisible(true);
 			}
 		});
+		
+		JLabel lblUsuario = new JLabel("Usuario:");
+		
+		tfUsuario = new JTextField();
+		tfUsuario.setColumns(10);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
+		
+		passwordField = new JPasswordField();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -120,9 +130,18 @@ public class VentanaCreacion extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblUsuario, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(34)
+							.addComponent(tfUsuario, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblContrasea, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblEscudo, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-								.addComponent(lblNombre, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+								.addComponent(lblEscudo, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+								.addComponent(lblNombre, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(tfNombre, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
@@ -131,15 +150,13 @@ public class VentanaCreacion extends JFrame {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(lblLocalizacionIcono, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblSiglas, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+							.addComponent(lblSiglas, GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createSequentialGroup()
-								.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-								.addGap(96))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(cbSustituye, 0, 233, Short.MAX_VALUE)))
+							.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+							.addGap(18)
+							.addComponent(cbSustituye, 0, 242, Short.MAX_VALUE)))
 					.addGap(106))
 		);
 		gl_panel.setVerticalGroup(
@@ -152,11 +169,11 @@ public class VentanaCreacion extends JFrame {
 							.addGap(6)
 							.addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblEscudo)
 							.addGap(15))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblLocalizacionIcono, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
 								.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -168,8 +185,13 @@ public class VentanaCreacion extends JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-						.addComponent(cbSustituye, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(101))
+						.addComponent(cbSustituye))
+					.addGap(6)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblUsuario)
+						.addComponent(tfUsuario)
+						.addComponent(lblContrasea)
+						.addComponent(passwordField)))
 		);
 		panel.setLayout(gl_panel);
 
@@ -180,6 +202,18 @@ public class VentanaCreacion extends JFrame {
 		panel_1.add(btnVolver);
 
 		JButton btnSiguiente = new JButton("Siguiente");
+		btnSiguiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Path destino = null;
+				try {
+					destino = Paths.get("iconos/", lblLocalizacionIcono.getName());
+//					 Files.copy(lblLocalizacionIcono.toPath(), destino,
+//					 StandardCopyOption.REPLACE_EXISTING);
+				} catch (Exception ex) {
+
+				}
+			}
+		});
 		panel_1.add(btnSiguiente);
 
 	}
