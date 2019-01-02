@@ -13,6 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import javax.swing.JComboBox;
 
 public class VentanaCreacion extends JFrame {
@@ -27,6 +30,7 @@ public class VentanaCreacion extends JFrame {
 		JLabel lblNombre = new JLabel("Nombre:");
 		
 		tfNombre = new JTextField();
+		tfNombre.setDocument(new JTextFieldLimit(3));
 		tfNombre.setColumns(10);
 		
 		JLabel lblEscudo = new JLabel("Escudo:");
@@ -95,3 +99,24 @@ public class VentanaCreacion extends JFrame {
 		
 	}
 }
+class JTextFieldLimit extends PlainDocument {
+	  private int limit;
+	  JTextFieldLimit(int limit) {
+	    super();
+	    this.limit = limit;
+	  }
+
+	  JTextFieldLimit(int limit, boolean upper) {
+	    super();
+	    this.limit = limit;
+	  }
+
+	  public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+	    if (str == null)
+	      return;
+
+	    if ((getLength() + str.length()) <= limit) {
+	      super.insertString(offset, str, attr);
+	    }
+	  }
+	}
