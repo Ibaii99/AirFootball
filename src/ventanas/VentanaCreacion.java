@@ -298,7 +298,7 @@ public class VentanaCreacion extends JFrame {
 		}
 		String comando = "INSERT INTO Equipos" + j.getNombre()
 				+ " ('fk_CodLiga', 'fk_Nombre_Jugador','Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
-		comando += " VALUES ('" + 1 + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira aqui
+		comando += " VALUES ('" + j.getCodLiga() + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira aqui
 																											// bien lo
 																											// de
 																											// CodLiga
