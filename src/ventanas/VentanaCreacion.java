@@ -209,11 +209,11 @@ public class VentanaCreacion extends JFrame {
 
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
+			public void actionPerformed(ActionEvent e) {
 				try {
-				bd.init();
-				}catch(Exception e3) {
-					
+					bd.init();
+				} catch (Exception e3) {
+
 				}
 				File source = fc.getSelectedFile();
 				Path destino = null; // Universalizamos el selector de imagen. Todo icono escogido se mueve a SRC
@@ -236,7 +236,7 @@ public class VentanaCreacion extends JFrame {
 				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
 					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
 					try {
-						
+
 						eliminarEquipo(bd, cbSustituye.getSelectedItem().toString(), j, cbSustituye);
 						anyadirEquipo(bd, e1, j);
 						VentanaLiga vl = new VentanaLiga(e1, bd, j);
@@ -247,7 +247,7 @@ public class VentanaCreacion extends JFrame {
 				}
 				try {
 					bd.close();
-				}catch (Exception eee){
+				} catch (Exception eee) {
 					eee.printStackTrace();
 				}
 			}
@@ -273,18 +273,19 @@ public class VentanaCreacion extends JFrame {
 		}
 	}
 
-	public void eliminarEquipo(BaseDeDatos bd, String nombre, Jugador j, JComboBox cb) throws SQLException {
+	public void eliminarEquipo(BaseDeDatos bd, String nombre, Jugador j, JComboBox cb) {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			bd.init();
-		} catch (Exception e3) {
-			 e3.printStackTrace();
-		}
-		String query = "DELETE FROM EQUIPOS" + j.getNombre() + "WHERE NOMBRE = " + cb.getSelectedItem().toString()
-				+ ";";
-		ResultSet rs = bd.getCon().createStatement().executeQuery(query);
-		bd.close();
+			String query = "DELETE FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE = '" + cb.getSelectedItem().toString()
+					+ "';";
+			System.out.println(query);
+			bd.getCon().createStatement().executeUpdate(query); //executeUpdate para inserts y deletes y executeQuery para selects
 
+			bd.close();
+		} catch (Exception e3) {
+			e3.printStackTrace();
+		}
 	}
 
 	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j) throws SQLException {
@@ -292,11 +293,17 @@ public class VentanaCreacion extends JFrame {
 			Class.forName("org.sqlite.JDBC");
 			bd.init();
 		} catch (Exception e3) {
-			 e3.printStackTrace();
+			e3.printStackTrace();
 		}
 		String comando = "INSERT INTO Equipos" + j.getNombre()
 				+ " ('fk_CodLiga', 'fk_Nombre_Jugador','Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
-		comando += " VALUES ('" + 0 + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira aqui bien lo de CodLiga lo he puesto a 0
+		comando += " VALUES ('" + 0 + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira aqui
+																											// bien lo
+																											// de
+																											// CodLiga
+																											// lo he
+																											// puesto a
+																											// 0
 				+ "','" + e.getPuntos() + "','" + e.getGolesEnContraTotales() + "','" + e.getGolesEnContraLocal()
 				+ "','" + e.getGolesEnContraVisitante() + "','" + e.getGolesAFavorTotales() + "','"
 				+ e.getGolesAFavorLocal() + "','" + e.getGolesAFavorVisitante() + "','" + e.getDerrotasTotales() + "','"
@@ -304,6 +311,7 @@ public class VentanaCreacion extends JFrame {
 				+ e.getVictoriasLocal() + "','" + e.getVictoriasVisitante() + "','" + e.getEmpatesTotales() + "','"
 				+ e.getEmpatesLocal() + "','" + e.getEmpatesVisitante() + "','" + e.getBolaEquipo().getColor().getRGB()
 				+ "','" + e.getBolaEquipo().getRutaImagen() + "')";
+		System.out.println(comando);
 		ResultSet rs = bd.getCon().createStatement().executeQuery(comando);
 		bd.close();
 
