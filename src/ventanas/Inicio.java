@@ -60,6 +60,13 @@ public class Inicio extends JFrame {
 		panel.add(bLiga);
 
 		final JButton bCreacion = new JButton("Creaci�n");
+		bCreacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaCreacion vc = new VentanaCreacion(bd, f);
+				vc.setVisible(true);
+				dispose();
+			}
+		});
 		bCreacion.setFont(new Font("Arial Black", Font.PLAIN, 16));
 		bCreacion.setBounds(getWidth() - 150, getHeight() - 150, 119, 40);
 		panel.add(bCreacion);
