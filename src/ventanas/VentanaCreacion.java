@@ -211,15 +211,10 @@ public class VentanaCreacion extends JFrame {
 				Jugador j = new Jugador(tfUsuario.getText(), passwordField.getPassword());
 
 				File source = fc.getSelectedFile();
-//				File dest = new File("iconos/equipos/" + lblLocalizacionIcono.getName());
-//				try {
-//					copyFileUsingStream(source, dest);
-				Path destino = null;
+				Path destino = null; //Universalizamos el selector de imagen. Todo icono escogido se mueve a SRC para que otro usuario pueda acceder a él desde otro ordenador.
 				try {
-					
-					destino = Paths.get("iconos/equipos/", source.getName());
-					System.out.println(destino.toFile().toString());
-//					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
+					destino = Paths.get("src\\iconos\\equipos\\", source.getName());
+					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
