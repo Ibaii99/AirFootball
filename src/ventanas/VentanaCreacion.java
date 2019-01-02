@@ -4,119 +4,206 @@ import javax.swing.JFrame;
 
 import entidades.BaseDeDatos;
 import fisicas.FisicasNuevas;
+import objetos.ObjetoCombobox;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Logger;
+
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.awt.event.ActionEvent;
 
 public class VentanaCreacion extends JFrame {
 	private JTextField tfNombre;
 	private JTextField tfSiglas;
 
 	public VentanaCreacion(BaseDeDatos bd, FisicasNuevas f) {
-		
+		setSize(550, 230);
+
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
-		
+
 		JLabel lblNombre = new JLabel("Nombre:");
-		
+
 		tfNombre = new JTextField();
-		tfNombre.setDocument(new JTextFieldLimit(3));
+
 		tfNombre.setColumns(10);
-		
+
 		JLabel lblEscudo = new JLabel("Escudo:");
-		
+
 		JButton btnExaminar = new JButton("Examinar...");
 		
+
 		JLabel lblSiglas = new JLabel("Siglas:");
-		
+
 		tfSiglas = new JTextField();
+		tfSiglas.setDocument(new JTextFieldLimit(3));
 		tfSiglas.setColumns(10);
-		
+
 		JLabel lblSustituirAEquipo = new JLabel("Sustituir a equipo:");
+
+		JComboBox cbSustituye = new JComboBox();
+		try {
+			Logger logger = Logger.getLogger("baseDeDatos");
+
+			Statement consulta;
+
+			String comando = "";
+			/**
+			 * No hago un mï¿½todo para diferentes sentencias SQL porque no realizamos
+			 * exactamente la misma en ningï¿½n momento
+			 * 
+			 */
+			try {
+				Class.forName("org.sqlite.JDBC");
+				bd.init();
+			} catch (Exception e3) {
+				// e3.printStackTrace();
+			}
+			String query = "SELECT NOMBRE FROM EQUIPOS;";
+			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
+			while (rs.next()) {
+
+				String nomEq = rs.getString("Nombre");
+				cbSustituye.addItem(new ObjetoCombobox(1, nomEq, null));
+			}
+			rs.close();
+			bd.close();
+		} catch (SQLException sql) {
+			sql.printStackTrace();
+		}
 		
-		JComboBox comboBox = new JComboBox();
+		JLabel lblLocalizacionIcono = new JLabel("");
+
+		btnExaminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fc = new JFileChooser();
+				FileNameExtensionFilter png = new FileNameExtensionFilter("Imágenes(.png)", "png");
+				fc.addChoosableFileFilter(png);
+				FileNameExtensionFilter jpg = new FileNameExtensionFilter("Imágenes(.jpg)", "jpg");
+				fc.addChoosableFileFilter(jpg);
+				FileNameExtensionFilter jpeg = new FileNameExtensionFilter("Imágenes(.jpeg)", "jpeg");
+				fc.addChoosableFileFilter(jpeg);
+				fc.setFileFilter(png);
+				int seleccion = fc.showOpenDialog(getContentPane());
+				if (seleccion == JFileChooser.APPROVE_OPTION) {
+					File fichero = fc.getSelectedFile();
+					lblLocalizacionIcono.setText(fichero.getAbsolutePath());
+				}
+				fc.setBounds(600, 100, 600, 300);
+				fc.setVisible(true);
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblEscudo, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-						.addComponent(lblSiglas, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-						.addComponent(lblNombre, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-						.addComponent(lblSustituirAEquipo, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-							.addGap(19))
-						.addComponent(tfNombre, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-						.addComponent(comboBox, Alignment.TRAILING, 0, 152, Short.MAX_VALUE))
-					.addGap(115))
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblEscudo, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+								.addComponent(lblNombre, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(tfNombre, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblLocalizacionIcono, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblSiglas, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createSequentialGroup()
+								.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+								.addGap(96))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(cbSustituye, 0, 233, Short.MAX_VALUE)))
+					.addGap(106))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(5)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tfNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNombre))
+						.addComponent(tfNombre)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(6)
+							.addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblEscudo)
+							.addGap(15))
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblLocalizacionIcono, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+								.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(10)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(lblEscudo))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tfSiglas)
+						.addComponent(tfSiglas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblSiglas))
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-						.addComponent(comboBox))
-					.addGap(90))
+						.addComponent(cbSustituye, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(101))
 		);
 		panel.setLayout(gl_panel);
-		
+
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1, BorderLayout.NORTH);
-		
+
 		JButton btnVolver = new JButton("Volver");
 		panel_1.add(btnVolver);
-		
+
 		JButton btnSiguiente = new JButton("Siguiente");
 		panel_1.add(btnSiguiente);
-		
+
 	}
 }
+
 class JTextFieldLimit extends PlainDocument {
-	  private int limit;
-	  JTextFieldLimit(int limit) {
-	    super();
-	    this.limit = limit;
-	  }
+	private int limit;
 
-	  JTextFieldLimit(int limit, boolean upper) {
-	    super();
-	    this.limit = limit;
-	  }
-
-	  public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-	    if (str == null)
-	      return;
-
-	    if ((getLength() + str.length()) <= limit) {
-	      super.insertString(offset, str, attr);
-	    }
-	  }
+	JTextFieldLimit(int limit) {
+		super();
+		this.limit = limit;
 	}
+
+	JTextFieldLimit(int limit, boolean upper) {
+		super();
+		this.limit = limit;
+	}
+
+	public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+		if (str == null)
+			return;
+
+		if ((getLength() + str.length()) <= limit) {
+			super.insertString(offset, str, attr);
+		}
+	}
+}
