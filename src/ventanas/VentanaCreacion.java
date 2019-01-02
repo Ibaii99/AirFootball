@@ -212,7 +212,8 @@ public class VentanaCreacion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				File source = fc.getSelectedFile();
-				Path destino = null; //Universalizamos el selector de imagen. Todo icono escogido se mueve a SRC para que otro usuario pueda acceder a él desde otro ordenador.
+				Path destino = null; // Universalizamos el selector de imagen. Todo icono escogido se mueve a SRC
+										// para que otro usuario pueda acceder a él desde otro ordenador.
 				try {
 					destino = Paths.get("src\\iconos\\equipos\\", source.getName());
 					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
@@ -223,15 +224,19 @@ public class VentanaCreacion extends JFrame {
 						"iconos/equipos/" + lblLocalizacionIcono.getName(),
 						"iconos/equipos/" + lblLocalizacionIcono.getName(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 						0);
-				if(!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
-					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÃ‘A ES ERRONEA", "ERROR", JOptionPane.WARNING_MESSAGE);
+				if (!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
+					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
+							"ERROR", JOptionPane.WARNING_MESSAGE);
 				}
-				if(bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
+				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
 					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
-					
-//					setVisible(false);
-//					MenuLiga mL = new MenuLiga(800, 800, j, bd,f);
-//					mL.setVisible(true);
+					try {
+						VentanaLiga vl = new VentanaLiga(e1, bd, j);
+						eliminarEquipo(bd, cbSustituye.getSelectedItem().toString(), j, cbSustituye);
+						anyadirEquipo(bd, e1, j);
+					} catch (SQLException e2) {
+
+					}
 				}
 			}
 		});
@@ -255,6 +260,43 @@ public class VentanaCreacion extends JFrame {
 			os.close();
 		}
 	}
+
+	public void eliminarEquipo(BaseDeDatos bd, String nombre, Jugador j, JComboBox cb) throws SQLException {
+		try {
+			Class.forName("org.sqlite.JDBC");
+			bd.init();
+		} catch (Exception e3) {
+			// e3.printStackTrace();
+		}
+		String query = "DELETE FROM EQUIPOS" + j.getNombre() + "WHERE NOMBRE = " + cb.getSelectedItem().toString()
+				+ ";";
+		ResultSet rs = bd.getCon().createStatement().executeQuery(query);
+		bd.close();
+
+	}
+
+	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j) throws SQLException {
+		try {
+			Class.forName("org.sqlite.JDBC");
+			bd.init();
+		} catch (Exception e3) {
+			// e3.printStackTrace();
+		}
+		String comando = "INSERT INTO Equipos" + j.getNombre()
+				+ " ('fk_CodLiga', 'fk_Nombre_Jugador','Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
+		comando += " VALUES ('" + 0 + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira aqui bien lo de CodLiga lo he puesto a 0
+				+ "','" + e.getPuntos() + "','" + e.getGolesEnContraTotales() + "','" + e.getGolesEnContraLocal()
+				+ "','" + e.getGolesEnContraVisitante() + "','" + e.getGolesAFavorTotales() + "','"
+				+ e.getGolesAFavorLocal() + "','" + e.getGolesAFavorVisitante() + "','" + e.getDerrotasTotales() + "','"
+				+ e.getDerrotasLocal() + "','" + e.getDerrotasVisitante() + "','" + e.getVictoriasTotales() + "','"
+				+ e.getVictoriasLocal() + "','" + e.getVictoriasVisitante() + "','" + e.getEmpatesTotales() + "','"
+				+ e.getEmpatesLocal() + "','" + e.getEmpatesVisitante() + "','" + e.getBolaEquipo().getColor().getRGB()
+				+ "','" + e.getBolaEquipo().getRutaImagen() + "')";
+		ResultSet rs = bd.getCon().createStatement().executeQuery(comando);
+		bd.close();
+
+	}
+
 }
 
 class JTextFieldLimit extends PlainDocument {
