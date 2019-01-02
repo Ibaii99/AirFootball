@@ -9,6 +9,8 @@ import jugador.Jugador;
 import objetos.ObjetoCombobox;
 
 import javax.swing.JPanel;
+
+import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -207,6 +209,13 @@ public class VentanaCreacion extends JFrame {
 		getContentPane().add(panel_1, BorderLayout.NORTH);
 
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Inicio i = new Inicio(bd, f);
+				i.setVisible(true);
+				dispose();
+			}
+		});
 		panel_1.add(btnVolver);
 
 		JButton btnSiguiente = new JButton("Siguiente");
@@ -223,9 +232,7 @@ public class VentanaCreacion extends JFrame {
 				try {
 					destino = Paths.get("src\\iconos\\equipos\\", source.getName());
 					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-				        Robot robot = new Robot();
-				        robot.keyPress(KeyEvent.VK_F5); //Actualiza el Eclipse solo para detectar ya nuestro icono
-				        robot.keyRelease(KeyEvent.VK_A);
+				    actualiza();
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -241,12 +248,14 @@ public class VentanaCreacion extends JFrame {
 				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
 					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
 					try {
+						actualiza();
 						eliminarEquipo(bd, cbSustituye.getSelectedItem().toString(), j, cbSustituye);
 						anyadirEquipo(bd, e1, j, icono);
+						actualiza();
 						VentanaLiga vl = new VentanaLiga(e1, bd, j);
 						vl.setVisible(true);
 						dispose();
-					} catch (SQLException e2) {
+					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
 				}
@@ -258,6 +267,47 @@ public class VentanaCreacion extends JFrame {
 			}
 		});
 		panel_1.add(btnSiguiente);
+		
+		JButton btnActualizarEquipos = new JButton("Actualizar equipos");
+		btnActualizarEquipos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
+					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
+							"ERROR", JOptionPane.WARNING_MESSAGE);
+					System.out.println("No registrado");
+				}
+				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
+					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
+					try {
+						cbSustituye.removeAllItems();
+						try {
+							Logger logger = Logger.getLogger("baseDeDatos");
+							Statement consulta;
+							String comando = "";
+							try {
+								Class.forName("org.sqlite.JDBC");
+								bd.init();
+							} catch (Exception e3) {
+								// e3.printStackTrace();
+							}
+							String query = "SELECT NOMBRE FROM EQUIPOS"+ tfUsuario.getText() + ";";
+							ResultSet rs = bd.getCon().createStatement().executeQuery(query);
+							while (rs.next()) {
+								String nomEq = rs.getString("Nombre");
+								cbSustituye.addItem(new ObjetoCombobox(1, nomEq, null));
+							}
+							rs.close();
+							bd.close();
+						} catch (SQLException sql) {
+							sql.printStackTrace();
+						}
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+				}
+			}
+		});
+		panel_1.add(btnActualizarEquipos);
 
 	}
 
@@ -293,6 +343,14 @@ public class VentanaCreacion extends JFrame {
 		}
 	}
 
+	/** Actualiza el Eclipse solo para detectar ya nuestro icono
+	 * @throws AWTException
+	 */
+	public void actualiza() throws AWTException {
+		Robot robot = new Robot();
+        robot.keyPress(KeyEvent.VK_F5); 
+        robot.keyRelease(KeyEvent.VK_A);
+	}
 	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j, String icono) throws SQLException {
 		try {
 			Class.forName("org.sqlite.JDBC");

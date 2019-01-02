@@ -173,8 +173,10 @@ public class VentanaLiga extends JFrame {
 		JLabel lblEscudoEquipo = new JLabel();
 		ImageIcon imageIconL = null;
 		try {
+			
 			imageIconL = new ImageIcon(getClass().getClassLoader().getResource(e.getBolaEquipo().getRutaImagen()));
 		} catch (Exception ej) {
+			
 			ej.printStackTrace();
 		}
 		resizeo(imageIconL, lblEscudoEquipo, 20, 20);
