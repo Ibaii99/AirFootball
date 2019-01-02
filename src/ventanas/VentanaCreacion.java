@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import entidades.BaseDeDatos;
 import fisicas.FisicasNuevas;
+import jugador.Jugador;
 import objetos.ObjetoCombobox;
 
 import javax.swing.JPanel;
@@ -82,7 +83,6 @@ public class VentanaCreacion extends JFrame {
 			String query = "SELECT NOMBRE FROM EQUIPOS;";
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 			while (rs.next()) {
-
 				String nomEq = rs.getString("Nombre");
 				cbSustituye.addItem(new ObjetoCombobox(1, nomEq, null));
 			}

@@ -59,7 +59,7 @@ public class Inicio extends JFrame {
 		bLiga.setBounds(getWidth() - 150, getHeight() - 100, 119, 40);
 		panel.add(bLiga);
 
-		final JButton bCreacion = new JButton("Creaciï¿½n");
+		final JButton bCreacion = new JButton("Creación");
 		bCreacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VentanaCreacion vc = new VentanaCreacion(bd, f);
