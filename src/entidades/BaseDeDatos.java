@@ -354,7 +354,7 @@ public class BaseDeDatos {
 				String query1 = "SELECT * FROM JUGADORES WHERE NOMBRE='" + nombre + "' AND PASSWORD='" + contrasenya
 						+ "'; ";
 				ResultSet rs = con.createStatement().executeQuery(query1);
-				// System.out.println(rs.getString("NOMBRE")); Prueba
+				System.out.println(rs.getString("NOMBRE"));// Prueba
 				j = new Jugador(nombre, password, rs.getInt("cantidadPartidas"));
 				rs.close();
 				close();
@@ -396,7 +396,8 @@ public class BaseDeDatos {
 					+ "'; ";
 			System.out.println(con);
 			ResultSet rs = con.createStatement().executeQuery(query1);
-			if (rs != null ) esta = true;
+			if (rs != null)
+				esta = true;
 
 		} catch (Exception u) {
 			u.printStackTrace();

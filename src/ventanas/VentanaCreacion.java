@@ -241,13 +241,13 @@ public class VentanaCreacion extends JFrame {
 				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
 					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
 					try {
-
 						eliminarEquipo(bd, cbSustituye.getSelectedItem().toString(), j, cbSustituye);
 						anyadirEquipo(bd, e1, j, icono);
 						VentanaLiga vl = new VentanaLiga(e1, bd, j);
 						vl.setVisible(true);
+						dispose();
 					} catch (SQLException e2) {
-
+						e2.printStackTrace();
 					}
 				}
 				try {
@@ -318,7 +318,7 @@ public class VentanaCreacion extends JFrame {
 				+ e.getEmpatesLocal() + "','" + e.getEmpatesVisitante() + "','" + e.getBolaEquipo().getColor().getRGB()
 				+ "','" + icono + "')";
 		System.out.println(comando);
-		ResultSet rs = bd.getCon().createStatement().executeQuery(comando);
+		bd.getCon().createStatement().executeUpdate(comando);
 		bd.close();
 
 	}
