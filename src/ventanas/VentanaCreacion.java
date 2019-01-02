@@ -277,7 +277,7 @@ public class VentanaCreacion extends JFrame {
 			Class.forName("org.sqlite.JDBC");
 			bd.init();
 		} catch (Exception e3) {
-			// e3.printStackTrace();
+			 e3.printStackTrace();
 		}
 		String query = "DELETE FROM EQUIPOS" + j.getNombre() + "WHERE NOMBRE = " + cb.getSelectedItem().toString()
 				+ ";";
@@ -291,7 +291,7 @@ public class VentanaCreacion extends JFrame {
 			Class.forName("org.sqlite.JDBC");
 			bd.init();
 		} catch (Exception e3) {
-			// e3.printStackTrace();
+			 e3.printStackTrace();
 		}
 		String comando = "INSERT INTO Equipos" + j.getNombre()
 				+ " ('fk_CodLiga', 'fk_Nombre_Jugador','Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
