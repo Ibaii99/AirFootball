@@ -32,7 +32,7 @@ public class Juego {
 	private static FisicasNuevas f = new FisicasNuevas();
 
 	public static void main(String[] args) {
-		Equipo e = new Equipo("ALA", "Deportivo Alav�s", 0, Color.BLUE, ("/iconos/equipos/ala.png"),
+		/*Equipo e = new Equipo("ALA", "Deportivo Alav�s", 0, Color.BLUE, ("/iconos/equipos/ala.png"),
 				"/iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		Equipo u = (new Equipo("ATH", "Athletic Club", 0, Color.RED, ("/iconos/equipos/ath.png"),
 				"/iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
@@ -47,11 +47,13 @@ public class Juego {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	
-		 
-		v.empieza();
+		 v.empieza();
 
-		v.actualizarCampo();
+			v.actualizarCampo(); */
+			
+		 Inicio i = new Inicio(bd, f);
+		 i.setVisible(true);
+		
 	}
 }
 	/*	char[] con ={ 'p', 'a', 's', 's'};
