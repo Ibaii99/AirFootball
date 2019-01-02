@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.FlowLayout;
+import java.awt.Robot;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,6 +36,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -221,14 +223,16 @@ public class VentanaCreacion extends JFrame {
 				try {
 					destino = Paths.get("src\\iconos\\equipos\\", source.getName());
 					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
+				        Robot robot = new Robot();
+				        robot.keyPress(KeyEvent.VK_F5); //Actualiza el Eclipse solo para detectar ya nuestro icono
+				        robot.keyRelease(KeyEvent.VK_A);
+
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText(), 0, Color.black,
-						"iconos/equipos/" + lblLocalizacionIcono.getName(),
-						"iconos/equipos/" + lblLocalizacionIcono.getName(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-						0);
-				
+				String icono = "iconos/equipos/" + source.getName();
+				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText(), 0, Color.black, icono, icono, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 				if (!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
 					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
 							"ERROR", JOptionPane.WARNING_MESSAGE);
@@ -239,7 +243,7 @@ public class VentanaCreacion extends JFrame {
 					try {
 
 						eliminarEquipo(bd, cbSustituye.getSelectedItem().toString(), j, cbSustituye);
-						anyadirEquipo(bd, e1, j);
+						anyadirEquipo(bd, e1, j, icono);
 						VentanaLiga vl = new VentanaLiga(e1, bd, j);
 						vl.setVisible(true);
 					} catch (SQLException e2) {
@@ -289,7 +293,7 @@ public class VentanaCreacion extends JFrame {
 		}
 	}
 
-	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j) throws SQLException {
+	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j, String icono) throws SQLException {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			bd.init();
@@ -298,20 +302,21 @@ public class VentanaCreacion extends JFrame {
 		}
 		String comando = "INSERT INTO Equipos" + j.getNombre()
 				+ " ('fk_CodLiga', 'fk_Nombre_Jugador','Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
-		comando += " VALUES ('" + j.getCodLiga() + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira aqui
-																											// bien lo
-																											// de
-																											// CodLiga
-																											// lo he
-																											// puesto a
-																											// 0
+		comando += " VALUES ('" + j.getCodLiga() + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira
+																															// aqui
+		// bien lo
+		// de
+		// CodLiga
+		// lo he
+		// puesto a
+		// 0
 				+ "','" + e.getPuntos() + "','" + e.getGolesEnContraTotales() + "','" + e.getGolesEnContraLocal()
 				+ "','" + e.getGolesEnContraVisitante() + "','" + e.getGolesAFavorTotales() + "','"
 				+ e.getGolesAFavorLocal() + "','" + e.getGolesAFavorVisitante() + "','" + e.getDerrotasTotales() + "','"
 				+ e.getDerrotasLocal() + "','" + e.getDerrotasVisitante() + "','" + e.getVictoriasTotales() + "','"
 				+ e.getVictoriasLocal() + "','" + e.getVictoriasVisitante() + "','" + e.getEmpatesTotales() + "','"
 				+ e.getEmpatesLocal() + "','" + e.getEmpatesVisitante() + "','" + e.getBolaEquipo().getColor().getRGB()
-				+ "','" + e.getImagen() + "')";
+				+ "','" + icono + "')";
 		System.out.println(comando);
 		ResultSet rs = bd.getCon().createStatement().executeQuery(comando);
 		bd.close();
