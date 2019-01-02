@@ -14,6 +14,8 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.FlowLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -208,7 +210,6 @@ public class VentanaCreacion extends JFrame {
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Jugador j = new Jugador(tfUsuario.getText(), passwordField.getPassword());
 
 				File source = fc.getSelectedFile();
 				Path destino = null; //Universalizamos el selector de imagen. Todo icono escogido se mueve a SRC para que otro usuario pueda acceder a él desde otro ordenador.
@@ -222,6 +223,16 @@ public class VentanaCreacion extends JFrame {
 						"iconos/equipos/" + lblLocalizacionIcono.getName(),
 						"iconos/equipos/" + lblLocalizacionIcono.getName(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 						0);
+				if(!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
+					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÃ‘A ES ERRONEA", "ERROR", JOptionPane.WARNING_MESSAGE);
+				}
+				if(bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
+					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
+					
+//					setVisible(false);
+//					MenuLiga mL = new MenuLiga(800, 800, j, bd,f);
+//					mL.setVisible(true);
+				}
 			}
 		});
 		panel_1.add(btnSiguiente);
