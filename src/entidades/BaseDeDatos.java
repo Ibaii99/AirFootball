@@ -392,7 +392,7 @@ public class BaseDeDatos {
 		boolean esta = false;
 		try {
 			Class.forName("org.sqlite.JDBC");
-			String query1 = "UPDATE * FROM JUGADORES WHERE NOMBRE='" + nombre + "' AND PASSWORD='" + contrasenya
+			String query1 = "SELECT * FROM JUGADORES WHERE NOMBRE='" + nombre + "' AND PASSWORD='" + contrasenya
 					+ "'; ";
 			System.out.println(con);
 			ResultSet rs = con.createStatement().executeQuery(query1);
