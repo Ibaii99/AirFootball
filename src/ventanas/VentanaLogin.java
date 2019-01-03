@@ -32,9 +32,13 @@ public class VentanaLogin extends JDialog {
 	private JButton btnLogin;
 	private JTextField tFNombre;
 	private JPasswordField passwordField;
-
+	private Jugador j;
+	private BaseDeDatos bd;
+	private FisicasNuevas f;
 
 	public  VentanaLogin(BaseDeDatos bd, FisicasNuevas f) {
+		this.bd = bd;
+		this.f = f;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,15 +105,15 @@ public class VentanaLogin extends JDialog {
 						}
 						//SI el jugador no esta entre los jugadores de la BD entonces se creara un nuevo objeto Jugador
 						if(!bd.estaJugadorRegistrado(name)) {
-							Jugador j = new Jugador(name, passwordField.getPassword(), 0);
+							j = new Jugador(name, passwordField.getPassword(), 0);
 							
 							bd.anyadirJugador(j);
 							bd.crearTablaEquipos(j);
 							bd.anyadirTodosLosEquipos(j.getCodLiga(), j);
 							//TODO
 							setVisible(false);
-							MenuLiga mL = new MenuLiga(800, 800, j, bd, f);
-							mL.setVisible(true);
+							siguienteTransicion();
+							
 						}
 						try {
 							bd.close();
@@ -138,11 +142,10 @@ public class VentanaLogin extends JDialog {
 							JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA", "ERROR", JOptionPane.WARNING_MESSAGE);
 						}
 						if(bd.estaJugadorEnBaseDeDatos(name, passwordField.getPassword())) {
-							Jugador j = bd.convertirAJugador(name, passwordField.getPassword());
-							//TODO
+							 j = bd.convertirAJugador(name, passwordField.getPassword());
+							
 							setVisible(false);
-							MenuLiga mL = new MenuLiga(800, 800, j, bd,f);
-							mL.setVisible(true);
+							siguienteTransicion();
 						}
 						try {
 							bd.close();
@@ -151,6 +154,8 @@ public class VentanaLogin extends JDialog {
 							e1.printStackTrace();
 						}
 					}
+
+				
 				});
 			}
 			GroupLayout gl_buttonPane = new GroupLayout(buttonPane);
@@ -172,5 +177,12 @@ public class VentanaLogin extends JDialog {
 			);
 			buttonPane.setLayout(gl_buttonPane);
 		}
+	}	
+	
+	private void siguienteTransicion() {	
+		// esto arrancaria menu liga para volver a elegir equipos pero esto solo se tiene que hacer para crear una nueva liga
+		MenuLiga mL = new MenuLiga(800, 800, j, bd, f);
+		mL.setVisible(true);
+		
 	}
 }

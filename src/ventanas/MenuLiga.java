@@ -107,6 +107,7 @@ public class MenuLiga extends JFrame {
 						v.setVisible(true);
 						dispose();
 						bd.close();
+						//TODO añadir el codliga y crear el archivo
 
 					} catch (Exception e1) {
 

@@ -61,13 +61,13 @@ public class VentanaCreacion extends JFrame {
 	private JPasswordField passwordField;
 
 	/**
-	 * Ventana de modo creación donde podemos diseñar nuestro propio equipo
+	 * Ventana de modo creaciï¿½n donde podemos diseï¿½ar nuestro propio equipo
 	 * 
 	 * @author Jorge
 	 * @param bd
 	 *            Base de datos pasada
 	 * @param f
-	 *            Físicas que se van a llevar desde el inicio del juego hasta los
+	 *            Fï¿½sicas que se van a llevar desde el inicio del juego hasta los
 	 *            partidos que se disputen
 	 */
 	/**
@@ -134,11 +134,11 @@ public class VentanaCreacion extends JFrame {
 		btnExaminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				FileNameExtensionFilter png = new FileNameExtensionFilter("Imágenes(.png)", "png");
+				FileNameExtensionFilter png = new FileNameExtensionFilter("Imï¿½genes(.png)", "png");
 				fc.addChoosableFileFilter(png);
-				FileNameExtensionFilter jpg = new FileNameExtensionFilter("Imágenes(.jpg)", "jpg");
+				FileNameExtensionFilter jpg = new FileNameExtensionFilter("Imï¿½genes(.jpg)", "jpg");
 				fc.addChoosableFileFilter(jpg);
-				FileNameExtensionFilter jpeg = new FileNameExtensionFilter("Imágenes(.jpeg)", "jpeg");
+				FileNameExtensionFilter jpeg = new FileNameExtensionFilter("Imï¿½genes(.jpeg)", "jpeg");
 				fc.addChoosableFileFilter(jpeg);
 				fc.setFileFilter(png);
 				int seleccion = fc.showOpenDialog(getContentPane());
@@ -166,36 +166,36 @@ public class VentanaCreacion extends JFrame {
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblEscudo, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-								.addComponent(lblNombre, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+								.addComponent(lblEscudo, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+								.addComponent(lblNombre, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(tfNombre, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+								.addComponent(tfNombre, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+									.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblLocalizacionIcono, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addComponent(lblSiglas, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+									.addComponent(lblLocalizacionIcono, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblSiglas, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+							.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addGap(18)
-							.addComponent(cbSustituye, 0, 245, Short.MAX_VALUE)
+							.addComponent(cbSustituye, 0, 242, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblUsuario, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addGap(34)
-							.addComponent(tfUsuario, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+							.addComponent(tfUsuario, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblContrasea, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+							.addComponent(lblContrasea, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)))
+							.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)))
 					.addGap(106))
 		);
 		gl_panel.setVerticalGroup(
@@ -203,13 +203,15 @@ public class VentanaCreacion extends JFrame {
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(5)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tfNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(9)
+							.addComponent(tfNombre))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(6)
-							.addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+							.addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblLocalizacionIcono, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+						.addComponent(lblLocalizacionIcono, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblEscudo)
 							.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -223,12 +225,18 @@ public class VentanaCreacion extends JFrame {
 						.addComponent(cbSustituye, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(5)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblUsuario)
-						.addComponent(tfUsuario)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(15)
+							.addComponent(lblUsuario, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(11)
+							.addComponent(tfUsuario))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(6)
-							.addComponent(lblContrasea, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addComponent(passwordField))
+							.addComponent(lblContrasea, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(11)
+							.addComponent(passwordField)))
 					.addGap(4))
 		);
 		panel.setLayout(gl_panel);
@@ -256,7 +264,7 @@ public class VentanaCreacion extends JFrame {
 				}
 				File source = fc.getSelectedFile();
 				Path destino = null; // Universalizamos el selector de imagen. Todo icono escogido se mueve a SRC
-										// para que otro usuario pueda acceder a él desde otro ordenador.
+										// para que otro usuario pueda acceder a ï¿½l desde otro ordenador.
 				try {
 					destino = Paths.get("src\\iconos\\equipos\\", source.getName());
 					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
@@ -269,7 +277,7 @@ public class VentanaCreacion extends JFrame {
 				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText(), 0, Color.black, icono, icono, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 				if (!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
-					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
+					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEï¿½A ES ERRONEA",
 							"ERROR", JOptionPane.WARNING_MESSAGE);
 					System.out.println("No registrado");
 				}
@@ -298,14 +306,14 @@ public class VentanaCreacion extends JFrame {
 
 		JButton btnActualizarEquipos = new JButton(
 				"Actualizar equipos"); /**
-										 * Depende del usuario y contraseña que tengamos en el textfield y el
-										 * passwordfield, nos actualizará los equipos del combobox por los de nuestra
+										 * Depende del usuario y contraseï¿½a que tengamos en el textfield y el
+										 * passwordfield, nos actualizarï¿½ los equipos del combobox por los de nuestra
 										 * liga ya creada
 										 **/
 		btnActualizarEquipos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
-					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
+					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEï¿½A ES ERRONEA",
 							"ERROR", JOptionPane.WARNING_MESSAGE);
 					System.out.println("No registrado");
 				}
@@ -332,12 +340,12 @@ public class VentanaCreacion extends JFrame {
 							rs.close();
 							bd.close();
 						} catch (SQLException sql) {
-							JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
+							JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEï¿½A ES ERRONEA",
 									"ERROR", JOptionPane.WARNING_MESSAGE);
 							System.out.println("No registrado");
 						}
 					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
+						JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEï¿½A ES ERRONEA",
 								"ERROR", JOptionPane.WARNING_MESSAGE);
 						System.out.println("No registrado");
 					}

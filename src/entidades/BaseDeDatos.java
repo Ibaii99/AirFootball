@@ -213,6 +213,18 @@ public class BaseDeDatos {
 			e.printStackTrace();
 		}
 	}
+	
+	public void actualizarJugador(Jugador j) {
+
+		try {
+			init();
+			Class.forName("org.sqlite.JDBC");
+			String query1 = "UPDATE Jugadores SET 'cantidadPartidas'=" + j.getCodLiga()	+ " WHERE Nombre='" + j.getNombre() + "'; ";
+			ResultSet rs = con.createStatement().executeQuery(query1);
+		}catch(Exception i) {
+			
+		}
+	}
 
 	/**
 	 * Metodo para aÃ±adir una liga a un jugador, es decir crear una liga nueva
@@ -232,7 +244,7 @@ public class BaseDeDatos {
 			jugadorJ.incCodLiga();
 			logger.log(Level.INFO, query);
 			liga.execute(query);
-
+			actualizarJugador(jugadorJ);
 			// System.out.println(rs.getString("CodLiga"));
 			con.close();
 		} catch (SQLException e) {
@@ -359,8 +371,9 @@ public class BaseDeDatos {
 				j = new Jugador(nombre, password, rs.getInt("cantidadPartidas"));
 				rs.close();
 				close();
+				System.out.println(j.getCodLiga());
 			} catch (Exception u) {
-				JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
+				JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEï¿½A ES ERRONEA",
 						"ERROR", JOptionPane.WARNING_MESSAGE);
 				System.out.println("No registrado");
 			}
