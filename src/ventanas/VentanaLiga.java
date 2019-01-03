@@ -234,7 +234,7 @@ public class VentanaLiga extends JFrame {
 	}
 
 	/**
-	 * Método burbuja para añadir a la tabla a la que se pasa la base de datos, el jugador, y el equipo escogido
+	 * Mï¿½todo burbuja para aï¿½adir a la tabla a la que se pasa la base de datos, el jugador, y el equipo escogido
 	 * @param bd Base de datos
 	 * @param j Jugador
 	 * @param e Equipo escogido
@@ -251,7 +251,7 @@ public class VentanaLiga extends JFrame {
 			} catch (Exception e3) {
 				e3.printStackTrace();
 			}
-			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " ORDER BY PUNTOS DESC;"; //Método burbuja para ordenar equipos por puntos.
+			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " ORDER BY PUNTOS DESC;"; //Mï¿½todo burbuja para ordenar equipos por puntos.
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 			while (rs.next()) {
 
@@ -331,7 +331,7 @@ class TeamBold extends DefaultTableCellRenderer {
 			parent.setBackground(Color.orange);
 			parent.setForeground(Color.BLACK);
 		} else if (row >= 17 && row < 20 && column == 0) { 
-			parent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iconos/Descenso.png")));
+			parent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iconos/DESCENSO.png")));
 			parent2.setText("" + (row + 1));
 			parent.setBackground(new Color(153, 0, 0));
 			parent.setForeground(Color.WHITE);
