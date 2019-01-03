@@ -29,11 +29,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-public class CargarGuardar extends JDialog {
+public class CargarCrear extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-	public CargarGuardar(Jugador j, FisicasNuevas f, BaseDeDatos bd) {
+	public CargarCrear(Jugador j, FisicasNuevas f, BaseDeDatos bd) {
 		setBounds(100, 100, 487, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

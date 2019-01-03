@@ -183,7 +183,7 @@ public class VentanaLogin extends JDialog {
 	
 	private void siguienteTransicion() {	
 		// esto arrancaria menu liga para volver a elegir equipos pero esto solo se tiene que hacer para crear una nueva liga
-		CargarGuardar cG = new CargarGuardar(j, f, bd);
+		CargarCrear cG = new CargarCrear(j, f, bd);
 		cG.setVisible(true);
 		setVisible(false);
 		

@@ -290,6 +290,7 @@ public class VentanaCreacion extends JFrame {
 						anyadirEquipo(bd, e1, j, icono);
 						actualiza();
 						Inicio i = new Inicio(bd, f);
+						i.setVisible(true);
 						//VentanaLiga vl = new VentanaLiga(e1, bd, j, j.devolverPartidosRestantes(Integer.parseInt(tfCodLiga.getText()), bd));
 						//vl.setVisible(true);
 						dispose();
