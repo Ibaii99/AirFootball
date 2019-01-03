@@ -1,5 +1,9 @@
 package fisicas;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import javax.swing.plaf.ActionMapUIResource;
 
 import entidades.Equipo;
@@ -8,7 +12,8 @@ import objetos.Poste;
 import ventanas.ventanaPartido;
 
 /**
- * @author ibai
+ * @author Ibai
+ * @author Jorge (simplemente arreglar algunos bugs para que funcione el hilo correctamente, el autor de los métodos es Ibai)
  *
  */
 public class FisicasNuevas {
@@ -64,7 +69,27 @@ public class FisicasNuevas {
 	
 		if((equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) < p.getX() && p.getX() < (equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES)
 				&& (equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) < p.getY() && p.getY() < (equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES)) { 
-				
+//				try {
+//				Robot robot = new Robot();
+//				robot.keyPress(KeyEvent.VK_U);
+//				robot.keyRelease(KeyEvent.VK_U);
+//				
+//				robot.keyPress(KeyEvent.VK_W);
+//				robot.keyRelease(KeyEvent.VK_W);
+//				
+//				robot.keyPress(KeyEvent.VK_U);
+//				robot.keyRelease(KeyEvent.VK_U);
+//				
+//				robot.keyPress(KeyEvent.VK_UP);
+//				robot.keyRelease(KeyEvent.VK_UP);
+//				
+//				robot.keyPress(KeyEvent.VK_U);
+//				robot.keyRelease(KeyEvent.VK_U);
+//				
+//				}catch(Exception eee) {
+//					
+//				}
+			
 				System.out.println("DENTRO");
 		
 			//TODO

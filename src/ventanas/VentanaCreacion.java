@@ -58,6 +58,20 @@ public class VentanaCreacion extends JFrame {
 	private JTextField tfUsuario;
 	private JPasswordField passwordField;
 
+	/**
+	 * Ventana de modo creación donde podemos diseñar nuestro propio equipo
+	 * 
+	 * @author Jorge
+	 * @param bd
+	 *            Base de datos pasada
+	 * @param f
+	 *            Físicas que se van a llevar desde el inicio del juego hasta los
+	 *            partidos que se disputen
+	 */
+	/**
+	 * @param bd
+	 * @param f
+	 */
 	public VentanaCreacion(BaseDeDatos bd, FisicasNuevas f) {
 		JFileChooser fc = new JFileChooser();
 		setSize(550, 239);
@@ -232,7 +246,7 @@ public class VentanaCreacion extends JFrame {
 				try {
 					destino = Paths.get("src\\iconos\\equipos\\", source.getName());
 					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-				    actualiza();
+					actualiza();
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -267,8 +281,13 @@ public class VentanaCreacion extends JFrame {
 			}
 		});
 		panel_1.add(btnSiguiente);
-		
-		JButton btnActualizarEquipos = new JButton("Actualizar equipos");
+
+		JButton btnActualizarEquipos = new JButton(
+				"Actualizar equipos"); /**
+										 * Depende del usuario y contraseña que tengamos en el textfield y el
+										 * passwordfield, nos actualizará los equipos del combobox por los de nuestra
+										 * liga ya creada
+										 **/
 		btnActualizarEquipos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
@@ -290,7 +309,7 @@ public class VentanaCreacion extends JFrame {
 							} catch (Exception e3) {
 								// e3.printStackTrace();
 							}
-							String query = "SELECT NOMBRE FROM EQUIPOS"+ tfUsuario.getText() + ";";
+							String query = "SELECT NOMBRE FROM EQUIPOS" + tfUsuario.getText() + ";";
 							ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 							while (rs.next()) {
 								String nomEq = rs.getString("Nombre");
@@ -343,14 +362,17 @@ public class VentanaCreacion extends JFrame {
 		}
 	}
 
-	/** Actualiza el Eclipse solo para detectar ya nuestro icono
+	/**
+	 * Actualiza el Eclipse solo para detectar ya nuestro icono
+	 * 
 	 * @throws AWTException
 	 */
 	public void actualiza() throws AWTException {
 		Robot robot = new Robot();
-        robot.keyPress(KeyEvent.VK_F5); 
-        robot.keyRelease(KeyEvent.VK_A);
+		robot.keyPress(KeyEvent.VK_F5);
+		robot.keyRelease(KeyEvent.VK_F5);
 	}
+
 	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j, String icono) throws SQLException {
 		try {
 			Class.forName("org.sqlite.JDBC");
