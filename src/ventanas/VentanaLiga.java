@@ -330,8 +330,8 @@ class TeamBold extends DefaultTableCellRenderer {
 			parent2.setText("" + (row + 1));
 			parent.setBackground(Color.orange);
 			parent.setForeground(Color.BLACK);
-		} else if (row >= 17 && row < 20 && column == 0) {
-			parent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iconos/DESCENSO.png")));
+		} else if (row >= 17 && row < 20 && column == 0) { 
+			parent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iconos/Descenso.png")));
 			parent2.setText("" + (row + 1));
 			parent.setBackground(new Color(153, 0, 0));
 			parent.setForeground(Color.WHITE);
