@@ -236,11 +236,11 @@ public class MenuAmistoso extends JFrame {
 				dispose();
 				char[] a = { 'a', 'b', 'c' };
 
-				Equipo eLocal = bd.convertirAEquipo(cbLocal.getSelectedItem().toString(), new Jugador("", a, 0),1);
+				Equipo eLocal = bd.convertirAEquipo(cbLocal.getSelectedItem().toString(), new Jugador("", a, 0),0);
 				System.out.println(eLocal.toString());
 
 				Equipo eVisitante = bd.convertirAEquipo(cbVisitante.getSelectedItem().toString(),
-						new Jugador("", a, 0), 1);
+						new Jugador("", a, 0), 0);
 				System.out.println(eVisitante.toString());
 				Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
 

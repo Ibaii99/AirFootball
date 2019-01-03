@@ -325,7 +325,7 @@ public class VentanaCreacion extends JFrame {
 				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
 					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
 					try {
-						cbSustituye.removeAllItems();
+						cbSustituye.removeAllItems(); 
 						try {
 							Logger logger = Logger.getLogger("baseDeDatos");
 							Statement consulta;
