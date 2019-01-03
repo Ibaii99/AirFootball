@@ -1,6 +1,6 @@
-UUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUWUUUWUUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUUUWUpackUUWUage fisicas;
-UUWU
-impoUUWUrt java.awt.AWTException;
+package fisicas;
+
+import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
@@ -10,221 +10,221 @@ import entidades.Equipo;
 import objetos.Pelota;
 import objetos.Poste;
 import ventanas.ventanaPartido;
-UUWU
-/**UUWU
- * @authorUUWU Ibai
- * @auUUWUthor Jorge (simplemente arreglar algunos bugs para que funcione el hilo correctamente, el autor de los m�todos es Ibai)
- *UUWU
- */UUWU
-public class FisicasNuevas {UUWU
-	public static double TIEUUWUMPO = 1;
-	public static doubleUUWU COEFICIENTE_PERDIDA_PELOTA = 0.991;
-	public static doUUWUuble COEFICIENTE_PERDIDA_EQUIPO = 0.90;
-	public statiUUWUc double VELOCIDAD_MAX_PELOTA = 6;
-	public sUUWUtatic double VELOCIDAD_MAX_EQUIPO = 5;
-	privUUWUate static double MARGEN_SEGURIDAD_REBOTES = 10;
-	UUWU
-	// TengoUUWU que hacer metodos para saber la posicion esperada de la pelota, 
-	// YUUWU el tiempo en el que se calcule eso
-	UUWU
-	UUWU
-	////UUWU///////////////////////////PELOTA Y EQUIPOS///////////////////////////////////////
-	UUWU
-	/** Metodo que calcUUWUula el choque entre la pelota y un equipo SOLO si hay choque
-	 * 	sino el metUUWUodo no hace nada
-	 * @param pUUWU			Pelota
-	 * @parUUWUam equipo	Equipo
-	 */UUWU
-	public voUUWUid choquePelotaEquipo(Pelota p,Equipo equipo) {
-		iUUWUf(chocanPelotas(p, equipo)) cambioVelocidadesChoquePelotaEquipo(p, equipo);
-	}UUWU
-	 UUWU
-	////UUWU///////////////////Metodos internos para calcularlo/////////////////////////////////
-	UUWU
-	/** Metodo para sabUUWUer si hay o ha habido un choque en las posiciones de la pelota y el equipo
-	 * @param p1 PeUUWUlota 1
-	 * @param eUUWUquipo Equipo con el que choca
-	 * @retUUWUurn Devuelve true si es verdad, false si no
-	 */UUWU
-	private boolean UUWUchocanPelotas(Pelota p1, Equipo equipo) {
-		boolean UUWUchocan = false;
-		if(MUUWUath.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
-		UUWU
-		if((equipo.gUUWUetBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()) < p1.getX() && p1.getX() < (equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio())
-				UUWU&& (equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()) < p1.getY() && p1.getY() < (equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio())
-			UUWU	) chocan = false;
-		rUUWUeturn chocan;
-	}UUWU
-	/**	Metodo para cambiarUUWU las velocidades de una pelota cuando esta choca con un equipo
-	 *  Suponiendo un cUUWUhoque elastico de velPelo = velPelo*masaPelo - velEqui*masaEqui
-	 *  El equipo nUUWUo se ver� afectado por el choque y si la pelota se metre dentro del equipo
-	 *  se sacaUUWU
-	 * @param pUUWU			Pelota que va a sufrir el choque
-	 * @parUUWUam equipo	Equipo con el que choca la pelota
-	 */UUWU
-	private void camUUWUbioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
-		p.setxAnUUWUtes(p.getX());
-		p.seUUWUtyAntes(p.getY());
-		UUWU
-	UUWU
-		if((equipo.getBolaEquUUWUipo().getX()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) < p.getX() && p.getX() < (equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES)
-				&& (equipUUWUo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) < p.getY() && p.getY() < (equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES)) { 
-//				try {UUWU
-//				Robot robot UUWU= new Robot();
-//				robot.keUUWUyPress(KeyEvent.VK_U);
-//				roboUUWUt.keyRelease(KeyEvent.VK_U);
-//				UUWU
-//				robot.keUUWUyPress(KeyEvent.VK_W);
-//				roboUUWUt.keyRelease(KeyEvent.VK_W);
-//				UUWU
-//				robot.keUUWUyPress(KeyEvent.VK_U);
-//				roboUUWUt.keyRelease(KeyEvent.VK_U);
-//				UUWU
-//				robot.keUUWUyPress(KeyEvent.VK_UP);
-//				roboUUWUt.keyRelease(KeyEvent.VK_UP);
-//				UUWU
-//				robot.keUUWUyPress(KeyEvent.VK_U);
-//				roboUUWUt.keyRelease(KeyEvent.VK_U);
-//				UUWU
-//				}catch(EUUWUxception eee) {
-//					UUWU
-//				UUWU}
-			UUWU
-			UUWU	System.out.println("DENTRO");
-		UUWU
-			//TODOUUWU
-				UUWU
-				if(pUUWU.getX() > equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getX()+p.getRadio()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY());}// la bola esta a la derecha del equipo
-				UUWUif(p.getX() < equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getX()-p.getRadio()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY());}// la bola esta a la izquierda del equipo
-			UUWU	if(p.getY() > equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getY()+p.getRadio()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX());}// la bola esta encima del equipo
-		UUWU		if(p.getY() < equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getY()-p.getRadio()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX());}// la bola esta debajo del equipo
-	UUWU			//cambioVelocidadesChoquePelotaEquipo(p, equipo);
-UUWU
-//				if(p.getUUWUVelX()<0)p.setVelX(p.getVelX() -equipo.getBolaEquipo().getRadio()/2);
-//				if(pUUWU.getVelX()>0)p.setVelX(p.getVelX() +equipo.getBolaEquipo().getRadio()/2);
-//				UUWU
-//				if(p.getUUWUVelY()<0)p.setVelY(p.getVelY() -equipo.getBolaEquipo().getRadio()/2);
-//				if(pUUWU.getVelY()>0)p.setVelY(p.getVelY() +equipo.getBolaEquipo().getRadio()/2);
-//				UUWU
-			}UUWU
-		if(!igualACeUUWUro(equipo.getBolaEquipo().getVelX())&& !igualACero(equipo.getBolaEquipo().getVelY())) {
-			cambUUWUiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*4, (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*4);//multiplico por dos para que no se quede pegado al jlabel
-			UUWU
-			}UUWU
-			UUWU
-			if(igualACerUUWUo(equipo.getBolaEquipo().getVelX())&& igualACero(equipo.getBolaEquipo().getVelY())) {
-				cambUUWUiarVelocidadPelota(p, -(p.getVelX()*p.getMasa() )*2,-(p.getVelY()*p.getMasa())*2); //multiplico por dos para que no se quede pegado al jlabel
-				UUWU
-			UUWU}
-		UUWU
-			UUWU
-			UUWU
-			SystUUWUem.out.println(equipo.getBolaEquipo().getX() + "   " + equipo.getBolaEquipo().getY());
-			UUWUSystem.out.println(p.getX() + "   " + p.getY());
-		UUWU	
-	}UUWU
-	UUWU
-////////UUWU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	UUWU
-	UUWU
-	////UUWU///////////////////////////PELOTA Y BORDES///////////////////////////////////////
-	UUWU
-	public sUUWUtatic void setTIEMPO(double tIEMPO) {
-		UUWUTIEMPO = tIEMPO;
-	UUWU}
-UUWU
-	/** Metodo que UUWUcalcula el choque de la pelota con el borde SOLO si ocurre el choque
-	 * @param vUUWU		Ventana con los bordes
-	 * @parUUWUam p		Pelota con la que se juega
-	 */UUWU
-	public void cUUWUhoquePelotaBorde(ventanaPartido v, Pelota p) {
-		if(reUUWUbotaeEnBordeArribAbaj(v, p)) choqueEnBordeArribaoAbajo(v, p);
-		iUUWUf(rebotaeEnBordederIzq(v, p)) choqueEnBordeIzquDer(v, p);
-	}UUWU
-	UUWU
-	////UUWU///////////////////Metodos internos para calcularlo/////////////////////////////////
-	UUWU
-	/** Metodo para sabUUWUer si ha ocurrido u ocurre algun choque en los bordes verticales del campo
-	 * @param v	 VeUUWUntana donde se juega el partido
-	 * @param pUUWU	 Pelota con la que se esta jugando
-	 * @retUUWUurn	 Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
-	 */UUWU
-	private boolean rebotUUWUaeEnBordeArribAbaj(ventanaPartido v, Pelota p) {
-		boolean hayReUUWUbote = false;
-		if(v.getPUUWUanelCampo().getSize().getHeight() <= (p.getY() + p.getRadio()+1))hayRebote = true;	//Choca arriba
-		if((pUUWU.getY() - p.getRadio()) <= 0)hayRebote = true;						//Choca abajo
-		rUUWUeturn hayRebote;
-	}UUWU
-	/** Metodo para sabUUWUer si ha ocurrido u ocurre algun choque en los bordes verticales del campo
-	 * @param v	 VeUUWUntana donde se juega el partido
-	 * @param pUUWU	 Pelota con la que se esta jugando
-	 * @retUUWUurn	 Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
-	 */UUWU
-	private boolean reboUUWUtaeEnBordederIzq(ventanaPartido v, Pelota p) {
-		boolean hayRUUWUebote = false;
-		if(v.getUUWUPanelCampo().getSize().getWidth()  <= (p.getX() + p.getRadio()+1))hayRebote = true;	//Choca en la derecha
-		if((UUWUp.getX() - p.getRadio()) <= 0)hayRebote = true;						//Choca a la izquierda
-		UUWUreturn hayRebote;
-	UUWU}
-UUWU
-	/**	Metodo para cambiarUUWU posicion si hay choque Arriba o abajo
-	 *  y reduce la velUUWUocidad de la bola como consecuencia del impacto
-	 *  para hacerlUUWUo mas real se reduce un 10%
-	 * @param vUUWU		Ventana donde ocurre el choque
-	 * @parUUWUam p		Pelota que genera el choque
-	 */UUWU
-	private void choqueEnUUWUBordeArribaoAbajo(ventanaPartido v, Pelota p) {
-		// Invierto lUUWUos vectores de velocidad
-		if(!igualUUWUACero(p.getVelY())&&!igualACero(p.getVelX())) {
-			cUUWUambiarVelocidadPelota(p, p.getVelX()*0.90, -p.getVelY()*0.90);
-		}UUWU
-		if(iUUWUgualACero(p.getVelY())&&igualACero(p.getVelX())) {
-		UUWUcambiarVelocidadPelota(p, 0, 0);}
-	UUWU}
-UUWU
-	/**	Metodo para cambiarUUWU posicion si hay choque a la derecha o izquierda
-	 *  y reduce la velUUWUocidad de la bola como consecuencia del impacto
-	 *  para hacerlUUWUo mas real se reduce un 10%
-	 * @param vUUWU		Ventana donde ocurre el choque
-	 * @parUUWUam p		Pelota que genera el choque
-	 */UUWU
-	private void choqueEnUUWUBordeIzquDer(ventanaPartido v, Pelota p) {
-		// Invierto lUUWUos vectores de velocidad
-		if(!igualUUWUACero(p.getVelY())&&!igualACero(p.getVelX())) {
-			cUUWUambiarVelocidadPelota(p, -p.getVelX()*0.90, p.getVelY()*0.90);
-		}UUWU
-		if(igUUWUualACero(p.getVelY())&&igualACero(p.getVelX())) {
-		cUUWUambiarVelocidadPelota(p, 0, 0);}
-	}UUWU
-	UUWU
-	UUWU
-////UUWU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-UUWU
-	////UUWU///////////////////////////PELOTA Y POSTES///////////////////////////////////////
-	UUWU
-	/** Metodo que calcula el choqueUUWU de la pelota con un poste SOLO si ocurre
-	 * @param v					UUWUVentana de partido
-	 * @param paloArribDer	UUWU	Poste
-	 * @param paloAbajoUUWUDer		Poste
-	 * @param paloAUUWUrribIzq		Poste
-	 * @param pUUWUaloAbajoIzq		Poste
-	 * @parUUWUam p					Pelota
-	 */UUWU
-	public void choquePeUUWUlotaPoste(ventanaPartido v, Poste paloArribDer, Poste paloAbajoDer, Poste paloArribIzq, Poste paloAbajoIzq, Pelota p) {
-		if(daAlPosteUUWU(v, p, paloArribDer) || daAlPoste(v, p, paloAbajoDer) ||daAlPoste(v, p, paloArribIzq) ||daAlPoste(v, p, paloAbajoIzq)) {
-			p.seUUWUtVelX(-p.getVelXAntes()*COEFICIENTE_PERDIDA_PELOTA);
-			UUWUp.setVelY(-p.getVelYAntes()*COEFICIENTE_PERDIDA_PELOTA);}
-		UUWU}
-	UUWU
-	////UUWU///////////////////Metodos internos para calcularlo/////////////////////////////////
-	UUWU
-	/** Metodo para saber siUUWU la pelota ha chocado o choca contra un poste
-	 * @param v			UUWUVentana donde se juega el partido
-	 * @param pelotUUWUa	Pelota con la que se esta jugando
-	 * @param pUUWUalo		Palo del que se quiere saber
-	 * @retUUWUurn			Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
-	 */UUWU
-	public boolean daAlPoste(ventanaPartidUo v, Pelota pelota, Poste palo) {
+
+/**
+ * @author Ibai
+ * @author Jorge (simplemente arreglar algunos bugs para que funcione el hilo correctamente, el autor de los m�todos es Ibai)
+ *
+ */
+public class FisicasNuevas {
+	public static double TIEMPO = 1;
+	public static double COEFICIENTE_PERDIDA_PELOTA = 0.991;
+	public static double COEFICIENTE_PERDIDA_EQUIPO = 0.90;
+	public static double VELOCIDAD_MAX_PELOTA = 6;
+	public static double VELOCIDAD_MAX_EQUIPO = 5;
+	private static double MARGEN_SEGURIDAD_REBOTES = 10;
+	
+	// Tengo que hacer metodos para saber la posicion esperada de la pelota, 
+	// Y el tiempo en el que se calcule eso
+	
+	
+	///////////////////////////////PELOTA Y EQUIPOS///////////////////////////////////////
+	
+	/** Metodo que calcula el choque entre la pelota y un equipo SOLO si hay choque
+	 * 	sino el metodo no hace nada
+	 * @param p			Pelota
+	 * @param equipo	Equipo
+	 */
+	public void choquePelotaEquipo(Pelota p,Equipo equipo) {
+		if(chocanPelotas(p, equipo)) cambioVelocidadesChoquePelotaEquipo(p, equipo);
+	}
+	 
+	///////////////////////Metodos internos para calcularlo/////////////////////////////////
+	
+	/** Metodo para saber si hay o ha habido un choque en las posiciones de la pelota y el equipo
+	 * @param p1 Pelota 1
+	 * @param equipo Equipo con el que choca
+	 * @return Devuelve true si es verdad, false si no
+	 */
+	private boolean chocanPelotas(Pelota p1, Equipo equipo) {
+		boolean chocan = false;
+		if(Math.abs(p1.getX() - equipo.getBolaEquipo().getX())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()) && Math.abs(p1.getY() - equipo.getBolaEquipo().getY())<= (p1.getRadio() + equipo.getBolaEquipo().getRadio()))chocan = true;
+		
+		if((equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()) < p1.getX() && p1.getX() < (equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio())
+				&& (equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()) < p1.getY() && p1.getY() < (equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio())
+				) chocan = false;
+		return chocan;
+	}
+	/**	Metodo para cambiar las velocidades de una pelota cuando esta choca con un equipo
+	 *  Suponiendo un choque elastico de velPelo = velPelo*masaPelo - velEqui*masaEqui
+	 *  El equipo no se ver� afectado por el choque y si la pelota se metre dentro del equipo
+	 *  se saca
+	 * @param p			Pelota que va a sufrir el choque
+	 * @param equipo	Equipo con el que choca la pelota
+	 */
+	private void cambioVelocidadesChoquePelotaEquipo (Pelota p,Equipo equipo) {
+		p.setxAntes(p.getX());
+		p.setyAntes(p.getY());
+		
+	
+		if((equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) < p.getX() && p.getX() < (equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES)
+				&& (equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) < p.getY() && p.getY() < (equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES)) { 
+//				try {
+//				Robot robot = new Robot();
+//				robot.keyPress(KeyEvent.VK_U);
+//				robot.keyRelease(KeyEvent.VK_U);
+//				
+//				robot.keyPress(KeyEvent.VK_W);
+//				robot.keyRelease(KeyEvent.VK_W);
+//				
+//				robot.keyPress(KeyEvent.VK_U);
+//				robot.keyRelease(KeyEvent.VK_U);
+//				
+//				robot.keyPress(KeyEvent.VK_UP);
+//				robot.keyRelease(KeyEvent.VK_UP);
+//				
+//				robot.keyPress(KeyEvent.VK_U);
+//				robot.keyRelease(KeyEvent.VK_U);
+//				
+//				}catch(Exception eee) {
+//					
+//				}
+			
+				System.out.println("DENTRO");
+		
+			//TODO
+				
+				if(p.getX() > equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getX()+p.getRadio()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY());}// la bola esta a la derecha del equipo
+				if(p.getX() < equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) {p.setX(p.getX()-p.getRadio()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES);p.setY(equipo.getBolaEquipo().getY());}// la bola esta a la izquierda del equipo
+				if(p.getY() > equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getY()+p.getRadio()+equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX());}// la bola esta encima del equipo
+				if(p.getY() < equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()+MARGEN_SEGURIDAD_REBOTES) {p.setY(p.getY()-p.getRadio()-equipo.getBolaEquipo().getRadio()-MARGEN_SEGURIDAD_REBOTES);p.setX(equipo.getBolaEquipo().getX());}// la bola esta debajo del equipo
+				//cambioVelocidadesChoquePelotaEquipo(p, equipo);
+
+//				if(p.getVelX()<0)p.setVelX(p.getVelX() -equipo.getBolaEquipo().getRadio()/2);
+//				if(p.getVelX()>0)p.setVelX(p.getVelX() +equipo.getBolaEquipo().getRadio()/2);
+//				
+//				if(p.getVelY()<0)p.setVelY(p.getVelY() -equipo.getBolaEquipo().getRadio()/2);
+//				if(p.getVelY()>0)p.setVelY(p.getVelY() +equipo.getBolaEquipo().getRadio()/2);
+//				
+			}
+		if(!igualACero(equipo.getBolaEquipo().getVelX())&& !igualACero(equipo.getBolaEquipo().getVelY())) {
+			cambiarVelocidadPelota(p, (-p.getVelX()*p.getMasa() + equipo.getBolaEquipo().getVelX()*equipo.getBolaEquipo().getMasa())*4, (-p.getVelY()*p.getMasa() + equipo.getBolaEquipo().getVelY()*equipo.getBolaEquipo().getMasa())*4);//multiplico por dos para que no se quede pegado al jlabel
+			
+			}
+			
+			if(igualACero(equipo.getBolaEquipo().getVelX())&& igualACero(equipo.getBolaEquipo().getVelY())) {
+				cambiarVelocidadPelota(p, -(p.getVelX()*p.getMasa() )*2,-(p.getVelY()*p.getMasa())*2); //multiplico por dos para que no se quede pegado al jlabel
+				
+			}
+		
+			
+			
+			System.out.println(equipo.getBolaEquipo().getX() + "   " + equipo.getBolaEquipo().getY());
+			System.out.println(p.getX() + "   " + p.getY());
+			
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	///////////////////////////////PELOTA Y BORDES///////////////////////////////////////
+	
+	public static void setTIEMPO(double tIEMPO) {
+		TIEMPO = tIEMPO;
+	}
+
+	/** Metodo que calcula el choque de la pelota con el borde SOLO si ocurre el choque
+	 * @param v		Ventana con los bordes
+	 * @param p		Pelota con la que se juega
+	 */
+	public void choquePelotaBorde(ventanaPartido v, Pelota p) {
+		if(rebotaeEnBordeArribAbaj(v, p)) choqueEnBordeArribaoAbajo(v, p);
+		if(rebotaeEnBordederIzq(v, p)) choqueEnBordeIzquDer(v, p);
+	}
+	
+	///////////////////////Metodos internos para calcularlo/////////////////////////////////
+	
+	/** Metodo para saber si ha ocurrido u ocurre algun choque en los bordes verticales del campo
+	 * @param v	 Ventana donde se juega el partido
+	 * @param p	 Pelota con la que se esta jugando
+	 * @return	 Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
+	 */
+	private boolean rebotaeEnBordeArribAbaj(ventanaPartido v, Pelota p) {
+		boolean hayRebote = false;
+		if(v.getPanelCampo().getSize().getHeight() <= (p.getY() + p.getRadio()+1))hayRebote = true;	//Choca arriba
+		if((p.getY() - p.getRadio()) <= 0)hayRebote = true;						//Choca abajo
+		return hayRebote;
+	}
+	/** Metodo para saber si ha ocurrido u ocurre algun choque en los bordes verticales del campo
+	 * @param v	 Ventana donde se juega el partido
+	 * @param p	 Pelota con la que se esta jugando
+	 * @return	 Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
+	 */
+	private boolean rebotaeEnBordederIzq(ventanaPartido v, Pelota p) {
+		boolean hayRebote = false;
+		if(v.getPanelCampo().getSize().getWidth()  <= (p.getX() + p.getRadio()+1))hayRebote = true;	//Choca en la derecha
+		if((p.getX() - p.getRadio()) <= 0)hayRebote = true;						//Choca a la izquierda
+		return hayRebote;
+	}
+
+	/**	Metodo para cambiar posicion si hay choque Arriba o abajo
+	 *  y reduce la velocidad de la bola como consecuencia del impacto
+	 *  para hacerlo mas real se reduce un 10%
+	 * @param v		Ventana donde ocurre el choque
+	 * @param p		Pelota que genera el choque
+	 */
+	private void choqueEnBordeArribaoAbajo(ventanaPartido v, Pelota p) {
+		// Invierto los vectores de velocidad
+		if(!igualACero(p.getVelY())&&!igualACero(p.getVelX())) {
+			cambiarVelocidadPelota(p, p.getVelX()*0.90, -p.getVelY()*0.90);
+		}
+		if(igualACero(p.getVelY())&&igualACero(p.getVelX())) {
+		cambiarVelocidadPelota(p, 0, 0);}
+	}
+
+	/**	Metodo para cambiar posicion si hay choque a la derecha o izquierda
+	 *  y reduce la velocidad de la bola como consecuencia del impacto
+	 *  para hacerlo mas real se reduce un 10%
+	 * @param v		Ventana donde ocurre el choque
+	 * @param p		Pelota que genera el choque
+	 */
+	private void choqueEnBordeIzquDer(ventanaPartido v, Pelota p) {
+		// Invierto los vectores de velocidad
+		if(!igualACero(p.getVelY())&&!igualACero(p.getVelX())) {
+			cambiarVelocidadPelota(p, -p.getVelX()*0.90, p.getVelY()*0.90);
+		}
+		if(igualACero(p.getVelY())&&igualACero(p.getVelX())) {
+		cambiarVelocidadPelota(p, 0, 0);}
+	}
+	
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	///////////////////////////////PELOTA Y POSTES///////////////////////////////////////
+	
+	/** Metodo que calcula el choque de la pelota con un poste SOLO si ocurre
+	 * @param v					Ventana de partido
+	 * @param paloArribDer		Poste
+	 * @param paloAbajoDer		Poste
+	 * @param paloArribIzq		Poste
+	 * @param paloAbajoIzq		Poste
+	 * @param p					Pelota
+	 */
+	public void choquePelotaPoste(ventanaPartido v, Poste paloArribDer, Poste paloAbajoDer, Poste paloArribIzq, Poste paloAbajoIzq, Pelota p) {
+		if(daAlPoste(v, p, paloArribDer) || daAlPoste(v, p, paloAbajoDer) ||daAlPoste(v, p, paloArribIzq) ||daAlPoste(v, p, paloAbajoIzq)) {
+			p.setVelX(-p.getVelXAntes()*COEFICIENTE_PERDIDA_PELOTA);
+			p.setVelY(-p.getVelYAntes()*COEFICIENTE_PERDIDA_PELOTA);}
+		}
+	
+	///////////////////////Metodos internos para calcularlo/////////////////////////////////
+	
+	/** Metodo para saber si la pelota ha chocado o choca contra un poste
+	 * @param v			Ventana donde se juega el partido
+	 * @param pelota	Pelota con la que se esta jugando
+	 * @param palo		Palo del que se quiere saber
+	 * @return			Devuelve: True si ha ocurrido u ocurre / False si no ocurre o no ha ocurrido
+	 */
+	public boolean daAlPoste(ventanaPartido v, Pelota pelota, Poste palo) {
 		boolean hayChoque = false;
 		if( Math.abs(palo.getX() - pelota.getX()) <= (pelota.getRadio() + palo.RADIO_POSTE) && Math.abs(palo.getY() - pelota.getY()) <= (pelota.getRadio() + palo.RADIO_POSTE)) hayChoque = true;
 		
