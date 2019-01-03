@@ -105,13 +105,14 @@ public class ventanaPartido extends JFrame {
 	private Jugador j;
 
 	// modificar constructor ventana, pone pelota en posicion no correcta
-	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso,
+	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esArcade, boolean esAmistoso,
 			boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas, BaseDeDatos bd, Jugador j) {
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.fisicas = fisicas;
 		this.isJugadorEquipoLocal = esJugadorVSMaquinaEquipoLocal;
 		this.isMultijugador = esMultijjugador;
+		this.arcade = esArcade;
 		this.isAmistoso = esAmistoso;
 		this.eLocal = eLocal;
 		this.eVisitante = eVisitante;
