@@ -449,7 +449,7 @@ public class BaseDeDatos {
 			Class.forName("org.sqlite.JDBC");
 			String query1 = "SELECT * FROM JUGADORES WHERE NOMBRE='" + nombre + "'; ";
 			ResultSet rs = con.createStatement().executeQuery(query1);
-			if (rs != null)
+			if (rs.getString(1) != null)
 				esta = true;
 			close();
 		} catch (Exception u) {
