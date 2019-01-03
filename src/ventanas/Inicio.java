@@ -109,21 +109,7 @@ public class Inicio extends JFrame {
 			private Equipo eLocal;
 
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					eLocal = equipoRandom(bd, eLocal);
-					eVisitante = equipoRandom(bd, eVisitante);
-					Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
-					ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, true, false, f,
-							bd, null);
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					partido.empieza();
-				} catch (Exception eee) {
-					eee.printStackTrace();
-				}
+				empiezaPartidoArcade(bd, eLocal, eVisitante, f);
 			}
 		});
 		bArcade.setFont(new Font("Arial Black", Font.PLAIN, 16));
@@ -179,6 +165,29 @@ public class Inicio extends JFrame {
 			e.printStackTrace();
 		}
 
+	}
+	/** Método que declaramos fuera debido a que lo utilizaremos directamente desde ventanaPartido cuando termine un partido.
+	 * @param bd baseDeDatos a pasar
+	 * @param eLocal equipo local
+	 * @param eVisitante equipo visitante
+	 * @param f físicas
+	 */
+	public void empiezaPartidoArcade(BaseDeDatos bd, Equipo eLocal, Equipo eVisitante, FisicasNuevas f) {
+		try {
+			eLocal = equipoRandom(bd, eLocal);
+			eVisitante = equipoRandom(bd, eVisitante);
+			Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
+			ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, true, false, f,
+					bd, null);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			partido.empieza();
+		} catch (Exception eee) {
+			eee.printStackTrace();
+		}
 	}
 
 	/**
