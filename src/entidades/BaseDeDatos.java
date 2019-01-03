@@ -392,7 +392,7 @@ public class BaseDeDatos {
 		boolean esta = false;
 		try {
 			Class.forName("org.sqlite.JDBC");
-			String query1 = "SELECT * FROM JUGADORES WHERE NOMBRE='" + nombre + "' AND PASSWORD='" + contrasenya
+			String query1 = "UPDATE * FROM JUGADORES WHERE NOMBRE='" + nombre + "' AND PASSWORD='" + contrasenya
 					+ "'; ";
 			System.out.println(con);
 			ResultSet rs = con.createStatement().executeQuery(query1);
@@ -498,7 +498,7 @@ public class BaseDeDatos {
 	public void anyadirEquiposStandar() {
 		char[] a = { 'a', 'b' };
 		anyadirTodosLosEquipos(0, new Jugador("", a, 0));
-		;
+		
 	}
 
 	public void init() throws SQLException {
@@ -508,5 +508,25 @@ public class BaseDeDatos {
 	public void close() throws SQLException {
 		if (con != null)
 			con.close();
+	}
+	public void actualizarEquipo(Jugador j, Equipo eNuevo) {
+		
+		try {
+			init();
+			Class.forName("org.sqlite.JDBC");
+			String query1 = "UPDATE Equipos" + j.getNombre() +
+					"SET 'fk_CodLiga'=" + j.getCodLiga() + ", 'fk_Nombre_Jugador'=" + j.getNombre()+",'Siglas'=" + eNuevo.getSiglas() 
+					 +", 'Nombre'=" + eNuevo.getNombre() + ", 'Puntos'=" + eNuevo.getPuntos()+", 'Goles Encajados Totales'=" + eNuevo.getGolesEnContraTotales()
+					+", 'Goles Encajados Local'=" + eNuevo.getGolesEnContraLocal()+",'Goles Encajados Visitante'=" + eNuevo.getGolesEnContraVisitante()
+					+", 'Goles A Favor Totales'=" + eNuevo.getGolesAFavorTotales()+", 'Goles A Favor Local'=" + eNuevo.getGolesAFavorLocal() +", 'Goles A Favor Visitante'=" + eNuevo.getGolesAFavorVisitante()
+					+", 'Derrotas Totales'=" + eNuevo.getDerrotasTotales()+", 'Derrotas Local'=" + eNuevo.getDerrotasLocal()+", 'Derrotas Visitante'=" + eNuevo.getDerrotasVisitante() 
+					+", 'Victorias Totales'=" + eNuevo.getVictoriasTotales()+", 'Victorias Local'=" + eNuevo.getVictoriasLocal()+", 'Victorias Visitante'=" + eNuevo.getVictoriasVisitante()
+					+", 'Empates Totales'=" + eNuevo.getEmpatesTotales()+", 'Empates Local'=" + eNuevo.getEmpatesLocal()+", 'Empates Visitante'=" + eNuevo.getEmpatesVisitante()
+					+", 'Color'=" + eNuevo.getBolaEquipo().getColor().getRGB()+", 'Icono'=" +eNuevo.getBolaEquipo().getRutaImagen() + 
+					" WHERE NOMBRE='" + eNuevo.getNombre() + "'; ";
+			ResultSet rs = con.createStatement().executeQuery(query1);
+		}catch(Exception i) {
+			
+		}
 	}
 }
