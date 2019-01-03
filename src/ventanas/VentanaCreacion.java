@@ -76,6 +76,9 @@ public class VentanaCreacion extends JFrame {
 		JFileChooser fc = new JFileChooser();
 		setSize(550, 239);
 
+		JLabel background_1 = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("iconos/anoeta.png")));
+		setContentPane(background_1);
+		background_1.setLayout(null);
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 
