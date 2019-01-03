@@ -49,6 +49,7 @@ import entidades.Equipo;
 import entidades.Partidos;
 import fisicas.FisicasNuevas;
 import fisicas.HiloJuego;
+import jugador.Jugador;
 import objetos.Pelota;
 import objetos.Poste;
 
@@ -101,10 +102,11 @@ public class ventanaPartido extends JFrame {
 	private JLabel lblposteArribaDerecha = new JLabel("");
 	private JLabel lblposteAbajoDerecha = new JLabel("");
 
+	private Jugador j;
 
 	// modificar constructor ventana, pone pelota en posicion no correcta
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso,
-			boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas, BaseDeDatos bd) {
+			boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas, BaseDeDatos bd, Jugador j) {
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.fisicas = fisicas;
@@ -115,7 +117,7 @@ public class ventanaPartido extends JFrame {
 		this.eVisitante = eVisitante;
 		this.p = p;
 		this.bd = bd;
-
+		this.j = j;
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
 		ImageIcon iconL = new ImageIcon(
@@ -602,12 +604,17 @@ public class ventanaPartido extends JFrame {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private void terminaPartido() {
+		hiloJuego.para();
+		this.setVisible(false);
 		if(isAmistoso) {
 			Inicio e = new Inicio(bd, fisicas);
-			hiloJuego.para();
 			e.setVisible(true);
-			this.setVisible(false);}
-		if(!isAmistoso) {partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);}
+			}
+		if(!isAmistoso) {
+			partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
+			bd.actualizarEquipo(j, eLocal);
+			bd.actualizarEquipo(j, eVisitante);
+			MenuLiga m = new MenuLiga(700, 700, j, bd, fisicas);}
 		
 	}
 
