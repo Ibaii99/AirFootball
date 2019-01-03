@@ -9,6 +9,8 @@ import jugador.Jugador;
 import objetos.ObjetoCombobox;
 
 import javax.swing.JPanel;
+
+import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -17,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.FlowLayout;
+import java.awt.Robot;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,6 +38,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -54,6 +58,20 @@ public class VentanaCreacion extends JFrame {
 	private JTextField tfUsuario;
 	private JPasswordField passwordField;
 
+	/**
+	 * Ventana de modo creación donde podemos diseñar nuestro propio equipo
+	 * 
+	 * @author Jorge
+	 * @param bd
+	 *            Base de datos pasada
+	 * @param f
+	 *            Físicas que se van a llevar desde el inicio del juego hasta los
+	 *            partidos que se disputen
+	 */
+	/**
+	 * @param bd
+	 * @param f
+	 */
 	public VentanaCreacion(BaseDeDatos bd, FisicasNuevas f) {
 		JFileChooser fc = new JFileChooser();
 		setSize(550, 239);
@@ -205,6 +223,13 @@ public class VentanaCreacion extends JFrame {
 		getContentPane().add(panel_1, BorderLayout.NORTH);
 
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Inicio i = new Inicio(bd, f);
+				i.setVisible(true);
+				dispose();
+			}
+		});
 		panel_1.add(btnVolver);
 
 		JButton btnSiguiente = new JButton("Siguiente");
@@ -221,13 +246,14 @@ public class VentanaCreacion extends JFrame {
 				try {
 					destino = Paths.get("src\\iconos\\equipos\\", source.getName());
 					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
+					actualiza();
+
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText(), 0, Color.black,
-						"iconos/equipos/" + lblLocalizacionIcono.getName(),
-						"iconos/equipos/" + lblLocalizacionIcono.getName(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-						0);
+				String icono = "iconos/equipos/" + source.getName();
+				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText(), 0, Color.black, icono, icono, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 				if (!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
 					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
 							"ERROR", JOptionPane.WARNING_MESSAGE);
@@ -236,13 +262,15 @@ public class VentanaCreacion extends JFrame {
 				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
 					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
 					try {
-
+						actualiza();
 						eliminarEquipo(bd, cbSustituye.getSelectedItem().toString(), j, cbSustituye);
-						anyadirEquipo(bd, e1, j);
+						anyadirEquipo(bd, e1, j, icono);
+						actualiza();
 						VentanaLiga vl = new VentanaLiga(e1, bd, j);
 						vl.setVisible(true);
-					} catch (SQLException e2) {
-
+						dispose();
+					} catch (Exception e2) {
+						e2.printStackTrace();
 					}
 				}
 				try {
@@ -253,6 +281,52 @@ public class VentanaCreacion extends JFrame {
 			}
 		});
 		panel_1.add(btnSiguiente);
+
+		JButton btnActualizarEquipos = new JButton(
+				"Actualizar equipos"); /**
+										 * Depende del usuario y contraseña que tengamos en el textfield y el
+										 * passwordfield, nos actualizará los equipos del combobox por los de nuestra
+										 * liga ya creada
+										 **/
+		btnActualizarEquipos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
+					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
+							"ERROR", JOptionPane.WARNING_MESSAGE);
+					System.out.println("No registrado");
+				}
+				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
+					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
+					try {
+						cbSustituye.removeAllItems();
+						try {
+							Logger logger = Logger.getLogger("baseDeDatos");
+							Statement consulta;
+							String comando = "";
+							try {
+								Class.forName("org.sqlite.JDBC");
+								bd.init();
+							} catch (Exception e3) {
+								// e3.printStackTrace();
+							}
+							String query = "SELECT NOMBRE FROM EQUIPOS" + tfUsuario.getText() + ";";
+							ResultSet rs = bd.getCon().createStatement().executeQuery(query);
+							while (rs.next()) {
+								String nomEq = rs.getString("Nombre");
+								cbSustituye.addItem(new ObjetoCombobox(1, nomEq, null));
+							}
+							rs.close();
+							bd.close();
+						} catch (SQLException sql) {
+							sql.printStackTrace();
+						}
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+				}
+			}
+		});
+		panel_1.add(btnActualizarEquipos);
 
 	}
 
@@ -280,15 +354,26 @@ public class VentanaCreacion extends JFrame {
 			String query = "DELETE FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE = '" + cb.getSelectedItem().toString()
 					+ "';";
 			System.out.println(query);
-			bd.getCon().createStatement().executeUpdate(query); //executeUpdate para inserts y deletes y executeQuery para selects
-
+			bd.getCon().createStatement().executeUpdate(query); // executeUpdate para inserts y deletes y executeQuery
+																// para selects
 			bd.close();
 		} catch (Exception e3) {
 			e3.printStackTrace();
 		}
 	}
 
-	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j) throws SQLException {
+	/**
+	 * Actualiza el Eclipse solo para detectar ya nuestro icono
+	 * 
+	 * @throws AWTException
+	 */
+	public void actualiza() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_F5);
+		robot.keyRelease(KeyEvent.VK_F5);
+	}
+
+	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j, String icono) throws SQLException {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			bd.init();
@@ -297,22 +382,23 @@ public class VentanaCreacion extends JFrame {
 		}
 		String comando = "INSERT INTO Equipos" + j.getNombre()
 				+ " ('fk_CodLiga', 'fk_Nombre_Jugador','Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
-		comando += " VALUES ('" + 0 + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira aqui
-																											// bien lo
-																											// de
-																											// CodLiga
-																											// lo he
-																											// puesto a
-																											// 0
+		comando += " VALUES ('" + j.getCodLiga() + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira
+																															// aqui
+		// bien lo
+		// de
+		// CodLiga
+		// lo he
+		// puesto a
+		// 0
 				+ "','" + e.getPuntos() + "','" + e.getGolesEnContraTotales() + "','" + e.getGolesEnContraLocal()
 				+ "','" + e.getGolesEnContraVisitante() + "','" + e.getGolesAFavorTotales() + "','"
 				+ e.getGolesAFavorLocal() + "','" + e.getGolesAFavorVisitante() + "','" + e.getDerrotasTotales() + "','"
 				+ e.getDerrotasLocal() + "','" + e.getDerrotasVisitante() + "','" + e.getVictoriasTotales() + "','"
 				+ e.getVictoriasLocal() + "','" + e.getVictoriasVisitante() + "','" + e.getEmpatesTotales() + "','"
 				+ e.getEmpatesLocal() + "','" + e.getEmpatesVisitante() + "','" + e.getBolaEquipo().getColor().getRGB()
-				+ "','" + e.getBolaEquipo().getRutaImagen() + "')";
+				+ "','" + icono + "')";
 		System.out.println(comando);
-		ResultSet rs = bd.getCon().createStatement().executeQuery(comando);
+		bd.getCon().createStatement().executeUpdate(comando);
 		bd.close();
 
 	}

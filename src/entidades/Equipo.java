@@ -18,7 +18,7 @@ public class Equipo{
 	private String nombre;		
 	
 	private String siglas; // Char para crear un formato de reconocimiento de siglas con lo dado en clase
-	
+	private String imagen;
 	private int puntos;
 	private ArrayList<Partidos> arrayPartidosJugados;
 	
@@ -308,6 +308,14 @@ public class Equipo{
 
 	public Pelota getBolaEquipo() {
 		return bolaEquipo;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 

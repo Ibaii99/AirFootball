@@ -10,6 +10,7 @@ import java.awt.KeyboardFocusManager;
 import java.awt.Paint;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Robot;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.RenderingHints.Key;
@@ -34,6 +35,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.FontMetrics;
+import java.awt.AWTException;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Composite;
@@ -111,8 +113,8 @@ public class ventanaPartido extends JFrame {
 
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
-		ImageIcon iconL = new ImageIcon(getClass().getClassLoader().getResource(
-				eLocal.getBolaEquipo().getRutaImagen()));
+		ImageIcon iconL = new ImageIcon(
+				getClass().getClassLoader().getResource(eLocal.getBolaEquipo().getRutaImagen()));
 		System.out.println(iconL);
 
 		ImageIcon imageIconL = null;
@@ -132,7 +134,8 @@ public class ventanaPartido extends JFrame {
 
 		ImageIcon imageIconV = null;
 		try {
-			imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
+			imageIconV = new ImageIcon(
+					getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
 		} catch (Exception ej) {
 			ej.printStackTrace();
 		}
@@ -190,7 +193,7 @@ public class ventanaPartido extends JFrame {
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE).addContainerGap()));
-		
+
 		JLabel lblPresionaUMayuscula = new JLabel("PRESIONA U MAYUSCULA PARA RECOLOCAR COMPONENTES");
 		lblPresionaUMayuscula.setBounds(185, 463, 380, 16);
 		panelCampo.add(lblPresionaUMayuscula);
@@ -201,9 +204,9 @@ public class ventanaPartido extends JFrame {
 		panel.add(lblNomEqL);
 
 		String siglasEqV = eVisitante.getSiglas();
-//		siglasEqV = siglasEqV.substring(1);
+		// siglasEqV = siglasEqV.substring(1);
 		JLabel lblNomEqV = new JLabel(siglasEqV);
-//		lblEqV.setBounds(460, 64, 45, 45);
+		// lblEqV.setBounds(460, 64, 45, 45);
 		lblNomEqV.setBounds(464, 5, 262, 36);
 		panel.add(lblNomEqV);
 		getContentPane().setLayout(groupLayout);
@@ -546,7 +549,7 @@ public class ventanaPartido extends JFrame {
 		lblposteArribaIzquierda.setVisible(true);
 	}
 
-	public void siEsGolSuma() {
+	public void siEsGolSuma() throws AWTException {
 		if ((p.getX() - p.getRadio()) <= 5
 				&& p.getY() <= (posteArribaIzquierda.getY() - posteArribaIzquierda.getRadio())
 				&& p.getY() >= (posteAbajoIzquierda.getY() + posteAbajoIzquierda.getRadio())) {
@@ -561,6 +564,7 @@ public class ventanaPartido extends JFrame {
 			fisicas.cambiarVelocidadEquipo(eLocal, 0, 0);
 			fisicas.cambiarVelocidadEquipo(eVisitante, 0, 0);
 			fisicas.cambiarVelocidadPelota(p, 0, 0);
+			presionaTeclaU();
 			actualizarCampo();
 		}
 		if ((p.getX() + p.getRadio()) >= (panelCampo.getWidth() - 5)
@@ -578,6 +582,7 @@ public class ventanaPartido extends JFrame {
 			fisicas.cambiarVelocidadEquipo(eVisitante, 0, 0);
 			fisicas.cambiarVelocidadPelota(p, 0, 0);
 			actualizarCampo();
+			presionaTeclaU();
 		}
 		// TODO aqui ya termina el partido, se tendria que añadir a la BD y luego ir a
 		// la menuliga
@@ -707,6 +712,7 @@ public class ventanaPartido extends JFrame {
 	public void setArcade(boolean arcade) {
 		this.arcade = arcade;
 	}
+
 	public void resizeo(ImageIcon imageIconL, JLabel jlIcono, int anchura, int altura) {
 		Image imagenResizL = imageIconL.getImage();
 		Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(anchura), (int) Math.round(altura),
@@ -716,5 +722,23 @@ public class ventanaPartido extends JFrame {
 		jlIcono.setIcon(iiResizeoL);
 		jlIcono.repaint();
 		revalidate();
+	}
+
+	public void presionaTeclaU() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_U);
+		robot.keyRelease(KeyEvent.VK_U);
+
+		robot.keyPress(KeyEvent.VK_W);
+		robot.keyRelease(KeyEvent.VK_W);
+
+		robot.keyPress(KeyEvent.VK_U);
+		robot.keyRelease(KeyEvent.VK_U);
+
+		robot.keyPress(KeyEvent.VK_UP);
+		robot.keyRelease(KeyEvent.VK_UP);
+
+		robot.keyPress(KeyEvent.VK_U);
+		robot.keyRelease(KeyEvent.VK_U);
 	}
 }
