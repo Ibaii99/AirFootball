@@ -137,6 +137,11 @@ public class MenuLiga extends JFrame {
 					    		bw = new BufferedWriter(new FileWriter(archivoPart));
 					    		ArrayList<Equipo> listaEquipos = bd.devolverTodosLosEquipos(j, ligaNueva);
 					    		Collections.shuffle(listaEquipos);
+					    		//Para la primera vuelta
+					    		for(Equipo equi : listaEquipos) {
+					    			if(equi != equipo) bw.write(equi.getNombre() + "/n");	// para que se guarden todos los equipos menos el que tu has elegido
+					    		}
+					    		//Para la segunda vuelta
 					    		for(Equipo equi : listaEquipos) {
 					    			if(equi != equipo) bw.write(equi.getNombre() + "/n");	// para que se guarden todos los equipos menos el que tu has elegido
 					    		}
