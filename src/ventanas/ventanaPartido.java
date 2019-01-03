@@ -614,7 +614,8 @@ public class ventanaPartido extends JFrame {
 			partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
 			bd.actualizarEquipo(j, partido.getEquipoLocal());
 			bd.actualizarEquipo(j, partido.getEquipoVisitante());
-			MenuLiga m = new MenuLiga(700, 700, j, bd, fisicas);}
+			MenuLiga m = new MenuLiga(700, 700, j, bd, fisicas);
+			m.setVisible(true);}
 		
 	}
 
