@@ -11,9 +11,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import entidades.BaseDeDatos;
+import entidades.Equipo;
 import fisicas.FisicasNuevas;
+import jugador.Jugador;
+import objetos.ObjetoCombobox;
+import objetos.Pelota;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
@@ -21,6 +26,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Inicio extends JFrame {
@@ -41,17 +47,17 @@ public class Inicio extends JFrame {
 		final JButton bLiga = new JButton("Liga");
 		bLiga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				try {
 					VentanaLogin v = new VentanaLogin(bd, f);
 					v.setVisible(true);
-					
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				setVisible(false);
-				
+
 				dispose();
 			}
 		});
@@ -74,15 +80,15 @@ public class Inicio extends JFrame {
 		final JButton bAmistoso = new JButton("Amistoso");
 		bAmistoso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				MenuAmistoso mu;
 				try {
-					mu = new MenuAmistoso(getSize().width, getSize().height,bd, f);
+					mu = new MenuAmistoso(getSize().width, getSize().height, bd, f);
 					mu.setVisible(true);
 				} catch (Exception e1) {
 					MenuAmistoso muAlt;
 					try {
-						muAlt = new MenuAmistoso(630, 460,bd,f);
+						muAlt = new MenuAmistoso(630, 460, bd, f);
 						muAlt.setVisible(true);
 					} catch (Exception e2) {
 						// TODO Auto-generated catch block
@@ -98,6 +104,28 @@ public class Inicio extends JFrame {
 		panel.add(bAmistoso);
 
 		final JButton bArcade = new JButton("Arcade");
+		bArcade.addActionListener(new ActionListener() {
+			private Equipo eVisitante;
+			private Equipo eLocal;
+
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					eLocal = equipoRandom(bd, eLocal);
+					eVisitante = equipoRandom(bd, eVisitante);
+					Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
+					ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, false, f,
+							bd, null);
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					partido.empieza();
+				} catch (Exception eee) {
+					eee.printStackTrace();
+				}
+			}
+		});
 		bArcade.setFont(new Font("Arial Black", Font.PLAIN, 16));
 		bArcade.setBounds(getWidth() - 150, getHeight() - 200, 119, 40);
 		panel.add(bArcade);
@@ -116,7 +144,7 @@ public class Inicio extends JFrame {
 
 		getContentPane().add(panel);
 		addComponentListener(new ComponentAdapter() {
-			@Override 
+			@Override
 			public void componentResized(ComponentEvent arg0) {
 
 				bLiga.setBounds(getWidth() - 150, getHeight() - 100, 119, 40);
@@ -126,11 +154,7 @@ public class Inicio extends JFrame {
 				ImageIcon imageIconR = new ImageIcon(Inicio.class.getResource("/iconos/PORTADA.jpg"));
 				Image imagenResiz = imageIconR.getImage();
 
-				Image iResizeo = imagenResiz.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH); // scale
-																														// it
-																														// the
-																														// smooth
-																														// way
+				Image iResizeo = imagenResiz.getScaledInstance(getWidth(), getHeight(), java.awt.Image.SCALE_SMOOTH);
 				ImageIcon iiResizeo = new ImageIcon(iResizeo);
 
 				lPortada.setIcon(iiResizeo);
@@ -140,6 +164,7 @@ public class Inicio extends JFrame {
 			}
 		});
 	}
+
 	public static void main(String[] args) {
 		BaseDeDatos bd = new BaseDeDatos("BETA");
 		Inicio i;
@@ -149,10 +174,39 @@ public class Inicio extends JFrame {
 			System.out.println(bd.getNombre());
 			i.setVisible(true);
 			bd.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
+	}
+
+	/**
+	 * Metodo recursivo que crea equipos al azar
+	 * 
+	 * @param bd
+	 *            base de datos a analizar
+	 * @param e
+	 *            equipo que queremos que se genere aleatoriamente
+	 */
+	public Equipo equipoRandom(BaseDeDatos bd, Equipo e) {
+		try {
+			bd.init();
+			String query2 = "SELECT NOMBRE FROM EQUIPOS ORDER BY RANDOM() LIMIT 1;";
+			ResultSet rs2 = bd.getCon().createStatement().executeQuery(query2);
+			while (rs2.next()) {
+				String nomEq = rs2.getString("Nombre");
+				char[] a = { 'a', 'b', 'c' };
+				e = bd.convertirAEquipo(nomEq, new Jugador("", a, 0), 0);
+//				System.out.println(e.getNombre());
+
+			}
+
+			rs2.close();
+			bd.close();
+		} catch (Exception t) {
+
+		}
+		return e;
 	}
 }

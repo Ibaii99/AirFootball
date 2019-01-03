@@ -120,9 +120,15 @@ public class ventanaPartido extends JFrame {
 		this.j = j;
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
+		try {
 		ImageIcon iconL = new ImageIcon(
 				getClass().getClassLoader().getResource(eLocal.getBolaEquipo().getRutaImagen()));
 		System.out.println(iconL);
+		} catch(Exception eeee) {
+			ImageIcon iconL = new ImageIcon(
+					getClass().getClassLoader().getResource(eLocal.getImagen()));
+			System.out.println(iconL);
+		}
 
 		ImageIcon imageIconL = null;
 		try {

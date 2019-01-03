@@ -312,7 +312,7 @@ public class BaseDeDatos {
 			System.out.println(codLiga);
 			ResultSet rs = con.createStatement().executeQuery(query1);
 			System.out.println(query1);
-			System.out.println(rs.toString());
+//			System.out.println(rs.toString());
 
 			String nombre = rs.getString("Nombre");
 			String siglas = rs.getString("Siglas");
