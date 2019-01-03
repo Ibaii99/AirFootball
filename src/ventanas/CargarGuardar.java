@@ -67,6 +67,7 @@ public class CargarGuardar extends JDialog {
 						FileReader lector=new FileReader(fichero.getName());
 						BufferedReader contenido=new BufferedReader(lector);
 						VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(contenido.readLine(), j), bd, j);
+						setVisible(false);
 						vL.setVisible(true);
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
@@ -88,6 +89,7 @@ public class CargarGuardar extends JDialog {
 		JButton btnNuevaPartida = new JButton("Nueva Partida");
 		btnNuevaPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				MenuLiga m = new MenuLiga(700, 700, j, bd, f);
 				m.setVisible(true);
 				setVisible(false);

@@ -108,18 +108,22 @@ public class MenuLiga extends JFrame {
 						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j);
 						System.out.println(bd);
 						
-						int ligaNueva = j.getCodLiga() +1;
+						int ligaNueva = j.getCodLiga()+1;
 						bd.anyadirLiga("Liga" + j.getCodLiga(), j);
 						bd.anyadirTodosLosEquipos(ligaNueva, j);
-						String ruta = "/"+j.getNombre() + ligaNueva +".txt";
-					    File archivo = new File(ruta);
+						bd.actualizarJugador(j);
+						String ruta = j.getNombre() + ligaNueva +".txt";
+					    
+						File archivo = new File(ruta);
+					    
 					    BufferedWriter bw;
 					    try {
 					    	if(!archivo.exists()) {
 					    		bw = new BufferedWriter(new FileWriter(archivo));
 					    		bw.write(equipo.getNombre());
+					    		bw.flush();
 					            bw.close();}
-					    }catch(Exception i) {}
+					    }catch(Exception i) {i.printStackTrace();}
 					        
 						VentanaLiga v = new VentanaLiga(equipo, bd, j);
 						v.setVisible(true);

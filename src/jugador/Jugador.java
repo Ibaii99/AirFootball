@@ -12,7 +12,8 @@ public class Jugador {
 	private ArrayList<Pelota> pelotasDesbloqueadas;
 	private String nombre;
 	private char[] password;
-	private int codLiga = 0;
+	private int codLiga = 1;
+	
 	
 	
 	public int getCodLiga() {

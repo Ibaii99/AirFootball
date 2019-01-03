@@ -146,6 +146,7 @@ public class VentanaLogin extends JDialog {
 							 j = bd.convertirAJugador(name, passwordField.getPassword());
 							
 							setVisible(false);
+							
 							siguienteTransicion();
 						}
 						try {
@@ -182,8 +183,9 @@ public class VentanaLogin extends JDialog {
 	
 	private void siguienteTransicion() {	
 		// esto arrancaria menu liga para volver a elegir equipos pero esto solo se tiene que hacer para crear una nueva liga
-		MenuLiga mL = new MenuLiga(800, 800, j, bd, f);
-		mL.setVisible(true);
+		CargarGuardar cG = new CargarGuardar(j, f, bd);
+		cG.setVisible(true);
+		setVisible(false);
 		
 	}
 }
