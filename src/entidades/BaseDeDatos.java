@@ -308,10 +308,12 @@ public class BaseDeDatos {
 		try {
 			init();
 			Class.forName("org.sqlite.JDBC");
-			String query1 = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE (NOMBRE='" + nombreEquipo + "' AND 'fk_CodLiga'="+codLiga+"); ";
+			String query1 = "SELECT * FROM Equipos" + j.getNombre() + " WHERE (NOMBRE='" + nombreEquipo + "' AND fk_CodLiga="+codLiga+"); ";
+			System.out.println(codLiga);
 			ResultSet rs = con.createStatement().executeQuery(query1);
+			System.out.println(query1);
 			System.out.println(rs.toString());
-			System.out.println(rs.getString(1).toString());
+
 			String nombre = rs.getString("Nombre");
 			String siglas = rs.getString("Siglas");
 			int puntos = Integer.parseInt(rs.getString("Puntos"));
