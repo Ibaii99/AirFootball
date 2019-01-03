@@ -244,7 +244,7 @@ public class MenuAmistoso extends JFrame {
 				System.out.println(eVisitante.toString());
 				Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
 
-				ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, false, f);
+				ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, false, f, bd);
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {

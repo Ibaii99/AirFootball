@@ -44,6 +44,7 @@ import java.awt.Dimension;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import entidades.BaseDeDatos;
 import entidades.Equipo;
 import entidades.Partidos;
 import fisicas.FisicasNuevas;
@@ -88,7 +89,8 @@ public class ventanaPartido extends JFrame {
 	private FisicasNuevas fisicas;
 	private HiloJuego hiloJuego;
 	public Partidos partido;
-
+	
+	private BaseDeDatos bd;
 	private Poste posteArribaIzquierda;
 	private Poste posteAbajoIzquierda;
 	private Poste posteArribaDerecha;
@@ -102,7 +104,7 @@ public class ventanaPartido extends JFrame {
 
 	// modificar constructor ventana, pone pelota en posicion no correcta
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso,
-			boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas) {
+			boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas, BaseDeDatos bd) {
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.fisicas = fisicas;
@@ -112,6 +114,7 @@ public class ventanaPartido extends JFrame {
 		this.eLocal = eLocal;
 		this.eVisitante = eVisitante;
 		this.p = p;
+		this.bd = bd;
 
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
@@ -594,10 +597,17 @@ public class ventanaPartido extends JFrame {
 		}
 		// TODO aqui ya termina el partido, se tendria que añadir a la BD y luego ir a
 		// la menuliga
-		if (golLocal + golVisitante == 5)
-			partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
+		if (golLocal + golVisitante == 5) terminaPartido();
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private void terminaPartido() {
+		if(isAmistoso) 
+			
+		Inicio e = new Inicio(bd, fisicas);
+		partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
+		
+	}
 
 	/**
 	 * Oculta todos los elementos con los que se juega A utilizar despues de los
