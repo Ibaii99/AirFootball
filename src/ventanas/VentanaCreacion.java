@@ -332,10 +332,14 @@ public class VentanaCreacion extends JFrame {
 							rs.close();
 							bd.close();
 						} catch (SQLException sql) {
-							sql.printStackTrace();
+							JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
+									"ERROR", JOptionPane.WARNING_MESSAGE);
+							System.out.println("No registrado");
 						}
 					} catch (Exception e2) {
-						e2.printStackTrace();
+						JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
+								"ERROR", JOptionPane.WARNING_MESSAGE);
+						System.out.println("No registrado");
 					}
 				}
 			}

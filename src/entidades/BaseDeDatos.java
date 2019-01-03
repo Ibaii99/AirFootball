@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import jugador.Jugador;
 import menuPrincipal.Liga;
@@ -359,7 +360,9 @@ public class BaseDeDatos {
 				rs.close();
 				close();
 			} catch (Exception u) {
-				u.printStackTrace();
+				JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA",
+						"ERROR", JOptionPane.WARNING_MESSAGE);
+				System.out.println("No registrado");
 			}
 		}
 
