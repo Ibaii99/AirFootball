@@ -31,11 +31,9 @@ public class HiloJuego extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			try {
-				v.presionaTeclaU();
-			} catch (Exception e) {
+	
 
-			}
+			
 			fisicas.choquePelotaBorde(v, p);
 			fisicas.choquePelotaEquipo(p, eLocal);
 			fisicas.choquePelotaEquipo(p, eVisitante);

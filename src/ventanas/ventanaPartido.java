@@ -64,8 +64,12 @@ public class ventanaPartido extends JFrame {
 	private Graphics2D graphics; // Objeto gr�fico sobre el que dibujar (del buffer)
 	private JPanel panelCampo = new JPanel(); // Panel principal
 
-	private JLabel lblGolesLocal = new JLabel("");
-	private JLabel lblGolesVisitante = new JLabel("");
+
+	private int golLocal = 0;
+	private int golVisitante = 0;
+	
+	private JLabel lblGolesLocal = new JLabel(""+golLocal);
+	private JLabel lblGolesVisitante = new JLabel(""+golVisitante);
 
 	private JLabel lblEquipoLocal = new JLabel("");
 	private JLabel lblEquipoVisitante = new JLabel("");
@@ -95,8 +99,6 @@ public class ventanaPartido extends JFrame {
 	private JLabel lblposteArribaDerecha = new JLabel("");
 	private JLabel lblposteAbajoDerecha = new JLabel("");
 
-	private int golLocal = 0;
-	private int golVisitante = 0;
 
 	// modificar constructor ventana, pone pelota en posicion no correcta
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esAmistoso,
@@ -194,9 +196,6 @@ public class ventanaPartido extends JFrame {
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE).addContainerGap()));
 
-		JLabel lblPresionaUMayuscula = new JLabel("PRESIONA U MAYUSCULA PARA RECOLOCAR COMPONENTES");
-		lblPresionaUMayuscula.setBounds(185, 463, 380, 16);
-		panelCampo.add(lblPresionaUMayuscula);
 
 		String siglasEqL = eLocal.getSiglas();
 		JLabel lblNomEqL = new JLabel(siglasEqL);
@@ -309,11 +308,19 @@ public class ventanaPartido extends JFrame {
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
 
 		setVisible(true);
+		
+		
 
 	}
 
 	public void empieza() {
 		meterAPanleCampo();
+		try {
+			presionaTeclaU();
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		hiloJuego.start();
 	}
 
@@ -334,6 +341,7 @@ public class ventanaPartido extends JFrame {
 		actualizarPosicionObjetos();
 		mostrarElementosDeJuego();
 		actualizarTamanyoLbl();
+	
 	}
 
 	public void degradarVelocidad() {
@@ -581,8 +589,8 @@ public class ventanaPartido extends JFrame {
 			fisicas.cambiarVelocidadEquipo(eLocal, 0, 0);
 			fisicas.cambiarVelocidadEquipo(eVisitante, 0, 0);
 			fisicas.cambiarVelocidadPelota(p, 0, 0);
-			actualizarCampo();
 			presionaTeclaU();
+			actualizarCampo();
 		}
 		// TODO aqui ya termina el partido, se tendria que añadir a la BD y luego ir a
 		// la menuliga
@@ -726,19 +734,31 @@ public class ventanaPartido extends JFrame {
 
 	public void presionaTeclaU() throws AWTException {
 		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_U);
-		robot.keyRelease(KeyEvent.VK_U);
 
 		robot.keyPress(KeyEvent.VK_W);
 		robot.keyRelease(KeyEvent.VK_W);
-
-		robot.keyPress(KeyEvent.VK_U);
-		robot.keyRelease(KeyEvent.VK_U);
+		try {
+			Thread.sleep(15);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		robot.keyPress(KeyEvent.VK_UP);
 		robot.keyRelease(KeyEvent.VK_UP);
-
+		try {
+			Thread.sleep(15);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		robot.keyPress(KeyEvent.VK_U);
 		robot.keyRelease(KeyEvent.VK_U);
+		try {
+			Thread.sleep(15);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
