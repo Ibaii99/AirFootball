@@ -69,7 +69,8 @@ public class CargarCrear extends JDialog {
 						BufferedReader contenido=new BufferedReader(lector);
 						String[] a = fc.getSelectedFile().getPath().toString().split("codLiga=");
 						String[] u = a[1].split(".");
-						VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(contenido.readLine(), j, Integer.parseInt(u[0])), bd, j, j.devolverPartidosRestantes(Integer.parseInt(u[0]), bd));
+						int codLigas = Integer.parseInt(u[0]);
+						VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(contenido.readLine(), j,codLigas ), bd, j, j.devolverPartidosRestantes(codLigas, bd),f);
 						setVisible(false);
 						vL.setVisible(true);
 					} catch (FileNotFoundException e1) {
@@ -92,7 +93,7 @@ public class CargarCrear extends JDialog {
 		JButton btnNuevaPartida = new JButton("Nueva Partida");
 		btnNuevaPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				bd.anyadirTodosLosEquipos(j.getCodLiga(), j);
 				MenuLiga m = new MenuLiga(700, 700, j, bd, f);
 				m.setVisible(true);
 				setVisible(false);

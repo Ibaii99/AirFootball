@@ -105,11 +105,11 @@ public class VentanaLogin extends JDialog {
 						}
 						//SI el jugador no esta entre los jugadores de la BD entonces se creara un nuevo objeto Jugador
 						if(!bd.estaJugadorRegistrado(name)) {
-							j = new Jugador(name, passwordField.getPassword(), 0);
+							j = new Jugador(name, passwordField.getPassword());
 							
 							bd.anyadirJugador(j);
 							bd.crearTablaEquipos(j);
-							bd.anyadirTodosLosEquipos(j.getCodLiga(), j);
+							
 							//TODO
 							setVisible(false);
 							siguienteTransicion();

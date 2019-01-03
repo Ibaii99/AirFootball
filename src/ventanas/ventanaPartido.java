@@ -609,6 +609,7 @@ public class ventanaPartido extends JFrame {
 		if(isAmistoso) {
 			Inicio e = new Inicio(bd, fisicas);
 			e.setVisible(true);
+			//TODO poner un mensajito o algo
 			}
 		if(!isAmistoso) {
 			partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
@@ -616,6 +617,7 @@ public class ventanaPartido extends JFrame {
 			bd.actualizarEquipo(j, partido.getEquipoVisitante());
 			MenuLiga m = new MenuLiga(700, 700, j, bd, fisicas);
 			m.setVisible(true);}
+		
 		
 	}
 

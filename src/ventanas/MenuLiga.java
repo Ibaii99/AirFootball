@@ -107,13 +107,22 @@ public class MenuLiga extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					try {
 						bd.init();
-						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j, j.getCodLiga());
+						
+						int ligaNueva = j.getCodLiga();
+						bd.anyadirLiga("Liga" + ligaNueva, j);
+						j.incCodLiga();
+						bd.actualizarJugador(j);
+						
+						
+						
+						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j, ligaNueva);
+						System.out.println(equipo.getNombre());
 						System.out.println(bd);
 						
-						int ligaNueva = j.getCodLiga()+1;
-						bd.anyadirLiga("Liga" + j.getCodLiga(), j);
-						bd.anyadirTodosLosEquipos(ligaNueva, j);
-						bd.actualizarJugador(j);
+						
+						
+						
+						
 						String ruta = j.getNombre() +"codLiga="+ ligaNueva +".txt";
 					    
 						File archivo = new File(ruta);
@@ -145,7 +154,7 @@ public class MenuLiga extends JFrame {
 					    		for(Equipo equi : listaEquipos) {
 					    			if(equi != equipo) bw.write(equi.getNombre() + "/n");	// para que se guarden todos los equipos menos el que tu has elegido
 					    		}
-					    		VentanaLiga v = new VentanaLiga(equipo, bd, j, listaEquipos);
+					    		VentanaLiga v = new VentanaLiga(equipo, bd, j, listaEquipos, f);
 								v.setVisible(true);
 					    		bw.flush();
 					            bw.close();}

@@ -26,8 +26,10 @@ import javax.swing.table.TableColumn;
 
 import entidades.BaseDeDatos;
 import entidades.Equipo;
+import fisicas.FisicasNuevas;
 import jugador.Jugador;
 import objetos.ObjetoCombobox;
+import objetos.Pelota;
 import objetos.ScrollablePanel;
 
 import javax.swing.JLabel;
@@ -55,13 +57,24 @@ public class VentanaLiga extends JFrame {
 	private JLabel background;
 	private BaseDeDatos bd;
 	private ArrayList<Equipo> listaPartidos;
+	private Equipo eLocal;
+	private Equipo eVisitante;
+	private boolean isJugadorLocal;
 	/**
 	 * Create the frame.
 	 * 
 	 * @throws SQLException
 	 */
-	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j, ArrayList<Equipo> listaPartidos) throws SQLException {
+	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j, ArrayList<Equipo> listaPartidos, FisicasNuevas f) throws SQLException {
 		this.listaPartidos = listaPartidos;
+		// La primera ronda de partidos se juega en casa
+		if(listaPartidos.size() >= 19) {
+			eLocal = e;
+			isJugadorLocal = true;
+		} else if(listaPartidos.size() < 19) {
+			eVisitante = e;
+			isJugadorLocal = false;
+		}
 		try {
 
 			// try {
@@ -216,6 +229,10 @@ public class VentanaLiga extends JFrame {
 				if (e.getDerrotasTotales() + e.getVictoriasTotales() + e.getEmpatesTotales() == 38) {
 					JOptionPane.showMessageDialog(null, "YA HAS TERMINADO LA LIGA", "ERROR",
 							JOptionPane.WARNING_MESSAGE);
+				}else {
+					ventanaPartido vP = new ventanaPartido(eLocal, eVisitante, new Pelota(Color.BLUE, "", 20), true, false, false, f, bd, j);
+					vP.setVisible(true);
+					setVisible(false);
 				}
 			}
 		});
