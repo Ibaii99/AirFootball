@@ -37,6 +37,9 @@ import jugador.Jugador;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JPanel;
@@ -103,6 +106,18 @@ public class MenuLiga extends JFrame {
 						bd.init();
 						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j);
 						System.out.println(bd);
+						
+						int ligaNueva = j.getCodLiga() +1;
+						String ruta = "/"+j.getNombre() + ligaNueva +".txt";
+					    File archivo = new File(ruta);
+					    BufferedWriter bw;
+					    try {
+					    	if(!archivo.exists()) {
+					    		bw = new BufferedWriter(new FileWriter(archivo));
+					    		bw.write(equipo.getNombre());
+					            bw.close();}
+					    }catch(Exception i) {}
+					        
 						VentanaLiga v = new VentanaLiga(equipo, bd, j);
 						v.setVisible(true);
 						dispose();

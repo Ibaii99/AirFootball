@@ -75,7 +75,7 @@ public class VentanaCreacion extends JFrame {
 	 * @param f
 	 */
 	public VentanaCreacion(BaseDeDatos bd, FisicasNuevas f) {
-		JFileChooser fc = new JFileChooser();
+		
 		setSize(550, 250);
 
 		JLabel background_1 = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("iconos/anoeta.png")));
@@ -130,7 +130,7 @@ public class VentanaCreacion extends JFrame {
 		}
 
 		JLabel lblLocalizacionIcono = new JLabel("");
-
+		JFileChooser fc = new JFileChooser();
 		btnExaminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

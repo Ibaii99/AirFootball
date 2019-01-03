@@ -371,7 +371,7 @@ public class BaseDeDatos {
 				j = new Jugador(nombre, password, rs.getInt("cantidadPartidas"));
 				rs.close();
 				close();
-				System.out.println(j.getCodLiga());
+				
 			} catch (Exception u) {
 				JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASE�A ES ERRONEA",
 						"ERROR", JOptionPane.WARNING_MESSAGE);
