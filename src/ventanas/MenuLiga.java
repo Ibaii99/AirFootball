@@ -19,7 +19,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -105,18 +107,19 @@ public class MenuLiga extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					try {
 						bd.init();
-						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j);
+						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j, j.getCodLiga());
 						System.out.println(bd);
 						
 						int ligaNueva = j.getCodLiga()+1;
 						bd.anyadirLiga("Liga" + j.getCodLiga(), j);
 						bd.anyadirTodosLosEquipos(ligaNueva, j);
 						bd.actualizarJugador(j);
-						String ruta = j.getNombre() + ligaNueva +".txt";
+						String ruta = j.getNombre() +"codLiga="+ ligaNueva +".txt";
 					    
 						File archivo = new File(ruta);
 					    
 					    BufferedWriter bw;
+					    //Escribe El equipo del Jugador
 					    try {
 					    	if(!archivo.exists()) {
 					    		bw = new BufferedWriter(new FileWriter(archivo));
@@ -124,9 +127,26 @@ public class MenuLiga extends JFrame {
 					    		bw.flush();
 					            bw.close();}
 					    }catch(Exception i) {i.printStackTrace();}
+					    //Escribe los rivales que tiene
+					    
+					    String rutaPart = j.getNombre() + ligaNueva + "Partidos.txt";
+					    
+						File archivoPart = new File(rutaPart);
+					    try {
+					    	if(!archivoPart.exists()) {
+					    		bw = new BufferedWriter(new FileWriter(archivoPart));
+					    		ArrayList<Equipo> listaEquipos = bd.devolverTodosLosEquipos(j, ligaNueva);
+					    		Collections.shuffle(listaEquipos);
+					    		for(Equipo equi : listaEquipos) {
+					    			if(equi != equipo) bw.write(equi.getNombre() + "/n");	// para que se guarden todos los equipos menos el que tu has elegido
+					    		}
+					    		VentanaLiga v = new VentanaLiga(equipo, bd, j, listaEquipos);
+								v.setVisible(true);
+					    		bw.flush();
+					            bw.close();}
+					    }catch(Exception i) {i.printStackTrace();}
 					        
-						VentanaLiga v = new VentanaLiga(equipo, bd, j);
-						v.setVisible(true);
+						
 						dispose();
 						bd.close();
 						//TODO añadir el codliga y crear el archivo

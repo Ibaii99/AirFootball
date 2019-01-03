@@ -2,6 +2,7 @@ package entidades;
 
 import java.awt.Color;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -302,12 +303,12 @@ public class BaseDeDatos {
 	 * @return Objeto Equipo
 	 * @throws SQLException
 	 */
-	public Equipo convertirAEquipo(String nombreEquipo, Jugador j) {
+	public Equipo convertirAEquipo(String nombreEquipo, Jugador j, int codLiga) {
 		Equipo e = null;
 		try {
 			init();
 			Class.forName("org.sqlite.JDBC");
-			String query1 = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE='" + nombreEquipo + "'; ";
+			String query1 = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE='" + nombreEquipo + "' AND 'fk_CodLiga'="+codLiga+"; ";
 			ResultSet rs = con.createStatement().executeQuery(query1);
 
 			String nombre = rs.getString("Nombre");
@@ -546,4 +547,27 @@ public class BaseDeDatos {
 			
 		}
 	}
+	public ArrayList<Equipo> devolverTodosLosEquipos(Jugador j, int codliga) {
+		ArrayList<Equipo> lista = new ArrayList<Equipo>();
+			try {
+				init();
+				Class.forName("org.sqlite.JDBC");
+				String query1 = "SELECT * FROM Equipos"+j.getNombre().toUpperCase()+" WHERE fk_CodLiga='" + codliga + "'; ";
+				ResultSet rs = con.createStatement().executeQuery(query1);
+				System.out.println(rs);// Prueba
+				while(rs.next()) {
+					String nombre = rs.getString("Nombre");
+					Equipo e = convertirAEquipo(nombre, j,codliga);
+					lista.add(e);
+					
+				}
+				rs.close();
+				close();
+				
+			} catch (Exception u) {	u.printStackTrace();		}
+		
+
+		return lista;
+	}
+
 }

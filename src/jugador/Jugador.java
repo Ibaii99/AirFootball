@@ -1,9 +1,18 @@
 package jugador;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
+import entidades.BaseDeDatos;
+import entidades.Equipo;
 import menuPrincipal.Liga;
 import objetos.Pelota;
+import ventanas.VentanaLiga;
 
 public class Jugador {
 	private int ligasJugadas;
@@ -12,7 +21,7 @@ public class Jugador {
 	private ArrayList<Pelota> pelotasDesbloqueadas;
 	private String nombre;
 	private char[] password;
-	private int codLiga = 1;
+	private int codLiga;
 	
 	
 	
@@ -38,7 +47,7 @@ public class Jugador {
 	public Jugador(String nombre, char[] password) {
 		this.password = password;
 		this.nombre = nombre;
-		codLiga = 0;
+		codLiga = 1;
 	}
 	public int getLigasJugadas() {
 		return ligasJugadas;
@@ -55,6 +64,25 @@ public class Jugador {
 	public char[] getPassword() {
 		return password;
 	}
+	public ArrayList<Equipo> devolverPartidosRestantes(int numLiga, BaseDeDatos bd){
+		ArrayList<Equipo> lista = new ArrayList<Equipo>();
+		String rutaPart = this.getNombre() + numLiga + "Partidos.txt";
+		File archivoPart = new File(rutaPart);
+		 try {
+		    	if(archivoPart.exists()) {
+		    		BufferedReader br = new BufferedReader(new FileReader(archivoPart));
+		    		String cadena = br.readLine();
+		    		while(cadena != null) {
+		    		lista.add(bd.convertirAEquipo(cadena, this, numLiga));
+		    		}
+		            br.close();}
+		    }catch(Exception i) {i.printStackTrace();}
+		 
+		 
+		return lista;
+		 
+	}
+	
 
 
 	

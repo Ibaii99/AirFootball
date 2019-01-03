@@ -26,6 +26,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class CargarGuardar extends JDialog {
@@ -66,7 +67,9 @@ public class CargarGuardar extends JDialog {
 					try {
 						FileReader lector=new FileReader(fichero.getName());
 						BufferedReader contenido=new BufferedReader(lector);
-						VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(contenido.readLine(), j), bd, j);
+						String[] a = fc.getSelectedFile().getPath().toString().split("codLiga=");
+						String[] u = a[1].split(".");
+						VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(contenido.readLine(), j, Integer.parseInt(u[0])), bd, j, j.devolverPartidosRestantes(Integer.parseInt(u[0]), bd));
 						setVisible(false);
 						vL.setVisible(true);
 					} catch (FileNotFoundException e1) {

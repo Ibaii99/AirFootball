@@ -11,6 +11,7 @@ import java.awt.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -53,14 +54,14 @@ public class VentanaLiga extends JFrame {
 	private DefaultTableModel model;
 	private JLabel background;
 	private BaseDeDatos bd;
-
+	private ArrayList<Equipo> listaPartidos;
 	/**
 	 * Create the frame.
 	 * 
 	 * @throws SQLException
 	 */
-	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j) throws SQLException {
-
+	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j, ArrayList<Equipo> listaPartidos) throws SQLException {
+		this.listaPartidos = listaPartidos;
 		try {
 
 			// try {
