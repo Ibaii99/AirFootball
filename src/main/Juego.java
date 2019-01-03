@@ -24,7 +24,7 @@ public class Juego {
 	public static ventanaPartido v; // la ventana se creara cuando se elijan los equipos con los que se va a jugar
 
 
-	private static BaseDeDatos bd = new BaseDeDatos("BETA");
+	private static BaseDeDatos bd = new BaseDeDatos("ALPHA");
 
 	
 	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 1, null, false);
@@ -32,6 +32,9 @@ public class Juego {
 	private static FisicasNuevas f = new FisicasNuevas();
 
 	public static void main(String[] args) {
+		bd.crearTabla();
+		bd.anyadirEquiposStandar();
+		
 		/*Equipo e = new Equipo("ALA", "Deportivo Alav�s", 0, Color.BLUE, ("/iconos/equipos/ala.png"),
 				"/iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		Equipo u = (new Equipo("ATH", "Athletic Club", 0, Color.RED, ("/iconos/equipos/ath.png"),

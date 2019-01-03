@@ -43,6 +43,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class MenuLiga extends JFrame {
 	/**
@@ -108,6 +109,8 @@ public class MenuLiga extends JFrame {
 						System.out.println(bd);
 						
 						int ligaNueva = j.getCodLiga() +1;
+						bd.anyadirLiga("Liga" + j.getCodLiga(), j);
+						bd.anyadirTodosLosEquipos(ligaNueva, j);
 						String ruta = "/"+j.getNombre() + ligaNueva +".txt";
 					    File archivo = new File(ruta);
 					    BufferedWriter bw;

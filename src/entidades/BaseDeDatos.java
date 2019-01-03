@@ -412,7 +412,8 @@ public class BaseDeDatos {
 					+ "'; ";
 			System.out.println(con);
 			ResultSet rs = con.createStatement().executeQuery(query1);
-			if (rs != null)
+		
+			if (rs.getString(1) != null)
 				esta = true;
 
 		} catch (Exception u) {

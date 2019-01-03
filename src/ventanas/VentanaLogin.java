@@ -140,6 +140,7 @@ public class VentanaLogin extends JDialog {
 						// SI el jugador no esta registrado con ese nombre y contraseña dara error
 						if(!bd.estaJugadorEnBaseDeDatos(name, passwordField.getPassword())) {
 							JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA", "ERROR", JOptionPane.WARNING_MESSAGE);
+							
 						}
 						if(bd.estaJugadorEnBaseDeDatos(name, passwordField.getPassword())) {
 							 j = bd.convertirAJugador(name, passwordField.getPassword());
