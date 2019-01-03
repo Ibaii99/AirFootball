@@ -13,7 +13,7 @@ public class HiloJuego extends Thread {
 	private Equipo eLocal;
 	private Equipo eVisitante;
 	private ventanaPartido v;
-
+	private boolean sigue = true;
 	public HiloJuego(Pelota p, Equipo eLocal, Equipo eVisitante, ventanaPartido v) {
 		this.p = p;
 		this.eLocal = eLocal;
@@ -23,7 +23,7 @@ public class HiloJuego extends Thread {
 
 	@Override
 	public void run() {
-		while (true) {
+		while (sigue) {
 
 			try {
 				Thread.sleep(25);
@@ -73,4 +73,7 @@ public class HiloJuego extends Thread {
 			//
 		}
 	}
+		public void para() {
+			sigue = false;
+		}
 }

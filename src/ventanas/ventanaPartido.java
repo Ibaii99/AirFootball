@@ -597,15 +597,17 @@ public class ventanaPartido extends JFrame {
 		}
 		// TODO aqui ya termina el partido, se tendria que añadir a la BD y luego ir a
 		// la menuliga
-		if (golLocal + golVisitante == 5) terminaPartido();
+		if (golLocal + golVisitante >= 3) terminaPartido();
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private void terminaPartido() {
-		if(isAmistoso) 
-			
-		Inicio e = new Inicio(bd, fisicas);
-		partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
+		if(isAmistoso) {
+			Inicio e = new Inicio(bd, fisicas);
+			hiloJuego.para();
+			e.setVisible(true);
+			this.setVisible(false);}
+		if(!isAmistoso) {partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);}
 		
 	}
 
