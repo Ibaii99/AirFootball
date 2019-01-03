@@ -24,7 +24,7 @@ public class Juego {
 	public static ventanaPartido v; // la ventana se creara cuando se elijan los equipos con los que se va a jugar
 
 
-	private static BaseDeDatos bd = new BaseDeDatos("Beta");
+	private static BaseDeDatos bd = new BaseDeDatos("BETA");
 
 	
 	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 1, null, false);
