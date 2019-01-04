@@ -238,8 +238,11 @@ public class VentanaCreacion extends JFrame {
 				File source = fc.getSelectedFile();
 				Path destino = null; // Universalizamos el selector de imagen. Todo icono escogido se mueve a SRC
 										// para que otro usuario pueda acceder a �l desde otro ordenador.
+				System.out.println(source.toPath());
+				
 				try {
-					destino = Paths.get("src\\iconos\\equipos\\", source.getName());
+					destino = Paths.get("src/iconos/equipos/", source.getName());
+					System.out.println(destino.toString());
 					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
 					actualiza();
 
@@ -249,9 +252,7 @@ public class VentanaCreacion extends JFrame {
 				String icono = "iconos/equipos/" + source.getName();
 				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText().toUpperCase(), 0, Color.black, icono, icono, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-			
-					//if(j.devolverPartidosRestantes(Integer.parseInt(tfCodLiga.getText()), bd)!=null) {
-					
+				
 					try {
 						actualiza();
 						
@@ -261,14 +262,12 @@ public class VentanaCreacion extends JFrame {
 						actualiza();
 						VentanaCreacion vC = new VentanaCreacion(bd, f, listaEquiposEliminados, ligaNueva,j);
 						vC.setVisible(true);
-						//VentanaLiga vl = new VentanaLiga(e1, bd, j, j.devolverPartidosRestantes(Integer.parseInt(tfCodLiga.getText()), bd));
-						//vl.setVisible(true);
+				
 						dispose();
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
-			//	}if(j.devolverPartidosRestantes(Integer.parseInt(tfCodLiga.getText()), bd)== null) {JOptionPane.showMessageDialog(null, "ESTE CODIGO DE LIGA NO EXISTE",
-			//			"ERROR", JOptionPane.WARNING_MESSAGE);}
+		
 					
 				try {
 					bd.close();
@@ -339,6 +338,7 @@ public class VentanaCreacion extends JFrame {
 			while ((length = is.read(buffer)) > 0) {
 				os.write(buffer, 0, length);
 			}
+			os.flush();//forzar el guardado
 		} finally {
 			is.close();
 			os.close();
@@ -349,8 +349,8 @@ public class VentanaCreacion extends JFrame {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			bd.init();
-			String query = "DELETE FROM EQUIPOS" + j.getNombre() + " WHERE (NOMBRE = '" + cb.getSelectedItem().toString()
-					+ "', fk_CodLiga="+codLiga+");";
+			String query = "DELETE FROM EQUIPOS" + j.getNombre().toUpperCase() + " WHERE (NOMBRE = '" + cb.getSelectedItem().toString()
+					+ "' AND fk_CodLiga="+codLiga+");";
 			System.out.println(query);
 			bd.getCon().createStatement().executeUpdate(query); // executeUpdate para inserts y deletes y executeQuery
 																// para selects

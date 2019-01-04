@@ -555,7 +555,7 @@ public class BaseDeDatos {
 			try {
 				init();
 				Class.forName("org.sqlite.JDBC");
-				String query1 = "SELECT * FROM Equipos"+j.getNombre().toUpperCase()+" WHERE fk_CodLiga='" + codliga + "'; ";
+				String query1 = "SELECT * FROM Equipos"+j.getNombre().toUpperCase()+" WHERE fk_CodLiga=" + codliga + "; ";
 				ResultSet rs = con.createStatement().executeQuery(query1);
 				System.out.println(rs);// Prueba
 				while(rs.next()) {

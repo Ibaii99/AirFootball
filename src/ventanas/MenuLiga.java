@@ -80,7 +80,7 @@ public class MenuLiga extends JFrame {
 			} catch (Exception e3) {
 				// e3.printStackTrace();
 			}
-			String query = "SELECT NOMBRE, ICONO FROM EQUIPOS" + j.getNombre() + " WHERE fk_CodLiga="+codLiga+";";
+			String query = "SELECT NOMBRE, ICONO FROM EQUIPOS" + j.getNombre().toUpperCase() + " WHERE fk_CodLiga="+codLiga+";";
 			System.out.println(query);
 			// Statement st = con.createStatement();
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
@@ -202,12 +202,12 @@ public class MenuLiga extends JFrame {
 						Class.forName("org.sqlite.JDBC");
 						Statement consultaCB;
 						consultaCB = bd.getCon().createStatement();
-						String comando2 = "SELECT ICONO FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE = '"
-								+ cbLiga.getSelectedItem().toString() + "'";
+						String comando2 = "SELECT ICONO FROM EQUIPOS" + j.getNombre() + " WHERE (NOMBRE = '"
+								+ cbLiga.getSelectedItem().toString() + "' AND fk_CodLiga="+codLiga +")";
 						logger.log(Level.INFO, "BD: " + comando2);
 						consultaCB.executeUpdate(comando2);
 						ResultSet rs2 = bd.getCon().createStatement().executeQuery(comando2);
-						System.out.println(rs2.toString());
+						System.out.println(rs2.getString("ICONO"));
 						while (rs2.next()) {
 							equipoL = "/" + rs2.getString("ICONO");
 							String iconoL = rs2.getString("ICONO");
