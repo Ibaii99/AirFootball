@@ -317,6 +317,12 @@ public class VentanaCreacion extends JFrame {
 		JButton btnListo = new JButton("Listo");
 		btnListo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				MenuLiga mU = new MenuLiga(700, 700, j, bd, f, ligaNueva);
 				mU.setVisible(true);
 				setVisible(false);
