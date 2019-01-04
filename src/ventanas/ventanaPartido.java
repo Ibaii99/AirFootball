@@ -103,10 +103,11 @@ public class ventanaPartido extends JFrame {
 	private JLabel lblposteAbajoDerecha = new JLabel("");
 
 	private Jugador j;
+	private int ganadosArcade;
 
 	// modificar constructor ventana, pone pelota en posicion no correcta
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esArcade, boolean esAmistoso,
-			boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas, BaseDeDatos bd, Jugador j) {
+			boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas, BaseDeDatos bd, Jugador j, int ganadosArcade) {
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.fisicas = fisicas;
@@ -119,6 +120,7 @@ public class ventanaPartido extends JFrame {
 		this.p = p;
 		this.bd = bd;
 		this.j = j;
+		this.ganadosArcade = ganadosArcade;
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
 		try {
@@ -619,8 +621,11 @@ public class ventanaPartido extends JFrame {
 			//TODO poner un mensajito o algo
 			}
 		if(arcade) {
+			
 			Inicio e = new Inicio(bd, fisicas);
-			e.empiezaPartidoArcade(bd, eLocal, eVisitante, fisicas);
+			ganadosArcade += 1;
+			System.out.println("Partidos ganados en esta sesión: " + ganadosArcade);
+			e.empiezaPartidoArcade(bd, eLocal, eVisitante, fisicas, ganadosArcade );
 		}
 		else {
 			partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);

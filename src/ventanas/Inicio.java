@@ -109,7 +109,7 @@ public class Inicio extends JFrame {
 			private Equipo eLocal;
 
 			public void actionPerformed(ActionEvent arg0) {
-				empiezaPartidoArcade(bd, eLocal, eVisitante, f);
+				empiezaPartidoArcade(bd, eLocal, eVisitante, f, 0);
 			}
 		});
 		bArcade.setFont(new Font("Arial Black", Font.PLAIN, 16));
@@ -172,13 +172,13 @@ public class Inicio extends JFrame {
 	 * @param eVisitante equipo visitante
 	 * @param f físicas
 	 */
-	public void empiezaPartidoArcade(BaseDeDatos bd, Equipo eLocal, Equipo eVisitante, FisicasNuevas f) {
+	public void empiezaPartidoArcade(BaseDeDatos bd, Equipo eLocal, Equipo eVisitante, FisicasNuevas f, int ganados) {
 		try {
 			eLocal = equipoRandom(bd, eLocal);
 			eVisitante = equipoRandom(bd, eVisitante);
 			Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
 			ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, true, false, f,
-					bd, null);
+					bd, null, ganados);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
