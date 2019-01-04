@@ -620,19 +620,21 @@ public class ventanaPartido extends JFrame {
 			e.setVisible(true);
 			//TODO poner un mensajito o algo
 			}
-		if(arcade) {
-			
+		if((arcade) && (golLocal>golVisitante)) {
 			Inicio e = new Inicio(bd, fisicas);
 			ganadosArcade += 1;
 			System.out.println("Partidos ganados en esta sesión: " + ganadosArcade);
 			e.empiezaPartidoArcade(bd, eLocal, eVisitante, fisicas, ganadosArcade );
 		}
-		else {
-			partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
-			bd.actualizarEquipo(j, partido.getEquipoLocal());
-			bd.actualizarEquipo(j, partido.getEquipoVisitante());
-			MenuLiga m = new MenuLiga(700, 700, j, bd, fisicas);
-			m.setVisible(true);}
+		if((arcade) && (golLocal<golVisitante)) {
+			GuardarEnArcade ga = new GuardarEnArcade(bd, fisicas, ganadosArcade); 
+		}
+//		else {
+//			partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
+//			bd.actualizarEquipo(j, partido.getEquipoLocal());
+//			bd.actualizarEquipo(j, partido.getEquipoVisitante());
+//			MenuLiga m = new MenuLiga(700, 700, j, bd, fisicas);
+//			m.setVisible(true);}
 		
 		
 	}
