@@ -93,7 +93,10 @@ public class MenuLiga extends JFrame {
 
 				String nomEq = rs.getString("Nombre");
 				String iconEq = rs.getString("Icono");
+				System.out.println(iconEq);
 				cbLiga.addItem(new ObjetoCombobox(1, nomEq, new ImageIcon(iconEq)));
+				revalidate();
+			
 				// System.out.println(nomEq + " " + iconEq);
 			}
 			// st.close();
@@ -213,6 +216,8 @@ public class MenuLiga extends JFrame {
 							String iconoL = rs2.getString("ICONO");
 							System.out.println(equipoL);
 						}
+						revalidate();
+						
 						resizeo(equipoL, icono);
 						bd.close();
 					} catch (Exception e) {
