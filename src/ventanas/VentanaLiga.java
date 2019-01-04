@@ -263,9 +263,10 @@ public class VentanaLiga extends JFrame {
 					JOptionPane.showMessageDialog(null, "YA HAS TERMINADO LA LIGA", "ERROR",
 							JOptionPane.WARNING_MESSAGE);
 				}else {
-					ventanaPartido vP = new ventanaPartido(eLocal, eVisitante, new Pelota(Color.BLUE, "", 20), true, false, false, false, f, bd, j, 0);
-					vP.setVisible(true);
-					setVisible(false);
+					ventanaPartido vp = new ventanaPartido(eLocal, eVisitante, new Pelota(Color.BLUE, "", 20), true, false, false, false, f, bd, j, 0);
+					vp.empieza();
+					vp.setVisible(true);
+					dispose();
 				}
 			}
 		});

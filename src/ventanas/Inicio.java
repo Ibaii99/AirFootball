@@ -77,7 +77,7 @@ public class Inicio extends JFrame {
 					i.printStackTrace();
 				}
 				setVisible(false);
-				
+
 				dispose();
 			}
 		});
@@ -117,6 +117,16 @@ public class Inicio extends JFrame {
 			private Equipo eLocal;
 
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					bd.init();
+					String crearTabla = "CREATE TABLE ARCADE ( " + "codPartida INTEGER PRIMARY KEY AUTOINCREMENT,"
+							+ "Usuario TEXT NOT NULL," + "'Partidos ganados' INTEGER " + ");";
+					bd.getCon().createStatement().executeUpdate(crearTabla);
+
+					bd.close();
+				} catch (Exception ff) {
+//					ff.printStackTrace();
+				}
 				empiezaPartidoArcade(bd, eLocal, eVisitante, f, 0);
 				dispose();
 			}
@@ -160,26 +170,34 @@ public class Inicio extends JFrame {
 		});
 	}
 
-	public static void main(String[] args) {
-		BaseDeDatos bd = new BaseDeDatos("BETA");
-		Inicio i;
-		try {
-			bd.init();
-			i = new Inicio(bd, new FisicasNuevas());
-			System.out.println(bd.getNombre());
-			i.setVisible(true);
-			bd.close();
+//	public static void main(String[] args) {
+//		BaseDeDatos bd = new BaseDeDatos("BETA");
+//		Inicio i;
+//		try {
+//			bd.init();
+//			i = new Inicio(bd, new FisicasNuevas());
+//			System.out.println(bd.getNombre());
+//			i.setVisible(true);
+//			bd.close();
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-	/** M�todo que declaramos fuera debido a que lo utilizaremos directamente desde ventanaPartido cuando termine un partido.
-	 * @param bd baseDeDatos a pasar
-	 * @param eLocal equipo local
-	 * @param eVisitante equipo visitante
-	 * @param f f�sicas
+	/**
+	 * M�todo que declaramos fuera debido a que lo utilizaremos directamente desde
+	 * ventanaPartido cuando termine un partido.
+	 * 
+	 * @param bd
+	 *            baseDeDatos a pasar
+	 * @param eLocal
+	 *            equipo local
+	 * @param eVisitante
+	 *            equipo visitante
+	 * @param f
+	 *            f�sicas
 	 */
 	public void empiezaPartidoArcade(BaseDeDatos bd, Equipo eLocal, Equipo eVisitante, FisicasNuevas f, int ganados) {
 		try {
@@ -217,7 +235,7 @@ public class Inicio extends JFrame {
 				String nomEq = rs2.getString("Nombre");
 				char[] a = { 'a', 'b', 'c' };
 				e = bd.convertirAEquipo(nomEq, new Jugador("", a, 0), 0);
-//				System.out.println(e.getNombre());
+				 System.out.println(e.getNombre());
 
 			}
 
