@@ -68,8 +68,8 @@ public class CargarCrear extends JDialog {
 						FileReader lector=new FileReader(fichero.getName());
 						BufferedReader contenido=new BufferedReader(lector);
 						String[] a = fc.getSelectedFile().getPath().toString().split("codLiga=");
-						String[] u = a[1].split(".");
-						int codLigas = Integer.parseInt(u[0]);
+						
+						int codLigas = Character.getNumericValue(a[1].charAt(0));
 						VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(contenido.readLine(), j,codLigas ), bd, j, j.devolverPartidosRestantes(codLigas, bd),f);
 						setVisible(false);
 						vL.setVisible(true);
