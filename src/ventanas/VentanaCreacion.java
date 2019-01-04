@@ -23,6 +23,8 @@ import java.awt.Robot;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javax.swing.JTextField;
@@ -57,9 +59,10 @@ import javax.swing.JPasswordField;
 public class VentanaCreacion extends JFrame {
 	private JTextField tfNombre;
 	private JTextField tfSiglas;
-	private JTextField tfUsuario;
-	private JPasswordField passwordField;
-	private JTextField tfCodLiga;
+	private ArrayList<Equipo> listaEquiposEliminados ;
+	private int ligaNueva;
+	private Jugador j;
+	private JComboBox cbSustituye;
 
 	/**
 	 * Ventana de modo creaci�n donde podemos dise�ar nuestro propio equipo
@@ -75,8 +78,19 @@ public class VentanaCreacion extends JFrame {
 	 * @param bd
 	 * @param f
 	 */
-	public VentanaCreacion(BaseDeDatos bd, FisicasNuevas f) {
+	public VentanaCreacion(BaseDeDatos bd, FisicasNuevas f, ArrayList<Equipo> listaEquipos, int ligaAanyadir, Jugador j) {
+		this.j = j;
 		
+		if( ligaAanyadir == 0) {
+			ligaNueva = j.getCodLiga();
+			bd.anyadirLiga("Liga" + ligaNueva, j);
+			bd.anyadirTodosLosEquipos(ligaNueva, j);
+		}
+		else if(ligaAanyadir != 0) ligaNueva = ligaAanyadir;
+		
+		
+		if( listaEquipos == null) this.listaEquiposEliminados = new ArrayList<>();
+		else if(listaEquipos != null) this.listaEquiposEliminados = listaEquipos;
 		setSize(737, 364);
 
 		JLabel background_1 = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("iconos/anoeta.png")));
@@ -105,7 +119,7 @@ public class VentanaCreacion extends JFrame {
 
 		JLabel lblSustituirAEquipo = new JLabel("Sustituir a equipo:");
 
-		JComboBox cbSustituye = new JComboBox();
+		cbSustituye = new JComboBox();
 		try {
 			Logger logger = Logger.getLogger("baseDeDatos");
 
@@ -118,7 +132,7 @@ public class VentanaCreacion extends JFrame {
 			} catch (Exception e3) {
 				// e3.printStackTrace();
 			}
-			String query = "SELECT NOMBRE FROM EQUIPOS;";
+			String query = "SELECT NOMBRE FROM EQUIPOS"+j.getNombre().toUpperCase()+" WHERE fk_CodLiga="+ligaNueva +";";
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 			while (rs.next()) {
 				String nomEq = rs.getString("Nombre");
@@ -153,54 +167,27 @@ public class VentanaCreacion extends JFrame {
 				fc.setVisible(true);
 			}
 		});
-
-		JLabel lblUsuario = new JLabel("Usuario:");
-
-		tfUsuario = new JTextField();
-		tfUsuario.setColumns(10);
-
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-
-		passwordField = new JPasswordField();
-		
-		JLabel lblCodigoDeLiga = new JLabel("Codigo de Liga:");
-		
-		tfCodLiga = new JTextField();
-		tfCodLiga.setColumns(10);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblUsuario, GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(tfUsuario, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
 						.addComponent(lblEscudo, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
 						.addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
 						.addComponent(lblSiglas, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
 						.addComponent(lblSustituirAEquipo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
-						.addComponent(tfNombre, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+						.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+						.addComponent(tfNombre, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblContrasea, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblCodigoDeLiga, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(tfCodLiga, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(cbSustituye, 0, 343, Short.MAX_VALUE)
+							.addComponent(cbSustituye, 0, 441, Short.MAX_VALUE)
 							.addGap(20))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+							.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
 							.addGap(171)
-							.addComponent(lblLocalizacionIcono, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)))
+							.addComponent(lblLocalizacionIcono, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
 					.addGap(43))
 		);
 		gl_panel.setVerticalGroup(
@@ -223,21 +210,7 @@ public class VentanaCreacion extends JFrame {
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
 						.addComponent(cbSustituye, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(20)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(tfUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblUsuario, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-								.addComponent(lblContrasea, GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(4))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(28)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblCodigoDeLiga, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-								.addComponent(tfCodLiga))
-							.addContainerGap())))
+					.addGap(86))
 		);
 		panel.setLayout(gl_panel);
 
@@ -274,23 +247,20 @@ public class VentanaCreacion extends JFrame {
 					ex.printStackTrace();
 				}
 				String icono = "iconos/equipos/" + source.getName();
-				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText(), 0, Color.black, icono, icono, 0, 0, 0, 0,
+				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText().toUpperCase(), 0, Color.black, icono, icono, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				if (!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
-					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASE�A ES ERRONEA",
-							"ERROR", JOptionPane.WARNING_MESSAGE);
-					System.out.println("No registrado");
-				}
-				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
-					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
+			
 					//if(j.devolverPartidosRestantes(Integer.parseInt(tfCodLiga.getText()), bd)!=null) {
+					
 					try {
 						actualiza();
-						eliminarEquipo(bd, cbSustituye.getSelectedItem().toString(), j, cbSustituye);
-						anyadirEquipo(bd, e1, j, icono);
+						
+						listaEquiposEliminados.add(bd.convertirAEquipo(cbSustituye.getSelectedItem().toString(), j, ligaNueva));
+						eliminarEquipo(bd, cbSustituye.getSelectedItem().toString(), j, cbSustituye, ligaNueva);
+						anyadirEquipo(bd, e1, j, icono,ligaNueva);
 						actualiza();
-						Inicio i = new Inicio(bd, f);
-						i.setVisible(true);
+						VentanaCreacion vC = new VentanaCreacion(bd, f, listaEquiposEliminados, ligaNueva,j);
+						vC.setVisible(true);
 						//VentanaLiga vl = new VentanaLiga(e1, bd, j, j.devolverPartidosRestantes(Integer.parseInt(tfCodLiga.getText()), bd));
 						//vl.setVisible(true);
 						dispose();
@@ -299,7 +269,7 @@ public class VentanaCreacion extends JFrame {
 					}
 			//	}if(j.devolverPartidosRestantes(Integer.parseInt(tfCodLiga.getText()), bd)== null) {JOptionPane.showMessageDialog(null, "ESTE CODIGO DE LIGA NO EXISTE",
 			//			"ERROR", JOptionPane.WARNING_MESSAGE);}
-					}
+					
 				try {
 					bd.close();
 				} catch (Exception eee) {
@@ -317,15 +287,8 @@ public class VentanaCreacion extends JFrame {
 										 **/
 		btnActualizarEquipos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (!bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
-					JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASE�A ES ERRONEA",
-							"ERROR", JOptionPane.WARNING_MESSAGE);
-					System.out.println("No registrado");
-				}
-				if (bd.estaJugadorEnBaseDeDatos(tfUsuario.getText(), passwordField.getPassword())) {
-					Jugador j = bd.convertirAJugador(tfUsuario.getText(), passwordField.getPassword());
-					try {
-						cbSustituye.removeAllItems(); 
+			
+					cbSustituye.removeAllItems(); 
 						try {
 							Logger logger = Logger.getLogger("baseDeDatos");
 							Statement consulta;
@@ -336,7 +299,8 @@ public class VentanaCreacion extends JFrame {
 							} catch (Exception e3) {
 								// e3.printStackTrace();
 							}
-							String query = "SELECT NOMBRE FROM EQUIPOS" + tfUsuario.getText() + ";";
+							
+							String query = "SELECT NOMBRE FROM EQUIPOS" + j.getNombre().toUpperCase() + " WHERE fk_CodLiga="+ ligaNueva +";";
 							ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 							while (rs.next()) {
 								String nomEq = rs.getString("Nombre");
@@ -344,20 +308,20 @@ public class VentanaCreacion extends JFrame {
 							}
 							rs.close();
 							bd.close();
-						} catch (SQLException sql) {
-							JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASE�A ES ERRONEA",
-									"ERROR", JOptionPane.WARNING_MESSAGE);
-							System.out.println("No registrado");
-						}
-					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASE�A ES ERRONEA",
-								"ERROR", JOptionPane.WARNING_MESSAGE);
-						System.out.println("No registrado");
-					}
-				}
+							
+						
+				}catch(Exception u) {u.printStackTrace();}
+			
+		}});
+		panel_1.add(btnActualizarEquipos);
+		
+		JButton btnListo = new JButton("Listo");
+		btnListo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
-		panel_1.add(btnActualizarEquipos);
+		panel_1.add(btnListo);
 
 	}
 
@@ -378,12 +342,12 @@ public class VentanaCreacion extends JFrame {
 		}
 	}
 
-	public void eliminarEquipo(BaseDeDatos bd, String nombre, Jugador j, JComboBox cb) {
+	public void eliminarEquipo(BaseDeDatos bd, String nombre, Jugador j, JComboBox cb, int codLiga) {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			bd.init();
-			String query = "DELETE FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE = '" + cb.getSelectedItem().toString()
-					+ "';";
+			String query = "DELETE FROM EQUIPOS" + j.getNombre() + " WHERE (NOMBRE = '" + cb.getSelectedItem().toString()
+					+ "', fk_CodLiga="+codLiga+");";
 			System.out.println(query);
 			bd.getCon().createStatement().executeUpdate(query); // executeUpdate para inserts y deletes y executeQuery
 																// para selects
@@ -404,7 +368,7 @@ public class VentanaCreacion extends JFrame {
 		robot.keyRelease(KeyEvent.VK_F5);
 	}
 
-	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j, String icono) throws SQLException {
+	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j, String icono, int codLiga) throws SQLException {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			bd.init();
@@ -413,7 +377,7 @@ public class VentanaCreacion extends JFrame {
 		}
 		String comando = "INSERT INTO Equipos" + j.getNombre()
 				+ " ('fk_CodLiga', 'fk_Nombre_Jugador','Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
-		comando += " VALUES ('" + j.getCodLiga() + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira
+		comando += " VALUES ('" + codLiga + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira
 																															// aqui
 		// bien lo
 		// de

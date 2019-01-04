@@ -55,8 +55,9 @@ public class MenuLiga extends JFrame {
 	 */
 	public String equipoL;
 	public ImageIcon imageIconL;
-
-	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, FisicasNuevas f) {
+	private int codLiga;
+	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, FisicasNuevas f, int cod) {
+		this.codLiga = cod;
 		try {
 			JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
 			setContentPane(lblBck);
@@ -79,7 +80,7 @@ public class MenuLiga extends JFrame {
 			} catch (Exception e3) {
 				// e3.printStackTrace();
 			}
-			String query = "SELECT NOMBRE, ICONO FROM EQUIPOS" + j.getNombre() + ";";
+			String query = "SELECT NOMBRE, ICONO FROM EQUIPOS" + j.getNombre() + " WHERE fk_CodLiga="+codLiga+";";
 			System.out.println(query);
 			// Statement st = con.createStatement();
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
@@ -108,22 +109,13 @@ public class MenuLiga extends JFrame {
 					try {
 						bd.init();
 						
-						int ligaNueva = j.getCodLiga();
-						bd.anyadirLiga("Liga" + ligaNueva, j);
-						j.incCodLiga();
-						bd.actualizarJugador(j);
-						
-						
-						
-						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j, ligaNueva);
+					
+					
+						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j, codLiga);
 						System.out.println(equipo.getNombre());
 						System.out.println(bd);
 						
-						
-						
-						
-						
-						String ruta = j.getNombre() +"codLiga="+ ligaNueva +".txt";
+						String ruta = j.getNombre() +"codLiga="+ codLiga +".txt";
 					    
 						File archivo = new File(ruta);
 					    
@@ -138,13 +130,13 @@ public class MenuLiga extends JFrame {
 					    }catch(Exception i) {i.printStackTrace();}
 					    //Escribe los rivales que tiene
 					    
-					    String rutaPart = j.getNombre() + ligaNueva + "Partidos.txt";
+					    String rutaPart = j.getNombre() + codLiga + "Partidos.txt";
 					    
 						File archivoPart = new File(rutaPart);
 					    try {
 					    	if(!archivoPart.exists()) {
 					    		bw = new BufferedWriter(new FileWriter(archivoPart));
-					    		ArrayList<Equipo> listaEquipos = bd.devolverTodosLosEquipos(j, ligaNueva);
+					    		ArrayList<Equipo> listaEquipos = bd.devolverTodosLosEquipos(j, codLiga);
 					    		Collections.shuffle(listaEquipos);
 					    		//Para la primera vuelta
 					    		for(Equipo equi : listaEquipos) {
@@ -154,7 +146,7 @@ public class MenuLiga extends JFrame {
 					    		for(Equipo equi : listaEquipos) {
 					    			if(equi != equipo) bw.write(equi.getNombre() + "\n");	// para que se guarden todos los equipos menos el que tu has elegido
 					    		}
-					    		VentanaLiga v = new VentanaLiga(equipo, bd, j, listaEquipos, f);
+					    		VentanaLiga v = new VentanaLiga(equipo, bd, j, listaEquipos, f, codLiga);
 								v.setVisible(true);
 					    		bw.flush();
 					            bw.close();}

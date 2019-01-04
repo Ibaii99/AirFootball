@@ -49,7 +49,7 @@ public class Inicio extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				try {
-					VentanaLogin v = new VentanaLogin(bd, f);
+					VentanaLogin v = new VentanaLogin(bd, f, true);
 					v.setVisible(true);
 
 				} catch (Exception e) {
@@ -65,11 +65,19 @@ public class Inicio extends JFrame {
 		bLiga.setBounds(getWidth() - 150, getHeight() - 100, 119, 40);
 		panel.add(bLiga);
 
-		final JButton bCreacion = new JButton("Creación");
+		final JButton bCreacion = new JButton("Creaciï¿½n");
 		bCreacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaCreacion vc = new VentanaCreacion(bd, f);
-				vc.setVisible(true);
+				try {
+					VentanaLogin v = new VentanaLogin(bd, f, false);
+					v.setVisible(true);
+
+				} catch (Exception i) {
+					// TODO Auto-generated catch block
+					i.printStackTrace();
+				}
+				setVisible(false);
+				
 				dispose();
 			}
 		});
@@ -167,11 +175,11 @@ public class Inicio extends JFrame {
 		}
 
 	}
-	/** Método que declaramos fuera debido a que lo utilizaremos directamente desde ventanaPartido cuando termine un partido.
+	/** Mï¿½todo que declaramos fuera debido a que lo utilizaremos directamente desde ventanaPartido cuando termine un partido.
 	 * @param bd baseDeDatos a pasar
 	 * @param eLocal equipo local
 	 * @param eVisitante equipo visitante
-	 * @param f físicas
+	 * @param f fï¿½sicas
 	 */
 	public void empiezaPartidoArcade(BaseDeDatos bd, Equipo eLocal, Equipo eVisitante, FisicasNuevas f, int ganados) {
 		try {

@@ -60,12 +60,16 @@ public class VentanaLiga extends JFrame {
 	private Equipo eLocal;
 	private Equipo eVisitante;
 	private boolean isJugadorLocal;
+	private VentanaLiga ventana;
+	private int ligaSeleccionada;
 	/**
 	 * Create the frame.
 	 * 
 	 * @throws SQLException
 	 */
-	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j, ArrayList<Equipo> listaPartidos, FisicasNuevas f) throws SQLException {
+	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j, ArrayList<Equipo> listaPartidos, FisicasNuevas f, int ligaSeleccionada) throws SQLException {
+		this.ligaSeleccionada = ligaSeleccionada;
+		ventana = this;
 		this.listaPartidos = listaPartidos;
 		// La primera ronda de partidos se juega en casa
 		if(listaPartidos.size() >= 19) {
@@ -75,6 +79,7 @@ public class VentanaLiga extends JFrame {
 			eVisitante = e;
 			isJugadorLocal = false;
 		}
+		
 		try {
 
 			// try {
@@ -173,6 +178,17 @@ public class VentanaLiga extends JFrame {
 
 		JButton btnCargar = new JButton("Cargar");
 		panelBotonera.add(btnCargar);
+		
+		JButton btnSalirAlMenu = new JButton("Salir al menu");
+		btnSalirAlMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConfirmacionSalirLiga cS = new ConfirmacionSalirLiga(bd, f, ventana);
+				cS.setVisible(true);
+				
+				
+			}
+		});
+		panelBotonera.add(btnSalirAlMenu);
 
 		JPanel panelInformacionEquipo = new JPanel();
 
@@ -248,7 +264,7 @@ public class VentanaLiga extends JFrame {
 		// setContentPane(background_1);
 		//// getContentPane().add(background_1);
 		// background_1.setLayout(null);
-
+		
 	}
 
 	/**
@@ -269,7 +285,7 @@ public class VentanaLiga extends JFrame {
 			} catch (Exception e3) {
 				e3.printStackTrace();
 			}
-			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " ORDER BY PUNTOS DESC;"; //M�todo burbuja para ordenar equipos por puntos.
+			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE fk_CodLiga="+ligaSeleccionada+" ORDER BY PUNTOS DESC;"; //M�todo burbuja para ordenar equipos por puntos.
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 			while (rs.next()) {
 
@@ -312,7 +328,9 @@ public class VentanaLiga extends JFrame {
 		jlIcono.repaint();
 		revalidate();
 	}
-
+	public void ocultarVentanaLiga() {
+		setVisible(false);
+	}
 }
 
 class TeamBold extends DefaultTableCellRenderer {
@@ -365,5 +383,7 @@ class TeamBold extends DefaultTableCellRenderer {
 		}
 		return parent;
 	}
+	
+	
 
 }

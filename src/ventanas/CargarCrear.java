@@ -54,49 +54,14 @@ public class CargarCrear extends JDialog {
 		btnCargar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO
-				JFileChooser fc = new JFileChooser();
-				FileNameExtensionFilter txt = new FileNameExtensionFilter("Archivos(.txt)", "txt");
-				fc.addChoosableFileFilter(txt);
-				fc.setFileFilter(txt);
-				int seleccion = fc.showOpenDialog(getContentPane());
-				if (seleccion == JFileChooser.APPROVE_OPTION) {
-					File fichero = fc.getSelectedFile();
-					System.out.println(fichero.getPath());
-					System.out.println(fichero.getName());
-					
-					try {
-						FileReader lector=new FileReader(fichero.getName());
-						BufferedReader contenido=new BufferedReader(lector);
-						String[] a = fc.getSelectedFile().getPath().toString().split("codLiga=");
-						
-						int codLigas = Character.getNumericValue(a[1].charAt(0));
-						VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(contenido.readLine(), j,codLigas ), bd, j, j.devolverPartidosRestantes(codLigas, bd),f);
-						setVisible(false);
-						vL.setVisible(true);
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-				}
-				fc.setBounds(600, 100, 600, 300);
-				fc.setVisible(true);
+			cargar(bd, j, f);
 			}
 		});
 		
 		JButton btnNuevaPartida = new JButton("Nueva Partida");
 		btnNuevaPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				bd.anyadirTodosLosEquipos(j.getCodLiga(), j);
-				MenuLiga m = new MenuLiga(700, 700, j, bd, f);
-				m.setVisible(true);
-				setVisible(false);
+				nueva(bd, j, f);
 			}
 		});
 		GroupLayout gl_panelBotones = new GroupLayout(panelBotones);
@@ -117,5 +82,50 @@ public class CargarCrear extends JDialog {
 		);
 		panelBotones.setLayout(gl_panelBotones);
 		contentPanel.setLayout(gl_contentPanel);
+	}
+	public void nueva(BaseDeDatos bd, Jugador j, FisicasNuevas f) {
+		int codLiga = j.getCodLiga();
+		bd.anyadirLiga("Liga" +  j.getCodLiga(), j);
+		bd.anyadirTodosLosEquipos(codLiga, j);
+		MenuLiga m = new MenuLiga(700, 700, j, bd, f,  codLiga);
+		m.setVisible(true);
+		setVisible(false);
+	}
+	
+	
+	public void cargar(BaseDeDatos bd, Jugador j, FisicasNuevas f) {
+		JFileChooser fc = new JFileChooser();
+		FileNameExtensionFilter txt = new FileNameExtensionFilter("Archivos(.txt)", "txt");
+		fc.addChoosableFileFilter(txt);
+		fc.setFileFilter(txt);
+		int seleccion = fc.showOpenDialog(getContentPane());
+		if (seleccion == JFileChooser.APPROVE_OPTION) {
+			File fichero = fc.getSelectedFile();
+			System.out.println(fichero.getPath());
+			System.out.println(fichero.getName());
+			
+			try {
+				FileReader lector=new FileReader(fichero.getName());
+				BufferedReader contenido=new BufferedReader(lector);
+				String[] a = fc.getSelectedFile().getPath().toString().split("codLiga=");
+				
+				int codLigas = Character.getNumericValue(a[1].charAt(0));
+				VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(contenido.readLine(), j,codLigas ), bd, j, j.devolverPartidosRestantes(codLigas, bd),f, codLigas);
+				setVisible(false);
+				vL.setVisible(true);
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		}
+		fc.setBounds(600, 100, 600, 300);
+		fc.setVisible(true);
 	}
 }

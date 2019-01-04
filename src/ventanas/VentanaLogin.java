@@ -36,7 +36,7 @@ public class VentanaLogin extends JDialog {
 	private BaseDeDatos bd;
 	private FisicasNuevas f;
 
-	public  VentanaLogin(BaseDeDatos bd, FisicasNuevas f) {
+	public  VentanaLogin(BaseDeDatos bd, FisicasNuevas f, boolean isModoLiga) {
 		this.bd = bd;
 		this.f = f;
 		setBounds(100, 100, 450, 300);
@@ -92,35 +92,42 @@ public class VentanaLogin extends JDialog {
 				btnRegister.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent e) {
-						try {
-							bd.init();
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						String name = tFNombre.getText().toUpperCase();
-						//SI el jugador esta entre los nombres de los jugadores de la bd dara error
-						if(bd.estaJugadorRegistrado(name)) {
-							JOptionPane.showMessageDialog(null, "ESTE JUGADOR YA ESTA REGISTRADO", "ERROR", JOptionPane.WARNING_MESSAGE);
-						}
-						//SI el jugador no esta entre los jugadores de la BD entonces se creara un nuevo objeto Jugador
-						if(!bd.estaJugadorRegistrado(name)) {
-							j = new Jugador(name, passwordField.getPassword());
-							
-							bd.anyadirJugador(j);
-							bd.crearTablaEquipos(j);
-							
-							//TODO
-							setVisible(false);
-							siguienteTransicion();
-							
-						}
-						try {
-							bd.close();
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+						
+							try {
+								bd.init();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							String name = tFNombre.getText().toUpperCase();
+							//SI el jugador esta entre los nombres de los jugadores de la bd dara error
+							if(bd.estaJugadorRegistrado(name)) {
+								JOptionPane.showMessageDialog(null, "ESTE JUGADOR YA ESTA REGISTRADO", "ERROR", JOptionPane.WARNING_MESSAGE);
+							}
+							//SI el jugador no esta entre los jugadores de la BD entonces se creara un nuevo objeto Jugador
+							if(!bd.estaJugadorRegistrado(name)) {
+								j = new Jugador(name, passwordField.getPassword());
+								
+								bd.anyadirJugador(j);
+								bd.crearTablaEquipos(j);
+								
+								//TODO
+								setVisible(false);
+							if(isModoLiga) {
+								siguienteTransicion();
+							}else if(!isModoLiga) {
+								VentanaCreacion vc = new VentanaCreacion(bd, f, null, j.getCodLiga(), j);
+								vc.setVisible(true);
+								setVisible(false);	
+							}
+								
+							}
+							try {
+								bd.close();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 						
 					}
 				});
@@ -129,37 +136,43 @@ public class VentanaLogin extends JDialog {
 			{
 				btnLogin = new JButton("Login");
 				btnLogin.addActionListener(new ActionListener() {
+					
 					public void actionPerformed(ActionEvent e) {
-						try {
-							bd.init();
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+					
+							try {
+								bd.init();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							String name = tFNombre.getText().toUpperCase();
+							// SI el jugador no esta registrado con ese nombre y contraseña dara error
+							if(!bd.estaJugadorEnBaseDeDatos(name, passwordField.getPassword())) {
+								JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA", "ERROR", JOptionPane.WARNING_MESSAGE);
+								
+							}
+							if(bd.estaJugadorEnBaseDeDatos(name, passwordField.getPassword())) {
+								 j = bd.convertirAJugador(name, passwordField.getPassword());
+								
+								setVisible(false);
+							if(isModoLiga) {
+								siguienteTransicion();
+							}else if(!isModoLiga) {
+								VentanaCreacion vc = new VentanaCreacion(bd, f, null, 0, j);
+								vc.setVisible(true);
+								setVisible(false);
+							}}
+							try {
+								bd.close();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+					
 						}
-						String name = tFNombre.getText().toUpperCase();
-						// SI el jugador no esta registrado con ese nombre y contraseña dara error
-						if(!bd.estaJugadorEnBaseDeDatos(name, passwordField.getPassword())) {
-							JOptionPane.showMessageDialog(null, "ESTE JUGADOR NO ESTA REGISTRADO O LA CONTRASEÑA ES ERRONEA", "ERROR", JOptionPane.WARNING_MESSAGE);
-							
-						}
-						if(bd.estaJugadorEnBaseDeDatos(name, passwordField.getPassword())) {
-							 j = bd.convertirAJugador(name, passwordField.getPassword());
-							
-							setVisible(false);
-							
-							siguienteTransicion();
-						}
-						try {
-							bd.close();
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-
-				
-				});
-			}
+					
+				});}
+			
 			GroupLayout gl_buttonPane = new GroupLayout(buttonPane);
 			gl_buttonPane.setHorizontalGroup(
 				gl_buttonPane.createParallelGroup(Alignment.LEADING)
