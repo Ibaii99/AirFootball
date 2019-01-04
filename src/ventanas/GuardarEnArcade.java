@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
@@ -25,15 +26,19 @@ public class GuardarEnArcade extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.addActionListener(new ActionListener() {
+		btnGuardar.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				try {
 				bd.init();
-				
+				bd.getCon().createStatement().executeUpdate("INSERT INTO Arcade(Usuario, Partidos ganados) " + "VALUES ('"+ textField.getText() + "', " + ganadosArcade + ")");
 				bd.close();
 				}catch(Exception e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "NO SE HA PODIDO INTRODUCIR A LA BASE DE DATOS",
+							"ERROR", JOptionPane.WARNING_MESSAGE);
 				}
+				Inicio i = new Inicio(bd, fisicas);
+				i.setVisible(true);
+				dispose();
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(getContentPane());

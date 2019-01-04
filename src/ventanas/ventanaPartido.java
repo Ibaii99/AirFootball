@@ -628,6 +628,8 @@ public class ventanaPartido extends JFrame {
 		}
 		if((arcade) && (golLocal<golVisitante)) {
 			GuardarEnArcade ga = new GuardarEnArcade(bd, fisicas, ganadosArcade); 
+			ga.setVisible(true);
+			dispose();
 		}
 //		else {
 //			partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
