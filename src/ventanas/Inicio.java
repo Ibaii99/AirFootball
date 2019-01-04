@@ -178,7 +178,7 @@ public class Inicio extends JFrame {
 			eLocal = equipoRandom(bd, eLocal);
 			eVisitante = equipoRandom(bd, eVisitante);
 			Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
-			ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, true, false, f,
+			ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, false, false, f,
 					bd, null, ganados);
 			try {
 				Thread.sleep(2000);
