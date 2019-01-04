@@ -110,6 +110,7 @@ public class Inicio extends JFrame {
 
 			public void actionPerformed(ActionEvent arg0) {
 				empiezaPartidoArcade(bd, eLocal, eVisitante, f, 0);
+				dispose();
 			}
 		});
 		bArcade.setFont(new Font("Arial Black", Font.PLAIN, 16));
