@@ -618,7 +618,11 @@ public class ventanaPartido extends JFrame {
 			e.setVisible(true);
 			//TODO poner un mensajito o algo
 			}
-		if(!isAmistoso) {
+		if(arcade) {
+			Inicio e = new Inicio(bd, fisicas);
+			e.empiezaPartidoArcade(bd, eLocal, eVisitante, fisicas);
+		}
+		else {
 			partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
 			bd.actualizarEquipo(j, partido.getEquipoLocal());
 			bd.actualizarEquipo(j, partido.getEquipoVisitante());

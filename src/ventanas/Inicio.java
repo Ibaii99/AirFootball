@@ -185,6 +185,7 @@ public class Inicio extends JFrame {
 				e.printStackTrace();
 			}
 			partido.empieza();
+			dispose();
 		} catch (Exception eee) {
 			eee.printStackTrace();
 		}
