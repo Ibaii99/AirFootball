@@ -318,7 +318,10 @@ public class VentanaCreacion extends JFrame {
 		JButton btnListo = new JButton("Listo");
 		btnListo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				MenuLiga mU = new MenuLiga(700, 700, j, bd, f, ligaNueva);
+				mU.setVisible(true);
+				setVisible(false);
+				dispose();
 			}
 		});
 		panel_1.add(btnListo);

@@ -116,7 +116,7 @@ public class VentanaLogin extends JDialog {
 							if(isModoLiga) {
 								siguienteTransicion();
 							}else if(!isModoLiga) {
-								VentanaCreacion vc = new VentanaCreacion(bd, f, null, j.getCodLiga(), j);
+								VentanaCreacion vc = new VentanaCreacion(bd, f, null, 0, j);
 								vc.setVisible(true);
 								setVisible(false);	
 							}
