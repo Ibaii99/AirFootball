@@ -118,10 +118,10 @@ public class CargarCrear extends JDialog {
 				e1.printStackTrace();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			}
 
 		}

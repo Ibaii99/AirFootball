@@ -135,7 +135,7 @@ public class BaseDeDatos {
 				equipo = con.createStatement();
 				comando = "CREATE TABLE Equipos('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT, PRIMARY KEY('Siglas') )";
 				logger.log(Level.INFO, "BD: " + comando);
-				equipo.executeQuery(comando);
+				equipo.executeUpdate(comando);
 			} catch (Exception i) {
 				i.printStackTrace();
 			} // Se lanza si la tabla ya existe - no hay problema
@@ -143,7 +143,7 @@ public class BaseDeDatos {
 				liga = con.createStatement();
 				comando = "CREATE TABLE Liga( 'CodLiga' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'codLigaJugador' INTEGER, 'fk_Nombre_Jugador' TEXT REFERENCES JUGADORES(NOMBRE), 'Nombre' TEXT NOT NULL)";
 				logger.log(Level.INFO, "BD: " + comando);
-				liga.execute(comando);
+				liga.executeUpdate(comando);
 			} catch (SQLException i) {
 				i.printStackTrace();
 			} // Se lanza si la tabla ya existe - no hay problema
@@ -152,7 +152,7 @@ public class BaseDeDatos {
 				jugadores = con.createStatement();
 				comando = "CREATE TABLE Jugadores( 'Nombre' TEXT PRIMARY KEY NOT NULL, 'Password' TEXT NOT NULL, 'cantidadPartidas' INTEGER DEFAULT 0)";
 				logger.log(Level.INFO, "BD: " + comando);
-				jugadores.execute(comando);
+				jugadores.executeUpdate(comando);
 			} catch (SQLException i) {
 				i.printStackTrace();
 			} // Se lanza si la tabla ya existe - no hay problema
@@ -178,7 +178,7 @@ public class BaseDeDatos {
 			String comando = "CREATE TABLE Equipos" + j.getNombre()
 					+ "('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT)";
 			logger.log(Level.INFO, "BD: " + comando);
-			equipo.executeQuery(comando);
+			equipo.executeUpdate(comando);
 		} catch (Exception i) {
 			i.printStackTrace();
 		} // Se lanza si la tabla ya existe - no hay problema
@@ -207,7 +207,7 @@ public class BaseDeDatos {
 			jugador = con.createStatement();
 			String query = "INSERT INTO Jugadores('Nombre','Password','cantidadPartidas') VALUES ('"
 					+ jugadorJ.getNombre() + "','" + contrasenya + "','" + jugadorJ.getCodLiga() + "')";
-			ResultSet rs = jugador.executeQuery(query);
+			con.createStatement().executeUpdate(query);
 			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

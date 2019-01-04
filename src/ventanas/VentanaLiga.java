@@ -44,7 +44,9 @@ import javax.swing.JTable;
 import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
@@ -72,6 +74,7 @@ public class VentanaLiga extends JFrame {
 		ventana = this;
 		this.listaPartidos = listaPartidos;
 		// La primera ronda de partidos se juega en casa
+		
 		if(listaPartidos.size() >= 19) {
 			eLocal = e;
 			isJugadorLocal = true;
@@ -79,6 +82,7 @@ public class VentanaLiga extends JFrame {
 			eVisitante = e;
 			isJugadorLocal = false;
 		}
+		
 		
 		try {
 
@@ -161,14 +165,15 @@ public class VentanaLiga extends JFrame {
 		// } catch (Exception ee) {
 		// ee.printStackTrace();
 		// }
+		System.out.println(listaPartidos.get(0));
+		
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		panelClasificacion.add(scrollPane);
 
 		JPanel panelBotonera = new JPanel();
 		getContentPane().add(panelBotonera, BorderLayout.SOUTH);
-
-		JButton btnGuardar = new JButton("Guardar");
+ 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -226,17 +231,29 @@ public class VentanaLiga extends JFrame {
 
 		JPanel panelEquipoAdversario = new JPanel();
 		panelInformacionEquipo.add(panelEquipoAdversario);
-
-		JLabel lblEscudoAdversario = new JLabel("New label");
+ 
+		String nombreEqVisitante = listaPartidos.get(0).getNombre();
+		JLabel lblEscudoAdversario = new JLabel();
+		ImageIcon imageIconV = null;
+		try {
+			eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga()-1);
+			
+			imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
+			System.out.println(imageIconV);
+		} catch (Exception ej) {
+			ej.printStackTrace();
+		}
+		resizeo(imageIconV, lblEscudoAdversario, 20, 20);
+		panelEquipoJugador.add(lblEscudoEquipo);
 		panelEquipoAdversario.add(lblEscudoAdversario);
 
-		JLabel lblNombAdversario = new JLabel("New label");
+		JLabel lblNombAdversario = new JLabel(eVisitante.getNombre());
 		panelEquipoAdversario.add(lblNombAdversario);
 
 		JLabel lblTEXTPuntosAdversario = new JLabel("Puntos:");
 		panelEquipoAdversario.add(lblTEXTPuntosAdversario);
 
-		JLabel lblPuntosAdversario = new JLabel("New label");
+		JLabel lblPuntosAdversario = new JLabel("" + listaPartidos.get(0).getPuntos());
 		panelEquipoAdversario.add(lblPuntosAdversario);
 
 		JButton btnPlay = new JButton("Play");

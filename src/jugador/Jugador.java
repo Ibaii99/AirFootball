@@ -75,9 +75,12 @@ public class Jugador {
 		    		while(cadena != null) {
 		    		lista.add(bd.convertirAEquipo(cadena, this, numLiga));
 		    		cadena = br.readLine();
+		    		
 		    		}
 		            br.close();}
-		    }catch(Exception i) {i.printStackTrace();}
+		    }catch(Exception i) {
+//		    	i.printStackTrace();
+		    	}
 		 
 		 
 		return lista;
