@@ -734,38 +734,45 @@ public class ventanaPartido extends JFrame {
 					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
 			System.out.println(query + "\n" + query2);
 			bd.getCon().createStatement().executeUpdate(query2);
-//			String query = "UPDATE Equipos" + j.getNombre()
-//					+ " SET Puntos=Puntos + 3, 'Goles A Favor Totales'='Goles A Favor Totales'+" + golVisitante
-//					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golLocal
-//					+ ", 'Victorias Totales'= 'Victorias Totales' + 1 WHERE NOMBRE='" + eVisitante.getNombre()
-//					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-//			bd.getCon().createStatement().executeUpdate(query);
-//			bd.close();
-//			bd.init();
-//			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Derrotas Totales' = 'Derrotas Totales'+1,"
-//					+ "'Goles A Favor Totales'='Goles A Favor Totales'+" + golLocal
-//					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golVisitante + " WHERE NOMBRE='"
-//					+ eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-//			System.out.println(query + "\n" + query2);
-//			bd.getCon().createStatement().executeUpdate(query2);
+			// String query = "UPDATE Equipos" + j.getNombre()
+			// + " SET Puntos=Puntos + 3, 'Goles A Favor Totales'='Goles A Favor Totales'+"
+			// + golVisitante
+			// + ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golLocal
+			// + ", 'Victorias Totales'= 'Victorias Totales' + 1 WHERE NOMBRE='" +
+			// eVisitante.getNombre()
+			// + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+			// bd.getCon().createStatement().executeUpdate(query);
+			// bd.close();
+			// bd.init();
+			// String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Derrotas Totales' =
+			// 'Derrotas Totales'+1,"
+			// + "'Goles A Favor Totales'='Goles A Favor Totales'+" + golLocal
+			// + ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golVisitante +
+			// " WHERE NOMBRE='"
+			// + eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+			// System.out.println(query + "\n" + query2);
+			// bd.getCon().createStatement().executeUpdate(query2);
 		} else if (golLocal == golVisitante) { // Esta parte del método falta por mejorar lo de goles a favor y tal
-//			String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos = Puntos + 1, 'Goles A Favor Totales'="
-//					+ golLocal + ", 'Goles Encajados Totales'=" + golVisitante
-//					+ ", 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='" + eVisitante.getNombre()
-//					+ "' OR NOMBRE='" + eLocal.getNombre() + "') AND fk_CodLiga=" + j.getCodLiga() + ";";
+			// String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos = Puntos + 1,
+			// 'Goles A Favor Totales'="
+			// + golLocal + ", 'Goles Encajados Totales'=" + golVisitante
+			// + ", 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='" +
+			// eVisitante.getNombre()
+			// + "' OR NOMBRE='" + eLocal.getNombre() + "') AND fk_CodLiga=" +
+			// j.getCodLiga() + ";";
 			bd.init();
 			int golesAcumuladosV = golVisitante + eLocal.getGolesAFavorTotales();
 			int golesEncajadosV = golLocal + eLocal.getGolesEnContraTotales();
-			String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos+1, 'Goles A Favor Totales'=" + ("" + golesAcumuladosV)
-					+ ", 'Goles Encajados Totales' = " + golesEncajadosV + ", 'Empates Totales'="
-					+ ("" + (eLocal.getEmpatesTotales() + 1)) + " WHERE NOMBRE='" + eLocal.getNombre() 
-					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+			String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos+1, 'Goles A Favor Totales'="
+					+ ("" + golesAcumuladosV) + ", 'Goles Encajados Totales' = " + golesEncajadosV
+					+ ", 'Empates Totales'=" + ("" + (eLocal.getEmpatesTotales() + 1)) + " WHERE NOMBRE='"
+					+ eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
 			System.out.println(query2);
 			bd.getCon().createStatement().executeUpdate(query2);
-			String query3 = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos+1, 'Goles A Favor Totales'=" + ("" + golesAcumuladosV)
-					+ ", 'Goles Encajados Totales' = " + golesEncajadosV + ", 'Empates Totales'="
-					+ ("" + (eVisitante.getEmpatesTotales() + 1)) + " WHERE NOMBRE='" + eVisitante.getNombre() 
-					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+			String query3 = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos+1, 'Goles A Favor Totales'="
+					+ ("" + golesAcumuladosV) + ", 'Goles Encajados Totales' = " + golesEncajadosV
+					+ ", 'Empates Totales'=" + ("" + (eVisitante.getEmpatesTotales() + 1)) + " WHERE NOMBRE='"
+					+ eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
 			System.out.println(query3);
 			bd.getCon().createStatement().executeUpdate(query3);
 		}
@@ -774,36 +781,72 @@ public class ventanaPartido extends JFrame {
 
 	}
 
-	private void setPuntosAlAzar(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException{
+	private void setPuntosAlAzar(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException {
 		bd.init();
-		String query = "SELECT * FROM EQUIPOS"+j.getNombre()+" WHERE NOMBRE NOT LIKE '" + eLocal.getNombre() + "' AND NOMBRE NOT LIKE '"+eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + " ORDER BY RANDOM();";
+		String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE NOT LIKE '" + eLocal.getNombre()
+				+ "' AND NOMBRE NOT LIKE '" + eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga()
+				+ " ORDER BY RANDOM();";
 		ResultSet rs = bd.getCon().createStatement().executeQuery(query);
-		while(rs.next()) {
+		while (rs.next()) {
 			try {
-			int numRandom = arrayNumsRandom(0, 1, 3);
-			if (numRandom==1){
-				String equipo = rs.getString("Nombre");
-				try {
-				rs.next();
-				String equipo2 = rs.getString("Nombre");
-				String updatePruebaEmp = "UPDATE EQUIPOS"+j.getNombre()+" SET Puntos="+ ("Puntos + "+numRandom) +", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE (Nombre='"+ equipo +"' OR Nombre='"+equipo2+"') AND fk_CodLiga="+j.getCodLiga()+";";	
-				System.out.println(updatePruebaEmp);
-				bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
-				}catch (Exception e){
-					
+				int numRandom = arrayNumsRandom(0, 1, 3);
+				if (numRandom == 1) {
+					String equipo = rs.getString("Nombre");
+					try {
+						rs.next();
+						String equipo2 = rs.getString("Nombre");
+						String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos="
+								+ ("Puntos + " + numRandom)
+								+ ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE (Nombre='"
+								+ equipo + "' OR Nombre='" + equipo2 + "') AND fk_CodLiga=" + j.getCodLiga() + ";";
+						System.out.println(updatePruebaEmp);
+						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
+					} catch (Exception e) {
+
+					}
 				}
-			}
-			String equipo = rs.getString("Nombre");
-			String updatePrueba = "UPDATE EQUIPOS"+j.getNombre()+" SET Puntos="+ (""+numRandom) +" WHERE Nombre='"+ equipo +"' AND fk_CodLiga="+j.getCodLiga()+";";	
-			System.out.println(updatePrueba);
-			bd.getCon().createStatement().executeUpdate(updatePrueba);
-			}catch(Exception e) {
-				
+				if (numRandom == 3) {
+					String equipo = rs.getString("Nombre");
+					try {
+						rs.next();
+						String equipo2 = rs.getString("Nombre");
+						String updatePruebaVic = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos="
+								+ ("Puntos + " + numRandom)
+								+ ", \"Victorias Totales\"= \"Victorias Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+3, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+1 WHERE Nombre='"
+								+ equipo + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+						System.out.println(updatePruebaVic);
+						bd.getCon().createStatement().executeUpdate(updatePruebaVic);
+						String updatePruebaDer = "UPDATE EQUIPOS" + j.getNombre()
+								+ " SET \"Derrotas Totales\"= \"Derrotas Totales\"+1, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+3, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+1 WHERE Nombre='"
+								+ equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+						System.out.println(updatePruebaDer);
+						bd.getCon().createStatement().executeUpdate(updatePruebaDer);
+
+					} catch (Exception e) {
+						String equipo2 = rs.getString("Nombre");
+						String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos="
+								+ ("Puntos + " + numRandom)
+								+ ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE Nombre='"
+								+ equipo2 + "') AND fk_CodLiga=" + j.getCodLiga() + ";";
+						System.out.println(updatePruebaEmp);
+						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
+					}
+				}
+				// String equipo = rs.getString("Nombre");
+				// String updatePrueba = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos=" + (""
+				// + numRandom)
+				// + " WHERE Nombre='" + equipo + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+				// System.out.println(updatePrueba);
+				// bd.getCon().createStatement().executeUpdate(updatePrueba);
+			} catch (Exception e) {
+
 			}
 		}
 		bd.close();
 	}
-	private static int getRandomNumberInRange(int min, int max) { //Método sacado de MKYong para elegir el numero aleatorio de goles que se van a marcar
+
+	private static int getRandomNumberInRange(int min, int max) { // Método sacado de MKYong para elegir el numero
+																	// aleatorio de goles que se van a marcar
 
 		if (min >= max) {
 			throw new IllegalArgumentException("max must be greater than min");
@@ -812,11 +855,12 @@ public class ventanaPartido extends JFrame {
 		Random r = new Random();
 		return r.nextInt((max - min) + 1) + min;
 	}
+
 	private static int arrayNumsRandom(int d, int e, int v) {
-		int[] intArray = {d, e, v};
-        int idx = new Random().nextInt(intArray.length);
-        int random = (intArray[idx]);
-        return random;
+		int[] intArray = { d, e, v };
+		int idx = new Random().nextInt(intArray.length);
+		int random = (intArray[idx]);
+		return random;
 	}
 
 	/**
