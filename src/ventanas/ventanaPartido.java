@@ -790,6 +790,7 @@ public class ventanaPartido extends JFrame {
 		while (rs.next()) {
 			try {
 				int numRandom = arrayNumsRandom(0, 1, 3);
+
 				if (numRandom == 1) {
 					String equipo = rs.getString("Nombre");
 					try {
@@ -806,14 +807,18 @@ public class ventanaPartido extends JFrame {
 					}
 				}
 				if (numRandom == 3) {
+					int golesRandom = getRandomNumberInRange(3, 4);
+					int golesPerdedor = 4 - golesRandom;
 					String equipo = rs.getString("Nombre");
 					try {
 						rs.next();
 						String equipo2 = rs.getString("Nombre");
 						String updatePruebaVic = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos="
 								+ ("Puntos + " + numRandom)
-								+ ", \"Victorias Totales\"= \"Victorias Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+3, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+1 WHERE Nombre='"
-								+ equipo + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+								+ ", \"Victorias Totales\"= \"Victorias Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+"
+								+ ("" + golesRandom) + ", \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+"
+								+ ("" + golesPerdedor) + " WHERE Nombre='" + equipo + "' AND fk_CodLiga="
+								+ j.getCodLiga() + ";";
 						System.out.println(updatePruebaVic);
 						bd.getCon().createStatement().executeUpdate(updatePruebaVic);
 						String updatePruebaDer = "UPDATE EQUIPOS" + j.getNombre()
