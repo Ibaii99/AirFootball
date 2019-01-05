@@ -28,6 +28,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
@@ -686,6 +687,7 @@ public class ventanaPartido extends JFrame {
 	private void setGolesYPuntos(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException {
 		j.setCodLiga(j.getCodLiga());
 		bd.init();
+		setPuntosAlAzar(bd, j, eLocal, eVisitante);
 		if (golLocal > golVisitante) {
 			eVisitante = bd.convertirAEquipo(eVisitante.getNombre(), j, j.getCodLiga());
 			eLocal = bd.convertirAEquipo(eLocal.getNombre(), j, j.getCodLiga());
@@ -769,6 +771,13 @@ public class ventanaPartido extends JFrame {
 		bd.close();
 		borrarPrimeraFila(j);
 
+	}
+
+	private void setPuntosAlAzar(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException{
+		bd.init();
+		String query = "SELECT * FROM EQUIPOS"+j.getNombre()+" WHERE NOMBRE NOT LIKE '" + eLocal.getNombre() + "' AND NOMBRE NOT LIKE '"+eVisitante.getNombre() + " AND fk_CodLiga=" + j.getCodLiga() + " ORDER BY RANDOM;";
+		ResultSet rs = bd.getCon().createStatement().executeQuery(query);
+		bd.close();
 	}
 
 	/**
