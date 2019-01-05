@@ -223,7 +223,14 @@ public class VentanaLiga extends JFrame {
 		JLabel lblTEXTPuntosEquipo = new JLabel("Puntos: ");
 		panelEquipoJugador.add(lblTEXTPuntosEquipo);
 
-		JLabel lblPuntosEquipo = new JLabel("" + e.getPuntos());
+		bd.init();
+		int puntosLocal = 0;
+		ResultSet rs = bd.getCon().createStatement().executeQuery("SELECT PUNTOS FROM Equipos WHERE NOMBRE='"+ e.getNombre() +"';");
+		while (rs.next()) {
+			puntosLocal = rs.getInt("Puntos"); 
+		}
+		bd.close();
+		JLabel lblPuntosEquipo = new JLabel("" + puntosLocal);
 		panelEquipoJugador.add(lblPuntosEquipo);
 
 		JLabel lblVs = new JLabel("VS");
@@ -305,7 +312,7 @@ public class VentanaLiga extends JFrame {
 			} catch (Exception e3) {
 				e3.printStackTrace();
 			}
-			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE fk_CodLiga="+ligaSeleccionada+" ORDER BY PUNTOS DESC;"; //M�todo burbuja para ordenar equipos por puntos.
+			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE fk_CodLiga="+j.getCodLiga()+" ORDER BY PUNTOS DESC;"; //M�todo burbuja para ordenar equipos por puntos.
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 			while (rs.next()) {
 

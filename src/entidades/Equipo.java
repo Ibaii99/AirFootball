@@ -318,6 +318,89 @@ public class Equipo{
 		this.imagen = imagen;
 	}
 
+	public void setBolaEquipo(Pelota bolaEquipo) {
+		this.bolaEquipo = bolaEquipo;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setSiglas(String siglas) {
+		this.siglas = siglas;
+	}
+
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
+	}
+
+	public void setArrayPartidosJugados(ArrayList<Partidos> arrayPartidosJugados) {
+		this.arrayPartidosJugados = arrayPartidosJugados;
+	}
+
+	public void setGolesEnContraTotales(int golesEnContraTotales) {
+		this.golesEnContraTotales = golesEnContraTotales;
+	}
+
+	public void setGolesEnContraVisitante(int golesEnContraVisitante) {
+		this.golesEnContraVisitante = golesEnContraVisitante;
+	}
+
+	public void setGolesEnContraLocal(int golesEnContraLocal) {
+		this.golesEnContraLocal = golesEnContraLocal;
+	}
+
+	public void setGolesAFavorTotales(int golesAFavorTotales) {
+		this.golesAFavorTotales = golesAFavorTotales;
+	}
+
+	public void setGolesAFavorVisitante(int golesAFavorVisitante) {
+		this.golesAFavorVisitante = golesAFavorVisitante;
+	}
+
+	public void setGolesAFavorLocal(int golesAFavorLocal) {
+		this.golesAFavorLocal = golesAFavorLocal;
+	}
+
+	public void setVictoriasTotales(int victoriasTotales) {
+		this.victoriasTotales = victoriasTotales;
+	}
+
+	public void setVictoriasLocal(int victoriasLocal) {
+		this.victoriasLocal = victoriasLocal;
+	}
+
+	public void setVictoriasVisitante(int victoriasVisitante) {
+		this.victoriasVisitante = victoriasVisitante;
+	}
+
+	public void setDerrotasTotales(int derrotasTotales) {
+		this.derrotasTotales = derrotasTotales;
+	}
+
+	public void setDerrotasLocal(int derrotasLocal) {
+		this.derrotasLocal = derrotasLocal;
+	}
+
+	public void setDerrotasVisitante(int derrotasVisitante) {
+		this.derrotasVisitante = derrotasVisitante;
+	}
+
+	public void setEmpatesTotales(int empatesTotales) {
+		this.empatesTotales = empatesTotales;
+	}
+
+	public void setEmpatesLocal(int empatesLocal) {
+		this.empatesLocal = empatesLocal;
+	}
+
+	public void setEmpatesVisitante(int empatesVisitante) {
+		this.empatesVisitante = empatesVisitante;
+	}
+
+	
+	
+
 
 
 	

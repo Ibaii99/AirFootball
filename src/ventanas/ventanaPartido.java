@@ -24,11 +24,15 @@ import java.awt.image.BufferedImageOp;
 import java.awt.image.ImageObserver;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.RenderableImage;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
@@ -650,7 +654,7 @@ public class ventanaPartido extends JFrame {
 	}
 
 	private void setGolesYPuntos(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException {
-		j.setCodLiga(j.getCodLiga()); 
+		j.setCodLiga(j.getCodLiga());
 		bd.init();
 		if (golLocal > golVisitante) {
 			String query = "UPDATE Equipos" + j.getNombre()
@@ -683,7 +687,7 @@ public class ventanaPartido extends JFrame {
 					+ " WHERE NOMBRE='" + eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
 			System.out.println(query + "\n" + query2);
 			bd.getCon().createStatement().executeUpdate(query2);
-		} else if (golLocal == golVisitante) { //Esta parte del método falta por mejorar lo de goles a favor y tal
+		} else if (golLocal == golVisitante) { // Esta parte del método falta por mejorar lo de goles a favor y tal
 			String query2 = "UPDATE Equipos" + j.getNombre()
 					+ " SET Puntos = Puntos + 1 AND 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='"
 					+ eVisitante.getNombre() + "' OR NOMBRE='" + eLocal.getNombre() + "') AND fk_CodLiga="
@@ -692,6 +696,24 @@ public class ventanaPartido extends JFrame {
 			bd.getCon().createStatement().executeUpdate(query2);
 		}
 		bd.close();
+		try {
+			File myFile = new File(j.getNombre() + j.getCodLiga() + "Partidos.txt");
+			Scanner fileScanner = new Scanner(myFile);
+			fileScanner.nextLine();
+			FileWriter fileStream = new FileWriter(myFile);
+			BufferedWriter out = new BufferedWriter(fileStream);
+			while (fileScanner.hasNextLine()) {
+				String next = fileScanner.nextLine();
+				if (next.equals("\n"))
+					out.newLine();
+				else
+					out.write(next);
+				out.newLine();
+			}
+			out.close();
+		} catch (Exception e4) {
+			e4.printStackTrace();
+		}
 
 	}
 
