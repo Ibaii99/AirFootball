@@ -643,7 +643,7 @@ public class ventanaPartido extends JFrame {
 			try {
 				setGolesYPuntos(bd, j, eLocal, eVisitante);
 				listaPartidos.remove(0);
-				if (listaPartidos.get(0).getNombre() == eLocal.getNombre()) { 
+				if (listaPartidos.get(0).getNombre() == eLocal.getNombre()) {
 					listaPartidos.remove(0);
 					borrarPrimeraFila(j);
 				}
@@ -687,41 +687,69 @@ public class ventanaPartido extends JFrame {
 		j.setCodLiga(j.getCodLiga());
 		bd.init();
 		if (golLocal > golVisitante) {
-			String query = "UPDATE Equipos" + j.getNombre()
-					+ " SET Puntos=Puntos + 3, 'Goles A Favor Totales'='Goles A Favor Totales'+" + golLocal
-					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golVisitante
-					+ ", 'Victorias Totales'= 'Victorias Totales' + 1 WHERE NOMBRE='" + eLocal.getNombre()
-					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+			eVisitante = bd.convertirAEquipo(eVisitante.getNombre(), j, j.getCodLiga());
+			eLocal = bd.convertirAEquipo(eLocal.getNombre(), j, j.getCodLiga());
+			int golesAcumulados = golLocal + eLocal.getGolesAFavorTotales();
+			int golesEncajados = golVisitante + eLocal.getGolesEnContraTotales();
+			String query = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos + 3, 'Goles A Favor Totales'="
+					+ ("" + golesAcumulados) + ", 'Goles Encajados Totales' = " + golesEncajados
+					+ ", 'Victorias Totales'=" + ("" + (eLocal.getVictoriasTotales() + 1)) + " WHERE NOMBRE='"
+					+ eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+			System.out.println(query);
+			bd.init();
 			bd.getCon().createStatement().executeUpdate(query);
 			bd.close();
 			bd.init();
-			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Derrotas Totales' = 'Derrotas Totales'+1,"
-					+ "'Goles A Favor Totales'='Goles A Favor Totales'+" + golVisitante
-					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golLocal + " WHERE NOMBRE='"
-					+ eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+			int golesAcumuladosV = golVisitante + eVisitante.getGolesAFavorTotales();
+			int golesEncajadosV = golLocal + eVisitante.getGolesEnContraTotales();
+			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Goles A Favor Totales'=" + ("" + golesAcumuladosV)
+					+ ", 'Goles Encajados Totales' = " + golesEncajadosV + ", 'Derrotas Totales'="
+					+ ("" + (eVisitante.getDerrotasTotales() + 1)) + " WHERE NOMBRE='" + eVisitante.getNombre()
+					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
 			System.out.println(query + "\n" + query2);
 			bd.getCon().createStatement().executeUpdate(query2);
 		}
 		if (golLocal < golVisitante) {
-			String query = "UPDATE Equipos" + j.getNombre()
-					+ " SET Puntos=Puntos + 3, 'Goles A Favor Totales'='Goles A Favor Totales'+" + golVisitante
-					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golLocal
-					+ ", 'Victorias Totales'= 'Victorias Totales' + 1 WHERE NOMBRE='" + eVisitante.getNombre()
-					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+			eVisitante = bd.convertirAEquipo(eVisitante.getNombre(), j, j.getCodLiga());
+			eLocal = bd.convertirAEquipo(eLocal.getNombre(), j, j.getCodLiga());
+			int golesAcumulados = golLocal + eVisitante.getGolesAFavorTotales();
+			int golesEncajados = golVisitante + eVisitante.getGolesEnContraTotales();
+			String query = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos + 3, 'Goles A Favor Totales'="
+					+ ("" + golesAcumulados) + ", 'Goles Encajados Totales' = " + golesEncajados
+					+ ", 'Victorias Totales'=" + ("" + (eVisitante.getVictoriasTotales() + 1)) + " WHERE NOMBRE='"
+					+ eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+			System.out.println(query);
+			bd.init();
 			bd.getCon().createStatement().executeUpdate(query);
 			bd.close();
 			bd.init();
-			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Derrotas Totales' = 'Derrotas Totales'+1,"
-					+ "'Goles A Favor Totales'='Goles A Favor Totales'+" + golLocal
-					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golVisitante + ","
-					+ " WHERE NOMBRE='" + eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+			int golesAcumuladosV = golVisitante + eLocal.getGolesAFavorTotales();
+			int golesEncajadosV = golLocal + eLocal.getGolesEnContraTotales();
+			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Goles A Favor Totales'=" + ("" + golesAcumuladosV)
+					+ ", 'Goles Encajados Totales' = " + golesEncajadosV + ", 'Derrotas Totales'="
+					+ ("" + (eLocal.getDerrotasTotales() + 1)) + " WHERE NOMBRE='" + eLocal.getNombre()
+					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
 			System.out.println(query + "\n" + query2);
 			bd.getCon().createStatement().executeUpdate(query2);
+//			String query = "UPDATE Equipos" + j.getNombre()
+//					+ " SET Puntos=Puntos + 3, 'Goles A Favor Totales'='Goles A Favor Totales'+" + golVisitante
+//					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golLocal
+//					+ ", 'Victorias Totales'= 'Victorias Totales' + 1 WHERE NOMBRE='" + eVisitante.getNombre()
+//					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+//			bd.getCon().createStatement().executeUpdate(query);
+//			bd.close();
+//			bd.init();
+//			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Derrotas Totales' = 'Derrotas Totales'+1,"
+//					+ "'Goles A Favor Totales'='Goles A Favor Totales'+" + golLocal
+//					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golVisitante + " WHERE NOMBRE='"
+//					+ eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+//			System.out.println(query + "\n" + query2);
+//			bd.getCon().createStatement().executeUpdate(query2);
 		} else if (golLocal == golVisitante) { // Esta parte del método falta por mejorar lo de goles a favor y tal
-			String query2 = "UPDATE Equipos" + j.getNombre()
-					+ " SET Puntos = Puntos + 1, 'Goles A Favor Totales'="+golLocal+", 'Goles Encajados Totales'="+golVisitante+", 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='"
-					+ eVisitante.getNombre() + "' OR NOMBRE='" + eLocal.getNombre() + "') AND fk_CodLiga="
-					+ j.getCodLiga() + ";";
+			String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos = Puntos + 1, 'Goles A Favor Totales'="
+					+ golLocal + ", 'Goles Encajados Totales'=" + golVisitante
+					+ ", 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='" + eVisitante.getNombre()
+					+ "' OR NOMBRE='" + eLocal.getNombre() + "') AND fk_CodLiga=" + j.getCodLiga() + ";";
 			System.out.println(query2);
 			bd.getCon().createStatement().executeUpdate(query2);
 		}
