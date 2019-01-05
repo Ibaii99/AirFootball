@@ -746,12 +746,25 @@ public class ventanaPartido extends JFrame {
 //			System.out.println(query + "\n" + query2);
 //			bd.getCon().createStatement().executeUpdate(query2);
 		} else if (golLocal == golVisitante) { // Esta parte del método falta por mejorar lo de goles a favor y tal
-			String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos = Puntos + 1, 'Goles A Favor Totales'="
-					+ golLocal + ", 'Goles Encajados Totales'=" + golVisitante
-					+ ", 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='" + eVisitante.getNombre()
-					+ "' OR NOMBRE='" + eLocal.getNombre() + "') AND fk_CodLiga=" + j.getCodLiga() + ";";
+//			String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos = Puntos + 1, 'Goles A Favor Totales'="
+//					+ golLocal + ", 'Goles Encajados Totales'=" + golVisitante
+//					+ ", 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='" + eVisitante.getNombre()
+//					+ "' OR NOMBRE='" + eLocal.getNombre() + "') AND fk_CodLiga=" + j.getCodLiga() + ";";
+			bd.init();
+			int golesAcumuladosV = golVisitante + eLocal.getGolesAFavorTotales();
+			int golesEncajadosV = golLocal + eLocal.getGolesEnContraTotales();
+			String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos+1, 'Goles A Favor Totales'=" + ("" + golesAcumuladosV)
+					+ ", 'Goles Encajados Totales' = " + golesEncajadosV + ", 'Empates Totales'="
+					+ ("" + (eLocal.getEmpatesTotales() + 1)) + " WHERE NOMBRE='" + eLocal.getNombre() 
+					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
 			System.out.println(query2);
 			bd.getCon().createStatement().executeUpdate(query2);
+			String query3 = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos+1, 'Goles A Favor Totales'=" + ("" + golesAcumuladosV)
+					+ ", 'Goles Encajados Totales' = " + golesEncajadosV + ", 'Empates Totales'="
+					+ ("" + (eVisitante.getEmpatesTotales() + 1)) + " WHERE NOMBRE='" + eVisitante.getNombre() 
+					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+			System.out.println(query3);
+			bd.getCon().createStatement().executeUpdate(query3);
 		}
 		bd.close();
 		borrarPrimeraFila(j);
