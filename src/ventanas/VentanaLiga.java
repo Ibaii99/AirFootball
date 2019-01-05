@@ -232,7 +232,7 @@ public class VentanaLiga extends JFrame {
 			puntosLocal = rs.getInt("Puntos"); 
 		}
 		bd.close();
-		JLabel lblPuntosEquipo = new JLabel("" + puntosLocal);
+		JLabel lblPuntosEquipo = new JLabel("" + puntosLocal); 
 		panelEquipoJugador.add(lblPuntosEquipo);
 
 		JLabel lblVs = new JLabel("VS");
@@ -255,7 +255,7 @@ public class VentanaLiga extends JFrame {
 //			while (rs2.next()) {
 //				puntosVisit = rs.getInt("Puntos"); 
 //			}
-//			bd.close();
+//			bd.close(); 
 			imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
 			System.out.println(imageIconV);
 		} catch (Exception ej) {

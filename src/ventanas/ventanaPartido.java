@@ -643,6 +643,15 @@ public class ventanaPartido extends JFrame {
 			try {
 				setGolesYPuntos(bd, j, eLocal, eVisitante);
 				listaPartidos.remove(0);
+				if (listaPartidos.get(0).getNombre() == eLocal.getNombre()) { 
+					listaPartidos.remove(0);
+					borrarPrimeraFila(j);
+				}
+				if (listaPartidos.size() < 19 && listaPartidos.get(0).getNombre() == eVisitante.getNombre()) {
+					listaPartidos.remove(0);
+					borrarPrimeraFila(j);
+				}
+
 				VentanaLiga vl = new VentanaLiga(eLocal, bd, j, listaPartidos, fisicas, j.getCodLiga());
 				vl.setVisible(true);
 			} catch (Exception e) {
@@ -651,6 +660,27 @@ public class ventanaPartido extends JFrame {
 			dispose();
 		}
 
+	}
+
+	private void borrarPrimeraFila(Jugador j) {
+		try {
+			File myFile = new File(j.getNombre() + j.getCodLiga() + "Partidos.txt");
+			Scanner fileScanner = new Scanner(myFile);
+			fileScanner.nextLine();
+			FileWriter fileStream = new FileWriter(myFile);
+			BufferedWriter out = new BufferedWriter(fileStream);
+			while (fileScanner.hasNextLine()) {
+				String next = fileScanner.nextLine();
+				if (next.equals("\n"))
+					out.newLine();
+				else
+					out.write(next);
+				out.newLine();
+			}
+			out.close();
+		} catch (Exception e4) {
+			e4.printStackTrace();
+		}
 	}
 
 	private void setGolesYPuntos(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException {
@@ -696,24 +726,7 @@ public class ventanaPartido extends JFrame {
 			bd.getCon().createStatement().executeUpdate(query2);
 		}
 		bd.close();
-		try {
-			File myFile = new File(j.getNombre() + j.getCodLiga() + "Partidos.txt");
-			Scanner fileScanner = new Scanner(myFile);
-			fileScanner.nextLine();
-			FileWriter fileStream = new FileWriter(myFile);
-			BufferedWriter out = new BufferedWriter(fileStream);
-			while (fileScanner.hasNextLine()) {
-				String next = fileScanner.nextLine();
-				if (next.equals("\n"))
-					out.newLine();
-				else
-					out.write(next);
-				out.newLine();
-			}
-			out.close();
-		} catch (Exception e4) {
-			e4.printStackTrace();
-		}
+		borrarPrimeraFila(j);
 
 	}
 
