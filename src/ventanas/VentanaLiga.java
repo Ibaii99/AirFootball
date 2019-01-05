@@ -324,7 +324,7 @@ public class VentanaLiga extends JFrame {
 			} catch (Exception e3) {
 				e3.printStackTrace();
 			}
-			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE fk_CodLiga="+j.getCodLiga()+" ORDER BY PUNTOS DESC;"; //M�todo burbuja para ordenar equipos por puntos.
+			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE fk_CodLiga="+j.getCodLiga()+" ORDER BY PUNTOS DESC, \"Goles A Favor Totales\"-\"Goles Encajados Totales\" DESC;"; //M�todo burbuja para ordenar equipos por puntos.
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 			while (rs.next()) {
 

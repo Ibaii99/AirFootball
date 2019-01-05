@@ -803,15 +803,22 @@ public class ventanaPartido extends JFrame {
 						System.out.println(updatePruebaEmp);
 						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
 					} catch (Exception e) {
-
+						String equipo2 = rs.getString("Nombre");
+						String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre()
+								+ " SET Puntos=Puntos + 1, \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE Nombre='"
+								+ equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+						System.out.println(updatePruebaEmp);
+						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
 					}
 				}
 				if (numRandom == 3) {
-					int golesRandom = getRandomNumberInRange(3, 4);
-					int golesPerdedor = 4 - golesRandom;
+					int golesRandom = 3;
+					int golesPerdedor = 1;
 					String equipo = rs.getString("Nombre");
 					try {
 						rs.next();
+						golesRandom = getRandomNumberInRange(3, 4);
+						golesPerdedor = 4 - golesRandom;
 						String equipo2 = rs.getString("Nombre");
 						String updatePruebaVic = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos="
 								+ ("Puntos + " + numRandom)
@@ -822,8 +829,10 @@ public class ventanaPartido extends JFrame {
 						System.out.println(updatePruebaVic);
 						bd.getCon().createStatement().executeUpdate(updatePruebaVic);
 						String updatePruebaDer = "UPDATE EQUIPOS" + j.getNombre()
-								+ " SET \"Derrotas Totales\"= \"Derrotas Totales\"+1, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+3, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+1 WHERE Nombre='"
-								+ equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+								+ " SET \"Derrotas Totales\"= \"Derrotas Totales\"+1, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+"
+								+ ("" + golesRandom) + ", \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+"
+								+ ("" + golesPerdedor) + " WHERE Nombre='" + equipo2 + "' AND fk_CodLiga="
+								+ j.getCodLiga() + ";";
 						System.out.println(updatePruebaDer);
 						bd.getCon().createStatement().executeUpdate(updatePruebaDer);
 
@@ -832,7 +841,7 @@ public class ventanaPartido extends JFrame {
 						String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos="
 								+ ("Puntos + " + numRandom)
 								+ ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE Nombre='"
-								+ equipo2 + "') AND fk_CodLiga=" + j.getCodLiga() + ";";
+								+ equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
 						System.out.println(updatePruebaEmp);
 						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
 					}
@@ -844,7 +853,12 @@ public class ventanaPartido extends JFrame {
 				// System.out.println(updatePrueba);
 				// bd.getCon().createStatement().executeUpdate(updatePrueba);
 			} catch (Exception e) {
-
+				String equipo2 = rs.getString("Nombre");
+				String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos=Puntos+1"
+						+ ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE Nombre='"
+						+ equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+				System.out.println(updatePruebaEmp);
+				bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
 			}
 		}
 		bd.close();
