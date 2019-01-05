@@ -143,11 +143,11 @@ public class MenuLiga extends JFrame {
 					    		Collections.shuffle(listaEquipos);
 					    		//Para la primera vuelta
 					    		for(Equipo equi : listaEquipos) {
-					    			if(equi != equipo) bw.write(equi.getNombre() + "\n");	// para que se guarden todos los equipos menos el que tu has elegido
+					    			if(equi.getNombre() != equipo.getNombre()) bw.write(equi.getNombre() + "\n");	// para que se guarden todos los equipos menos el que tu has elegido
 					    		}
 					    		//Para la segunda vuelta
 					    		for(Equipo equi : listaEquipos) {
-					    			if(equi != equipo) bw.write(equi.getNombre() + "\n");	// para que se guarden todos los equipos menos el que tu has elegido
+					    			if(equi.getNombre() != equipo.getNombre()) bw.write(equi.getNombre() + "\n");	// para que se guarden todos los equipos menos el que tu has elegido
 					    		}
 					    		VentanaLiga v = new VentanaLiga(equipo, bd, j, listaEquipos, f, codLiga);
 								v.setVisible(true);

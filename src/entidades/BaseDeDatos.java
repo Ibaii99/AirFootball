@@ -222,6 +222,7 @@ public class BaseDeDatos {
 			Class.forName("org.sqlite.JDBC");
 			String query1 = "UPDATE Jugadores SET 'cantidadPartidas'=" + j.getCodLiga()	+ " WHERE Nombre='" + j.getNombre() + "'; ";
 			ResultSet rs = con.createStatement().executeQuery(query1);
+			close();
 		}catch(Exception i) {
 			
 		} 
