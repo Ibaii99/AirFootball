@@ -775,8 +775,14 @@ public class ventanaPartido extends JFrame {
 
 	private void setPuntosAlAzar(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException{
 		bd.init();
-		String query = "SELECT * FROM EQUIPOS"+j.getNombre()+" WHERE NOMBRE NOT LIKE '" + eLocal.getNombre() + "' AND NOMBRE NOT LIKE '"+eVisitante.getNombre() + " AND fk_CodLiga=" + j.getCodLiga() + " ORDER BY RANDOM;";
+		String query = "SELECT * FROM EQUIPOS"+j.getNombre()+" WHERE NOMBRE NOT LIKE '" + eLocal.getNombre() + "' AND NOMBRE NOT LIKE '"+eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + " ORDER BY RANDOM();";
 		ResultSet rs = bd.getCon().createStatement().executeQuery(query);
+		while(rs.next()) {
+			String queryPrueba = "SELECT * FROM EQUIPOS"+j.getNombre()+" WHERE NOMBRE =\"Real Sociedad\" AND fk_CodLiga=" + j.getCodLiga() + " ORDER BY RANDOM();";
+			System.out.println(queryPrueba);
+			ResultSet rs2 = bd.getCon().createStatement().executeQuery(queryPrueba);
+			System.out.println(rs2.getString("Nombre"));
+		}
 		bd.close();
 	}
 
