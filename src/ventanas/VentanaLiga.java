@@ -225,7 +225,9 @@ public class VentanaLiga extends JFrame {
 
 		bd.init();
 		int puntosLocal = 0;
-		ResultSet rs = bd.getCon().createStatement().executeQuery("SELECT PUNTOS FROM Equipos WHERE NOMBRE='"+ e.getNombre() +"';");
+		String queryLocal = "SELECT PUNTOS FROM Equipos"+ j.getNombre().toUpperCase() +" WHERE NOMBRE='"+ e.getNombre() +"' AND fk_CodLiga="+j.getCodLiga()+";";
+		ResultSet rs = bd.getCon().createStatement().executeQuery(queryLocal);
+		System.out.println(rs.getInt("Puntos"));
 		while (rs.next()) {
 			puntosLocal = rs.getInt("Puntos"); 
 		}
@@ -242,8 +244,18 @@ public class VentanaLiga extends JFrame {
 		String nombreEqVisitante = listaPartidos.get(0).getNombre();
 		JLabel lblEscudoAdversario = new JLabel();
 		ImageIcon imageIconV = null;
+		int puntosVisit = 0;
 		try {
 			eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga());
+//			bd.init();
+//			String queryVisit = "SELECT Puntos FROM Equipos"+ j.getNombre().toUpperCase() +" WHERE NOMBRE='"+ eVisitante.getNombre() +"' AND fk_CodLiga="+j.getCodLiga()+";";
+//			System.out.println(queryVisit); 
+//			ResultSet rs2 = bd.getCon().createStatement().executeQuery(queryVisit);
+//			System.out.println(rs2.getInt("Puntos"));
+//			while (rs2.next()) {
+//				puntosVisit = rs.getInt("Puntos"); 
+//			}
+//			bd.close();
 			imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
 			System.out.println(imageIconV);
 		} catch (Exception ej) {
@@ -262,7 +274,7 @@ public class VentanaLiga extends JFrame {
 		JLabel lblTEXTPuntosAdversario = new JLabel("Puntos:");
 		panelEquipoAdversario.add(lblTEXTPuntosAdversario);
 
-		JLabel lblPuntosAdversario = new JLabel("" + listaPartidos.get(0).getPuntos());
+		JLabel lblPuntosAdversario = new JLabel("" + puntosVisit);
 		panelEquipoAdversario.add(lblPuntosAdversario);
 
 		JButton btnPlay = new JButton("Play");
