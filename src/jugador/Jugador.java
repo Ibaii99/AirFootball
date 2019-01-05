@@ -25,6 +25,30 @@ public class Jugador {
 	
 	
 	
+	public void setLigasJugadas(int ligasJugadas) {
+		this.ligasJugadas = ligasJugadas;
+	}
+
+	public void setLigasGanadas(int ligasGanadas) {
+		this.ligasGanadas = ligasGanadas;
+	}
+
+	public void setPelotasDesbloqueadas(ArrayList<Pelota> pelotasDesbloqueadas) {
+		this.pelotasDesbloqueadas = pelotasDesbloqueadas;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setPassword(char[] password) {
+		this.password = password;
+	}
+
+	public void setCodLiga(int codLiga) {
+		this.codLiga = codLiga;
+	}
+
 	public int getCodLiga() {
 		return codLiga;
 	}

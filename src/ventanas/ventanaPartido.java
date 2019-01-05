@@ -25,7 +25,9 @@ import java.awt.image.ImageObserver;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.RenderableImage;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.AttributedCharacterIterator;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.swing.*;
@@ -66,12 +68,11 @@ public class ventanaPartido extends JFrame {
 	private Graphics2D graphics; // Objeto gr�fico sobre el que dibujar (del buffer)
 	private JPanel panelCampo = new JPanel(); // Panel principal
 
-
 	private int golLocal = 0;
 	private int golVisitante = 0;
-	
-	private JLabel lblGolesLocal = new JLabel(""+golLocal);
-	private JLabel lblGolesVisitante = new JLabel(""+golVisitante);
+
+	private JLabel lblGolesLocal = new JLabel("" + golLocal);
+	private JLabel lblGolesVisitante = new JLabel("" + golVisitante);
 
 	private JLabel lblEquipoLocal = new JLabel("");
 	private JLabel lblEquipoVisitante = new JLabel("");
@@ -90,7 +91,8 @@ public class ventanaPartido extends JFrame {
 	private FisicasNuevas fisicas;
 	private HiloJuego hiloJuego;
 	public Partidos partido;
-	
+	private ArrayList<Equipo> listaPartidos;
+
 	private BaseDeDatos bd;
 	private Poste posteArribaIzquierda;
 	private Poste posteAbajoIzquierda;
@@ -106,8 +108,9 @@ public class ventanaPartido extends JFrame {
 	private int ganadosArcade;
 
 	// modificar constructor ventana, pone pelota en posicion no correcta
-	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esArcade, boolean esAmistoso,
-			boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas, BaseDeDatos bd, Jugador j, int ganadosArcade) {
+	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esArcade,
+			boolean esAmistoso, boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas, BaseDeDatos bd, Jugador j,
+			int ganadosArcade, ArrayList<Equipo> listaPartidos) {
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.fisicas = fisicas;
@@ -121,15 +124,15 @@ public class ventanaPartido extends JFrame {
 		this.bd = bd;
 		this.j = j;
 		this.ganadosArcade = ganadosArcade;
+		this.listaPartidos = listaPartidos;
 		GraphicsEnvironment ge = null;
 		String nombreFont = "DSEG14Classic-Regular.ttf";
 		try {
-		ImageIcon iconL = new ImageIcon(
-				getClass().getClassLoader().getResource(eLocal.getBolaEquipo().getRutaImagen()));
-		System.out.println(iconL);
-		} catch(Exception eeee) {
 			ImageIcon iconL = new ImageIcon(
-					getClass().getClassLoader().getResource(eLocal.getImagen()));
+					getClass().getClassLoader().getResource(eLocal.getBolaEquipo().getRutaImagen()));
+			System.out.println(iconL);
+		} catch (Exception eeee) {
+			ImageIcon iconL = new ImageIcon(getClass().getClassLoader().getResource(eLocal.getImagen()));
 			System.out.println(iconL);
 		}
 
@@ -209,7 +212,6 @@ public class ventanaPartido extends JFrame {
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE).addContainerGap()));
-
 
 		String siglasEqL = eLocal.getSiglas();
 		JLabel lblNomEqL = new JLabel(siglasEqL);
@@ -322,8 +324,6 @@ public class ventanaPartido extends JFrame {
 		hiloJuego = new HiloJuego(p, eLocal, eVisitante, this);
 
 		setVisible(true);
-		
-		
 
 	}
 
@@ -355,7 +355,7 @@ public class ventanaPartido extends JFrame {
 		actualizarPosicionObjetos();
 		mostrarElementosDeJuego();
 		actualizarTamanyoLbl();
-	
+
 	}
 
 	public void degradarVelocidad() {
@@ -608,37 +608,92 @@ public class ventanaPartido extends JFrame {
 		}
 		// TODO aqui ya termina el partido, se tendria que añadir a la BD y luego ir a
 		// la menuliga
-		if (golLocal + golVisitante >= 3) terminaPartido();
+		if (golLocal + golVisitante >= 3)
+			terminaPartido();
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private void terminaPartido() {
 		hiloJuego.para();
 		this.setVisible(false);
-		if(isAmistoso) {
+		if (isAmistoso) {
 			Inicio e = new Inicio(bd, fisicas);
 			e.setVisible(true);
-			//TODO poner un mensajito o algo
-			}
-		if((arcade) && (golLocal>golVisitante)) {
+			// TODO poner un mensajito o algo
+		}
+		if ((arcade) && (golLocal > golVisitante)) {
 			Inicio e = new Inicio(bd, fisicas);
 			ganadosArcade += 1;
 			System.out.println("Partidos ganados en esta sesión: " + ganadosArcade);
-			e.empiezaPartidoArcade(bd, eLocal, eVisitante, fisicas, ganadosArcade );
+			e.empiezaPartidoArcade(bd, eLocal, eVisitante, fisicas, ganadosArcade);
 		}
-		if((arcade) && (golLocal<golVisitante)) {
-			GuardarEnArcade ga = new GuardarEnArcade(bd, fisicas, ganadosArcade); 
+		if ((arcade) && (golLocal < golVisitante)) {
+			GuardarEnArcade ga = new GuardarEnArcade(bd, fisicas, ganadosArcade);
 			ga.setVisible(true);
 			dispose();
 		}
-//		else {
-//			partido = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
-//			bd.actualizarEquipo(j, partido.getEquipoLocal());
-//			bd.actualizarEquipo(j, partido.getEquipoVisitante());
-//			MenuLiga m = new MenuLiga(700, 700, j, bd, fisicas);
-//			m.setVisible(true);}
-		
-		
+		if (!isAmistoso && !arcade) {
+
+			// bd.actualizarEquipo(j, eLocal);
+			// bd.actualizarEquipo(j, eVisitante);
+			try {
+				setGolesYPuntos(bd, j, eLocal, eVisitante);
+				listaPartidos.remove(0);
+				VentanaLiga vl = new VentanaLiga(eLocal, bd, j, listaPartidos, fisicas, j.getCodLiga());
+				vl.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			dispose();
+		}
+
+	}
+
+	private void setGolesYPuntos(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException {
+		j.setCodLiga(j.getCodLiga() - 1); // HECHO UNICAMENTE PARA QUE ME PILLE CODLIGA Y VER SI VA
+
+		bd.init();
+		if (golLocal > golVisitante) {
+			String query = "UPDATE Equipos" + j.getNombre()
+					+ " SET Puntos=Puntos + 3, 'Goles A Favor Totales'='Goles A Favor Totales'+" + golLocal
+					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golVisitante
+					+ ", 'Victorias Totales'= 'Victorias Totales' + 1 WHERE NOMBRE='" + eLocal.getNombre()
+					+ "' AND fk_CodLiga=" + j.getCodLiga() + "";
+			bd.getCon().createStatement().executeUpdate(query);
+			bd.close();
+			bd.init();
+			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Derrotas Totales' = 'Derrotas Totales'+1,"
+					+ "'Goles A Favor Totales'='Goles A Favor Totales'+" + golVisitante
+					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golLocal + "," + " WHERE NOMBRE='"
+					+ eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + "";
+			System.out.println(query + "\n" + query2);
+			bd.getCon().createStatement().executeUpdate(query2);
+		}
+		if (golLocal < golVisitante) {
+			String query = "UPDATE Equipos" + j.getNombre()
+					+ " SET Puntos=Puntos + 3, 'Goles A Favor Totales'='Goles A Favor Totales'+" + golVisitante
+					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golLocal
+					+ ", 'Victorias Totales'= 'Victorias Totales' + 1 WHERE NOMBRE='" + eVisitante.getNombre()
+					+ "' AND fk_CodLiga=" + j.getCodLiga() + "";
+			bd.getCon().createStatement().executeUpdate(query);
+			bd.close();
+			bd.init();
+			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Derrotas Totales' = 'Derrotas Totales'+1,"
+					+ "'Goles A Favor Totales'='Goles A Favor Totales'+" + golLocal
+					+ ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golVisitante + ","
+					+ " WHERE NOMBRE='" + eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + "";
+			System.out.println(query + "\n" + query2);
+			bd.getCon().createStatement().executeUpdate(query2);
+		} else if (golLocal == golVisitante) { //Esta parte del método falta por mejorar lo de goles a favor y tal
+			String query2 = "UPDATE Equipos" + j.getNombre()
+					+ " SET Puntos = Puntos + 1 AND 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='"
+					+ eVisitante.getNombre() + "' OR NOMBRE='" + eLocal.getNombre() + "') AND fk_CodLiga="
+					+ j.getCodLiga() + ";";
+			System.out.println(query2);
+			bd.getCon().createStatement().executeUpdate(query2);
+		}
+		bd.close();
+
 	}
 
 	/**
