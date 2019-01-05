@@ -639,7 +639,7 @@ public class ventanaPartido extends JFrame {
 			try {
 				setGolesYPuntos(bd, j, eLocal, eVisitante);
 				listaPartidos.remove(0);
-				VentanaLiga vl = new VentanaLiga(eLocal, bd, j, listaPartidos, fisicas, j.getCodLiga());
+				VentanaLiga vl = new VentanaLiga(eLocal, bd, j, listaPartidos, fisicas, j.getCodLiga()+1);
 				vl.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();

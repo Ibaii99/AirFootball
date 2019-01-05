@@ -237,10 +237,12 @@ public class VentanaLiga extends JFrame {
 		ImageIcon imageIconV = null;
 		try {
 			eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga()-1);
-			
 			imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
 			System.out.println(imageIconV);
 		} catch (Exception ej) {
+//			eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga());
+//			imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
+//			System.out.println(imageIconV);
 			ej.printStackTrace();
 		}
 		resizeo(imageIconV, lblEscudoAdversario, 20, 20);
