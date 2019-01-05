@@ -247,6 +247,7 @@ public class VentanaLiga extends JFrame {
 		int puntosVisit = 0;
 		try {
 			eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga());
+			puntosVisit = eVisitante.getPuntos();
 //			bd.init();
 //			String queryVisit = "SELECT Puntos FROM Equipos"+ j.getNombre().toUpperCase() +" WHERE NOMBRE='"+ eVisitante.getNombre() +"' AND fk_CodLiga="+j.getCodLiga()+";";
 //			System.out.println(queryVisit); 

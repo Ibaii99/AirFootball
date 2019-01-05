@@ -846,19 +846,14 @@ public class ventanaPartido extends JFrame {
 						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
 					}
 				}
-				// String equipo = rs.getString("Nombre");
-				// String updatePrueba = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos=" + (""
-				// + numRandom)
-				// + " WHERE Nombre='" + equipo + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-				// System.out.println(updatePrueba);
-				// bd.getCon().createStatement().executeUpdate(updatePrueba);
+				
 			} catch (Exception e) {
-				String equipo2 = rs.getString("Nombre");
-				String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos=Puntos+1"
-						+ ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE Nombre='"
-						+ equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-				System.out.println(updatePruebaEmp);
-				bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
+//				String equipo2 = rs.getString("Nombre");
+//				String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos=Puntos+1"
+//						+ ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE Nombre='"
+//						+ equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+//				System.out.println(updatePruebaEmp);
+//				bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
 			}
 		}
 		bd.close();
