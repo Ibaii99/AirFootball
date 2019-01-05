@@ -134,6 +134,7 @@ public class MenuLiga extends JFrame {
 					    //Escribe los rivales que tiene
 					    
 					    String rutaPart = j.getNombre() + codLiga + "Partidos.txt";
+					    j.setCodLiga(codLiga);
 					    
 						File archivoPart = new File(rutaPart);
 					    try {

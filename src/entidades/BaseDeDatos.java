@@ -133,7 +133,9 @@ public class BaseDeDatos {
 
 			try {
 				equipo = con.createStatement();
-				comando = "CREATE TABLE Equipos('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT, PRIMARY KEY('Siglas') )";
+				comando = "CREATE TABLE Equipos('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT "
+//						+ ", PRIMARY KEY('Siglas') "
+						+ ")";
 				logger.log(Level.INFO, "BD: " + comando);
 				equipo.executeUpdate(comando);
 			} catch (Exception i) {
@@ -309,7 +311,7 @@ public class BaseDeDatos {
 		try {
 			init();
 			Class.forName("org.sqlite.JDBC");
-			String query1 = "SELECT * FROM Equipos" + j.getNombre() + " WHERE (NOMBRE='" + nombreEquipo + "' AND fk_CodLiga="+j.getCodLiga()+"); ";
+			String query1 = "SELECT * FROM Equipos" + j.getNombre() + " WHERE (NOMBRE='" + nombreEquipo + "' AND fk_CodLiga="+codLiga+"); ";
 			System.out.println(codLiga);
 			ResultSet rs = con.createStatement().executeQuery(query1);
 			System.out.println(query1);
