@@ -719,7 +719,7 @@ public class ventanaPartido extends JFrame {
 			bd.getCon().createStatement().executeUpdate(query2);
 		} else if (golLocal == golVisitante) { // Esta parte del método falta por mejorar lo de goles a favor y tal
 			String query2 = "UPDATE Equipos" + j.getNombre()
-					+ " SET Puntos = Puntos + 1 AND 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='"
+					+ " SET Puntos = Puntos + 1, 'Goles A Favor Totales'="+golLocal+", 'Goles Encajados Totales'="+golVisitante+", 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='"
 					+ eVisitante.getNombre() + "' OR NOMBRE='" + eLocal.getNombre() + "') AND fk_CodLiga="
 					+ j.getCodLiga() + ";";
 			System.out.println(query2);
