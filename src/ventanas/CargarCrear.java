@@ -110,7 +110,9 @@ public class CargarCrear extends JDialog {
 				String[] a = fc.getSelectedFile().getPath().toString().split("codLiga=");
 				
 				int codLigas = Character.getNumericValue(a[1].charAt(0));
+				System.out.println(codLigas);
 				VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(contenido.readLine(), j,codLigas ), bd, j, j.devolverPartidosRestantes(codLigas, bd),f, codLigas);
+				j.setCodLiga(codLigas);
 				setVisible(false);
 				vL.setVisible(true);
 			} catch (FileNotFoundException e1) {

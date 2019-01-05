@@ -236,7 +236,7 @@ public class VentanaLiga extends JFrame {
 		JLabel lblEscudoAdversario = new JLabel();
 		ImageIcon imageIconV = null;
 		try {
-			eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga()-1);
+			eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga());
 			imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
 			System.out.println(imageIconV);
 		} catch (Exception ej) {

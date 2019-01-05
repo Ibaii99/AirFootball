@@ -639,7 +639,7 @@ public class ventanaPartido extends JFrame {
 			try {
 				setGolesYPuntos(bd, j, eLocal, eVisitante);
 				listaPartidos.remove(0);
-				VentanaLiga vl = new VentanaLiga(eLocal, bd, j, listaPartidos, fisicas, j.getCodLiga()+1);
+				VentanaLiga vl = new VentanaLiga(eLocal, bd, j, listaPartidos, fisicas, j.getCodLiga());
 				vl.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -650,8 +650,7 @@ public class ventanaPartido extends JFrame {
 	}
 
 	private void setGolesYPuntos(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException {
-		j.setCodLiga(j.getCodLiga() - 1); // HECHO UNICAMENTE PARA QUE ME PILLE CODLIGA Y VER SI VA
-
+		j.setCodLiga(j.getCodLiga()); 
 		bd.init();
 		if (golLocal > golVisitante) {
 			String query = "UPDATE Equipos" + j.getNombre()
