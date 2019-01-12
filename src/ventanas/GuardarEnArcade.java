@@ -18,6 +18,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.util.logging.Level;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JTable;
@@ -39,11 +40,11 @@ public class GuardarEnArcade extends JFrame {
 		panelClasificacion.setScrollableHeight(ScrollablePanel.ScrollableSizeHint.STRETCH);
 		getContentPane().add(panelClasificacion, BorderLayout.CENTER);
 		DefaultTableModel model = new DefaultTableModel();
-		
+
 		table = new JTable(model);
 		model.addColumn("Usuario");
 		model.addColumn("Partidas ganadas");
-		String header[] = {"Usuario", "Partidos ganados"};
+		String header[] = { "Usuario", "Partidos ganados" };
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			TableColumn column1 = table.getTableHeader().getColumnModel().getColumn(i);
 			column1.setHeaderValue(header[i]);
@@ -51,46 +52,52 @@ public class GuardarEnArcade extends JFrame {
 		table.getTableHeader().setFont(table.getTableHeader().getFont().deriveFont(Font.BOLD));
 		anadirATabla(model, bd);
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		panelClasificacion.add(scrollPane);
 		getContentPane().add(panelClasificacion);
-		
+
 		JPanel panelNorte = new JPanel();
 		getContentPane().add(panelNorte, BorderLayout.NORTH);
-						JLabel lblUsuario = new JLabel("Usuario:");
-						panelNorte.add(lblUsuario);
-				
-						textField = new JTextField();
-						panelNorte.add(textField);
-						textField.setColumns(10);
-		
-				JButton btnGuardar = new JButton("Guardar");
-				panelNorte.add(btnGuardar);
-				btnGuardar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							bd.init();
-							bd.getCon().createStatement().executeUpdate("INSERT INTO Arcade(Usuario, 'Partidos ganados') "
-									+ "VALUES ('" + textField.getText() + "', " + ganadosArcade + ");");
-							bd.close();
-						} catch (Exception e1) {
-							JOptionPane.showMessageDialog(null, "NO SE HA PODIDO INTRODUCIR A LA BASE DE DATOS", "ERROR",
-									JOptionPane.WARNING_MESSAGE);
-							e1.printStackTrace();
-						}
-						Inicio i = new Inicio(bd, fisicas);
-						i.setVisible(true);
-						dispose();
+		JLabel lblUsuario = new JLabel("Usuario:");
+		panelNorte.add(lblUsuario);
+
+		textField = new JTextField();
+		panelNorte.add(textField);
+		textField.setColumns(10);
+
+		JButton btnGuardar = new JButton("Guardar");
+		panelNorte.add(btnGuardar);
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (textField.getText() == null || textField.getText() == "") {
+						JOptionPane.showMessageDialog(null, "Introduce el usuario.", "ERROR DE GUARDADO",
+								JOptionPane.WARNING_MESSAGE);
+					} else {
+						bd.init();
+						bd.getCon().createStatement().executeUpdate("INSERT INTO Arcade(Usuario, 'Partidos ganados') "
+								+ "VALUES ('" + textField.getText() + "', " + ganadosArcade + ");");
+						bd.close();
 					}
-				});
+
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "NO SE HA PODIDO INTRODUCIR A LA BASE DE DATOS", "ERROR",
+							JOptionPane.WARNING_MESSAGE);
+					e1.printStackTrace();
+				}
+				Inicio i = new Inicio(bd, fisicas);
+				i.setVisible(true);
+				dispose();
+			}
+		});
 		setVisible(true);
 	}
 
 	private void anadirATabla(DefaultTableModel model, BaseDeDatos bd) {
 		try {
 			bd.init();
-			String query = "SELECT * FROM ARCADE ORDER BY 'Partidos Ganados' DESC;";
+			String query = "SELECT * FROM ARCADE ORDER BY \"Partidos Ganados\" DESC;";
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 			while (rs.next()) {
 				String nombre = rs.getString("Usuario");

@@ -139,7 +139,7 @@ public class BaseDeDatos {
 				logger.log(Level.INFO, "BD: " + comando);
 				equipo.executeUpdate(comando);
 			} catch (Exception i) {
-				i.printStackTrace();
+//				i.printStackTrace();
 			} // Se lanza si la tabla ya existe - no hay problema
 			try {
 				liga = con.createStatement();
@@ -147,7 +147,7 @@ public class BaseDeDatos {
 				logger.log(Level.INFO, "BD: " + comando);
 				liga.executeUpdate(comando);
 			} catch (SQLException i) {
-				i.printStackTrace();
+//				i.printStackTrace();
 			} // Se lanza si la tabla ya existe - no hay problema
 
 			try {
@@ -156,7 +156,7 @@ public class BaseDeDatos {
 				logger.log(Level.INFO, "BD: " + comando);
 				jugadores.executeUpdate(comando);
 			} catch (SQLException i) {
-				i.printStackTrace();
+//				i.printStackTrace();
 			} // Se lanza si la tabla ya existe - no hay problema
 			con.close();
 		} catch (Exception i) {
