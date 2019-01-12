@@ -480,37 +480,37 @@ public class BaseDeDatos {
 					"iconos/equipos/atl.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("BAR", "FC Barcelona", 0, Color.BLUE, ("iconos/equipos/bar.png"),
 					"iconos/equipos/bar.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("BET", "Real Betis", 0, Color.BLUE, ("iconos/equipos/bet.png"),
+			anyadirEquipo(new Equipo("BET", "Real Betis", 0, Color.GREEN, ("iconos/equipos/bet.png"),
 					"iconos/equipos/bet.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("CEL", "Celta de Vigo", 0, Color.BLUE, ("iconos/equipos/cel.png"),
+			anyadirEquipo(new Equipo("CEL", "Celta de Vigo", 0, Color.CYAN, ("iconos/equipos/cel.png"),
 					"iconos/equipos/cel.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("DEP", "Deportivo de La Coru�a", 0, Color.BLUE, ("iconos/equipos/dep.png"),
 					"iconos/equipos/dep.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("EIB", "SD Eibar", 0, Color.BLUE, ("iconos/equipos/eib.png"),
+			anyadirEquipo(new Equipo("EIB", "SD Eibar", 0, Color.PINK, ("iconos/equipos/eib.png"),
 					"iconos/equipos/eib.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("ESP", "RCD Espanyol", 0, Color.BLUE, ("iconos/equipos/esp.png"),
 					"iconos/equipos/esp.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("GET", "Getafe CF", 0, Color.BLUE, ("iconos/equipos/get.png"),
 					"iconos/equipos/get.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("GIR", "Girona FC", 0, Color.BLUE, ("iconos/equipos/gir.png"),
+			anyadirEquipo(new Equipo("GIR", "Girona FC", 0, Color.RED, ("iconos/equipos/gir.png"),
 					"iconos/equipos/gir.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("HUE", "SD Huesca", 0, Color.BLUE, ("iconos/equipos/hue.png"),
+			anyadirEquipo(new Equipo("HUE", "SD Huesca", 0, Color.MAGENTA, ("iconos/equipos/hue.png"),
 					"iconos/equipos/hue.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("LEG", "Legan�s", 0, Color.BLUE, ("iconos/equipos/leg.png"),
 					"iconos/equipos/leg.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("RAY", "Rayo Vallecano", 0, Color.BLUE, ("iconos/equipos/ray.png"),
+			anyadirEquipo(new Equipo("RAY", "Rayo Vallecano", 0, Color.WHITE, ("iconos/equipos/ray.png"),
 					"iconos/equipos/ray.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("RMA", "Real Madrid CF", 0, Color.BLUE, ("iconos/equipos/rma.png"),
+			anyadirEquipo(new Equipo("RMA", "Real Madrid CF", 0, Color.WHITE, ("iconos/equipos/rma.png"),
 					"iconos/equipos/rma.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("RSO", "Real Sociedad", 0, Color.BLUE, ("iconos/equipos/rso.png"),
 					"iconos/equipos/rso.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("SEV", "Sevilla FC", 0, Color.BLUE, ("iconos/equipos/sev.png"),
+			anyadirEquipo(new Equipo("SEV", "Sevilla FC", 0, Color.WHITE, ("iconos/equipos/sev.png"),
 					"iconos/equipos/sev.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("VAL", "Valencia CF", 0, Color.BLUE, ("iconos/equipos/val.png"),
+			anyadirEquipo(new Equipo("VAL", "Valencia CF", 0, Color.WHITE, ("iconos/equipos/val.png"),
 					"iconos/equipos/val.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("VLL", "Real Valladolid", 0, Color.BLUE, ("iconos/equipos/vll.png"),
+			anyadirEquipo(new Equipo("VLL", "Real Valladolid", 0, Color.WHITE, ("iconos/equipos/vll.png"),
 					"iconos/equipos/vll.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("VLR", "Villarreal CF", 0, Color.BLUE, ("iconos/equipos/vlr.png"),
+			anyadirEquipo(new Equipo("VLR", "Villarreal CF", 0, Color.YELLOW, ("iconos/equipos/vlr.png"),
 					"iconos/equipos/vlr.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 
 		} catch (Exception e) {

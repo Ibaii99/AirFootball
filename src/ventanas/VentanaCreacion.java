@@ -250,7 +250,7 @@ public class VentanaCreacion extends JFrame {
 					ex.printStackTrace();
 				}
 				String icono = "iconos/equipos/" + source.getName();
-				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText().toUpperCase(), 0, Color.black, icono, icono, 0, 0, 0, 0,
+				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText(), 0, Color.black, icono, icono, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 				
 					try {
