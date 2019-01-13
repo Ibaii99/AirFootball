@@ -164,9 +164,9 @@ public class VentanaLogin extends JDialog {
 							}}
 							try {
 								bd.close();
-							} catch (SQLException e1) {
+							} catch (SQLException e1) { //EXCEPCION BD
 								// TODO Auto-generated catch block
-								e1.printStackTrace();
+//								e1.printStackTrace();
 							}
 					
 						}

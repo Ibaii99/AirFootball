@@ -287,8 +287,8 @@ public class BaseDeDatos {
 
 			con.close();
 
-		} catch (Exception o) {
-			o.printStackTrace();
+		} catch (Exception o) { //INSERTAR A EQUIPOS DA IGUAL QUE SEA CUSTOM O NO
+//			o.printStackTrace();
 		}
 	}
 
@@ -423,14 +423,14 @@ public class BaseDeDatos {
 			if (rs.getString(1) != null)
 				esta = true;
 
-		} catch (Exception u) {
-			u.printStackTrace();
+		} catch (Exception u) { //EXCEPCION USUARIOS
+//			u.printStackTrace();
 		}
 		try {
 			close();
-		} catch (SQLException e) {
+		} catch (SQLException e) { //EXCEPCION CERRAR BD
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		return esta;
 	}
@@ -513,8 +513,8 @@ public class BaseDeDatos {
 			anyadirEquipo(new Equipo("VLR", "Villarreal CF", 0, Color.YELLOW, ("iconos/equipos/vlr.png"),
 					"iconos/equipos/vlr.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) { //EXCEPCION DE ANYADIR EQUIPOS DEFAULT MIRARLA SI ALGO VA MAL
+//			e.printStackTrace();
 
 		}
 	}
