@@ -36,9 +36,10 @@ public class Juego {
 		try {
 			bd.crearTabla();
 			bd.anyadirEquiposStandar();
-		} catch (Exception e) {
-			
+		}catch (Exception e) {
+//			e.printStackTrace();
 		}
+		
 		
 		
 		/*Equipo e = new Equipo("ALA", "Deportivo Alav�s", 0, Color.BLUE, ("/iconos/equipos/ala.png"),
