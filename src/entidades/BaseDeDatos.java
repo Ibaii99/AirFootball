@@ -478,7 +478,7 @@ public class BaseDeDatos {
 					"iconos/equipos/ath.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("ATM", "Atl�tico de Madrid", 0, Color.RED, ("iconos/equipos/atl.png"),
 					"iconos/equipos/atl.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("BAR", "FC Barcelona", 0, Color.BLUE, ("iconos/equipos/bar.png"),
+			anyadirEquipo(new Equipo("BAR", "FC Barcelona", 0, Color.magenta, ("iconos/equipos/bar.png"),
 					"iconos/equipos/bar.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("BET", "Real Betis", 0, Color.GREEN, ("iconos/equipos/bet.png"),
 					"iconos/equipos/bet.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
@@ -506,9 +506,9 @@ public class BaseDeDatos {
 					"iconos/equipos/rso.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("SEV", "Sevilla FC", 0, Color.WHITE, ("iconos/equipos/sev.png"),
 					"iconos/equipos/sev.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("VAL", "Valencia CF", 0, Color.WHITE, ("iconos/equipos/val.png"),
+			anyadirEquipo(new Equipo("VAL", "Valencia CF", 0, Color.orange, ("iconos/equipos/val.png"),
 					"iconos/equipos/val.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("VLL", "Real Valladolid", 0, Color.WHITE, ("iconos/equipos/vll.png"),
+			anyadirEquipo(new Equipo("VLL", "Real Valladolid", 0, new Color(102, 0, 153), ("iconos/equipos/vll.png"),
 					"iconos/equipos/vll.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("VLR", "Villarreal CF", 0, Color.YELLOW, ("iconos/equipos/vlr.png"),
 					"iconos/equipos/vlr.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);

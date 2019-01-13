@@ -43,9 +43,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.FontMetrics;
+import java.awt.GradientPaint;
 import java.awt.AWTException;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Composite;
 import java.awt.Dimension;
 
@@ -476,16 +478,42 @@ public class ventanaPartido extends JFrame {
 	 */
 	private void pintarLabels() {
 		elementosAOpaco();
-		if (eLocal.getBolaEquipo().getRutaImagen() == null)
+		if (eLocal.getBolaEquipo().getRutaImagen() == null) {
 			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
-		if (eVisitante.getBolaEquipo().getRutaImagen() == null)
+		}
+		if (eVisitante.getBolaEquipo().getRutaImagen() == null) {
 			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
-		if (p.getRutaImagen() == null)
+		}
+		if (p.getRutaImagen() == null) {
 			lblPelota.setBackground(p.getColor());
+
+		}
 		// TODO aqui hay fallo
 		lblEquipoLocal.setBackground(Color.BLACK);
 		lblEquipoVisitante.setBackground(Color.gray);
 		lblPelota.setBackground(Color.BLUE);
+		try {
+//			lblEquipoLocal.setOpaque(false); ESTO  HARIA QUE SOLO SE VIERA EL ICONO Y NO QUEREMOS ESO
+			lblEquipoLocal.setIcon(lblEqL.getIcon());
+			lblEquipoLocal.setHorizontalAlignment(JLabel.CENTER);
+			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
+			lblEquipoVisitante.setIcon(lblEqV.getIcon());
+			lblEquipoVisitante.setHorizontalAlignment(JLabel.CENTER);
+			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
+			lblPelota.setBackground(p.getColor());
+//			Graphics2D g2dL = (Graphics2D) lblEquipoLocal.getGraphics();
+//			Graphics2D g2dV = (Graphics2D) lblEquipoVisitante.getGraphics();
+//			g2dL.fillOval((int) Math.round(lblEquipoLocal.getBounds().getX()),
+//					(int) Math.round(lblEquipoLocal.getBounds().getY()), lblEquipoLocal.getWidth(),
+//					lblEquipoLocal.getHeight());
+
+			// paintIcon(lblEquipoLocal, lblEquipoLocal.getGraphics(),
+			// (int)Math.round(lblEquipoLocal.getBounds().getX()),
+			// (int)Math.round(lblEquipoLocal.getBounds().getY()),
+			// eLocal.getBolaEquipo().getColor());
+		} catch (Exception ss) {
+			ss.printStackTrace();
+		}
 
 		lblposteAbajoDerecha.setBackground(Color.WHITE);
 		lblposteArribaDerecha.setBackground(Color.WHITE);
@@ -846,14 +874,17 @@ public class ventanaPartido extends JFrame {
 						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
 					}
 				}
-				
+
 			} catch (Exception e) {
-//				String equipo2 = rs.getString("Nombre");
-//				String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos=Puntos+1"
-//						+ ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE Nombre='"
-//						+ equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-//				System.out.println(updatePruebaEmp);
-//				bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
+				// String equipo2 = rs.getString("Nombre");
+				// String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET
+				// Puntos=Puntos+1"
+				// + ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"=
+				// \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados
+				// Totales\"+2 WHERE Nombre='"
+				// + equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+				// System.out.println(updatePruebaEmp);
+				// bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
 			}
 		}
 		bd.close();
