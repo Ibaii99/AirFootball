@@ -1,9 +1,11 @@
 package entidades;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -113,6 +115,16 @@ public class BaseDeDatos {
 	 */
 	public BaseDeDatos(String nombreBD) {
 		this.nombre = nombreBD;
+		try {
+			FileHandler fh = new FileHandler("BDlogger");
+			logger.addHandler(fh);
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
