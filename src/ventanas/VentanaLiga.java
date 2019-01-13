@@ -75,13 +75,7 @@ public class VentanaLiga extends JFrame {
 		this.listaPartidos = listaPartidos;
 		// La primera ronda de partidos se juega en casa
 		
-		if(listaPartidos.size() >= 19) {
-			eLocal = e;
-			isJugadorLocal = true;
-		} else if(listaPartidos.size() < 19) {
-			eVisitante = e;
-			isJugadorLocal = false;
-		}
+
 		
 		
 		try {
@@ -245,26 +239,32 @@ public class VentanaLiga extends JFrame {
 		JLabel lblEscudoAdversario = new JLabel();
 		ImageIcon imageIconV = null;
 		int puntosVisit = 0;
+		
 		try {
-			eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga());
-			puntosVisit = eVisitante.getPuntos();
-//			bd.init();
-//			String queryVisit = "SELECT Puntos FROM Equipos"+ j.getNombre().toUpperCase() +" WHERE NOMBRE='"+ eVisitante.getNombre() +"' AND fk_CodLiga="+j.getCodLiga()+";";
-//			System.out.println(queryVisit); 
-//			ResultSet rs2 = bd.getCon().createStatement().executeQuery(queryVisit);
-//			System.out.println(rs2.getInt("Puntos"));
-//			while (rs2.next()) {
-//				puntosVisit = rs.getInt("Puntos"); 
-//			}
-//			bd.close(); 
-			imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
+			if(listaPartidos.size() >= 19) {
+				eLocal = e;
+				isJugadorLocal = true;
+				
+				eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga());
+				puntosVisit = eVisitante.getPuntos();
+				imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
+			} else if(listaPartidos.size() < 19) {
+				eVisitante = e;
+				isJugadorLocal = false;
+				eLocal = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga());
+				
+				puntosVisit = puntosLocal; //intercambiamos si jugamos de visitante
+				imageIconV = imageIconL;
+				
+				puntosLocal = eVisitante.getPuntos();
+				imageIconL = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
+			}
+			
 			System.out.println(imageIconV);
 		} catch (Exception ej) {
-//			eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga());
-//			imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
-//			System.out.println(imageIconV);
 			ej.printStackTrace();
 		}
+		
 		resizeo(imageIconV, lblEscudoAdversario, 20, 20);
 		panelEquipoJugador.add(lblEscudoEquipo);
 		panelEquipoAdversario.add(lblEscudoAdversario);
