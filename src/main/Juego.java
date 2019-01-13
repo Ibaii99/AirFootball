@@ -32,8 +32,14 @@ public class Juego {
 	private static FisicasNuevas f = new FisicasNuevas();
 
 	public static void main(String[] args) {
-		bd.crearTabla();
-		bd.anyadirEquiposStandar();
+		
+		try {
+			bd.crearTabla();
+			bd.anyadirEquiposStandar();
+		} catch (Exception e) {
+			
+		}
+		
 		
 		/*Equipo e = new Equipo("ALA", "Deportivo Alav�s", 0, Color.BLUE, ("/iconos/equipos/ala.png"),
 				"/iconos/equipos/ala.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
