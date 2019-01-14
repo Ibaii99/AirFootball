@@ -26,7 +26,7 @@ public abstract class Objetos{
 	protected double y;
 	
 	protected double xAntes = 0;
-	protected double yAntes = 0;
+	protected double yAntes = 0; 
 	
 ////////////////////////Velocidad///////////////////////////	
 	protected double velX;
@@ -67,7 +67,13 @@ public abstract class Objetos{
 		this.rutaImagen = rutaImagen;
 	}
 	
-	
+
+
+	public void setRutaImagen(String rutaImagen) {
+		this.rutaImagen = rutaImagen;
+	}
+
+
 
 	public Color getColor() {
 		return color;

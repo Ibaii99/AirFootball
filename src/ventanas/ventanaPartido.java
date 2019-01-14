@@ -111,16 +111,20 @@ public class ventanaPartido extends JFrame {
 	private JLabel lblposteAbajoIzquierda = new JLabel("");
 	private JLabel lblposteArribaDerecha = new JLabel("");
 	private JLabel lblposteAbajoDerecha = new JLabel("");
-
+	
+	private int codLiga;
+	
 	private Jugador j;
 	private int ganadosArcade;
 
 	// modificar constructor ventana, pone pelota en posicion no correcta
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esArcade,
 			boolean esAmistoso, boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas, BaseDeDatos bd, Jugador j,
-			int ganadosArcade, ArrayList<Equipo> listaPartidos) {
+			int ganadosArcade, ArrayList<Equipo> listaPartidos, int codigoLiga) {
+		
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.codLiga = codigoLiga;
 		this.fisicas = fisicas;
 		this.isJugadorEquipoLocal = esJugadorVSMaquinaEquipoLocal;
 		this.isMultijugador = esMultijjugador;
@@ -143,7 +147,7 @@ public class ventanaPartido extends JFrame {
 			ImageIcon iconL = new ImageIcon(getClass().getClassLoader().getResource(eLocal.getImagen()));
 			System.out.println(iconL);
 		}
-
+		
 		ImageIcon imageIconL = null;
 		try {
 			imageIconL = new ImageIcon(getClass().getClassLoader().getResource(eLocal.getBolaEquipo().getRutaImagen()));
@@ -208,18 +212,24 @@ public class ventanaPartido extends JFrame {
 		lblGolesLocal.setFont(f);
 		panel.add(lblGolesLocal);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
-				groupLayout.createSequentialGroup().addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
-								.addComponent(panelCampo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE).addContainerGap()));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
+						.addComponent(panelCampo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+					.addContainerGap())
+		);
 
 		String siglasEqL = eLocal.getSiglas();
 		JLabel lblNomEqL = new JLabel(siglasEqL);
@@ -492,6 +502,8 @@ public class ventanaPartido extends JFrame {
 		lblEquipoLocal.setBackground(Color.BLACK);
 		lblEquipoVisitante.setBackground(Color.gray);
 		lblPelota.setBackground(Color.BLUE);
+
+		
 		try {
 //			lblEquipoLocal.setOpaque(false); ESTO  HARIA QUE SOLO SE VIERA EL ICONO Y NO QUEREMOS ESO
 			lblEquipoLocal.setIcon(lblEqL.getIcon());
@@ -642,7 +654,7 @@ public class ventanaPartido extends JFrame {
 		}
 		// TODO aqui ya termina el partido, se tendria que añadir a la BD y luego ir a
 		// la menuliga
-		if (golLocal + golVisitante >= 3)
+		if (golLocal + golVisitante >= 4)
 			terminaPartido();
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -675,14 +687,14 @@ public class ventanaPartido extends JFrame {
 				listaPartidos.remove(0);
 				if (listaPartidos.get(0).getNombre() == eLocal.getNombre()) {
 					listaPartidos.remove(0);
-					borrarPrimeraFila(j);
+					borrarPrimeraFila(j,codLiga);
 				}
 				if (listaPartidos.size() < 19 && listaPartidos.get(0).getNombre() == eVisitante.getNombre()) {
 					listaPartidos.remove(0);
-					borrarPrimeraFila(j);
+					borrarPrimeraFila(j,codLiga);
 				}
 
-				VentanaLiga vl = new VentanaLiga(eLocal, bd, j, listaPartidos, fisicas, j.getCodLiga());
+				VentanaLiga vl = new VentanaLiga(eLocal, bd, j, listaPartidos, fisicas, codLiga);
 				vl.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -692,9 +704,9 @@ public class ventanaPartido extends JFrame {
 
 	}
 
-	private void borrarPrimeraFila(Jugador j) {
+	private void borrarPrimeraFila(Jugador j, int codLiga) {
 		try {
-			File myFile = new File(j.getNombre() + j.getCodLiga() + "Partidos.txt");
+			File myFile = new File(j.getNombre() + codLiga + "Partidos.txt");
 			Scanner fileScanner = new Scanner(myFile);
 			fileScanner.nextLine();
 			FileWriter fileStream = new FileWriter(myFile);
@@ -714,102 +726,16 @@ public class ventanaPartido extends JFrame {
 	}
 
 	private void setGolesYPuntos(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException {
-		j.setCodLiga(j.getCodLiga());
-		bd.init();
-		setPuntosAlAzar(bd, j, eLocal, eVisitante);
-		if (golLocal > golVisitante) {
-			eVisitante = bd.convertirAEquipo(eVisitante.getNombre(), j, j.getCodLiga());
-			eLocal = bd.convertirAEquipo(eLocal.getNombre(), j, j.getCodLiga());
-			int golesAcumulados = golLocal + eLocal.getGolesAFavorTotales();
-			int golesEncajados = golVisitante + eLocal.getGolesEnContraTotales();
-			String query = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos + 3, 'Goles A Favor Totales'="
-					+ ("" + golesAcumulados) + ", 'Goles Encajados Totales' = " + golesEncajados
-					+ ", 'Victorias Totales'=" + ("" + (eLocal.getVictoriasTotales() + 1)) + " WHERE NOMBRE='"
-					+ eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query);
-			bd.init();
-			bd.getCon().createStatement().executeUpdate(query);
-			bd.close();
-			bd.init();
-			int golesAcumuladosV = golVisitante + eVisitante.getGolesAFavorTotales();
-			int golesEncajadosV = golLocal + eVisitante.getGolesEnContraTotales();
-			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Goles A Favor Totales'=" + ("" + golesAcumuladosV)
-					+ ", 'Goles Encajados Totales' = " + golesEncajadosV + ", 'Derrotas Totales'="
-					+ ("" + (eVisitante.getDerrotasTotales() + 1)) + " WHERE NOMBRE='" + eVisitante.getNombre()
-					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query + "\n" + query2);
-			bd.getCon().createStatement().executeUpdate(query2);
-		}
-		if (golLocal < golVisitante) {
-			eVisitante = bd.convertirAEquipo(eVisitante.getNombre(), j, j.getCodLiga());
-			eLocal = bd.convertirAEquipo(eLocal.getNombre(), j, j.getCodLiga());
-			int golesAcumulados = golLocal + eVisitante.getGolesAFavorTotales();
-			int golesEncajados = golVisitante + eVisitante.getGolesEnContraTotales();
-			String query = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos + 3, 'Goles A Favor Totales'="
-					+ ("" + golesAcumulados) + ", 'Goles Encajados Totales' = " + golesEncajados
-					+ ", 'Victorias Totales'=" + ("" + (eVisitante.getVictoriasTotales() + 1)) + " WHERE NOMBRE='"
-					+ eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query);
-			bd.init();
-			bd.getCon().createStatement().executeUpdate(query);
-			bd.close();
-			bd.init();
-			int golesAcumuladosV = golVisitante + eLocal.getGolesAFavorTotales();
-			int golesEncajadosV = golLocal + eLocal.getGolesEnContraTotales();
-			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Goles A Favor Totales'=" + ("" + golesAcumuladosV)
-					+ ", 'Goles Encajados Totales' = " + golesEncajadosV + ", 'Derrotas Totales'="
-					+ ("" + (eLocal.getDerrotasTotales() + 1)) + " WHERE NOMBRE='" + eLocal.getNombre()
-					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query + "\n" + query2);
-			bd.getCon().createStatement().executeUpdate(query2);
-			// String query = "UPDATE Equipos" + j.getNombre()
-			// + " SET Puntos=Puntos + 3, 'Goles A Favor Totales'='Goles A Favor Totales'+"
-			// + golVisitante
-			// + ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golLocal
-			// + ", 'Victorias Totales'= 'Victorias Totales' + 1 WHERE NOMBRE='" +
-			// eVisitante.getNombre()
-			// + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			// bd.getCon().createStatement().executeUpdate(query);
-			// bd.close();
-			// bd.init();
-			// String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Derrotas Totales' =
-			// 'Derrotas Totales'+1,"
-			// + "'Goles A Favor Totales'='Goles A Favor Totales'+" + golLocal
-			// + ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golVisitante +
-			// " WHERE NOMBRE='"
-			// + eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			// System.out.println(query + "\n" + query2);
-			// bd.getCon().createStatement().executeUpdate(query2);
-		} else if (golLocal == golVisitante) { // Esta parte del método falta por mejorar lo de goles a favor y tal
-			// String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos = Puntos + 1,
-			// 'Goles A Favor Totales'="
-			// + golLocal + ", 'Goles Encajados Totales'=" + golVisitante
-			// + ", 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='" +
-			// eVisitante.getNombre()
-			// + "' OR NOMBRE='" + eLocal.getNombre() + "') AND fk_CodLiga=" +
-			// j.getCodLiga() + ";";
-			bd.init();
-			int golesAcumuladosV = golVisitante + eLocal.getGolesAFavorTotales();
-			int golesEncajadosV = golLocal + eLocal.getGolesEnContraTotales();
-			String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos+1, 'Goles A Favor Totales'="
-					+ ("" + golesAcumuladosV) + ", 'Goles Encajados Totales' = " + golesEncajadosV
-					+ ", 'Empates Totales'=" + ("" + (eLocal.getEmpatesTotales() + 1)) + " WHERE NOMBRE='"
-					+ eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query2);
-			bd.getCon().createStatement().executeUpdate(query2);
-			String query3 = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos+1, 'Goles A Favor Totales'="
-					+ ("" + golesAcumuladosV) + ", 'Goles Encajados Totales' = " + golesEncajadosV
-					+ ", 'Empates Totales'=" + ("" + (eVisitante.getEmpatesTotales() + 1)) + " WHERE NOMBRE='"
-					+ eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query3);
-			bd.getCon().createStatement().executeUpdate(query3);
-		}
-		bd.close();
-		borrarPrimeraFila(j);
+		
+		setPuntosAlAzar(bd, j, eLocal, eVisitante,codLiga);
+		Partidos p = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
+		bd.actualizarEquipo(j, eLocal, codLiga);
+		bd.actualizarEquipo(j, eVisitante, codLiga);
+		borrarPrimeraFila(j,codLiga);
 
 	}
 
-	private void setPuntosAlAzar(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException {
+	private void setPuntosAlAzar(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante, int codLiga) throws SQLException {
 		bd.init();
 		String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE NOT LIKE '" + eLocal.getNombre()
 				+ "' AND NOMBRE NOT LIKE '" + eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga()
@@ -827,14 +753,14 @@ public class ventanaPartido extends JFrame {
 						String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos="
 								+ ("Puntos + " + numRandom)
 								+ ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE (Nombre='"
-								+ equipo + "' OR Nombre='" + equipo2 + "') AND fk_CodLiga=" + j.getCodLiga() + ";";
+								+ equipo + "' OR Nombre='" + equipo2 + "') AND fk_CodLiga=" + codLiga + ";";
 						System.out.println(updatePruebaEmp);
 						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
 					} catch (Exception e) {
 						String equipo2 = rs.getString("Nombre");
 						String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre()
 								+ " SET Puntos=Puntos + 1, \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE Nombre='"
-								+ equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+								+ equipo2 + "' AND fk_CodLiga=" + codLiga + ";";
 						System.out.println(updatePruebaEmp);
 						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
 					}
@@ -848,28 +774,28 @@ public class ventanaPartido extends JFrame {
 						golesRandom = getRandomNumberInRange(3, 4);
 						golesPerdedor = 4 - golesRandom;
 						String equipo2 = rs.getString("Nombre");
-						String updatePruebaVic = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos="
+						String updatePruebaVic = "UPDATE EQUIPOS" + j.getNombre().toUpperCase() + " SET Puntos="
 								+ ("Puntos + " + numRandom)
 								+ ", \"Victorias Totales\"= \"Victorias Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+"
 								+ ("" + golesRandom) + ", \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+"
 								+ ("" + golesPerdedor) + " WHERE Nombre='" + equipo + "' AND fk_CodLiga="
-								+ j.getCodLiga() + ";";
+								+ codLiga+ ";";
 						System.out.println(updatePruebaVic);
 						bd.getCon().createStatement().executeUpdate(updatePruebaVic);
-						String updatePruebaDer = "UPDATE EQUIPOS" + j.getNombre()
+						String updatePruebaDer = "UPDATE EQUIPOS" + j.getNombre().toUpperCase()
 								+ " SET \"Derrotas Totales\"= \"Derrotas Totales\"+1, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+"
 								+ ("" + golesRandom) + ", \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+"
 								+ ("" + golesPerdedor) + " WHERE Nombre='" + equipo2 + "' AND fk_CodLiga="
-								+ j.getCodLiga() + ";";
+								+ codLiga+ ";";
 						System.out.println(updatePruebaDer);
 						bd.getCon().createStatement().executeUpdate(updatePruebaDer);
 
 					} catch (Exception e) {
 						String equipo2 = rs.getString("Nombre");
-						String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos="
+						String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre().toUpperCase() + " SET Puntos="
 								+ ("Puntos + " + numRandom)
 								+ ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE Nombre='"
-								+ equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
+								+ equipo2 + "' AND fk_CodLiga=" + codLiga + ";";
 						System.out.println(updatePruebaEmp);
 						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
 					}

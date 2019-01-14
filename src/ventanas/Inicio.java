@@ -183,7 +183,7 @@ public class Inicio extends JFrame {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-//
+// 
 //	}
 
 	/**
@@ -205,7 +205,7 @@ public class Inicio extends JFrame {
 			eVisitante = equipoRandom(bd, eVisitante);
 			Pelota pelotaPartido = new Pelota(Color.white, "pelota", 20);
 			ventanaPartido partido = new ventanaPartido(eLocal, eVisitante, pelotaPartido, true, true, false, false, f,
-					bd, null, ganados, null);
+					bd, null, ganados, null,0);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

@@ -2,8 +2,13 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
+<<<<<<< HEAD
   <date>2019-01-14T11:49:37</date>
   <millis>1547462977767</millis>
+=======
+  <date>2019-01-14T14:10:00</date>
+  <millis>1547471400673</millis>
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
   <sequence>0</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -13,8 +18,13 @@
   <message>BD: CREATE TABLE Equipos('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT , PRIMARY KEY('Siglas') )</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2019-01-14T11:49:37</date>
   <millis>1547462977773</millis>
+=======
+  <date>2019-01-14T14:10:00</date>
+  <millis>1547471400680</millis>
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
   <sequence>1</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -24,8 +34,13 @@
   <message>BD: CREATE TABLE Liga( 'CodLiga' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'codLigaJugador' INTEGER, 'fk_Nombre_Jugador' TEXT REFERENCES JUGADORES(NOMBRE), 'Nombre' TEXT NOT NULL)</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2019-01-14T11:49:37</date>
   <millis>1547462977773</millis>
+=======
+  <date>2019-01-14T14:10:00</date>
+  <millis>1547471400681</millis>
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
   <sequence>2</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -35,6 +50,7 @@
   <message>BD: CREATE TABLE Jugadores( 'Nombre' TEXT PRIMARY KEY NOT NULL, 'Password' TEXT NOT NULL, 'cantidadPartidas' INTEGER DEFAULT 0)</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2019-01-14T11:49:43</date>
   <millis>1547462983227</millis>
   <sequence>3</sequence>
@@ -253,5 +269,16 @@
   <method>actionPerformed</method>
   <thread>16</thread>
   <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Arenas Getxo' AND fk_CodLiga=6)</message>
+=======
+  <date>2019-01-14T14:10:07</date>
+  <millis>1547471407362</millis>
+  <sequence>3</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>entidades.BaseDeDatos</class>
+  <method>anyadirLiga</method>
+  <thread>14</thread>
+  <message>INSERT INTO Liga('codLigaJugador','fk_Nombre_Jugador', 'Nombre') VALUES ('14','IBAI','Liga14')</message>
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
 </record>
 </log>

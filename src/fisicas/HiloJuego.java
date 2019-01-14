@@ -51,7 +51,7 @@ public class HiloJuego extends Thread {
 			} catch (AWTException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+				}
 			// System.out.println("--------------------------Pelota-------------------------------------");
 			// System.out.println("x: "+p.getX()+ " y: "+ p.getY());
 			// System.out.println("velX: "+p.getVelX() + " velY: "+p.getVelY() + " color: "

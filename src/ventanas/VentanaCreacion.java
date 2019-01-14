@@ -25,6 +25,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javax.swing.JTextField;
@@ -49,6 +50,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -121,28 +123,23 @@ public class VentanaCreacion extends JFrame {
 
 		cbSustituye = new JComboBox();
 		try {
-			Logger logger = Logger.getLogger("baseDeDatos");
-
-			Statement consulta;
-
-			String comando = "";
+			Logger logger = Logger.getLogger("ventCreacion");
 			try {
-				Class.forName("org.sqlite.JDBC");
-				bd.init();
-			} catch (Exception e3) {
-				// e3.printStackTrace();
+				logger.addHandler(new FileHandler("Ventana Creacion"));
+			} catch (SecurityException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			String query = "SELECT NOMBRE FROM EQUIPOS"+j.getNombre().toUpperCase()+" WHERE fk_CodLiga="+ligaNueva +";";
-			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
-			while (rs.next()) {
-				String nomEq = rs.getString("Nombre");
-				cbSustituye.addItem(new ObjetoCombobox(1, nomEq, null));
+			
+			
+			for (Equipo e : bd.devolverTodosLosEquipos(j, ligaNueva)) {
+				cbSustituye.addItem(new ObjetoCombobox(1, e.getNombre(), null));
+			
 			}
-			rs.close();
-			bd.close();
-		} catch (SQLException sql) {
-			sql.printStackTrace();
-		}
+		}finally {
 
 		JLabel lblLocalizacionIcono = new JLabel("");
 		JFileChooser fc = new JFileChooser();
@@ -151,10 +148,6 @@ public class VentanaCreacion extends JFrame {
 
 				FileNameExtensionFilter png = new FileNameExtensionFilter("Im�genes(.png)", "png");
 				fc.addChoosableFileFilter(png);
-				FileNameExtensionFilter jpg = new FileNameExtensionFilter("Im�genes(.jpg)", "jpg");
-				fc.addChoosableFileFilter(jpg);
-				FileNameExtensionFilter jpeg = new FileNameExtensionFilter("Im�genes(.jpeg)", "jpeg");
-				fc.addChoosableFileFilter(jpeg);
 				fc.setFileFilter(png);
 				int seleccion = fc.showOpenDialog(getContentPane());
 				if (seleccion == JFileChooser.APPROVE_OPTION) {
@@ -245,6 +238,7 @@ public class VentanaCreacion extends JFrame {
 					System.out.println(destino.toString());
 					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
 					actualiza();
+					Thread.sleep(500);
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -257,8 +251,10 @@ public class VentanaCreacion extends JFrame {
 						actualiza();
 						
 						listaEquiposEliminados.add(bd.convertirAEquipo(cbSustituye.getSelectedItem().toString(), j, ligaNueva));
-						eliminarEquipo(bd, cbSustituye.getSelectedItem().toString(), j, cbSustituye, ligaNueva);
-						anyadirEquipo(bd, e1, j, icono,ligaNueva);
+						bd.eliminarEquipo(cbSustituye.getSelectedItem().toString(), j, ligaNueva);
+						e1.getBolaEquipo().setRutaImagen(icono);
+						bd.anyadirEquipo(e1, ligaNueva, j);
+						
 						actualiza();
 						VentanaCreacion vC = new VentanaCreacion(bd, f, listaEquiposEliminados, ligaNueva,j);
 						vC.setVisible(true);
@@ -327,44 +323,42 @@ public class VentanaCreacion extends JFrame {
 				mU.setVisible(true);
 				setVisible(false);
 				dispose();
-			}
-		});
-		panel_1.add(btnListo);
+			}});
+		panel_1.add(btnListo);}}
+	
 
-	}
-
+	
 	private static void copyFileUsingStream(File source, File dest) throws IOException {
-		InputStream is = null;
-		OutputStream os = null;
-		try {
-			is = new FileInputStream(source);
-			os = new FileOutputStream(dest);
-			byte[] buffer = new byte[1024];
-			int length;
-			while ((length = is.read(buffer)) > 0) {
-				os.write(buffer, 0, length);
+//		InputStream is = null;
+//		OutputStream os = null;
+//		try {
+//			is = new FileInputStream(source);
+//			os = new FileOutputStream(dest);
+//			byte[] buffer = new byte[1024];
+//			int length;
+//			while ((length = is.read(buffer)) > 0) {
+//				os.write(buffer, 0, length);
+//			}
+//			os.flush();//forzar el guardado
+//		} finally {
+//			is.close();
+//			os.close();
+//		}
+		
+		try{
+			FileInputStream fis = new FileInputStream(source); //inFile -> Archivo a copiar
+			FileOutputStream fos = new FileOutputStream(dest); //outFile -> Copia del archivo
+			FileChannel inChannel = fis.getChannel(); 
+			FileChannel outChannel = fos.getChannel(); 
+			inChannel.transferTo(0, inChannel.size(), outChannel); 
+			fis.close(); 
+			fos.close();
+			}catch (IOException ioe) {
+			System.err.println("Error al Generar Copia");
 			}
-			os.flush();//forzar el guardado
-		} finally {
-			is.close();
-			os.close();
-		}
 	}
 
-	public void eliminarEquipo(BaseDeDatos bd, String nombre, Jugador j, JComboBox cb, int codLiga) {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			bd.init();
-			String query = "DELETE FROM EQUIPOS" + j.getNombre().toUpperCase() + " WHERE (NOMBRE = '" + cb.getSelectedItem().toString()
-					+ "' AND fk_CodLiga="+codLiga+");";
-			System.out.println(query);
-			bd.getCon().createStatement().executeUpdate(query); // executeUpdate para inserts y deletes y executeQuery
-																// para selects
-			bd.close();
-		} catch (Exception e3) {
-			e3.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Actualiza el Eclipse solo para detectar ya nuestro icono
@@ -377,35 +371,6 @@ public class VentanaCreacion extends JFrame {
 		robot.keyRelease(KeyEvent.VK_F5);
 	}
 
-	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j, String icono, int codLiga) throws SQLException {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			bd.init();
-		} catch (Exception e3) {
-			e3.printStackTrace();
-		}
-		String comando = "INSERT INTO Equipos" + j.getNombre()
-				+ " ('fk_CodLiga', 'fk_Nombre_Jugador','Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
-		comando += " VALUES ('" + codLiga + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira
-																															// aqui
-		// bien lo
-		// de
-		// CodLiga
-		// lo he
-		// puesto a
-		// 0
-				+ "','" + e.getPuntos() + "','" + e.getGolesEnContraTotales() + "','" + e.getGolesEnContraLocal()
-				+ "','" + e.getGolesEnContraVisitante() + "','" + e.getGolesAFavorTotales() + "','"
-				+ e.getGolesAFavorLocal() + "','" + e.getGolesAFavorVisitante() + "','" + e.getDerrotasTotales() + "','"
-				+ e.getDerrotasLocal() + "','" + e.getDerrotasVisitante() + "','" + e.getVictoriasTotales() + "','"
-				+ e.getVictoriasLocal() + "','" + e.getVictoriasVisitante() + "','" + e.getEmpatesTotales() + "','"
-				+ e.getEmpatesLocal() + "','" + e.getEmpatesVisitante() + "','" + e.getBolaEquipo().getColor().getRGB()
-				+ "','" + icono + "')";
-		System.out.println(comando);
-		bd.getCon().createStatement().executeUpdate(comando);
-		bd.close();
-
-	}
 }
 
 class JTextFieldLimit extends PlainDocument {

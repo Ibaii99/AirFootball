@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Atlï¿½tico de Madrid
 Rayo Vallecano
 Sevilla FC
@@ -38,3 +39,45 @@ SD Eibar
 Deportivo de La Coruï¿½a
 Real Betis
 Real Valladolid
+=======
+SD Huesca
+Villarreal CF
+Sevilla FC
+Real Valladolid
+Athletic Club
+SD Eibar
+Deportivo de La Coru�a
+Getafe CF
+Celta de Vigo
+Rayo Vallecano
+Atl�tico de Madrid
+RCD Espanyol
+Girona FC
+Real Madrid CF
+FC Barcelona
+Real Betis
+Real Sociedad
+Deportivo Alav�s
+Legan�s
+Valencia CF
+SD Huesca
+Villarreal CF
+Sevilla FC
+Real Valladolid
+Athletic Club
+SD Eibar
+Deportivo de La Coru�a
+Getafe CF
+Celta de Vigo
+Rayo Vallecano
+Atl�tico de Madrid
+RCD Espanyol
+Girona FC
+Real Madrid CF
+FC Barcelona
+Real Betis
+Real Sociedad
+Deportivo Alav�s
+Legan�s
+Valencia CF
+>>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git

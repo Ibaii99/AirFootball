@@ -90,20 +90,21 @@ public class Jugador {
 	}
 	public ArrayList<Equipo> devolverPartidosRestantes(int numLiga, BaseDeDatos bd){
 		ArrayList<Equipo> lista = new ArrayList<Equipo>();
-		String rutaPart = this.getNombre() + numLiga + "Partidos.txt";
+		String rutaPart = this.getNombre().toUpperCase() + numLiga + "Partidos.txt";
 		File archivoPart = new File(rutaPart);
 		 try {
 		    	if(archivoPart.exists()) {
 		    		BufferedReader br = new BufferedReader(new FileReader(archivoPart));
 		    		String cadena = br.readLine();
 		    		while(cadena != null) {
+		    		
 		    		lista.add(bd.convertirAEquipo(cadena, this, numLiga));
 		    		cadena = br.readLine();
 		    		
-		    		}
+		    		} 
 		            br.close();}
 		    }catch(Exception i) {
-//		    	i.printStackTrace();
+		    	i.printStackTrace();
 		    	}
 		 
 		 
