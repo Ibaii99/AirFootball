@@ -493,7 +493,7 @@ public class BaseDeDatos {
 					"iconos/equipos/atl.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("BAR", "FC Barcelona", 0, Color.magenta, ("iconos/equipos/bar.png"),
 					"iconos/equipos/bar.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
-			anyadirEquipo(new Equipo("BET", "Real Betis", 0, Color.GREEN, ("iconos/equipos/bet.png"),
+			anyadirEquipo(new Equipo("BET", "Real Betis", 0, new Color(0, 153, 0), ("iconos/equipos/bet.png"),
 					"iconos/equipos/bet.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);
 			anyadirEquipo(new Equipo("CEL", "Celta de Vigo", 0, Color.CYAN, ("iconos/equipos/cel.png"),
 					"iconos/equipos/cel.png", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), indice, j);

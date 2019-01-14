@@ -1,6 +1,13 @@
 package ventanas;
 
 import java.awt.Graphics;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.geom.Line2D;
+import javax.swing.border.AbstractBorder;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
@@ -85,6 +92,7 @@ public class ventanaPartido extends JFrame {
 
 	private JLabelGraficoAjustado lblEquipoLocal = new JLabelGraficoAjustado("");
 	private JLabelGraficoAjustado lblEquipoVisitante = new JLabelGraficoAjustado("");
+
 	public void setLblPelota(JLabelGraficoAjustado lblPelota) {
 		this.lblPelota = lblPelota;
 	}
@@ -161,12 +169,13 @@ public class ventanaPartido extends JFrame {
 		}
 		resizeo(imageIconL, lblEqL, 45, 45);
 
-//		ImageIcon iconC = new ImageIcon(getClass().getClassLoader().getResource("iconos/campo.png"));
-//		Image imgC = iconC.getImage();
-//		BufferedImage biC = new BufferedImage(720, 395, BufferedImage.TYPE_INT_ARGB);
-//		Graphics gC = biC.createGraphics();
-//		gC.drawImage(imgC, 0, 0, 720, 395, null);
-//		ImageIcon newIconC = new ImageIcon(biC);
+		// ImageIcon iconC = new
+		// ImageIcon(getClass().getClassLoader().getResource("iconos/campo.png"));
+		// Image imgC = iconC.getImage();
+		// BufferedImage biC = new BufferedImage(720, 395, BufferedImage.TYPE_INT_ARGB);
+		// Graphics gC = biC.createGraphics();
+		// gC.drawImage(imgC, 0, 0, 720, 395, null);
+		// ImageIcon newIconC = new ImageIcon(biC);
 
 		ImageIcon imageIconV = null;
 		try {
@@ -177,12 +186,13 @@ public class ventanaPartido extends JFrame {
 		}
 		resizeo(imageIconV, lblEqV, 45, 45);
 
-//		ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("iconos/marcadorconnombres.jpg"));
-//		Image img = icon.getImage();
-//		BufferedImage bi = new BufferedImage(373, 50, BufferedImage.TYPE_INT_ARGB);
-//		Graphics g = bi.createGraphics();
-//		g.drawImage(img, 0, 0, 373, 50, null);
-//		ImageIcon newIcon = new ImageIcon(bi);
+		// ImageIcon icon = new
+		// ImageIcon(getClass().getClassLoader().getResource("iconos/marcadorconnombres.jpg"));
+		// Image img = icon.getImage();
+		// BufferedImage bi = new BufferedImage(373, 50, BufferedImage.TYPE_INT_ARGB);
+		// Graphics g = bi.createGraphics();
+		// g.drawImage(img, 0, 0, 373, 50, null);
+		// ImageIcon newIcon = new ImageIcon(bi);
 		try {
 			f = Font.createFont(Font.TRUETYPE_FONT, ventanaPartido.class.getResourceAsStream(nombreFont));
 			f = f.deriveFont(Font.PLAIN, 28);
@@ -507,17 +517,20 @@ public class ventanaPartido extends JFrame {
 			// QUEREMOS ESO
 			lblPelota.setOpaque(false);
 			ImageIcon icBalonLiga = new ImageIcon(getClass().getClassLoader().getResource("iconos/balon_laliga.png"));
-			
+
 			lblPelota.setIcon(icBalonLiga);
 			resizeo(icBalonLiga, lblPelota, 40, 40);
-			
+
+			lblEquipoLocal.setOpaque(false);
 			lblEquipoLocal.setIcon(lblEqL.getIcon());
 			lblEquipoLocal.setHorizontalAlignment(JLabel.CENTER);
 			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
-			
+			lblEquipoLocal.repaint();
+
 			lblEquipoVisitante.setIcon(lblEqV.getIcon());
 			lblEquipoVisitante.setHorizontalAlignment(JLabel.CENTER);
 			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
+			lblEquipoVisitante.repaint();
 
 		} catch (Exception ss) {
 			ss.printStackTrace();
@@ -994,4 +1007,6 @@ public class ventanaPartido extends JFrame {
 			e.printStackTrace();
 		}
 	}
+
+
 }

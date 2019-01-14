@@ -274,6 +274,7 @@ public class JLabelGraficoAjustado extends JLabel {
 				g2.scale(horFlip ? -1 : 1, vertFlip ? -1 : 1);
 				g2.translate(horFlip ? -getWidth() : 0, vertFlip ? -getHeight() : 0);
 			}
+			g2.fillOval(iniXZoom,  iniYZoom, ancZoom, altZoom);
 			g2.drawImage(imagenObjeto, iniXZoom, iniYZoom, ancZoom, altZoom, null);
 		}
 	}
