@@ -111,16 +111,20 @@ public class ventanaPartido extends JFrame {
 	private JLabel lblposteAbajoIzquierda = new JLabel("");
 	private JLabel lblposteArribaDerecha = new JLabel("");
 	private JLabel lblposteAbajoDerecha = new JLabel("");
-
+	
+	private int codLiga;
+	
 	private Jugador j;
 	private int ganadosArcade;
 
 	// modificar constructor ventana, pone pelota en posicion no correcta
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esArcade,
 			boolean esAmistoso, boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas, BaseDeDatos bd, Jugador j,
-			int ganadosArcade, ArrayList<Equipo> listaPartidos) {
+			int ganadosArcade, ArrayList<Equipo> listaPartidos, int codigoLiga) {
+		
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.codLiga = codigoLiga;
 		this.fisicas = fisicas;
 		this.isJugadorEquipoLocal = esJugadorVSMaquinaEquipoLocal;
 		this.isMultijugador = esMultijjugador;
@@ -683,14 +687,14 @@ public class ventanaPartido extends JFrame {
 				listaPartidos.remove(0);
 				if (listaPartidos.get(0).getNombre() == eLocal.getNombre()) {
 					listaPartidos.remove(0);
-					borrarPrimeraFila(j);
+					borrarPrimeraFila(j,codLiga);
 				}
 				if (listaPartidos.size() < 19 && listaPartidos.get(0).getNombre() == eVisitante.getNombre()) {
 					listaPartidos.remove(0);
-					borrarPrimeraFila(j);
+					borrarPrimeraFila(j,codLiga);
 				}
 
-				VentanaLiga vl = new VentanaLiga(eLocal, bd, j, listaPartidos, fisicas, j.getCodLiga());
+				VentanaLiga vl = new VentanaLiga(eLocal, bd, j, listaPartidos, fisicas, codLiga);
 				vl.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -700,9 +704,9 @@ public class ventanaPartido extends JFrame {
 
 	}
 
-	private void borrarPrimeraFila(Jugador j) {
+	private void borrarPrimeraFila(Jugador j, int codLiga) {
 		try {
-			File myFile = new File(j.getNombre() + j.getCodLiga() + "Partidos.txt");
+			File myFile = new File(j.getNombre() + codLiga + "Partidos.txt");
 			Scanner fileScanner = new Scanner(myFile);
 			fileScanner.nextLine();
 			FileWriter fileStream = new FileWriter(myFile);
@@ -722,98 +726,12 @@ public class ventanaPartido extends JFrame {
 	}
 
 	private void setGolesYPuntos(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException {
-		j.setCodLiga(j.getCodLiga());
-		bd.init();
+		
 		setPuntosAlAzar(bd, j, eLocal, eVisitante);
-		if (golLocal > golVisitante) {
-			eVisitante = bd.convertirAEquipo(eVisitante.getNombre(), j, j.getCodLiga());
-			eLocal = bd.convertirAEquipo(eLocal.getNombre(), j, j.getCodLiga());
-			int golesAcumulados = golLocal + eLocal.getGolesAFavorTotales();
-			int golesEncajados = golVisitante + eLocal.getGolesEnContraTotales();
-			String query = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos + 3, 'Goles A Favor Totales'="
-					+ ("" + golesAcumulados) + ", 'Goles Encajados Totales' = " + golesEncajados
-					+ ", 'Victorias Totales'=" + ("" + (eLocal.getVictoriasTotales() + 1)) + " WHERE NOMBRE='"
-					+ eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query);
-			bd.init();
-			bd.getCon().createStatement().executeUpdate(query);
-			bd.close();
-			bd.init();
-			int golesAcumuladosV = golVisitante + eVisitante.getGolesAFavorTotales();
-			int golesEncajadosV = golLocal + eVisitante.getGolesEnContraTotales();
-			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Goles A Favor Totales'=" + ("" + golesAcumuladosV)
-					+ ", 'Goles Encajados Totales' = " + golesEncajadosV + ", 'Derrotas Totales'="
-					+ ("" + (eVisitante.getDerrotasTotales() + 1)) + " WHERE NOMBRE='" + eVisitante.getNombre()
-					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query + "\n" + query2);
-			bd.getCon().createStatement().executeUpdate(query2);
-		}
-		if (golLocal < golVisitante) {
-			eVisitante = bd.convertirAEquipo(eVisitante.getNombre(), j, j.getCodLiga());
-			eLocal = bd.convertirAEquipo(eLocal.getNombre(), j, j.getCodLiga());
-			int golesAcumulados = golLocal + eVisitante.getGolesAFavorTotales();
-			int golesEncajados = golVisitante + eVisitante.getGolesEnContraTotales();
-			String query = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos + 3, 'Goles A Favor Totales'="
-					+ ("" + golesAcumulados) + ", 'Goles Encajados Totales' = " + golesEncajados
-					+ ", 'Victorias Totales'=" + ("" + (eVisitante.getVictoriasTotales() + 1)) + " WHERE NOMBRE='"
-					+ eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query);
-			bd.init();
-			bd.getCon().createStatement().executeUpdate(query);
-			bd.close();
-			bd.init();
-			int golesAcumuladosV = golVisitante + eLocal.getGolesAFavorTotales();
-			int golesEncajadosV = golLocal + eLocal.getGolesEnContraTotales();
-			String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Goles A Favor Totales'=" + ("" + golesAcumuladosV)
-					+ ", 'Goles Encajados Totales' = " + golesEncajadosV + ", 'Derrotas Totales'="
-					+ ("" + (eLocal.getDerrotasTotales() + 1)) + " WHERE NOMBRE='" + eLocal.getNombre()
-					+ "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query + "\n" + query2);
-			bd.getCon().createStatement().executeUpdate(query2);
-			// String query = "UPDATE Equipos" + j.getNombre()
-			// + " SET Puntos=Puntos + 3, 'Goles A Favor Totales'='Goles A Favor Totales'+"
-			// + golVisitante
-			// + ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golLocal
-			// + ", 'Victorias Totales'= 'Victorias Totales' + 1 WHERE NOMBRE='" +
-			// eVisitante.getNombre()
-			// + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			// bd.getCon().createStatement().executeUpdate(query);
-			// bd.close();
-			// bd.init();
-			// String query2 = "UPDATE Equipos" + j.getNombre() + " SET 'Derrotas Totales' =
-			// 'Derrotas Totales'+1,"
-			// + "'Goles A Favor Totales'='Goles A Favor Totales'+" + golLocal
-			// + ", 'Goles Encajados Totales' = 'Goles Encajados Totales'+" + golVisitante +
-			// " WHERE NOMBRE='"
-			// + eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			// System.out.println(query + "\n" + query2);
-			// bd.getCon().createStatement().executeUpdate(query2);
-		} else if (golLocal == golVisitante) { // Esta parte del método falta por mejorar lo de goles a favor y tal
-			// String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos = Puntos + 1,
-			// 'Goles A Favor Totales'="
-			// + golLocal + ", 'Goles Encajados Totales'=" + golVisitante
-			// + ", 'Empates Totales' = 'Empates Totales' + 1 WHERE (NOMBRE='" +
-			// eVisitante.getNombre()
-			// + "' OR NOMBRE='" + eLocal.getNombre() + "') AND fk_CodLiga=" +
-			// j.getCodLiga() + ";";
-			bd.init();
-			int golesAcumuladosV = golVisitante + eLocal.getGolesAFavorTotales();
-			int golesEncajadosV = golLocal + eLocal.getGolesEnContraTotales();
-			String query2 = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos+1, 'Goles A Favor Totales'="
-					+ ("" + golesAcumuladosV) + ", 'Goles Encajados Totales' = " + golesEncajadosV
-					+ ", 'Empates Totales'=" + ("" + (eLocal.getEmpatesTotales() + 1)) + " WHERE NOMBRE='"
-					+ eLocal.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query2);
-			bd.getCon().createStatement().executeUpdate(query2);
-			String query3 = "UPDATE Equipos" + j.getNombre() + " SET Puntos=Puntos+1, 'Goles A Favor Totales'="
-					+ ("" + golesAcumuladosV) + ", 'Goles Encajados Totales' = " + golesEncajadosV
-					+ ", 'Empates Totales'=" + ("" + (eVisitante.getEmpatesTotales() + 1)) + " WHERE NOMBRE='"
-					+ eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-			System.out.println(query3);
-			bd.getCon().createStatement().executeUpdate(query3);
-		}
-		bd.close();
-		borrarPrimeraFila(j);
+		Partidos p = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
+		bd.actualizarEquipo(j, eLocal, codLiga);
+		bd.actualizarEquipo(j, eVisitante, codLiga);
+		borrarPrimeraFila(j,codLiga);
 
 	}
 

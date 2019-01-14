@@ -546,16 +546,13 @@ public class BaseDeDatos {
 		if (con != null)
 			con.close();
 	}
-	public void actualizarEquipo(Jugador j, Equipo eNuevo) {
+	public void actualizarEquipo(Jugador j, Equipo eNuevo, int codLiga) {
 		
 		try {
 			init();
 			Class.forName("org.sqlite.JDBC");
-			String query1 = "UPDATE Equipos" + j.getNombre() +
-					" SET "
-//					+ "'fk_CodLiga'=" + j.getCodLiga() + ", "
-//							+ "'fk_Nombre_Jugador'='" + j.getNombre()+"',"
-									+ "'Siglas'='" + eNuevo.getSiglas() 
+			String query1 = "UPDATE Equipos" + j.getNombre().toUpperCase() + 
+					" SET 'Siglas'='" + eNuevo.getSiglas() 
 					 +"', 'Nombre'='" + eNuevo.getNombre() + "', 'Puntos'=" + eNuevo.getPuntos()+", 'Goles Encajados Totales'=" + eNuevo.getGolesEnContraTotales()
 					+", 'Goles Encajados Local'=" + eNuevo.getGolesEnContraLocal()+",'Goles Encajados Visitante'=" + eNuevo.getGolesEnContraVisitante()
 					+", 'Goles A Favor Totales'=" + eNuevo.getGolesAFavorTotales()+", 'Goles A Favor Local'=" + eNuevo.getGolesAFavorLocal() +", 'Goles A Favor Visitante'=" + eNuevo.getGolesAFavorVisitante()
@@ -563,7 +560,7 @@ public class BaseDeDatos {
 					+", 'Victorias Totales'=" + eNuevo.getVictoriasTotales()+", 'Victorias Local'=" + eNuevo.getVictoriasLocal()+", 'Victorias Visitante'=" + eNuevo.getVictoriasVisitante()
 					+", 'Empates Totales'=" + eNuevo.getEmpatesTotales()+", 'Empates Local'=" + eNuevo.getEmpatesLocal()+", 'Empates Visitante'=" + eNuevo.getEmpatesVisitante()
 					+", 'Color'='" + eNuevo.getBolaEquipo().getColor().getRGB()+"', 'Icono'='" +eNuevo.getBolaEquipo().getRutaImagen() + 
-					"' WHERE NOMBRE='" + eNuevo.getNombre() + "' AND fk_codLiga = " + (j.getCodLiga()-1) + "; ";
+					"' WHERE NOMBRE='" + eNuevo.getNombre() + "' AND fk_codLiga = " + codLiga + "; ";
 			System.out.println(query1);
 			con.createStatement().executeUpdate(query1);
 			

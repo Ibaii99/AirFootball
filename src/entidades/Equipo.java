@@ -20,7 +20,7 @@ public class Equipo{
 	private String siglas; // Char para crear un formato de reconocimiento de siglas con lo dado en clase
 	private String imagen;
 	private int puntos;
-	private ArrayList<Partidos> arrayPartidosJugados;
+
 	
 ////////////////////////////Atributos para estadísticas///////////////////////////////////////////////////
 	private int golesEnContraTotales;
@@ -167,12 +167,7 @@ public class Equipo{
 		this.puntos += puntos;
 	}
 
-	/** Metodo para guardar el partido jugado por el Equipo
-	 * @param partido	Partido jugado
-	 */
-	public void anyadirPartidoJugado(Partidos partido) {
-		arrayPartidosJugados.add(partido);
-	}
+
 	
 	/**	Metodo para añadir estadisticas cuando el equipo juega de Visitante
 	 * @param haGanado			true si gana, false si empata o pierde
@@ -221,13 +216,8 @@ public class Equipo{
 		golesEnContraTotales = golesEnContraVisitante + golesEnContraLocal;
 	}
 	
-	/** Metodo para añadir un partido a la lista de partidos jugados del equipo
-	 * @param p	Partido jugado
-	 */
-	public void anyadirPartido(Partidos p) {
-		arrayPartidosJugados.add(p);
-		
-	}
+
+
 
 	public String getNombre() {
 		return nombre;
@@ -242,9 +232,7 @@ public class Equipo{
 	}
 
 
-	public ArrayList<Partidos> getArrayPartidosJugados() {
-		return arrayPartidosJugados;
-	}
+
 
 	public int getGolesEnContraTotales() {
 		return golesEnContraTotales;
@@ -332,10 +320,6 @@ public class Equipo{
 
 	public void setPuntos(int puntos) {
 		this.puntos = puntos;
-	}
-
-	public void setArrayPartidosJugados(ArrayList<Partidos> arrayPartidosJugados) {
-		this.arrayPartidosJugados = arrayPartidosJugados;
 	}
 
 	public void setGolesEnContraTotales(int golesEnContraTotales) {

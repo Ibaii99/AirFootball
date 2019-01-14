@@ -33,8 +33,7 @@ public class Partidos {
 	 *  Guarda el equipo ganador del equipo
 	 */
 	private void anyadirDatosAEquipos() {
-		equipoLocal.anyadirPartido(this);
-		equipoVisitante.anyadirPartido(this);
+
 		if(golesLocal < golesVisitante) {
 			equipoLocal.anyadirPuntos(0);
 			equipoVisitante.anyadirPuntos(3);
