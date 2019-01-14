@@ -59,6 +59,7 @@ public class MenuLiga extends JFrame {
 	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, FisicasNuevas f, int cod) {
 		this.codLiga = cod;
 		try {
+			Thread.sleep(500);
 			JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
 			setContentPane(lblBck);
 
@@ -188,6 +189,7 @@ public class MenuLiga extends JFrame {
 			JLabel icono = new JLabel("");
 			int xIcono = Math.round((getWidth() / 2) - (182 * getWidth() / 630));
 			int yIcono = Math.round((getHeight() / 2) - 96 * getHeight() / 630);
+			
 			equipoL = "/iconos/equipos/ala.png";
 			String newequipoL = "";
 			imageIconL = new ImageIcon(getClass().getResource(equipoL));
