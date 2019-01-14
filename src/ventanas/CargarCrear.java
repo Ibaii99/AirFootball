@@ -111,7 +111,7 @@ public class CargarCrear extends JDialog {
 				
 				int codLigas = Character.getNumericValue(a[1].charAt(0));
 				System.out.println(codLigas);
-				j.setCodLiga(codLigas);
+				
 				VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(contenido.readLine(), j,codLigas ), bd, j, j.devolverPartidosRestantes(codLigas, bd),f, codLigas);
 				
 				setVisible(false);

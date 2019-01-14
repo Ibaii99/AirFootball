@@ -208,18 +208,24 @@ public class ventanaPartido extends JFrame {
 		lblGolesLocal.setFont(f);
 		panel.add(lblGolesLocal);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
-				groupLayout.createSequentialGroup().addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
-								.addComponent(panelCampo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE).addContainerGap()));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
+						.addComponent(panelCampo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+					.addContainerGap())
+		);
 
 		String siglasEqL = eLocal.getSiglas();
 		JLabel lblNomEqL = new JLabel(siglasEqL);
@@ -492,6 +498,8 @@ public class ventanaPartido extends JFrame {
 		lblEquipoLocal.setBackground(Color.BLACK);
 		lblEquipoVisitante.setBackground(Color.gray);
 		lblPelota.setBackground(Color.BLUE);
+
+		
 		try {
 //			lblEquipoLocal.setOpaque(false); ESTO  HARIA QUE SOLO SE VIERA EL ICONO Y NO QUEREMOS ESO
 			lblEquipoLocal.setIcon(lblEqL.getIcon());
@@ -642,7 +650,7 @@ public class ventanaPartido extends JFrame {
 		}
 		// TODO aqui ya termina el partido, se tendria que añadir a la BD y luego ir a
 		// la menuliga
-		if (golLocal + golVisitante >= 3)
+		if (golLocal + golVisitante >= 4)
 			terminaPartido();
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
