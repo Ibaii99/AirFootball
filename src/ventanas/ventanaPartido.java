@@ -156,12 +156,12 @@ public class ventanaPartido extends JFrame {
 		}
 		resizeo(imageIconL, lblEqL, 45, 45);
 
-		ImageIcon iconC = new ImageIcon(ventanaPartido.class.getResource("/iconos/campo.png"));
-		Image imgC = iconC.getImage();
-		BufferedImage biC = new BufferedImage(720, 395, BufferedImage.TYPE_INT_ARGB);
-		Graphics gC = biC.createGraphics();
-		gC.drawImage(imgC, 0, 0, 720, 395, null);
-		ImageIcon newIconC = new ImageIcon(biC);
+//		ImageIcon iconC = new ImageIcon(getClass().getClassLoader().getResource("iconos/campo.png"));
+//		Image imgC = iconC.getImage();
+//		BufferedImage biC = new BufferedImage(720, 395, BufferedImage.TYPE_INT_ARGB);
+//		Graphics gC = biC.createGraphics();
+//		gC.drawImage(imgC, 0, 0, 720, 395, null);
+//		ImageIcon newIconC = new ImageIcon(biC);
 
 		ImageIcon imageIconV = null;
 		try {
@@ -172,19 +172,19 @@ public class ventanaPartido extends JFrame {
 		}
 		resizeo(imageIconV, lblEqV, 45, 45);
 
-		ImageIcon icon = new ImageIcon(ventanaPartido.class.getResource("/iconos/marcadorconnombres.jpg"));
-		Image img = icon.getImage();
-		BufferedImage bi = new BufferedImage(373, 50, BufferedImage.TYPE_INT_ARGB);
-		Graphics g = bi.createGraphics();
-		g.drawImage(img, 0, 0, 373, 50, null);
-		ImageIcon newIcon = new ImageIcon(bi);
+//		ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("iconos/marcadorconnombres.jpg"));
+//		Image img = icon.getImage();
+//		BufferedImage bi = new BufferedImage(373, 50, BufferedImage.TYPE_INT_ARGB);
+//		Graphics g = bi.createGraphics();
+//		g.drawImage(img, 0, 0, 373, 50, null);
+//		ImageIcon newIcon = new ImageIcon(bi);
 		try {
 			f = Font.createFont(Font.TRUETYPE_FONT, ventanaPartido.class.getResourceAsStream(nombreFont));
 			f = f.deriveFont(Font.PLAIN, 28);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		setSize(900, 600);
+		setSize(900, 622);
 		setResizable(true);
 
 		// lblEquipoLocal.setText("EQUIPO LOCAL");
@@ -500,13 +500,18 @@ public class ventanaPartido extends JFrame {
 		try {
 			// lblEquipoLocal.setOpaque(false); ESTO HARIA QUE SOLO SE VIERA EL ICONO Y NO
 			// QUEREMOS ESO
+			lblPelota.setOpaque(false);
+			ImageIcon icBalonLiga = new ImageIcon(getClass().getClassLoader().getResource("iconos/balon_laliga.png"));
+			
+			lblPelota.setIcon(icBalonLiga);
+			resizeo(icBalonLiga, lblPelota, 40, 40);
 			lblEquipoLocal.setIcon(lblEqL.getIcon());
 			lblEquipoLocal.setHorizontalAlignment(JLabel.CENTER);
 			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
 			lblEquipoVisitante.setIcon(lblEqV.getIcon());
 			lblEquipoVisitante.setHorizontalAlignment(JLabel.CENTER);
 			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
-			lblPelota.setBackground(p.getColor());
+//			lblPelota.setBackground(p.getColor());
 			// Graphics2D g2dL = (Graphics2D) lblEquipoLocal.getGraphics();
 			// Graphics2D g2dV = (Graphics2D) lblEquipoVisitante.getGraphics();
 			// g2dL.fillOval((int) Math.round(lblEquipoLocal.getBounds().getX()),
