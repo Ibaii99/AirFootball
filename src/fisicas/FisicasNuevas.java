@@ -53,6 +53,7 @@ public class FisicasNuevas {
 		if((equipo.getBolaEquipo().getX()-equipo.getBolaEquipo().getRadio()) < p1.getX() && p1.getX() < (equipo.getBolaEquipo().getX()+equipo.getBolaEquipo().getRadio())
 				&& (equipo.getBolaEquipo().getY()-equipo.getBolaEquipo().getRadio()) < p1.getY() && p1.getY() < (equipo.getBolaEquipo().getY()+equipo.getBolaEquipo().getRadio())
 				) chocan = false;
+		
 		return chocan;
 	}
 	/**	Metodo para cambiar las velocidades de una pelota cuando esta choca con un equipo

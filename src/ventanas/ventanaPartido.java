@@ -60,6 +60,7 @@ import entidades.Partidos;
 import fisicas.FisicasNuevas;
 import fisicas.HiloJuego;
 import jugador.Jugador;
+import objetos.JLabelGraficoAjustado;
 import objetos.Pelota;
 import objetos.Poste;
 
@@ -82,9 +83,13 @@ public class ventanaPartido extends JFrame {
 	private JLabel lblGolesLocal = new JLabel("" + golLocal);
 	private JLabel lblGolesVisitante = new JLabel("" + golVisitante);
 
-	private JLabel lblEquipoLocal = new JLabel("");
-	private JLabel lblEquipoVisitante = new JLabel("");
-	private JLabel lblPelota = new JLabel("");
+	private JLabelGraficoAjustado lblEquipoLocal = new JLabelGraficoAjustado("");
+	private JLabelGraficoAjustado lblEquipoVisitante = new JLabelGraficoAjustado("");
+	public void setLblPelota(JLabelGraficoAjustado lblPelota) {
+		this.lblPelota = lblPelota;
+	}
+
+	public JLabelGraficoAjustado lblPelota = new JLabelGraficoAjustado("");
 	private JLabel lblEqL = new JLabel("");
 	private JLabel lblEqV = new JLabel("");
 	private boolean isMultijugador;
@@ -505,24 +510,15 @@ public class ventanaPartido extends JFrame {
 			
 			lblPelota.setIcon(icBalonLiga);
 			resizeo(icBalonLiga, lblPelota, 40, 40);
+			
 			lblEquipoLocal.setIcon(lblEqL.getIcon());
 			lblEquipoLocal.setHorizontalAlignment(JLabel.CENTER);
 			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
+			
 			lblEquipoVisitante.setIcon(lblEqV.getIcon());
 			lblEquipoVisitante.setHorizontalAlignment(JLabel.CENTER);
 			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
-//			lblPelota.setBackground(p.getColor());
-			// Graphics2D g2dL = (Graphics2D) lblEquipoLocal.getGraphics();
-			// Graphics2D g2dV = (Graphics2D) lblEquipoVisitante.getGraphics();
-			// g2dL.fillOval((int) Math.round(lblEquipoLocal.getBounds().getX()),
-			// (int) Math.round(lblEquipoLocal.getBounds().getY()),
-			// lblEquipoLocal.getWidth(),
-			// lblEquipoLocal.getHeight());
 
-			// paintIcon(lblEquipoLocal, lblEquipoLocal.getGraphics(),
-			// (int)Math.round(lblEquipoLocal.getBounds().getX()),
-			// (int)Math.round(lblEquipoLocal.getBounds().getY()),
-			// eLocal.getBolaEquipo().getColor());
 		} catch (Exception ss) {
 			ss.printStackTrace();
 		}
@@ -890,7 +886,7 @@ public class ventanaPartido extends JFrame {
 		return lblEquipoVisitante;
 	}
 
-	public JLabel getLblPelota() {
+	public JLabelGraficoAjustado getLblPelota() {
 		return lblPelota;
 	}
 

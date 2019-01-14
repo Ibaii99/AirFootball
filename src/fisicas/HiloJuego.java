@@ -39,6 +39,7 @@ public class HiloJuego extends Thread {
 			fisicas.choquePelotaEquipo(p, eVisitante);
 			fisicas.choquePelotaPoste(v, v.getPosteArribaDerecha(), v.getPosteAbajoDerecha(),
 					v.getPosteArribaIzquierda(), v.getPosteAbajoIzquierda(), p);
+//			v.getLblPelota().setRotacion(1);
 			fisicas.mueveEquipo(eLocal, fisicas.TIEMPO, v);
 			fisicas.mueveEquipo(eVisitante, fisicas.TIEMPO, v);
 			fisicas.muevePelota(p, fisicas.TIEMPO, v);
