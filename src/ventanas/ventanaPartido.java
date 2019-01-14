@@ -708,7 +708,7 @@ public class ventanaPartido extends JFrame {
 			BufferedWriter out = new BufferedWriter(fileStream);
 			while (fileScanner.hasNextLine()) {
 				String next = fileScanner.nextLine();
-				if (next.equals("\n") || next.equals(eLocal.getNombre())) {
+				if (next.equals("\n")) {
 					out.newLine();
 				} else {
 					out.write(next);
