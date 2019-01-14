@@ -67,7 +67,7 @@ public abstract class Objetos{
 		this.rutaImagen = rutaImagen;
 	}
 	
-	S
+
 
 	public void setRutaImagen(String rutaImagen) {
 		this.rutaImagen = rutaImagen;
