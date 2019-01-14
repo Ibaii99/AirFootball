@@ -207,7 +207,7 @@ public class VentanaLiga extends JFrame {
 			imageIconL = new ImageIcon(getClass().getClassLoader().getResource(e.getBolaEquipo().getRutaImagen()));
 		} catch (Exception ej) {
 			
-			ej.printStackTrace();
+			ej.printStackTrace(); 
 		}
 		resizeo(imageIconL, lblEscudoEquipo, 20, 20);
 		panelEquipoJugador.add(lblEscudoEquipo);
@@ -220,7 +220,7 @@ public class VentanaLiga extends JFrame {
 
 		int puntosLocal = 0;
 		puntosLocal = bd.convertirAEquipo(e.getNombre(), j, ligaSeleccionada).getPuntos();
-		
+	
 		JLabel lblPuntosEquipo = new JLabel("" + puntosLocal); 
 		panelEquipoJugador.add(lblPuntosEquipo);
 

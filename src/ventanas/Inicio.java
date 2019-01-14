@@ -183,7 +183,7 @@ public class Inicio extends JFrame {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-//
+// 
 //	}
 
 	/**

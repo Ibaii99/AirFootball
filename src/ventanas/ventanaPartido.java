@@ -147,7 +147,7 @@ public class ventanaPartido extends JFrame {
 			ImageIcon iconL = new ImageIcon(getClass().getClassLoader().getResource(eLocal.getImagen()));
 			System.out.println(iconL);
 		}
-
+		
 		ImageIcon imageIconL = null;
 		try {
 			imageIconL = new ImageIcon(getClass().getClassLoader().getResource(eLocal.getBolaEquipo().getRutaImagen()));

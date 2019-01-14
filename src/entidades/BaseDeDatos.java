@@ -565,7 +565,7 @@ public class BaseDeDatos {
 			con.createStatement().executeUpdate(query1);
 			
 		}catch(Exception i) {
-			i.printStackTrace();
+			i.printStackTrace(); 
 		}
 	}
 	public ArrayList<Equipo> devolverTodosLosEquipos(Jugador j, int codliga) {

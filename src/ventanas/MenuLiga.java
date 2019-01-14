@@ -251,7 +251,7 @@ public class MenuLiga extends JFrame {
 			e.printStackTrace();
 		}
 	}
-
+ 
 	/**
 	 * @param equipo:
 	 *            Ruta de la imagen que queremos resizear

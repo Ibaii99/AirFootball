@@ -101,7 +101,7 @@ public class Jugador {
 		    		lista.add(bd.convertirAEquipo(cadena, this, numLiga));
 		    		cadena = br.readLine();
 		    		
-		    		}
+		    		} 
 		            br.close();}
 		    }catch(Exception i) {
 		    	i.printStackTrace();

@@ -92,7 +92,7 @@ public class CargarCrear extends JDialog {
 		setVisible(false);
 	}
 	
-	
+
 	public void cargar(BaseDeDatos bd, Jugador j, FisicasNuevas f) {
 		JFileChooser fc = new JFileChooser();
 		FileNameExtensionFilter txt = new FileNameExtensionFilter("Archivos(.txt)", "txt");

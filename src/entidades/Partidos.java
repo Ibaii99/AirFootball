@@ -31,7 +31,7 @@ public class Partidos {
 	/** Metodo de añadir los datos del partido a las estadisitcas de los equipos.
 	 *  Añade goles, Puntos, y si ha ganado, perdido o empatado
 	 *  Guarda el equipo ganador del equipo
-	 */
+	 */ 
 	private void anyadirDatosAEquipos() {
 
 		if(golesLocal < golesVisitante) {

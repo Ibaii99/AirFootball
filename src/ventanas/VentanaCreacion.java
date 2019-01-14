@@ -325,7 +325,7 @@ public class VentanaCreacion extends JFrame {
 				dispose();
 			}});
 		panel_1.add(btnListo);}}
-		
+	
 
 	
 	private static void copyFileUsingStream(File source, File dest) throws IOException {

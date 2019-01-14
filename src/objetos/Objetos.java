@@ -26,7 +26,7 @@ public abstract class Objetos{
 	protected double y;
 	
 	protected double xAntes = 0;
-	protected double yAntes = 0;
+	protected double yAntes = 0; 
 	
 ////////////////////////Velocidad///////////////////////////	
 	protected double velX;
