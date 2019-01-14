@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
@@ -70,37 +71,20 @@ public class MenuLiga extends JFrame {
 			bd.init();
 			JComboBox cbLiga = new JComboBox();
 
-			Logger logger = Logger.getLogger("baseDeDatos");
-
-			Statement consulta;
-
-			String comando = "";
-			try {
-				Class.forName("org.sqlite.JDBC");
-			} catch (Exception e3) {
-				// e3.printStackTrace();
-			}
-			String query = "SELECT NOMBRE, ICONO FROM EQUIPOS" + j.getNombre().toUpperCase() + " WHERE fk_CodLiga="+codLiga+";";
-			System.out.println(query);
-			// Statement st = con.createStatement();
-			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
-			System.out.println(rs.toString());
-			System.out.println(rs);
-			// System.out.println(rs.isClosed());
-
-			System.out.println(rs.getString("NOMBRE"));
-			while (rs.next()) {
-
-				String nomEq = rs.getString("Nombre");
-				String iconEq = rs.getString("Icono");
-				System.out.println(iconEq);
-				cbLiga.addItem(new ObjetoCombobox(1, nomEq, new ImageIcon(iconEq)));
-				revalidate();
+			Logger logger = Logger.getLogger("menuLiga");
+			logger.addHandler(new FileHandler("menuLiga"));
 			
-				// System.out.println(nomEq + " " + iconEq);
+
+			
+		
+			
+			
+			for (Equipo eq : bd.devolverTodosLosEquipos(j, codLiga)) {
+		
+				cbLiga.addItem(new ObjetoCombobox(1, eq.getNombre(), new ImageIcon(eq.getBolaEquipo().getRutaImagen())));
+				revalidate();
 			}
-			// st.close();
-			rs.close();
+
 
 			JLabel lblEligeEquipo = new JLabel("Elige equipo:");
 			// TODO
@@ -118,7 +102,7 @@ public class MenuLiga extends JFrame {
 						System.out.println(equipo.getNombre());
 						System.out.println(bd);
 						
-						String ruta = j.getNombre() +"codLiga="+ codLiga +".txt";
+						String ruta = j.getNombre().toUpperCase() +"codLiga="+ codLiga +".txt";
 					    
 						File archivo = new File(ruta);
 					    
@@ -158,7 +142,7 @@ public class MenuLiga extends JFrame {
 					        
 						
 						dispose();
-						bd.close();
+						
 						//TODO añadir el codliga y crear el archivo
 
 					} catch (Exception e1) {
@@ -202,25 +186,12 @@ public class MenuLiga extends JFrame {
 				 */
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						bd.init();
-						Class.forName("org.sqlite.JDBC");
-						Statement consultaCB;
-						consultaCB = bd.getCon().createStatement();
-						String comando2 = "SELECT ICONO FROM EQUIPOS" + j.getNombre() + " WHERE (NOMBRE = '"
-								+ cbLiga.getSelectedItem().toString() + "' AND fk_CodLiga="+codLiga +")";
-						logger.log(Level.INFO, "BD: " + comando2);
-						consultaCB.executeUpdate(comando2);
-						ResultSet rs2 = bd.getCon().createStatement().executeQuery(comando2);
-						System.out.println(rs2.getString("ICONO"));
-						while (rs2.next()) {
-							equipoL = "/" + rs2.getString("ICONO");
-							String iconoL = rs2.getString("ICONO");
-							System.out.println(equipoL);
-						}
+					
+						equipoL = "/"+bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j, codLiga).getBolaEquipo().getRutaImagen();
 						revalidate();
 						
 						resizeo(equipoL, icono);
-						bd.close();
+						
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
