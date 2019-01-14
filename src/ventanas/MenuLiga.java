@@ -60,6 +60,7 @@ public class MenuLiga extends JFrame {
 	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, FisicasNuevas f, int cod) {
 		this.codLiga = cod;
 		try {
+			
 			Thread.sleep(500);
 			JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
 			setContentPane(lblBck);
@@ -135,10 +136,12 @@ public class MenuLiga extends JFrame {
 					    		for(Equipo equi : listaEquipos) {
 					    			if(equi.getNombre() != cbLiga.getSelectedItem().toString()) bw.write(equi.getNombre() + "\n");	// para que se guarden todos los equipos menos el que tu has elegido
 					    		}
+					    		bw.flush();
+					            bw.close();
 					    		VentanaLiga v = new VentanaLiga(equipo, bd, j, listaEquipos, f, codLiga);
 								v.setVisible(true);
-					    		bw.flush();
-					            bw.close();}
+					    		
+					            }
 					    }catch(Exception i) {i.printStackTrace();}
 					        
 						

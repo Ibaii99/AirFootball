@@ -111,9 +111,9 @@ public class ventanaPartido extends JFrame {
 	private JLabel lblposteAbajoIzquierda = new JLabel("");
 	private JLabel lblposteArribaDerecha = new JLabel("");
 	private JLabel lblposteAbajoDerecha = new JLabel("");
-	
+
 	private int codLiga;
-	
+
 	private Jugador j;
 	private int ganadosArcade;
 
@@ -121,7 +121,7 @@ public class ventanaPartido extends JFrame {
 	public ventanaPartido(Equipo eLocal, Equipo eVisitante, Pelota p, boolean esMultijjugador, boolean esArcade,
 			boolean esAmistoso, boolean esJugadorVSMaquinaEquipoLocal, FisicasNuevas fisicas, BaseDeDatos bd, Jugador j,
 			int ganadosArcade, ArrayList<Equipo> listaPartidos, int codigoLiga) {
-		
+
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.codLiga = codigoLiga;
@@ -147,7 +147,7 @@ public class ventanaPartido extends JFrame {
 			ImageIcon iconL = new ImageIcon(getClass().getClassLoader().getResource(eLocal.getImagen()));
 			System.out.println(iconL);
 		}
-		
+
 		ImageIcon imageIconL = null;
 		try {
 			imageIconL = new ImageIcon(getClass().getClassLoader().getResource(eLocal.getBolaEquipo().getRutaImagen()));
@@ -212,24 +212,18 @@ public class ventanaPartido extends JFrame {
 		lblGolesLocal.setFont(f);
 		panel.add(lblGolesLocal);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
-						.addComponent(panelCampo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
-					.addContainerGap())
-		);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
+								.addComponent(panelCampo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE).addContainerGap()));
 
 		String siglasEqL = eLocal.getSiglas();
 		JLabel lblNomEqL = new JLabel(siglasEqL);
@@ -503,9 +497,9 @@ public class ventanaPartido extends JFrame {
 		lblEquipoVisitante.setBackground(Color.gray);
 		lblPelota.setBackground(Color.BLUE);
 
-		
 		try {
-//			lblEquipoLocal.setOpaque(false); ESTO  HARIA QUE SOLO SE VIERA EL ICONO Y NO QUEREMOS ESO
+			// lblEquipoLocal.setOpaque(false); ESTO HARIA QUE SOLO SE VIERA EL ICONO Y NO
+			// QUEREMOS ESO
 			lblEquipoLocal.setIcon(lblEqL.getIcon());
 			lblEquipoLocal.setHorizontalAlignment(JLabel.CENTER);
 			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
@@ -513,11 +507,12 @@ public class ventanaPartido extends JFrame {
 			lblEquipoVisitante.setHorizontalAlignment(JLabel.CENTER);
 			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
 			lblPelota.setBackground(p.getColor());
-//			Graphics2D g2dL = (Graphics2D) lblEquipoLocal.getGraphics();
-//			Graphics2D g2dV = (Graphics2D) lblEquipoVisitante.getGraphics();
-//			g2dL.fillOval((int) Math.round(lblEquipoLocal.getBounds().getX()),
-//					(int) Math.round(lblEquipoLocal.getBounds().getY()), lblEquipoLocal.getWidth(),
-//					lblEquipoLocal.getHeight());
+			// Graphics2D g2dL = (Graphics2D) lblEquipoLocal.getGraphics();
+			// Graphics2D g2dV = (Graphics2D) lblEquipoVisitante.getGraphics();
+			// g2dL.fillOval((int) Math.round(lblEquipoLocal.getBounds().getX()),
+			// (int) Math.round(lblEquipoLocal.getBounds().getY()),
+			// lblEquipoLocal.getWidth(),
+			// lblEquipoLocal.getHeight());
 
 			// paintIcon(lblEquipoLocal, lblEquipoLocal.getGraphics(),
 			// (int)Math.round(lblEquipoLocal.getBounds().getX()),
@@ -687,11 +682,11 @@ public class ventanaPartido extends JFrame {
 				listaPartidos.remove(0);
 				if (listaPartidos.get(0).getNombre() == eLocal.getNombre()) {
 					listaPartidos.remove(0);
-					borrarPrimeraFila(j,codLiga);
+					borrarPrimeraFila(j, codLiga);
 				}
 				if (listaPartidos.size() < 19 && listaPartidos.get(0).getNombre() == eVisitante.getNombre()) {
 					listaPartidos.remove(0);
-					borrarPrimeraFila(j,codLiga);
+					borrarPrimeraFila(j, codLiga);
 				}
 
 				VentanaLiga vl = new VentanaLiga(eLocal, bd, j, listaPartidos, fisicas, codLiga);
@@ -713,11 +708,12 @@ public class ventanaPartido extends JFrame {
 			BufferedWriter out = new BufferedWriter(fileStream);
 			while (fileScanner.hasNextLine()) {
 				String next = fileScanner.nextLine();
-				if (next.equals("\n"))
+				if (next.equals("\n") || next.equals(eLocal.getNombre())) {
 					out.newLine();
-				else
+				} else {
 					out.write(next);
-				out.newLine();
+					out.newLine();
+				}
 			}
 			out.close();
 		} catch (Exception e4) {
@@ -726,16 +722,17 @@ public class ventanaPartido extends JFrame {
 	}
 
 	private void setGolesYPuntos(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException {
-		
-		setPuntosAlAzar(bd, j, eLocal, eVisitante,codLiga);
+
+		setPuntosAlAzar(bd, j, eLocal, eVisitante, codLiga);
 		Partidos p = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
 		bd.actualizarEquipo(j, eLocal, codLiga);
 		bd.actualizarEquipo(j, eVisitante, codLiga);
-		borrarPrimeraFila(j,codLiga);
+		borrarPrimeraFila(j, codLiga);
 
 	}
 
-	private void setPuntosAlAzar(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante, int codLiga) throws SQLException {
+	private void setPuntosAlAzar(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante, int codLiga)
+			throws SQLException {
 		bd.init();
 		String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE NOT LIKE '" + eLocal.getNombre()
 				+ "' AND NOMBRE NOT LIKE '" + eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga()
@@ -778,15 +775,15 @@ public class ventanaPartido extends JFrame {
 								+ ("Puntos + " + numRandom)
 								+ ", \"Victorias Totales\"= \"Victorias Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+"
 								+ ("" + golesRandom) + ", \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+"
-								+ ("" + golesPerdedor) + " WHERE Nombre='" + equipo + "' AND fk_CodLiga="
-								+ codLiga+ ";";
+								+ ("" + golesPerdedor) + " WHERE Nombre='" + equipo + "' AND fk_CodLiga=" + codLiga
+								+ ";";
 						System.out.println(updatePruebaVic);
 						bd.getCon().createStatement().executeUpdate(updatePruebaVic);
 						String updatePruebaDer = "UPDATE EQUIPOS" + j.getNombre().toUpperCase()
 								+ " SET \"Derrotas Totales\"= \"Derrotas Totales\"+1, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+"
 								+ ("" + golesRandom) + ", \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+"
-								+ ("" + golesPerdedor) + " WHERE Nombre='" + equipo2 + "' AND fk_CodLiga="
-								+ codLiga+ ";";
+								+ ("" + golesPerdedor) + " WHERE Nombre='" + equipo2 + "' AND fk_CodLiga=" + codLiga
+								+ ";";
 						System.out.println(updatePruebaDer);
 						bd.getCon().createStatement().executeUpdate(updatePruebaDer);
 

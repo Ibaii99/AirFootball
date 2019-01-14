@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-Arenas Getxo
-=======
-Athletic Club
->>>>>>> branch 'master' of https://github.com/Ibaii99/ProyectoProgramIII.git
