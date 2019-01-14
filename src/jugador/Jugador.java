@@ -90,7 +90,7 @@ public class Jugador {
 	}
 	public ArrayList<Equipo> devolverPartidosRestantes(int numLiga, BaseDeDatos bd){
 		ArrayList<Equipo> lista = new ArrayList<Equipo>();
-		String rutaPart = this.getNombre() + numLiga + "Partidos.txt";
+		String rutaPart = this.getNombre().toUpperCase() + numLiga + "Partidos.txt";
 		File archivoPart = new File(rutaPart);
 		 try {
 		    	if(archivoPart.exists()) {
