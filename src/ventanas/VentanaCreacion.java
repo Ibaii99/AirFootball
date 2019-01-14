@@ -151,10 +151,6 @@ public class VentanaCreacion extends JFrame {
 
 				FileNameExtensionFilter png = new FileNameExtensionFilter("Im�genes(.png)", "png");
 				fc.addChoosableFileFilter(png);
-				FileNameExtensionFilter jpg = new FileNameExtensionFilter("Im�genes(.jpg)", "jpg");
-				fc.addChoosableFileFilter(jpg);
-				FileNameExtensionFilter jpeg = new FileNameExtensionFilter("Im�genes(.jpeg)", "jpeg");
-				fc.addChoosableFileFilter(jpeg);
 				fc.setFileFilter(png);
 				int seleccion = fc.showOpenDialog(getContentPane());
 				if (seleccion == JFileChooser.APPROVE_OPTION) {

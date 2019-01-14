@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-01-14T11:39:03</date>
+  <millis>1547462343406</millis>
+  <sequence>0</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>entidades.BaseDeDatos</class>
+  <method>crearTabla</method>
+  <thread>1</thread>
+  <message>BD: CREATE TABLE Equipos('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT , PRIMARY KEY('Siglas') )</message>
+</record>
+<record>
+  <date>2019-01-14T11:39:03</date>
+  <millis>1547462343412</millis>
+  <sequence>1</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>entidades.BaseDeDatos</class>
+  <method>crearTabla</method>
+  <thread>1</thread>
+  <message>BD: CREATE TABLE Liga( 'CodLiga' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'codLigaJugador' INTEGER, 'fk_Nombre_Jugador' TEXT REFERENCES JUGADORES(NOMBRE), 'Nombre' TEXT NOT NULL)</message>
+</record>
+<record>
+  <date>2019-01-14T11:39:03</date>
+  <millis>1547462343413</millis>
+  <sequence>2</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>entidades.BaseDeDatos</class>
+  <method>crearTabla</method>
+  <thread>1</thread>
+  <message>BD: CREATE TABLE Jugadores( 'Nombre' TEXT PRIMARY KEY NOT NULL, 'Password' TEXT NOT NULL, 'cantidadPartidas' INTEGER DEFAULT 0)</message>
+</record>
+<record>
+  <date>2019-01-14T11:39:10</date>
+  <millis>1547462350131</millis>
+  <sequence>3</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>entidades.BaseDeDatos</class>
+  <method>anyadirLiga</method>
+  <thread>17</thread>
+  <message>INSERT INTO Liga('codLigaJugador','fk_Nombre_Jugador', 'Nombre') VALUES ('4','IBAI','Liga4')</message>
+</record>
+<record>
+  <date>2019-01-14T11:39:13</date>
+  <millis>1547462353612</millis>
+  <sequence>4</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Real Valladolid' AND fk_CodLiga=4)</message>
+</record>
+<record>
+  <date>2019-01-14T11:39:20</date>
+  <millis>1547462360430</millis>
+  <sequence>5</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>entidades.BaseDeDatos</class>
+  <method>anyadirLiga</method>
+  <thread>17</thread>
+  <message>INSERT INTO Liga('codLigaJugador','fk_Nombre_Jugador', 'Nombre') VALUES ('5','IBAI','Liga5')</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:09</date>
+  <millis>1547462409548</millis>
+  <sequence>6</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Athletic Club' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:10</date>
+  <millis>1547462410304</millis>
+  <sequence>7</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'FC Barcelona' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:10</date>
+  <millis>1547462410767</millis>
+  <sequence>8</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Real Betis' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:11</date>
+  <millis>1547462411016</millis>
+  <sequence>9</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Celta de Vigo' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:11</date>
+  <millis>1547462411283</millis>
+  <sequence>10</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Deportivo de La Coruï¿½a' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:11</date>
+  <millis>1547462411514</millis>
+  <sequence>11</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'SD Eibar' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:11</date>
+  <millis>1547462411777</millis>
+  <sequence>12</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'RCD Espanyol' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:12</date>
+  <millis>1547462412061</millis>
+  <sequence>13</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Getafe CF' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:12</date>
+  <millis>1547462412332</millis>
+  <sequence>14</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Girona FC' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:12</date>
+  <millis>1547462412564</millis>
+  <sequence>15</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'SD Huesca' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:12</date>
+  <millis>1547462412788</millis>
+  <sequence>16</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Leganï¿½s' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:13</date>
+  <millis>1547462413117</millis>
+  <sequence>17</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Rayo Vallecano' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:13</date>
+  <millis>1547462413398</millis>
+  <sequence>18</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Real Madrid CF' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:13</date>
+  <millis>1547462413636</millis>
+  <sequence>19</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Real Sociedad' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:13</date>
+  <millis>1547462413944</millis>
+  <sequence>20</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Sevilla FC' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:14</date>
+  <millis>1547462414317</millis>
+  <sequence>21</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Valencia CF' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:14</date>
+  <millis>1547462414675</millis>
+  <sequence>22</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Real Valladolid' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:15</date>
+  <millis>1547462415159</millis>
+  <sequence>23</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Villarreal CF' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:15</date>
+  <millis>1547462415828</millis>
+  <sequence>24</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Arenas Getxo' AND fk_CodLiga=5)</message>
+</record>
+<record>
+  <date>2019-01-14T11:40:18</date>
+  <millis>1547462418000</millis>
+  <sequence>25</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuLiga$3</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOSIBAI WHERE (NOMBRE = 'Arenas Getxo' AND fk_CodLiga=5)</message>
+</record>
