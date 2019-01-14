@@ -396,7 +396,8 @@ public class Equipo{
 
 	public void setEmpatesVisitante(int empatesVisitante) {
 		this.empatesVisitante = empatesVisitante;
-	}
+	} 
+	
 
 	
 	

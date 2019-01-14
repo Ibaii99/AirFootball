@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import jugador.Jugador;
@@ -591,6 +592,25 @@ public class BaseDeDatos {
 		
 
 		return lista;
+	}
+	
+	/** Metodo para eliminar equipos de la base de datos
+	 * @param nombreEquipo 	Nombre del equipo
+	 * @param j				Jugador al que se le elimina
+	 * @param codLiga		Liga de la que se elimina
+	 */
+	public void eliminarEquipo( String nombreEquipo, Jugador j, int codLiga) {
+		try {
+			init();
+			String query = "DELETE FROM EQUIPOS" + j.getNombre().toUpperCase() + " WHERE (NOMBRE = '" + nombreEquipo
+					+ "' AND fk_CodLiga="+codLiga+");";
+			System.out.println(query);
+			getCon().createStatement().executeUpdate(query); // executeUpdate para inserts y deletes y executeQuery
+																// para selects
+			close();
+		} catch (Exception e3) {
+			e3.printStackTrace();
+		}
 	}
 
 }

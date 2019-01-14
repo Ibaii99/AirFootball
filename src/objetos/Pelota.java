@@ -212,6 +212,8 @@ public class Pelota extends Objetos{
 	public double getRadio() {
 		return radio;
 	}
+	
+	
 
 	}
 	

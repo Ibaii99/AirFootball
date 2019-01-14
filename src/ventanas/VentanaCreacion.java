@@ -253,8 +253,10 @@ public class VentanaCreacion extends JFrame {
 						actualiza();
 						
 						listaEquiposEliminados.add(bd.convertirAEquipo(cbSustituye.getSelectedItem().toString(), j, ligaNueva));
-						eliminarEquipo(bd, cbSustituye.getSelectedItem().toString(), j, cbSustituye, ligaNueva);
-						anyadirEquipo(bd, e1, j, icono,ligaNueva);
+						bd.eliminarEquipo(cbSustituye.getSelectedItem().toString(), j, ligaNueva);
+						e1.getBolaEquipo().setRutaImagen(icono);
+						bd.anyadirEquipo(e1, ligaNueva, j);
+						
 						actualiza();
 						VentanaCreacion vC = new VentanaCreacion(bd, f, listaEquiposEliminados, ligaNueva,j);
 						vC.setVisible(true);
@@ -347,20 +349,7 @@ public class VentanaCreacion extends JFrame {
 		}
 	}
 
-	public void eliminarEquipo(BaseDeDatos bd, String nombre, Jugador j, JComboBox cb, int codLiga) {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			bd.init();
-			String query = "DELETE FROM EQUIPOS" + j.getNombre().toUpperCase() + " WHERE (NOMBRE = '" + cb.getSelectedItem().toString()
-					+ "' AND fk_CodLiga="+codLiga+");";
-			System.out.println(query);
-			bd.getCon().createStatement().executeUpdate(query); // executeUpdate para inserts y deletes y executeQuery
-																// para selects
-			bd.close();
-		} catch (Exception e3) {
-			e3.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Actualiza el Eclipse solo para detectar ya nuestro icono
@@ -373,35 +362,6 @@ public class VentanaCreacion extends JFrame {
 		robot.keyRelease(KeyEvent.VK_F5);
 	}
 
-	public void anyadirEquipo(BaseDeDatos bd, Equipo e, Jugador j, String icono, int codLiga) throws SQLException {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			bd.init();
-		} catch (Exception e3) {
-			e3.printStackTrace();
-		}
-		String comando = "INSERT INTO Equipos" + j.getNombre()
-				+ " ('fk_CodLiga', 'fk_Nombre_Jugador','Siglas', 'Nombre', 'Puntos', 'Goles Encajados Totales', 'Goles Encajados Local', 'Goles Encajados Visitante', 'Goles A Favor Totales', 'Goles A Favor Local', 'Goles A Favor Visitante', 'Derrotas Totales', 'Derrotas Local', 'Derrotas Visitante', 'Victorias Totales', 'Victorias Local', 'Victorias Visitante', 'Empates Totales', 'Empates Local', 'Empates Visitante', 'Color', 'Icono')";
-		comando += " VALUES ('" + codLiga + "','" + j.getNombre() + "','" + e.getSiglas() + "','" + e.getNombre() // mira
-																															// aqui
-		// bien lo
-		// de
-		// CodLiga
-		// lo he
-		// puesto a
-		// 0
-				+ "','" + e.getPuntos() + "','" + e.getGolesEnContraTotales() + "','" + e.getGolesEnContraLocal()
-				+ "','" + e.getGolesEnContraVisitante() + "','" + e.getGolesAFavorTotales() + "','"
-				+ e.getGolesAFavorLocal() + "','" + e.getGolesAFavorVisitante() + "','" + e.getDerrotasTotales() + "','"
-				+ e.getDerrotasLocal() + "','" + e.getDerrotasVisitante() + "','" + e.getVictoriasTotales() + "','"
-				+ e.getVictoriasLocal() + "','" + e.getVictoriasVisitante() + "','" + e.getEmpatesTotales() + "','"
-				+ e.getEmpatesLocal() + "','" + e.getEmpatesVisitante() + "','" + e.getBolaEquipo().getColor().getRGB()
-				+ "','" + icono + "')";
-		System.out.println(comando);
-		bd.getCon().createStatement().executeUpdate(comando);
-		bd.close();
-
-	}
 }
 
 class JTextFieldLimit extends PlainDocument {
