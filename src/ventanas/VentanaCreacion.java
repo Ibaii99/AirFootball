@@ -50,6 +50,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -328,21 +329,33 @@ public class VentanaCreacion extends JFrame {
 
 	
 	private static void copyFileUsingStream(File source, File dest) throws IOException {
-		InputStream is = null;
-		OutputStream os = null;
-		try {
-			is = new FileInputStream(source);
-			os = new FileOutputStream(dest);
-			byte[] buffer = new byte[1024];
-			int length;
-			while ((length = is.read(buffer)) > 0) {
-				os.write(buffer, 0, length);
+//		InputStream is = null;
+//		OutputStream os = null;
+//		try {
+//			is = new FileInputStream(source);
+//			os = new FileOutputStream(dest);
+//			byte[] buffer = new byte[1024];
+//			int length;
+//			while ((length = is.read(buffer)) > 0) {
+//				os.write(buffer, 0, length);
+//			}
+//			os.flush();//forzar el guardado
+//		} finally {
+//			is.close();
+//			os.close();
+//		}
+		
+		try{
+			FileInputStream fis = new FileInputStream(source); //inFile -> Archivo a copiar
+			FileOutputStream fos = new FileOutputStream(dest); //outFile -> Copia del archivo
+			FileChannel inChannel = fis.getChannel(); 
+			FileChannel outChannel = fos.getChannel(); 
+			inChannel.transferTo(0, inChannel.size(), outChannel); 
+			fis.close(); 
+			fos.close();
+			}catch (IOException ioe) {
+			System.err.println("Error al Generar Copia");
 			}
-			os.flush();//forzar el guardado
-		} finally {
-			is.close();
-			os.close();
-		}
 	}
 
 

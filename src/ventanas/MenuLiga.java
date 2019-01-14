@@ -81,7 +81,7 @@ public class MenuLiga extends JFrame {
 			
 			for (Equipo eq : bd.devolverTodosLosEquipos(j, codLiga)) {
 		
-				cbLiga.addItem(new ObjetoCombobox(1, eq.getNombre(), new ImageIcon(eq.getBolaEquipo().getRutaImagen())));
+				cbLiga.addItem(new ObjetoCombobox(1, eq.getNombre(), new ImageIcon("/"+eq.getBolaEquipo().getRutaImagen())));
 				revalidate();
 			}
 
@@ -259,6 +259,7 @@ public class MenuLiga extends JFrame {
 	 *            JLabel donde se encuentra el icono del equipo
 	 */
 	public void resizeo(String equipo, JLabel icono) {
+		System.out.println(equipo);
 		imageIconL = new ImageIcon(getClass().getResource(equipo));
 		Image imagenResizL = imageIconL.getImage();
 		Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(200 * getWidth() / 600),
