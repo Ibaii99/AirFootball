@@ -25,6 +25,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javax.swing.JTextField;
@@ -121,28 +122,23 @@ public class VentanaCreacion extends JFrame {
 
 		cbSustituye = new JComboBox();
 		try {
-			Logger logger = Logger.getLogger("baseDeDatos");
-
-			Statement consulta;
-
-			String comando = "";
+			Logger logger = Logger.getLogger("ventCreacion");
 			try {
-				Class.forName("org.sqlite.JDBC");
-				bd.init();
-			} catch (Exception e3) {
-				// e3.printStackTrace();
+				logger.addHandler(new FileHandler("Ventana Creacion"));
+			} catch (SecurityException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			String query = "SELECT NOMBRE FROM EQUIPOS"+j.getNombre().toUpperCase()+" WHERE fk_CodLiga="+ligaNueva +";";
-			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
-			while (rs.next()) {
-				String nomEq = rs.getString("Nombre");
-				cbSustituye.addItem(new ObjetoCombobox(1, nomEq, null));
+			
+			
+			for (Equipo e : bd.devolverTodosLosEquipos(j, ligaNueva)) {
+				cbSustituye.addItem(new ObjetoCombobox(1, e.getNombre(), null));
+			
 			}
-			rs.close();
-			bd.close();
-		} catch (SQLException sql) {
-			sql.printStackTrace();
-		}
+		}finally {
 
 		JLabel lblLocalizacionIcono = new JLabel("");
 		JFileChooser fc = new JFileChooser();
@@ -241,6 +237,7 @@ public class VentanaCreacion extends JFrame {
 					System.out.println(destino.toString());
 					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
 					actualiza();
+					Thread.sleep(500);
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -325,12 +322,11 @@ public class VentanaCreacion extends JFrame {
 				mU.setVisible(true);
 				setVisible(false);
 				dispose();
-			}
-		});
-		panel_1.add(btnListo);
+			}});
+		panel_1.add(btnListo);}}
+		
 
-	}
-
+	
 	private static void copyFileUsingStream(File source, File dest) throws IOException {
 		InputStream is = null;
 		OutputStream os = null;
