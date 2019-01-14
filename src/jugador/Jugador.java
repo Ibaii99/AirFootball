@@ -97,13 +97,14 @@ public class Jugador {
 		    		BufferedReader br = new BufferedReader(new FileReader(archivoPart));
 		    		String cadena = br.readLine();
 		    		while(cadena != null) {
+		    		
 		    		lista.add(bd.convertirAEquipo(cadena, this, numLiga));
 		    		cadena = br.readLine();
 		    		
 		    		}
 		            br.close();}
 		    }catch(Exception i) {
-//		    	i.printStackTrace();
+		    	i.printStackTrace();
 		    	}
 		 
 		 

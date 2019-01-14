@@ -108,11 +108,10 @@ public class CargarCrear extends JDialog {
 				FileReader lector=new FileReader(fichero.getName());
 				BufferedReader contenido=new BufferedReader(lector);
 				String[] a = fc.getSelectedFile().getPath().toString().split("codLiga=");
-				
+				String nomEq = contenido.readLine();
 				int codLigas = Character.getNumericValue(a[1].charAt(0));
-				System.out.println(codLigas);
 				
-				VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(contenido.readLine(), j,codLigas ), bd, j, j.devolverPartidosRestantes(codLigas, bd),f, codLigas);
+				VentanaLiga vL = new VentanaLiga(bd.convertirAEquipo(nomEq, j,codLigas ), bd, j, j.devolverPartidosRestantes(codLigas, bd),f, codLigas);
 				
 				setVisible(false);
 				vL.setVisible(true);
@@ -121,10 +120,10 @@ public class CargarCrear extends JDialog {
 				e1.printStackTrace();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
-//				e1.printStackTrace();
+				e1.printStackTrace();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
-//				e1.printStackTrace();
+				e1.printStackTrace();
 			}
 
 		}

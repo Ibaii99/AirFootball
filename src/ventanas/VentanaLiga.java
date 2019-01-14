@@ -133,7 +133,8 @@ public class VentanaLiga extends JFrame {
 		// String iUCL = "iconos/UCL.png";
 		// String iEL = "iconos/EUROPA.png";
 		// String iDesc = "iconos/DESCENSO.png";
-		anadirATabla(bd, j, e);
+		
+		anadirATabla(bd, j, e,ligaSeleccionada);
 
 		// try {
 		// for (int i = 0; i < 20; i++) {
@@ -217,15 +218,9 @@ public class VentanaLiga extends JFrame {
 		JLabel lblTEXTPuntosEquipo = new JLabel("Puntos: ");
 		panelEquipoJugador.add(lblTEXTPuntosEquipo);
 
-		bd.init();
 		int puntosLocal = 0;
-		String queryLocal = "SELECT PUNTOS FROM Equipos"+ j.getNombre().toUpperCase() +" WHERE NOMBRE='"+ e.getNombre() +"' AND fk_CodLiga="+j.getCodLiga()+";";
-		ResultSet rs = bd.getCon().createStatement().executeQuery(queryLocal);
-		System.out.println(rs.getInt("Puntos"));
-		while (rs.next()) {
-			puntosLocal = rs.getInt("Puntos"); 
-		}
-		bd.close();
+		puntosLocal = bd.convertirAEquipo(e.getNombre(), j, ligaSeleccionada).getPuntos();
+		
 		JLabel lblPuntosEquipo = new JLabel("" + puntosLocal); 
 		panelEquipoJugador.add(lblPuntosEquipo);
 
@@ -245,13 +240,13 @@ public class VentanaLiga extends JFrame {
 				eLocal = e;
 				isJugadorLocal = true;
 				
-				eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga());
+				eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, ligaSeleccionada);
 				puntosVisit = eVisitante.getPuntos();
 				imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
 			} else if(listaPartidos.size() < 19) {
 				eVisitante = e;
 				isJugadorLocal = false;
-				eLocal = bd.convertirAEquipo(nombreEqVisitante, j, j.getCodLiga());
+				eLocal = bd.convertirAEquipo(nombreEqVisitante, j, ligaSeleccionada);
 				
 				puntosVisit = puntosLocal; //intercambiamos si jugamos de visitante
 				imageIconV = imageIconL;
@@ -314,7 +309,7 @@ public class VentanaLiga extends JFrame {
 	 * @param e Equipo escogido
 	 * @throws SQLException 
 	 */
-	private void anadirATabla(BaseDeDatos bd, Jugador j, Equipo e) throws SQLException {
+	private void anadirATabla(BaseDeDatos bd, Jugador j, Equipo e, int codLiga) throws SQLException {
 		try {
 			TeamBold tb = new TeamBold();
 			System.out.println(bd.getNombre());
@@ -325,7 +320,7 @@ public class VentanaLiga extends JFrame {
 			} catch (Exception e3) {
 				e3.printStackTrace();
 			}
-			String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE fk_CodLiga="+j.getCodLiga()+" ORDER BY PUNTOS DESC, \"Goles A Favor Totales\"-\"Goles Encajados Totales\" DESC;"; //M�todo burbuja para ordenar equipos por puntos.
+			String query = "SELECT * FROM EQUIPOS" + j.getNombre().toUpperCase() + " WHERE fk_CodLiga="+codLiga+" ORDER BY PUNTOS DESC, \"Goles A Favor Totales\"-\"Goles Encajados Totales\" DESC;"; //M�todo burbuja para ordenar equipos por puntos.
 			ResultSet rs = bd.getCon().createStatement().executeQuery(query);
 			while (rs.next()) {
 
@@ -340,7 +335,7 @@ public class VentanaLiga extends JFrame {
 
 			}
 			rs.close();
-			String query2 = "SELECT NOMBRE FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE = '" + e.getNombre() + "';";
+			String query2 = "SELECT NOMBRE FROM EQUIPOS" + j.getNombre().toUpperCase() + " WHERE (NOMBRE = '" + e.getNombre() + "' AND fk_CodLiga="+ codLiga +");";
 
 			ResultSet rs2 = bd.getCon().createStatement().executeQuery(query2);
 			System.out.println(rs2);

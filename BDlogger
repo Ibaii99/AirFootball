@@ -2,8 +2,8 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2019-01-14T11:58:31</date>
-  <millis>1547463511309</millis>
+  <date>2019-01-14T12:30:02</date>
+  <millis>1547465402681</millis>
   <sequence>0</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -13,8 +13,8 @@
   <message>BD: CREATE TABLE Equipos('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT , PRIMARY KEY('Siglas') )</message>
 </record>
 <record>
-  <date>2019-01-14T11:58:31</date>
-  <millis>1547463511314</millis>
+  <date>2019-01-14T12:30:02</date>
+  <millis>1547465402687</millis>
   <sequence>1</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -24,8 +24,8 @@
   <message>BD: CREATE TABLE Liga( 'CodLiga' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'codLigaJugador' INTEGER, 'fk_Nombre_Jugador' TEXT REFERENCES JUGADORES(NOMBRE), 'Nombre' TEXT NOT NULL)</message>
 </record>
 <record>
-  <date>2019-01-14T11:58:31</date>
-  <millis>1547463511315</millis>
+  <date>2019-01-14T12:30:02</date>
+  <millis>1547465402689</millis>
   <sequence>2</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -34,3 +34,4 @@
   <thread>1</thread>
   <message>BD: CREATE TABLE Jugadores( 'Nombre' TEXT PRIMARY KEY NOT NULL, 'Password' TEXT NOT NULL, 'cantidadPartidas' INTEGER DEFAULT 0)</message>
 </record>
+</log>
