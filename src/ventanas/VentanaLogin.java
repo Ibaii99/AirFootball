@@ -14,11 +14,14 @@ import jugador.Jugador;
 
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -27,6 +30,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class VentanaLogin extends JDialog {
 
@@ -52,6 +57,23 @@ public class VentanaLogin extends JDialog {
 		JLabel lblContrasea = new JLabel("ContraseÃ±a:");
 
 		tFNombre = new JTextField();
+		tFNombre.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				Properties prop = new Properties();
+				InputStream is = null;
+				
+				try {
+					is = new FileInputStream("src/user_properties/"+tFNombre.getText()+".properties"); //Carga de user_properties automaticamente la contraseña si el usuario esta registrado
+					prop.load(is);
+					passwordField.setText(prop.getProperty("usuario.pass"));
+				} catch(IOException e) {
+					System.out.println(e.toString()); 
+				}
+				
+		 
+			}
+		});
 		tFNombre.setColumns(10);
 
 		passwordField = new JPasswordField();
