@@ -13,6 +13,9 @@ import fisicas.FisicasNuevas;
 import jugador.Jugador;
 
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
@@ -106,9 +109,24 @@ public class VentanaLogin extends JDialog {
 							}
 							//SI el jugador no esta entre los jugadores de la BD entonces se creara un nuevo objeto Jugador
 							if(!bd.estaJugadorRegistrado(name)) {
+						
 								j = new Jugador(name, passwordField.getPassword());
 								
+								 try {
+										
+							            FileWriter fw = new FileWriter(
+//							            		"properties/"+
+							            		j.getNombre()+".properties");
+							            BufferedWriter writer = new BufferedWriter(fw);
+							            writer.write("usuario.nombre=" + name);
+							            writer.write("\r\n");   
+							            writer.write("usuario.pass=" + passwordField.getText());
+							            writer.close();
+							        } catch (IOException e3) {
+							            e3.printStackTrace();
+							        }
 								bd.anyadirJugador(j);
+								
 								bd.crearTablaEquipos(j);
 								
 								//TODO
@@ -177,9 +195,9 @@ public class VentanaLogin extends JDialog {
 			gl_buttonPane.setHorizontalGroup(
 				gl_buttonPane.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_buttonPane.createSequentialGroup()
-						.addComponent(btnRegister, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnRegister, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
 						.addGap(5))
 			);
 			gl_buttonPane.setVerticalGroup(
@@ -187,8 +205,8 @@ public class VentanaLogin extends JDialog {
 					.addGroup(gl_buttonPane.createSequentialGroup()
 						.addGap(5)
 						.addGroup(gl_buttonPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btnLogin)
-							.addComponent(btnRegister)))
+							.addComponent(btnRegister)
+							.addComponent(btnLogin)))
 			);
 			buttonPane.setLayout(gl_buttonPane);
 		}
