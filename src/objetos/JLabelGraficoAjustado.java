@@ -1,6 +1,8 @@
 package objetos;
 
 import java.awt.*;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,30 +12,30 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 /**
- * Clase mejorada de JLabel para gestionar imágenes ajustadas al JLabel
+ * Clase mejorada de JLabel para gestionar imï¿½genes ajustadas al JLabel
  */
 public class JLabelGraficoAjustado extends JLabel {
-	// la posición X,Y se hereda de JLabel
+	// la posiciï¿½n X,Y se hereda de JLabel
 	protected int anchuraObjeto; // Anchura definida del objeto en pixels
 	protected int alturaObjeto; // Altura definida del objeto en pixels
 	protected double zoom; // Zoom del objeto en % (1.0 = 100%)
-	protected double radsRotacion; // Rotación del objeto en radianes
+	protected double radsRotacion; // Rotaciï¿½n del objeto en radianes
 	protected float opacidad; // Opacidad del objeto (0.0f a 0.1f)
 	protected BufferedImage imagenObjeto; // imagen para el escalado
 	private static final long serialVersionUID = 1L; // para serializar
-
+	private Color color;
 	/**
-	 * Crea un nuevo JLabel gráfico.<br>
-	 * Si no existe el fichero de imagen, se crea un rectángulo blanco con borde
+	 * Crea un nuevo JLabel grï¿½fico.<br>
+	 * Si no existe el fichero de imagen, se crea un rectï¿½ngulo blanco con borde
 	 * rojo
 	 * 
 	 * @param nombreImagenObjeto
-	 *            Nombre fichero donde está la imagen del objeto. Puede ser también
+	 *            Nombre fichero donde estï¿½ la imagen del objeto. Puede ser tambiï¿½n
 	 *            un nombre de recurso desde el paquete de esta clase.
 	 * @param anchura
-	 *            Anchura del gráfico en píxels (si es <= 0 ocupa todo el ancho)
+	 *            Anchura del grï¿½fico en pï¿½xels (si es <= 0 ocupa todo el ancho)
 	 * @param altura
-	 *            Altura del gráfico en píxels (si es <= 0 ocupa todo el alto)
+	 *            Altura del grï¿½fico en pï¿½xels (si es <= 0 ocupa todo el alto)
 	 */
 	public JLabelGraficoAjustado(String nombreImagenObjeto, int anchura, int altura) {
 		zoom = 1.0;
@@ -65,7 +67,7 @@ public class JLabelGraficoAjustado extends JLabel {
 	 * Cambia la imagen del objeto
 	 * 
 	 * @param nomImagenObjeto
-	 *            Nombre fichero donde está la imagen del objeto. Puede ser también
+	 *            Nombre fichero donde estï¿½ la imagen del objeto. Puede ser tambiï¿½n
 	 *            un nombre de recurso desde el paquete de esta clase.
 	 */
 	public void setImagen(String nomImagenObjeto) {
@@ -81,7 +83,7 @@ public class JLabelGraficoAjustado extends JLabel {
 		if (imgURL == null) {
 			imagenObjeto = null;
 		} else {
-			try { // guarda la imagen para dibujarla de forma escalada después
+			try { // guarda la imagen para dibujarla de forma escalada despuï¿½s
 				imagenObjeto = ImageIO.read(imgURL);
 			} catch (IOException e) {
 			} // Error al leer la imagen
@@ -105,11 +107,11 @@ public class JLabelGraficoAjustado extends JLabel {
 	 * Cambia la imagen del objeto
 	 * 
 	 * @param urlImagenObjeto
-	 *            URL de recurso o fichero donde está la imagen del objeto.
+	 *            URL de recurso o fichero donde estï¿½ la imagen del objeto.
 	 */
 	public void setImagen(URL urlImagenObjeto) {
 		imagenObjeto = null;
-		try { // guarda la imagen para dibujarla de forma escalada después
+		try { // guarda la imagen para dibujarla de forma escalada despuï¿½s
 			imagenObjeto = ImageIO.read(urlImagenObjeto);
 		} catch (IOException e) {
 		} // Error al leer la imagen - se queda a null
@@ -129,7 +131,7 @@ public class JLabelGraficoAjustado extends JLabel {
 	}
 
 	/**
-	 * Devuelve la anchura del rectángulo gráfico del objeto
+	 * Devuelve la anchura del rectï¿½ngulo grï¿½fico del objeto
 	 * 
 	 * @return Anchura
 	 */
@@ -138,7 +140,7 @@ public class JLabelGraficoAjustado extends JLabel {
 	}
 
 	/**
-	 * Devuelve la altura del rectángulo gráfico del objeto
+	 * Devuelve la altura del rectï¿½ngulo grï¿½fico del objeto
 	 * 
 	 * @return Altura
 	 */
@@ -147,23 +149,23 @@ public class JLabelGraficoAjustado extends JLabel {
 	}
 
 	/**
-	 * Devuelve la rotación del objeto
+	 * Devuelve la rotaciï¿½n del objeto
 	 * 
-	 * @return Rotación actual del objeto en radianes
+	 * @return Rotaciï¿½n actual del objeto en radianes
 	 */
 	public double getRotacion() {
 		return radsRotacion;
 	}
 
 	/**
-	 * Modifica la rotación del objeto
+	 * Modifica la rotaciï¿½n del objeto
 	 * 
 	 * @param rotacion
-	 *            Nueva rotación del objeto (en radianes)
+	 *            Nueva rotaciï¿½n del objeto (en radianes)
 	 */
 	public void setRotacion(double rotacion) {
 		radsRotacion = rotacion;
-		repaint(); // Si no repintamos aquí Swing no sabe que ha cambiado el dibujo
+		repaint(); // Si no repintamos aquï¿½ Swing no sabe que ha cambiado el dibujo
 	}
 
 	/**
@@ -183,7 +185,7 @@ public class JLabelGraficoAjustado extends JLabel {
 	 */
 	public void setZoom(double zoom) {
 		this.zoom = zoom;
-		repaint(); // Si no repintamos aquí Swing no sabe que ha cambiado el dibujo
+		repaint(); // Si no repintamos aquï¿½ Swing no sabe que ha cambiado el dibujo
 	}
 
 	/**
@@ -203,18 +205,18 @@ public class JLabelGraficoAjustado extends JLabel {
 	 */
 	public void setOpacidad(float opacidad) {
 		if (opacidad < 0.0f || opacidad > 1.0f)
-			return; // No se cambia si el valor es inválido
+			return; // No se cambia si el valor es invï¿½lido
 		this.opacidad = opacidad;
-		repaint(); // Si no repintamos aquí Swing no sabe que ha cambiado el dibujo
+		repaint(); // Si no repintamos aquï¿½ Swing no sabe que ha cambiado el dibujo
 	}
 
 	/**
-	 * Actualiza la posición del objeto
+	 * Actualiza la posiciï¿½n del objeto
 	 * 
 	 * @param x
-	 *            Coordenada x (doble) - se redondea al píxel más cercano
+	 *            Coordenada x (doble) - se redondea al pï¿½xel mï¿½s cercano
 	 * @param y
-	 *            Coordenada y (doble) - se redondea al píxel más cercano
+	 *            Coordenada y (doble) - se redondea al pï¿½xel mï¿½s cercano
 	 */
 	public void setLocation(double x, double y) {
 		setLocation((int) Math.round(x), (int) Math.round(y));
@@ -238,104 +240,56 @@ public class JLabelGraficoAjustado extends JLabel {
 	}
 
 	// Dibuja este componente de una forma no habitual
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		if (imagenObjeto != null) {
-			Graphics2D g2 = (Graphics2D) g; // El Graphics realmente es Graphics2D
-			g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-			g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			int anc = anchuraObjeto;
-			int alt = alturaObjeto;
-			int iniX = 0;
-			int iniY = 0;
-			if (anc <= 0) {
-				anc = getWidth();
-			} else {
-				iniX = (getWidth() - anc) / 2;
-			}
-			if (alt <= 0) {
-				alt = getHeight();
-			} else {
-				iniY = (getHeight() - alt) / 2;
-			}
-			// Rotación
-			g2.rotate(radsRotacion, getWidth() / 2, getHeight() / 2); // Incorporar al gráfico la rotación definida
-			// Transparencia
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacidad)); // Incorporar la
-																							// transparencia definida
-			// Cálculo de zoom
-			int ancZoom = (int) Math.round(anc * zoom);
-			int altZoom = (int) Math.round(alt * zoom);
-			int iniXZoom = iniX + (anc - ancZoom) / 2;
-			int iniYZoom = iniY + (alt - altZoom) / 2;
-			if (horFlip || vertFlip) {
-				g2.scale(horFlip ? -1 : 1, vertFlip ? -1 : 1);
-				g2.translate(horFlip ? -getWidth() : 0, vertFlip ? -getHeight() : 0);
-			}
-			g2.fillOval(iniXZoom,  iniYZoom, ancZoom, altZoom);
-			g2.drawImage(imagenObjeto, iniXZoom, iniYZoom, ancZoom, altZoom, null);
-		}
-	}
+	 @Override
+	    protected void paintComponent(Graphics gr)
+	    {
+	        super.paintComponent(gr);
+	        Graphics2D g = (Graphics2D)gr;
 
-	/**
-	 * Método de prueba de label gráfico
-	 */
-	public static void main(String[] args) {
-		JFrame f = new JFrame("Prueba JLabelGraficoAjustado");
-		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		JLabelGraficoAjustado label = new JLabelGraficoAjustado("Melee (4).png", 400, 400);
-		f.setSize(600, 400);
-		f.add(label, BorderLayout.CENTER);
-		f.setVisible(true);
-		try {
-			Thread.sleep(2000);
-		} catch (Exception e) {
-		} // Espera 2 segundos
-		label.setFlip(true, false);
-		try {
-			Thread.sleep(2000);
-		} catch (Exception e) {
-		} // Espera 2 segundos
-		label.setFlip(false, true);
-		try {
-			Thread.sleep(2000);
-		} catch (Exception e) {
-		} // Espera 2 segundos
-		label.setFlip(true, true);
-		try {
-			Thread.sleep(5000);
-		} catch (Exception e) {
-		} // Espera 5 segundos
-		for (int rot = 0; rot <= 200; rot++) {
-			label.setRotacion(rot * Math.PI / 100);
-			try {
-				Thread.sleep(20);
-			} catch (Exception e) {
-			} // Espera dos décimas entre rotación y rotación
-		}
-		for (int op = -100; op <= 100; op++) {
-			label.setOpacidad(Math.abs(op * 0.01f));
-			try {
-				Thread.sleep(20);
-			} catch (Exception e) {
-			} // Espera dos décimas entre cambio y cambio de opacidad
-		}
-		for (int rot = 100; rot > 1; rot--) {
-			label.setZoom(rot / 100.0);
-			try {
-				Thread.sleep(20);
-			} catch (Exception e) {
-			} // Espera dos décimas entre zoom y zoom
-		}
-		for (int rot = 1; rot <= 100; rot++) {
-			label.setZoom(rot / 100.0);
-			try {
-				Thread.sleep(20);
-			} catch (Exception e) {
-			} // Espera dos décimas entre zoom y zoom
-		}
-	}
+	        g.setRenderingHint(
+	            RenderingHints.KEY_ANTIALIASING,
+	            RenderingHints.VALUE_ANTIALIAS_ON);
 
-}
+	        Shape ring = createRingShape(getWidth()/2, getHeight()/2, getWidth()/2-1, getHeight()/8); 
+	        g.setColor(color);
+	        g.fill(ring);
+	        g.setColor(Color.BLACK);
+	        g.draw(ring);
+
+	       /* Shape otherRing = createRingShape(getWidth()/2, getHeight()/2, getWidth()/4-1, getHeight()/4-1); 
+	        g.setPaint(new GradientPaint(
+	            new Point(250, 40), Color.RED, 
+	            new Point(350, 200), Color.GREEN));
+	        g.fill(otherRing);
+	        g.setColor(Color.BLACK);
+	        g.draw(otherRing);*/
+
+	    }
+
+	    private static Shape createRingShape(
+	        double centerX, double centerY, double outerRadius, double thickness)
+	    {
+	        Ellipse2D outer = new Ellipse2D.Double(
+	            centerX - outerRadius, 
+	            centerY - outerRadius,
+	            outerRadius + outerRadius, 
+	            outerRadius + outerRadius);
+	        Ellipse2D inner = new Ellipse2D.Double(
+	            centerX - outerRadius + thickness, 
+	            centerY - outerRadius + thickness,
+	            outerRadius + outerRadius - thickness - thickness, 
+	            outerRadius + outerRadius - thickness - thickness);
+	        Area area = new Area(outer);
+	        area.subtract(new Area(inner));
+	        return area;
+	    }
+
+		public Color getColor() {
+			return color;
+		}
+
+		public void setColor(Color color2) {
+			this.color = color2;
+		}
+
+	}
