@@ -93,11 +93,7 @@ public class ventanaPartido extends JFrame {
 	private JLabelGraficoAjustado lblEquipoLocal = new JLabelGraficoAjustado("");
 	private JLabelGraficoAjustado lblEquipoVisitante = new JLabelGraficoAjustado("");
 
-	public void setLblPelota(JLabelGraficoAjustado lblPelota) {
-		this.lblPelota = lblPelota;
-	}
-
-	public JLabelGraficoAjustado lblPelota = new JLabelGraficoAjustado("");
+	public JLabel lblPelota = new JLabel("");
 	private JLabel lblEqL = new JLabel("");
 	private JLabel lblEqV = new JLabel("");
 	private boolean isMultijugador;
@@ -496,49 +492,34 @@ public class ventanaPartido extends JFrame {
 	 *            Pelota
 	 */
 	private void pintarLabels() {
-		elementosAOpaco();
-		if (eLocal.getBolaEquipo().getRutaImagen() == null) {
-			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
-		}
-		if (eVisitante.getBolaEquipo().getRutaImagen() == null) {
-			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
-		}
-		if (p.getRutaImagen() == null) {
-			lblPelota.setBackground(p.getColor());
-
-		}
-		// TODO aqui hay fallo
-		lblEquipoLocal.setBackground(Color.BLACK);
-		lblEquipoVisitante.setBackground(Color.gray);
-		lblPelota.setBackground(Color.BLUE);
-
+		
 		try {
-			// lblEquipoLocal.setOpaque(false); ESTO HARIA QUE SOLO SE VIERA EL ICONO Y NO
-			// QUEREMOS ESO
+
 			lblPelota.setOpaque(false);
 			ImageIcon icBalonLiga = new ImageIcon(getClass().getClassLoader().getResource("iconos/balon_laliga.png"));
 
 			lblPelota.setIcon(icBalonLiga);
 			resizeo(icBalonLiga, lblPelota, 40, 40);
 
-//			lblEquipoLocal.setOpaque(false);
-			lblEquipoLocal.setIcon(lblEqL.getIcon());
-			lblEquipoLocal.setHorizontalAlignment(JLabel.CENTER);
-			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
-			lblEquipoLocal.repaint();
 
+			lblEquipoLocal.setIcon(lblEqL.getIcon());
+			lblEquipoLocal.setColor(eLocal.getBolaEquipo().getColor());
+			lblEquipoLocal.setHorizontalAlignment(JLabel.CENTER);
+			
+			lblEquipoLocal.repaint();
+			
+			lblEquipoVisitante.setColor(eVisitante.getBolaEquipo().getColor());
 			lblEquipoVisitante.setIcon(lblEqV.getIcon());
 			lblEquipoVisitante.setHorizontalAlignment(JLabel.CENTER);
-			lblEquipoVisitante.setBackground(eVisitante.getBolaEquipo().getColor());
+			
 			lblEquipoVisitante.repaint();
 
 		} catch (Exception ss) {
 			ss.printStackTrace();
 		}
-
+		postesAOpaco();
 		lblposteAbajoDerecha.setBackground(Color.WHITE);
 		lblposteArribaDerecha.setBackground(Color.WHITE);
-
 		lblposteAbajoIzquierda.setBackground(Color.WHITE);
 		lblposteArribaIzquierda.setBackground(Color.WHITE);
 		/*
@@ -868,6 +849,9 @@ public class ventanaPartido extends JFrame {
 		lblEquipoLocal.setOpaque(true);
 		lblPelota.setOpaque(true);
 		lblEquipoVisitante.setOpaque(true);
+		postesAOpaco();
+	}
+	public void postesAOpaco(){
 		lblposteAbajoDerecha.setOpaque(true);
 		lblposteAbajoIzquierda.setOpaque(true);
 		lblposteArribaDerecha.setOpaque(true);
@@ -899,7 +883,7 @@ public class ventanaPartido extends JFrame {
 		return lblEquipoVisitante;
 	}
 
-	public JLabelGraficoAjustado getLblPelota() {
+	public JLabel getLblPelota() {
 		return lblPelota;
 	}
 
