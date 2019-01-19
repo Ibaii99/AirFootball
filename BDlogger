@@ -2,8 +2,8 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2019-01-19T15:26:39</date>
-  <millis>1547907999774</millis>
+  <date>2019-01-19T15:30:35</date>
+  <millis>1547908235884</millis>
   <sequence>0</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -13,8 +13,8 @@
   <message>BD: CREATE TABLE Equipos('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT , PRIMARY KEY('Siglas') )</message>
 </record>
 <record>
-  <date>2019-01-19T15:26:39</date>
-  <millis>1547907999806</millis>
+  <date>2019-01-19T15:30:35</date>
+  <millis>1547908235890</millis>
   <sequence>1</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -24,8 +24,8 @@
   <message>BD: CREATE TABLE Liga( 'CodLiga' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'codLigaJugador' INTEGER, 'fk_Nombre_Jugador' TEXT REFERENCES JUGADORES(NOMBRE), 'Nombre' TEXT NOT NULL)</message>
 </record>
 <record>
-  <date>2019-01-19T15:26:39</date>
-  <millis>1547907999826</millis>
+  <date>2019-01-19T15:30:35</date>
+  <millis>1547908235891</millis>
   <sequence>2</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -35,24 +35,200 @@
   <message>BD: CREATE TABLE Jugadores( 'Nombre' TEXT PRIMARY KEY NOT NULL, 'Password' TEXT NOT NULL, 'cantidadPartidas' INTEGER DEFAULT 0)</message>
 </record>
 <record>
-  <date>2019-01-19T15:26:52</date>
-  <millis>1547908012165</millis>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239383</millis>
   <sequence>3</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
-  <class>entidades.BaseDeDatos</class>
-  <method>crearTablaEquipos</method>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
   <thread>16</thread>
-  <message>BD: CREATE TABLE EquiposJORGE('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT)</message>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Athletic Club'</message>
 </record>
 <record>
-  <date>2019-01-19T15:26:55</date>
-  <millis>1547908015519</millis>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239461</millis>
   <sequence>4</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
-  <class>entidades.BaseDeDatos</class>
-  <method>anyadirLiga</method>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
   <thread>16</thread>
-  <message>INSERT INTO Liga('codLigaJugador','fk_Nombre_Jugador', 'Nombre') VALUES ('1','JORGE','Liga1')</message>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Atlï¿½tico de Madrid'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239495</millis>
+  <sequence>5</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'FC Barcelona'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239528</millis>
+  <sequence>6</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Real Betis'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239542</millis>
+  <sequence>7</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Celta de Vigo'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239565</millis>
+  <sequence>8</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Deportivo de La Coruï¿½a'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239574</millis>
+  <sequence>9</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'SD Eibar'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239604</millis>
+  <sequence>10</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'RCD Espanyol'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239632</millis>
+  <sequence>11</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Getafe CF'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239652</millis>
+  <sequence>12</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Girona FC'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239680</millis>
+  <sequence>13</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'SD Huesca'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239715</millis>
+  <sequence>14</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Leganï¿½s'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239739</millis>
+  <sequence>15</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Rayo Vallecano'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239770</millis>
+  <sequence>16</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Real Madrid CF'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239786</millis>
+  <sequence>17</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Real Sociedad'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239829</millis>
+  <sequence>18</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Sevilla FC'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239859</millis>
+  <sequence>19</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Valencia CF'</message>
+</record>
+<record>
+  <date>2019-01-19T15:30:39</date>
+  <millis>1547908239887</millis>
+  <sequence>20</sequence>
+  <logger>baseDeDatos</logger>
+  <level>INFO</level>
+  <class>ventanas.MenuAmistoso$1</class>
+  <method>actionPerformed</method>
+  <thread>16</thread>
+  <message>BD: SELECT ICONO FROM EQUIPOS WHERE NOMBRE = 'Real Valladolid'</message>
 </record>

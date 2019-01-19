@@ -521,7 +521,7 @@ public class ventanaPartido extends JFrame {
 			lblPelota.setIcon(icBalonLiga);
 			resizeo(icBalonLiga, lblPelota, 40, 40);
 
-			lblEquipoLocal.setOpaque(false);
+//			lblEquipoLocal.setOpaque(false);
 			lblEquipoLocal.setIcon(lblEqL.getIcon());
 			lblEquipoLocal.setHorizontalAlignment(JLabel.CENTER);
 			lblEquipoLocal.setBackground(eLocal.getBolaEquipo().getColor());
