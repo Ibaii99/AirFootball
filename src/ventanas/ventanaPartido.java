@@ -39,6 +39,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
@@ -718,96 +720,36 @@ public class ventanaPartido extends JFrame {
 
 	private void setGolesYPuntos(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante) throws SQLException {
 
-		setPuntosAlAzar(bd, j, eLocal, eVisitante, codLiga);
+		//setPuntosAlAzar(bd, j, eLocal, eVisitante, codLiga);
+		generarPartidosDeJornada();
 		Partidos p = new Partidos(eLocal, eVisitante, golLocal, golVisitante, false, true);
 		bd.actualizarEquipo(j, eLocal, codLiga);
 		bd.actualizarEquipo(j, eVisitante, codLiga);
 		borrarPrimeraFila(j, codLiga);
-
+		
 	}
-
-	private void setPuntosAlAzar(BaseDeDatos bd, Jugador j, Equipo eLocal, Equipo eVisitante, int codLiga)
-			throws SQLException {
-		bd.init();
-		String query = "SELECT * FROM EQUIPOS" + j.getNombre() + " WHERE NOMBRE NOT LIKE '" + eLocal.getNombre()
-				+ "' AND NOMBRE NOT LIKE '" + eVisitante.getNombre() + "' AND fk_CodLiga=" + j.getCodLiga()
-				+ " ORDER BY RANDOM();";
-		ResultSet rs = bd.getCon().createStatement().executeQuery(query);
-		while (rs.next()) {
-			try {
-				int numRandom = arrayNumsRandom(0, 1, 3);
-
-				if (numRandom == 1) {
-					String equipo = rs.getString("Nombre");
-					try {
-						rs.next();
-						String equipo2 = rs.getString("Nombre");
-						String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET Puntos="
-								+ ("Puntos + " + numRandom)
-								+ ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE (Nombre='"
-								+ equipo + "' OR Nombre='" + equipo2 + "') AND fk_CodLiga=" + codLiga + ";";
-						System.out.println(updatePruebaEmp);
-						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
-					} catch (Exception e) {
-						String equipo2 = rs.getString("Nombre");
-						String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre()
-								+ " SET Puntos=Puntos + 1, \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE Nombre='"
-								+ equipo2 + "' AND fk_CodLiga=" + codLiga + ";";
-						System.out.println(updatePruebaEmp);
-						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
-					}
-				}
-				if (numRandom == 3) {
-					int golesRandom = 3;
-					int golesPerdedor = 1;
-					String equipo = rs.getString("Nombre");
-					try {
-						rs.next();
-						golesRandom = getRandomNumberInRange(3, 4);
-						golesPerdedor = 4 - golesRandom;
-						String equipo2 = rs.getString("Nombre");
-						String updatePruebaVic = "UPDATE EQUIPOS" + j.getNombre().toUpperCase() + " SET Puntos="
-								+ ("Puntos + " + numRandom)
-								+ ", \"Victorias Totales\"= \"Victorias Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+"
-								+ ("" + golesRandom) + ", \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+"
-								+ ("" + golesPerdedor) + " WHERE Nombre='" + equipo + "' AND fk_CodLiga=" + codLiga
-								+ ";";
-						System.out.println(updatePruebaVic);
-						bd.getCon().createStatement().executeUpdate(updatePruebaVic);
-						String updatePruebaDer = "UPDATE EQUIPOS" + j.getNombre().toUpperCase()
-								+ " SET \"Derrotas Totales\"= \"Derrotas Totales\"+1, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+"
-								+ ("" + golesRandom) + ", \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+"
-								+ ("" + golesPerdedor) + " WHERE Nombre='" + equipo2 + "' AND fk_CodLiga=" + codLiga
-								+ ";";
-						System.out.println(updatePruebaDer);
-						bd.getCon().createStatement().executeUpdate(updatePruebaDer);
-
-					} catch (Exception e) {
-						String equipo2 = rs.getString("Nombre");
-						String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre().toUpperCase() + " SET Puntos="
-								+ ("Puntos + " + numRandom)
-								+ ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"= \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados Totales\"+2 WHERE Nombre='"
-								+ equipo2 + "' AND fk_CodLiga=" + codLiga + ";";
-						System.out.println(updatePruebaEmp);
-						bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
-					}
-				}
-
-			} catch (Exception e) {
-				// String equipo2 = rs.getString("Nombre");
-				// String updatePruebaEmp = "UPDATE EQUIPOS" + j.getNombre() + " SET
-				// Puntos=Puntos+1"
-				// + ", \"Empates Totales\"= \"Empates Totales\"+1, \"Goles A Favor Totales\"=
-				// \"Goles A Favor Totales\"+2, \"Goles Encajados Totales\"= \"Goles Encajados
-				// Totales\"+2 WHERE Nombre='"
-				// + equipo2 + "' AND fk_CodLiga=" + j.getCodLiga() + ";";
-				// System.out.println(updatePruebaEmp);
-				// bd.getCon().createStatement().executeUpdate(updatePruebaEmp);
-			}
+	private void generarPartidosDeJornada() {
+		ArrayList<Equipo> listaequipos = bd.devolverTodosLosEquipos(j, codLiga);
+		System.out.println(eLocal.getNombre());
+		for(int e = 0; e < listaequipos.size() ; e++) {
+			if(listaequipos.get(e).getNombre().equals(eLocal.getNombre()) || listaequipos.get(e).getNombre().equals(eVisitante.getNombre()))listaequipos.remove(e);
 		}
-		bd.close();
+		System.out.println("Tamañooo "+ listaequipos.size());
+		Collections.shuffle(listaequipos);
+		while(listaequipos.size()>1) {
+			Equipo e1 = listaequipos.get(0);
+			Equipo e2 = listaequipos.get(1);
+			Random random = new Random();
+			int resLocal =  random.nextInt((4 - 0) + 1) + 0;
+			int resVisi = 4 - resLocal;
+			Partidos p = new Partidos(e1, e2, resLocal, resVisi, false, true);
+			bd.actualizarEquipo(j, e1, codLiga);
+			bd.actualizarEquipo(j, e2, codLiga);
+			listaequipos.remove(0);
+			listaequipos.remove(0);
+		}
 	}
-
+	
 	private static int getRandomNumberInRange(int min, int max) { // Método sacado de MKYong para elegir el numero
 																	// aleatorio de goles que se van a marcar
 
