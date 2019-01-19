@@ -123,23 +123,26 @@ public class MenuLiga extends JFrame {
 						try {
 							if (!archivoPart.exists()) {
 								bw = new BufferedWriter(new FileWriter(archivoPart));
-								ArrayList<Equipo> listaEquipos = bd.devolverTodosLosEquipos(j, codLiga);
-								Collections.shuffle(listaEquipos);
+								ArrayList<Equipo> listaequipos = bd.devolverTodosLosEquipos(j, codLiga);
+								for(int cont = 0; cont < listaequipos.size() ; cont++) {
+									if(listaequipos.get(cont).getNombre().equals(cbLiga.getSelectedItem().toString()) )listaequipos.remove(cont);
+								}
+								Collections.shuffle(listaequipos);
 								// Para la primera vuelta
-								for (Equipo equi : listaEquipos) {
+								for (Equipo equi : listaequipos) {
 									if (equi.getNombre() != cbLiga.getSelectedItem().toString())
 										bw.write(equi.getNombre() + "\n"); // para que se guarden todos los equipos
 																			// menos el que tu has elegido
 								}
 								// Para la segunda vuelta
-								for (Equipo equi : listaEquipos) {
+								for (Equipo equi : listaequipos) {
 									if (equi.getNombre() != cbLiga.getSelectedItem().toString())
 										bw.write(equi.getNombre() + "\n"); // para que se guarden todos los equipos
 																			// menos el que tu has elegido
 								}
 								bw.flush();
 								bw.close();
-								VentanaLiga v = new VentanaLiga(equipo, bd, j, listaEquipos, f, codLiga);
+								VentanaLiga v = new VentanaLiga(equipo, bd, j, listaequipos, f, codLiga);
 								v.setVisible(true);
 
 							}
