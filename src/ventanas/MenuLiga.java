@@ -57,10 +57,11 @@ public class MenuLiga extends JFrame {
 	public String equipoL;
 	public ImageIcon imageIconL;
 	private int codLiga;
+
 	public MenuLiga(int anchura, int altura, Jugador j, BaseDeDatos bd, FisicasNuevas f, int cod) {
 		this.codLiga = cod;
 		try {
-			
+
 			Thread.sleep(500);
 			JLabel lblBck = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("/iconos/stadiumLiga2.png"))));
 			setContentPane(lblBck);
@@ -75,18 +76,13 @@ public class MenuLiga extends JFrame {
 
 			Logger logger = Logger.getLogger("menuLiga");
 			logger.addHandler(new FileHandler("menuLiga"));
-			
 
-			
-		
-			
-			
 			for (Equipo eq : bd.devolverTodosLosEquipos(j, codLiga)) {
-		
-				cbLiga.addItem(new ObjetoCombobox(1, eq.getNombre(), new ImageIcon("/"+eq.getBolaEquipo().getRutaImagen())));
+
+				cbLiga.addItem(
+						new ObjetoCombobox(1, eq.getNombre(), new ImageIcon("/" + eq.getBolaEquipo().getRutaImagen())));
 				revalidate();
 			}
-
 
 			JLabel lblEligeEquipo = new JLabel("Elige equipo:");
 			// TODO
@@ -97,57 +93,63 @@ public class MenuLiga extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					try {
 						bd.init();
-						
-					
-					
+
 						Equipo equipo = bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j, codLiga);
 						System.out.println(equipo.getNombre());
 						System.out.println(bd);
-						
-						String ruta = j.getNombre().toUpperCase() +"codLiga="+ codLiga +".txt";
-					    
+
+						String ruta = j.getNombre().toUpperCase() + "codLiga=" + codLiga + ".txt";
+
 						File archivo = new File(ruta);
-					    
-					    BufferedWriter bw;
-					    //Escribe El equipo del Jugador
-					    try {
-					    	if(!archivo.exists()) {
-					    		bw = new BufferedWriter(new FileWriter(archivo));
-					    		bw.write(equipo.getNombre());
-					    		bw.flush();
-					            bw.close();}
-					    }catch(Exception i) {i.printStackTrace();}
-					    //Escribe los rivales que tiene
-					    
-					    String rutaPart = j.getNombre() + codLiga + "Partidos.txt";
-					    j.setCodLiga(codLiga);
-					    
+
+						BufferedWriter bw;
+						// Escribe El equipo del Jugador
+						try {
+							if (!archivo.exists()) {
+								bw = new BufferedWriter(new FileWriter(archivo));
+								bw.write(equipo.getNombre());
+								bw.flush();
+								bw.close();
+							}
+						} catch (Exception i) {
+							i.printStackTrace();
+						}
+						// Escribe los rivales que tiene
+
+						String rutaPart = j.getNombre() + codLiga + "Partidos.txt";
+						j.setCodLiga(codLiga);
+
 						File archivoPart = new File(rutaPart);
-					    try {
-					    	if(!archivoPart.exists()) {
-					    		bw = new BufferedWriter(new FileWriter(archivoPart));
-					    		ArrayList<Equipo> listaEquipos = bd.devolverTodosLosEquipos(j, codLiga);
-					    		Collections.shuffle(listaEquipos);
-					    		//Para la primera vuelta
-					    		for(Equipo equi : listaEquipos) {
-					    			if(equi.getNombre() != cbLiga.getSelectedItem().toString()) bw.write(equi.getNombre() + "\n");	// para que se guarden todos los equipos menos el que tu has elegido
-					    		}
-					    		//Para la segunda vuelta
-					    		for(Equipo equi : listaEquipos) {
-					    			if(equi.getNombre() != cbLiga.getSelectedItem().toString()) bw.write(equi.getNombre() + "\n");	// para que se guarden todos los equipos menos el que tu has elegido
-					    		}
-					    		bw.flush();
-					            bw.close();
-					    		VentanaLiga v = new VentanaLiga(equipo, bd, j, listaEquipos, f, codLiga);
+						try {
+							if (!archivoPart.exists()) {
+								bw = new BufferedWriter(new FileWriter(archivoPart));
+								ArrayList<Equipo> listaEquipos = bd.devolverTodosLosEquipos(j, codLiga);
+								Collections.shuffle(listaEquipos);
+								// Para la primera vuelta
+								for (Equipo equi : listaEquipos) {
+									if (equi.getNombre() != cbLiga.getSelectedItem().toString())
+										bw.write(equi.getNombre() + "\n"); // para que se guarden todos los equipos
+																			// menos el que tu has elegido
+								}
+								// Para la segunda vuelta
+								for (Equipo equi : listaEquipos) {
+									if (equi.getNombre() != cbLiga.getSelectedItem().toString())
+										bw.write(equi.getNombre() + "\n"); // para que se guarden todos los equipos
+																			// menos el que tu has elegido
+								}
+								bw.flush();
+								bw.close();
+								VentanaLiga v = new VentanaLiga(equipo, bd, j, listaEquipos, f, codLiga);
 								v.setVisible(true);
-					    		
-					            }
-					    }catch(Exception i) {i.printStackTrace();}
-					        
-						
+
+							}
+						} catch (Exception i) {
+							i.printStackTrace();
+						}
+
 						dispose();
-						
-						//TODO añadir el codliga y crear el archivo
+
+						// TODO añadir el codliga y crear el archivo
 
 					} catch (Exception e1) {
 
@@ -176,7 +178,7 @@ public class MenuLiga extends JFrame {
 			JLabel icono = new JLabel("");
 			int xIcono = Math.round((getWidth() / 2) - (182 * getWidth() / 630));
 			int yIcono = Math.round((getHeight() / 2) - 96 * getHeight() / 630);
-			
+
 			equipoL = "/iconos/equipos/ala.png";
 			String newequipoL = "";
 			imageIconL = new ImageIcon(getClass().getResource(equipoL));
@@ -191,12 +193,14 @@ public class MenuLiga extends JFrame {
 				 */
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-					
-						equipoL = "/"+bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j, codLiga).getBolaEquipo().getRutaImagen();
+
+						equipoL = "/" + bd.convertirAEquipo(cbLiga.getSelectedItem().toString(), j, codLiga)
+								.getBolaEquipo().getRutaImagen();
+						System.out.println(equipoL);
 						revalidate();
-						
+
 						resizeo(equipoL, icono);
-						
+
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -256,7 +260,7 @@ public class MenuLiga extends JFrame {
 			e.printStackTrace();
 		}
 	}
- 
+
 	/**
 	 * @param equipo:
 	 *            Ruta de la imagen que queremos resizear
@@ -266,6 +270,7 @@ public class MenuLiga extends JFrame {
 	public void resizeo(String equipo, JLabel icono) {
 		System.out.println(equipo);
 		imageIconL = new ImageIcon(getClass().getResource(equipo));
+
 		Image imagenResizL = imageIconL.getImage();
 		Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(200 * getWidth() / 600),
 				(int) Math.round(200 * getHeight() / 600), java.awt.Image.SCALE_SMOOTH); // scale it the
@@ -273,5 +278,6 @@ public class MenuLiga extends JFrame {
 		ImageIcon iiResizeoL = new ImageIcon(iResizeoL);
 		icono.setSize(iiResizeoL.getIconWidth(), iiResizeoL.getIconHeight());
 		icono.setIcon(iiResizeoL);
+//		super.paintComponents(getGraphics());
 	}
 }
