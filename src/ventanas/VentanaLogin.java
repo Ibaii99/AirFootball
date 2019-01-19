@@ -68,7 +68,7 @@ public class VentanaLogin extends JDialog {
 					prop.load(is);
 					passwordField.setText(prop.getProperty("usuario.pass"));
 				} catch(IOException e) {
-					System.out.println(e.toString()); 
+//					System.out.println(e.toString()); 
 				}
 				
 		 
