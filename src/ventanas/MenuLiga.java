@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import objetos.ObjetoCombobox;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -280,4 +281,6 @@ public class MenuLiga extends JFrame {
 		icono.setIcon(iiResizeoL);
 //		super.paintComponents(getGraphics());
 	}
+	
 }
+
