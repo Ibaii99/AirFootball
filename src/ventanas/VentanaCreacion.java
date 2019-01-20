@@ -61,12 +61,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JSlider;
 
 public class VentanaCreacion extends JFrame {
-	private JTextField tfNombre;
-	private JTextField tfSiglas;
-	private ArrayList<Equipo> listaEquiposEliminados ;
+	private static JTextField tfNombre;
+	private static JTextField tfSiglas;
+	private ArrayList<Equipo> listaEquiposEliminados;
 	private int ligaNueva;
 	private Jugador j;
-	private JComboBox cbSustituye;
+	private static JComboBox cbSustituye;
 
 	/**
 	 * Ventana de modo creaci�n donde podemos dise�ar nuestro propio equipo
@@ -82,25 +82,27 @@ public class VentanaCreacion extends JFrame {
 	 * @param bd
 	 * @param f
 	 */
-	public VentanaCreacion(BaseDeDatos bd, FisicasNuevas f, ArrayList<Equipo> listaEquipos, int ligaAanyadir, Jugador j) {
+	public VentanaCreacion(BaseDeDatos bd, FisicasNuevas f, ArrayList<Equipo> listaEquipos, int ligaAanyadir,
+			Jugador j) {
 		this.j = j;
-		
-		if( ligaAanyadir == 0) {
+
+		if (ligaAanyadir == 0) {
 			ligaNueva = j.getCodLiga();
 			bd.anyadirLiga("Liga" + ligaNueva, j);
 			bd.anyadirTodosLosEquipos(ligaNueva, j);
-		}
-		else if(ligaAanyadir != 0) ligaNueva = ligaAanyadir;
-		
-		
-		if( listaEquipos == null) this.listaEquiposEliminados = new ArrayList<>();
-		else if(listaEquipos != null) this.listaEquiposEliminados = listaEquipos;
-		setSize(737, 411);
+		} else if (ligaAanyadir != 0)
+			ligaNueva = ligaAanyadir;
+
+		if (listaEquipos == null)
+			this.listaEquiposEliminados = new ArrayList<>();
+		else if (listaEquipos != null)
+			this.listaEquiposEliminados = listaEquipos;
+		setSize(902, 381);
 
 		JLabel background_1 = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("iconos/anoeta.png")));
 		setContentPane(background_1);
 		background_1.setLayout(null);
-		((JComponent) getContentPane()).setBorder(new EmptyBorder(10,20, 10, 20));
+		((JComponent) getContentPane()).setBorder(new EmptyBorder(10, 20, 10, 20));
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -135,189 +137,235 @@ public class VentanaCreacion extends JFrame {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
-			
+
 			for (Equipo e : bd.devolverTodosLosEquipos(j, ligaNueva)) {
 				cbSustituye.addItem(new ObjetoCombobox(1, e.getNombre(), null));
-			
+
 			}
-		}finally {
+		} finally {
 
-		JLabel lblLocalizacionIcono = new JLabel("");
-		JFileChooser fc = new JFileChooser();
-		btnExaminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			JLabel lblLocalizacionIcono = new JLabel("");
+			JFileChooser fc = new JFileChooser();
+			btnExaminar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 
-				FileNameExtensionFilter png = new FileNameExtensionFilter("Im�genes(.png)", "png");
-				fc.addChoosableFileFilter(png);
-				fc.setFileFilter(png);
-				int seleccion = fc.showOpenDialog(getContentPane());
-				if (seleccion == JFileChooser.APPROVE_OPTION) {
-					File fichero = fc.getSelectedFile();
-					System.out.println(fichero.getPath());
-					System.out.println(fichero.getName());
-					lblLocalizacionIcono.setText(fichero.getName());
+					FileNameExtensionFilter png = new FileNameExtensionFilter("Im�genes(.png)", "png");
+					fc.addChoosableFileFilter(png);
+					fc.setFileFilter(png);
+					int seleccion = fc.showOpenDialog(getContentPane());
+					if (seleccion == JFileChooser.APPROVE_OPTION) {
+						File fichero = fc.getSelectedFile();
+						System.out.println(fichero.getPath());
+						System.out.println(fichero.getName());
+						lblLocalizacionIcono.setText(fichero.getName());
+					}
+					fc.setBounds(600, 100, 600, 300);
+					fc.setVisible(true);
 				}
-				fc.setBounds(600, 100, 600, 300);
-				fc.setVisible(true);
-			}
-		});
-		
+			});
 
-		JPanel panel_1 = new JPanel();
-		getContentPane().add(panel_1, BorderLayout.NORTH);
+			JPanel panel_1 = new JPanel();
+			getContentPane().add(panel_1, BorderLayout.NORTH);
 
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Inicio i = new Inicio(bd, f);
-				i.setVisible(true);
-				dispose();
-			}
-		});
-		panel_1.add(btnVolver);
-
-		JButton btnSiguiente = new JButton("Siguiente");
-		btnSiguiente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					bd.init();
-				} catch (Exception e3) {
-
+			JButton btnVolver = new JButton("Volver");
+			btnVolver.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					Inicio i = new Inicio(bd, f);
+					i.setVisible(true);
+					dispose();
 				}
-	
-				File source = fc.getSelectedFile();
-				Path destino = null; // Universalizamos el selector de imagen. Todo icono escogido se mueve a SRC
-										// para que otro usuario pueda acceder a �l desde otro ordenador.
-				System.out.println(source.toPath());
-				
-				try {
-					destino = Paths.get("src/iconos/equipos/", source.getName());
-					System.out.println(destino.toString());
-					Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-					actualiza();
-					Thread.sleep(500);
+			});
+			panel_1.add(btnVolver);
 
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-				String icono = "iconos/equipos/" + source.getName();
-				Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText(), 0, Color.black, icono, icono, 0, 0, 0, 0,
-						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				
+			JButton btnSiguiente = new JButton("Crear equipo");
+			btnSiguiente.addActionListener(new ActionListener() {
+				private Color color;
+//				private JColorChooser cc;
+
+				public void actionPerformed(ActionEvent e) {
+					try {
+						bd.init();
+						color = JColorChooser.showDialog(null, "Elige el color de tu equipo", Color.white);
+						
+					} catch (Exception e3) {
+
+					}
+					
+					File source = fc.getSelectedFile();
+					Path destino = null; // Universalizamos el selector de imagen. Todo icono escogido se mueve a SRC
+											// para que otro usuario pueda acceder a �l desde otro ordenador.
+					System.out.println(source.toPath());
+
+					try {
+						destino = Paths.get("src/iconos/equipos/", source.getName());
+						System.out.println(destino.toString());
+						Files.copy(source.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
+						actualiza();
+						Thread.sleep(500);
+
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+					String icono = "iconos/equipos/" + source.getName();
+					Equipo e1 = new Equipo(tfSiglas.getText(), tfNombre.getText(), 0, color, icono, icono, 0, 0,
+							0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
 					try {
 						actualiza();
-						
-						listaEquiposEliminados.add(bd.convertirAEquipo(cbSustituye.getSelectedItem().toString(), j, ligaNueva));
+
+						listaEquiposEliminados
+								.add(bd.convertirAEquipo(cbSustituye.getSelectedItem().toString(), j, ligaNueva));
 						bd.eliminarEquipo(cbSustituye.getSelectedItem().toString(), j, ligaNueva);
 						e1.getBolaEquipo().setRutaImagen(icono);
 						bd.anyadirEquipo(e1, ligaNueva, j);
-						
+
 						actualiza();
-						VentanaCreacion vC = new VentanaCreacion(bd, f, listaEquiposEliminados, ligaNueva,j);
+						VentanaCreacion vC = new VentanaCreacion(bd, f, listaEquiposEliminados, ligaNueva, j);
 						vC.setVisible(true);
-				
+
 						dispose();
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
-		
-					
-				try {
-					bd.close();
-				} catch (Exception eee) {
-					eee.printStackTrace();
-				}
-			}
-		});
-		panel_1.add(btnSiguiente);
 
-		JButton btnActualizarEquipos = new JButton(
-				"Actualizar equipos"); /**
-										 * Depende del usuario y contrase�a que tengamos en el textfield y el
-										 * passwordfield, nos actualizar� los equipos del combobox por los de nuestra
-										 * liga ya creada
-										 **/
-		btnActualizarEquipos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			
-					cbSustituye.removeAllItems(); 
+					try {
+						bd.close();
+					} catch (Exception eee) {
+						eee.printStackTrace();
+					}
+				}
+			});
+			panel_1.add(btnSiguiente);
+
+			JButton btnActualizarEquipos = new JButton(
+					"Actualizar equipos"); /**
+											 * Depende del usuario y contrase�a que tengamos en el textfield y el
+											 * passwordfield, nos actualizar� los equipos del combobox por los de
+											 * nuestra liga ya creada
+											 **/
+			btnActualizarEquipos.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+
+					cbSustituye.removeAllItems();
+					try {
+						Logger logger = Logger.getLogger("baseDeDatos");
+						Statement consulta;
+						String comando = "";
 						try {
-							Logger logger = Logger.getLogger("baseDeDatos");
-							Statement consulta;
-							String comando = "";
-							try {
-								Class.forName("org.sqlite.JDBC");
-								bd.init();
-							} catch (Exception e3) {
-								// e3.printStackTrace();
-							}
-							
-							String query = "SELECT NOMBRE FROM EQUIPOS" + j.getNombre().toUpperCase() + " WHERE fk_CodLiga="+ ligaNueva +";";
-							ResultSet rs = bd.getCon().createStatement().executeQuery(query);
-							while (rs.next()) {
-								String nomEq = rs.getString("Nombre");
-								cbSustituye.addItem(new ObjetoCombobox(1, nomEq, null));
-							}
-							rs.close();
-							bd.close();
-							
-						
-				}catch(Exception u) {u.printStackTrace();}
-			
-		}});
-		panel_1.add(btnActualizarEquipos);
-		
-		JButton btnListo = new JButton("Listo");
-		btnListo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				MenuLiga mU = new MenuLiga(700, 700, j, bd, f, ligaNueva);
-				mU.setVisible(true);
-				setVisible(false);
-				dispose();
-			}});
-		panel_1.add(btnListo);}
-		}
-	
+							Class.forName("org.sqlite.JDBC");
+							bd.init();
+						} catch (Exception e3) {
+							// e3.printStackTrace();
+						}
 
-	
-	private static void copyFileUsingStream(File source, File dest) throws IOException {
-//		InputStream is = null;
-//		OutputStream os = null;
-//		try {
-//			is = new FileInputStream(source);
-//			os = new FileOutputStream(dest);
-//			byte[] buffer = new byte[1024];
-//			int length;
-//			while ((length = is.read(buffer)) > 0) {
-//				os.write(buffer, 0, length);
-//			}
-//			os.flush();//forzar el guardado
-//		} finally {
-//			is.close();
-//			os.close();
-//		}
-		
-		try{
-			FileInputStream fis = new FileInputStream(source); //inFile -> Archivo a copiar
-			FileOutputStream fos = new FileOutputStream(dest); //outFile -> Copia del archivo
-			FileChannel inChannel = fis.getChannel(); 
-			FileChannel outChannel = fos.getChannel(); 
-			inChannel.transferTo(0, inChannel.size(), outChannel); 
-			fis.close(); 
-			fos.close();
-			}catch (IOException ioe) {
-			System.err.println("Error al Generar Copia");
-			}
+						String query = "SELECT NOMBRE FROM EQUIPOS" + j.getNombre().toUpperCase() + " WHERE fk_CodLiga="
+								+ ligaNueva + ";";
+						ResultSet rs = bd.getCon().createStatement().executeQuery(query);
+						while (rs.next()) {
+							String nomEq = rs.getString("Nombre");
+							cbSustituye.addItem(new ObjetoCombobox(1, nomEq, null));
+						}
+						rs.close();
+						bd.close();
+
+					} catch (Exception u) {
+						u.printStackTrace();
+					}
+
+				}
+			});
+			panel_1.add(btnActualizarEquipos);
+
+			JButton btnListo = new JButton("Listo");
+			btnListo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					MenuLiga mU = new MenuLiga(700, 700, j, bd, f, ligaNueva);
+					mU.setVisible(true);
+					setVisible(false);
+					dispose();
+				}
+			});
+			panel_1.add(btnListo);
+			GroupLayout gl_panel = new GroupLayout(panel);
+			gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_panel.createSequentialGroup().addContainerGap()
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+									.addComponent(lblEscudo, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+									.addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+									.addComponent(lblSiglas, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 169,
+											Short.MAX_VALUE)
+									.addComponent(lblSustituirAEquipo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 169,
+											Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+									.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+									.addComponent(tfNombre, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+									.addGroup(gl_panel.createSequentialGroup()
+											.addComponent(cbSustituye, 0, 441, Short.MAX_VALUE).addGap(20))
+									.addGroup(gl_panel.createSequentialGroup()
+											.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+											.addGap(171).addComponent(lblLocalizacionIcono, GroupLayout.DEFAULT_SIZE,
+													102, Short.MAX_VALUE)))
+							.addGap(43)));
+			gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createSequentialGroup().addGap(11)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+									.addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+									.addComponent(tfNombre, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblLocalizacionIcono, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+									.addComponent(btnExaminar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 47,
+											Short.MAX_VALUE)
+									.addComponent(lblEscudo))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblSiglas)
+									.addComponent(tfSiglas, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+									.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+									.addComponent(cbSustituye, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+											GroupLayout.PREFERRED_SIZE))
+							.addGap(86)));
+			panel.setLayout(gl_panel);
+		}
 	}
 
+	private static void copyFileUsingStream(File source, File dest) throws IOException {
+		// InputStream is = null;
+		// OutputStream os = null;
+		// try {
+		// is = new FileInputStream(source);
+		// os = new FileOutputStream(dest);
+		// byte[] buffer = new byte[1024];
+		// int length;
+		// while ((length = is.read(buffer)) > 0) {
+		// os.write(buffer, 0, length);
+		// }
+		// os.flush();//forzar el guardado
+		// } finally {
+		// is.close();
+		// os.close();
+		// }
 
+		try {
+			FileInputStream fis = new FileInputStream(source); // inFile -> Archivo a copiar
+			FileOutputStream fos = new FileOutputStream(dest); // outFile -> Copia del archivo
+			FileChannel inChannel = fis.getChannel();
+			FileChannel outChannel = fos.getChannel();
+			inChannel.transferTo(0, inChannel.size(), outChannel);
+			fis.close();
+			fos.close();
+		} catch (IOException ioe) {
+			System.err.println("Error al Generar Copia");
+		}
+	}
 
 	/**
 	 * Actualiza el Eclipse solo para detectar ya nuestro icono
