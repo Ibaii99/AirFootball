@@ -183,7 +183,7 @@ public class MenuLiga extends JFrame {
 			int xIcono = Math.round((getWidth() / 2) - (182 * getWidth() / 630));
 			int yIcono = Math.round((getHeight() / 2) - 96 * getHeight() / 630);
 
-			if (cbLiga.getSelectedItem().toString().equals("Deportivo Alav�s")) {
+			if (cbLiga.getItemAt(0).toString().equals("Deportivo Alav�s")) {
 				equipoL = "/iconos/equipos/ala.png";
 			} else {
 				equipoL = "/iconos/equipos/ath.png";
