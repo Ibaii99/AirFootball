@@ -673,9 +673,6 @@ public class ventanaPartido extends JFrame {
 			dispose();
 		}
 		if (!isAmistoso && !arcade) {
-
-			// bd.actualizarEquipo(j, eLocal);
-			// bd.actualizarEquipo(j, eVisitante);
 			try {
 				setGolesYPuntos(bd, j, eLocal, eVisitante);
 				listaPartidos.remove(0);

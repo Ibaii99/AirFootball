@@ -15,6 +15,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -57,6 +58,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.JSlider;
 
 public class VentanaCreacion extends JFrame {
 	private JTextField tfNombre;
@@ -93,7 +95,7 @@ public class VentanaCreacion extends JFrame {
 		
 		if( listaEquipos == null) this.listaEquiposEliminados = new ArrayList<>();
 		else if(listaEquipos != null) this.listaEquiposEliminados = listaEquipos;
-		setSize(737, 364);
+		setSize(737, 411);
 
 		JLabel background_1 = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("iconos/anoeta.png")));
 		setContentPane(background_1);
@@ -160,52 +162,7 @@ public class VentanaCreacion extends JFrame {
 				fc.setVisible(true);
 			}
 		});
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblEscudo, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-						.addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-						.addComponent(lblSiglas, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-						.addComponent(lblSustituirAEquipo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(tfSiglas, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-						.addComponent(tfNombre, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(cbSustituye, 0, 441, Short.MAX_VALUE)
-							.addGap(20))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnExaminar, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-							.addGap(171)
-							.addComponent(lblLocalizacionIcono, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
-					.addGap(43))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(11)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-						.addComponent(tfNombre, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblLocalizacionIcono, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-						.addComponent(btnExaminar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-						.addComponent(lblEscudo))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSiglas)
-						.addComponent(tfSiglas, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSustituirAEquipo, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-						.addComponent(cbSustituye, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(86))
-		);
-		panel.setLayout(gl_panel);
+		
 
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1, BorderLayout.NORTH);
@@ -228,6 +185,7 @@ public class VentanaCreacion extends JFrame {
 				} catch (Exception e3) {
 
 				}
+	
 				File source = fc.getSelectedFile();
 				Path destino = null; // Universalizamos el selector de imagen. Todo icono escogido se mueve a SRC
 										// para que otro usuario pueda acceder a �l desde otro ordenador.
@@ -324,7 +282,8 @@ public class VentanaCreacion extends JFrame {
 				setVisible(false);
 				dispose();
 			}});
-		panel_1.add(btnListo);}}
+		panel_1.add(btnListo);}
+		}
 	
 
 	
@@ -370,7 +329,6 @@ public class VentanaCreacion extends JFrame {
 		robot.keyPress(KeyEvent.VK_F5);
 		robot.keyRelease(KeyEvent.VK_F5);
 	}
-
 }
 
 class JTextFieldLimit extends PlainDocument {
