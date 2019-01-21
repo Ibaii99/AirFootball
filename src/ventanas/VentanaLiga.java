@@ -171,13 +171,10 @@ public class VentanaLiga extends JFrame {
  		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				JOptionPane.showConfirmDialog(null, "Liga guardada con éxito");
 			}
 		});
 		panelBotonera.add(btnGuardar);
-
-		JButton btnCargar = new JButton("Cargar");
-		panelBotonera.add(btnCargar);
 		
 		JButton btnSalirAlMenu = new JButton("Salir al menu");
 		btnSalirAlMenu.addActionListener(new ActionListener() {

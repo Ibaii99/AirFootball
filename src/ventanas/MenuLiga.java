@@ -278,7 +278,12 @@ public class MenuLiga extends JFrame {
 	 */
 	public void resizeo(String equipo, JLabel icono) {
 		System.out.println(equipo);
-		imageIconL = new ImageIcon(getClass().getResource(equipo));
+		try {
+			imageIconL = new ImageIcon(this.getClass().getResource(equipo));
+		} catch (Exception e) {
+			imageIconL = new ImageIcon(this.getClass().getClassLoader().getResource(equipo));
+		}
+		
 
 		Image imagenResizL = imageIconL.getImage();
 		Image iResizeoL = imagenResizL.getScaledInstance((int) Math.round(200 * getWidth() / 600),
