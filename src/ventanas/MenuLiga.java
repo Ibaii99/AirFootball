@@ -140,6 +140,9 @@ public class MenuLiga extends JFrame {
 								// Para la segunda vuelta
 								for (Equipo equi : listaequipos) {	bw.write(equi.getNombre() + "\n");	}
 								
+								//Duplico la lista para tener la ida y la vuelta
+								for(Equipo equi : listaequipos) {	listaequipos.add(equi);	}
+								
 								bw.flush();
 								bw.close();
 								VentanaLiga v = new VentanaLiga(equipo, bd, j, listaequipos, f, codLiga);
