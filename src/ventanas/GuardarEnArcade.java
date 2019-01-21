@@ -31,10 +31,15 @@ public class GuardarEnArcade extends JFrame {
 	private JTextField textField;
 	private JTable table;
 
+	/** Ventana donde salen los registros de las puntuaciones mas altas de arcade y donde guardamos nuestro registro
+	 * @param bd
+	 * @param fisicas
+	 * @param ganadosArcade Partidos ganados en modo arcade
+	 */
 	public GuardarEnArcade(BaseDeDatos bd, FisicasNuevas fisicas, int ganadosArcade) {
 		setSize(474, 203);
 
-		ScrollablePanel panelClasificacion = new ScrollablePanel(new BorderLayout());
+		ScrollablePanel panelClasificacion = new ScrollablePanel(new BorderLayout()); //Implementamos aqui la clase ScrollablePanel por problemas con el JScrollPane
 
 		panelClasificacion.setScrollableWidth(ScrollablePanel.ScrollableSizeHint.FIT);
 		panelClasificacion.setScrollableHeight(ScrollablePanel.ScrollableSizeHint.STRETCH);

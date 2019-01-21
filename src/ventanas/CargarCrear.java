@@ -33,6 +33,11 @@ public class CargarCrear extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
+	/** Ventana que nos da la opción de cargar o crear una liga
+	 * @param j jugador con el que nos hemos registrado
+	 * @param f físicas del juego, que se van pasando de ventana en ventana
+	 * @param bd base de datos que vamos a recorrer para comprobar la liga cargada
+	 */
 	public CargarCrear(Jugador j, FisicasNuevas f, BaseDeDatos bd) {
 		setBounds(100, 100, 487, 300);
 		getContentPane().setLayout(new BorderLayout());

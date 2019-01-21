@@ -50,7 +50,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class MenuLiga extends JFrame {
-	/**
+	/** Menu donde elegimos nuestro equipo con el que vamos a jugar la liga
 	 * @author Jorge
 	 * @throws SQLException
 	 * @author ibai

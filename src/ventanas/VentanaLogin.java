@@ -44,6 +44,11 @@ public class VentanaLogin extends JDialog {
 	private BaseDeDatos bd;
 	private FisicasNuevas f;
 
+	/** Ventana que se abre cuando vamos a registrar un usuario en la BD o logearnos
+	 * @param bd
+	 * @param f
+	 * @param isModoLiga
+	 */
 	public VentanaLogin(BaseDeDatos bd, FisicasNuevas f, boolean isModoLiga) {
 		this.bd = bd;
 		this.f = f;

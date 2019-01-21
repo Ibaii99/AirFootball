@@ -36,6 +36,10 @@ public class Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	/** Menu de inicio
+	 * @param bd Base de datos a recorrer
+	 * @param f Fisicas del juego
+	 */
 	public Inicio(BaseDeDatos bd, FisicasNuevas f) {
 		setSize(630, 460);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -125,9 +129,10 @@ public class Inicio extends JFrame {
 
 					bd.close();
 				} catch (Exception ff) {
+					//Si está la tabla creada, no hacemos nada
 //					ff.printStackTrace();
 				}
-				empiezaPartidoArcade(bd, eLocal, eVisitante, f, 0);
+				empiezaPartidoArcade(bd, eLocal, eVisitante, f, 0); //Empieza el partido entre dos equipos aleatorios de la base de datos
 				dispose();
 			}
 		});
@@ -170,34 +175,12 @@ public class Inicio extends JFrame {
 		});
 	}
 
-//	public static void main(String[] args) {
-//		BaseDeDatos bd = new BaseDeDatos("BETA");
-//		Inicio i;
-//		try {
-//			bd.init();
-//			i = new Inicio(bd, new FisicasNuevas());
-//			System.out.println(bd.getNombre());
-//			i.setVisible(true);
-//			bd.close();
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-// 
-//	}
-
-	/**
-	 * Mï¿½todo que declaramos fuera debido a que lo utilizaremos directamente desde
-	 * ventanaPartido cuando termine un partido.
-	 * 
-	 * @param bd
-	 *            baseDeDatos a pasar
-	 * @param eLocal
-	 *            equipo local
-	 * @param eVisitante
-	 *            equipo visitante
-	 * @param f
-	 *            fï¿½sicas
+	/** Metodo para empezar un partido de modo arcade entre dos equipos al azar
+	 * @param bd BD a recorrer 
+	 * @param eLocal Equipo random 1
+	 * @param eVisitante Equipo random 2
+	 * @param f Fisicas del juego
+	 * @param ganados Numero de partidos que lleva el jugador ganados en la sesion
 	 */
 	public void empiezaPartidoArcade(BaseDeDatos bd, Equipo eLocal, Equipo eVisitante, FisicasNuevas f, int ganados) {
 		try {

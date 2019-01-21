@@ -64,9 +64,14 @@ public class VentanaLiga extends JFrame {
 	private boolean isJugadorLocal;
 	private VentanaLiga ventana;
 	private int ligaSeleccionada;
-	/**
-	 * Create the frame.
-	 * 
+	
+	/** Ventana con la clasificacion de nuestra liga y los datos de nuestros equipos, y la proxima jornada
+	 * @param e Equipo
+	 * @param bd Base de datos a pasar
+	 * @param j Jugador
+	 * @param listaPartidos Arraylist de jornadas de nuestro equipo
+	 * @param f Fisicas 
+	 * @param ligaSeleccionada Codigo de liga seleccionada
 	 * @throws SQLException
 	 */
 	public VentanaLiga(Equipo e, BaseDeDatos bd, Jugador j, ArrayList<Equipo> listaPartidos, FisicasNuevas f, int ligaSeleccionada) throws SQLException {
@@ -74,21 +79,8 @@ public class VentanaLiga extends JFrame {
 		ventana = this;
 		this.listaPartidos = listaPartidos;
 		// La primera ronda de partidos se juega en casa
-		
-
-		
-		
+	
 		try {
-
-			// try {
-			// BufferedImage img =
-			// ImageIO.read(getClass().getClassLoader().getResource("iconos/anoeta.png"));
-			// background = new JLabel(new ImageIcon(img));
-			// } catch (IOException e1) {
-			// e1.printStackTrace();
-			// }
-			//
-			// setContentPane(background);
 			bd.init();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -130,36 +122,9 @@ public class VentanaLiga extends JFrame {
 			column1.setHeaderValue(header[i]);
 		}
 		table.getTableHeader().setFont(table.getTableHeader().getFont().deriveFont(Font.BOLD));
-		// String iUCL = "iconos/UCL.png";
-		// String iEL = "iconos/EUROPA.png";
-		// String iDesc = "iconos/DESCENSO.png";
-		
+
 		anadirATabla(bd, j, e,ligaSeleccionada);
 
-		// try {
-		// for (int i = 0; i < 20; i++) {
-		// if (i < 4) {
-		// ImageIcon icon = new
-		// ImageIcon(getClass().getClassLoader().getResource(iUCL));
-		// // table.getColumnModel().getColumn(0).setCellRenderer(new UCLRenderer());
-		// table.setValueAt(icon, i, 0);
-		// } else if (i >= 4 && i < 7) {
-		// ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(iEL));
-		// // table.getColumnModel().getColumn(0).setCellRenderer(new EuropaRenderer());
-		// table.setValueAt(icon, i, 0);
-		// } else if (i >= 17) {
-		// ImageIcon icon = new
-		// ImageIcon(getClass().getClassLoader().getResource(iDesc));
-		// // table.getColumnModel().getColumn(0).setCellRenderer(new
-		// DescensoRenderer());
-		// table.setValueAt(icon, i, 0);
-		// }
-		//
-		// }
-		// // table.setDefaultRenderer(Object.class, new IconTableCellRenderer());
-		// } catch (Exception ee) {
-		// ee.printStackTrace();
-		// }
 		System.out.println(listaPartidos.get(0));
 		
 
@@ -171,7 +136,7 @@ public class VentanaLiga extends JFrame {
  		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showConfirmDialog(null, "Liga guardada con éxito");
+				JOptionPane.showMessageDialog(null, "Liga guardada con éxito");
 			}
 		});
 		panelBotonera.add(btnGuardar);
