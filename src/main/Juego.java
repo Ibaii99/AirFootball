@@ -31,7 +31,7 @@ public class Juego {
 
 	public static void main(String[] args) {
 
-		try {
+		try { 
 			bd.crearTabla();
 			bd.anyadirEquiposStandar();
 		} catch (Exception e) {
