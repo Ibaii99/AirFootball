@@ -127,7 +127,7 @@ public class MenuLiga extends JFrame {
 								ArrayList<Equipo> listaequiposTotal = bd.devolverTodosLosEquipos(j, codLiga);
 								ArrayList<Equipo> listaequipos = new ArrayList<>();
 								
-								for (Equipo equi : listaequipos) {
+								for (Equipo equi : listaequiposTotal) {
 									if (equi.getNombre() != cbLiga.getSelectedItem().toString()) listaequipos.add(equi);
 									// para que se guarden todos los equipos menos el que tu has elegido en la lista
 								}
