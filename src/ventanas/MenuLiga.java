@@ -124,23 +124,22 @@ public class MenuLiga extends JFrame {
 						try {
 							if (!archivoPart.exists()) {
 								bw = new BufferedWriter(new FileWriter(archivoPart));
-								ArrayList<Equipo> listaequipos = bd.devolverTodosLosEquipos(j, codLiga);
-								for(int cont = 0; cont < listaequipos.size() ; cont++) {
-									if(listaequipos.get(cont).getNombre().equals(cbLiga.getSelectedItem().toString()) )listaequipos.remove(cont);
+								ArrayList<Equipo> listaequiposTotal = bd.devolverTodosLosEquipos(j, codLiga);
+								ArrayList<Equipo> listaequipos = new ArrayList<>();
+								
+								for (Equipo equi : listaequipos) {
+									if (equi.getNombre() != cbLiga.getSelectedItem().toString()) listaequipos.add(equi);
+									// para que se guarden todos los equipos menos el que tu has elegido en la lista
 								}
-								Collections.shuffle(listaequipos);
+								
+								Collections.shuffle(listaequipos); // Desordenamos la lista
+								
 								// Para la primera vuelta
-								for (Equipo equi : listaequipos) {
-									if (equi.getNombre() != cbLiga.getSelectedItem().toString())
-										bw.write(equi.getNombre() + "\n"); // para que se guarden todos los equipos
-																			// menos el que tu has elegido
-								}
+								for (Equipo equi : listaequipos) {	bw.write(equi.getNombre() + "\n");	}
+								
 								// Para la segunda vuelta
-								for (Equipo equi : listaequipos) {
-									if (equi.getNombre() != cbLiga.getSelectedItem().toString())
-										bw.write(equi.getNombre() + "\n"); // para que se guarden todos los equipos
-																			// menos el que tu has elegido
-								}
+								for (Equipo equi : listaequipos) {	bw.write(equi.getNombre() + "\n");	}
+								
 								bw.flush();
 								bw.close();
 								VentanaLiga v = new VentanaLiga(equipo, bd, j, listaequipos, f, codLiga);
