@@ -330,7 +330,12 @@ public class VentanaLiga extends JFrame {
 	}
 }
 
-class TeamBold extends DefaultTableCellRenderer {
+/**
+ * @author Jorge
+ *  Renderer para definir la celda según la posición en la que se encuentren los equipos: Champions, Europa League o descenso
+ *  Este renderer además settea el equipo que hayas escogido en negrita
+ */
+class TeamBold extends DefaultTableCellRenderer { 
 	private String nombre;
 
 	public String getNombre() {
@@ -341,10 +346,7 @@ class TeamBold extends DefaultTableCellRenderer {
 		this.nombre = nombre;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
-	 * Renderer para definir la celda según la posición en la que se encuentren los equipos: Champions, Europa League o descenso
-	 */
+	
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
 
