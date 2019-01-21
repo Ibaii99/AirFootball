@@ -136,7 +136,7 @@ public class VentanaLiga extends JFrame {
  		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Liga guardada con éxito");
+				JOptionPane.showMessageDialog(null, "Liga guardada con ï¿½xito");
 			}
 		});
 		panelBotonera.add(btnGuardar);
@@ -164,24 +164,15 @@ public class VentanaLiga extends JFrame {
 
 		JLabel lblEscudoEquipo = new JLabel();
 		ImageIcon imageIconL = null;
-		try {
-			
-			imageIconL = new ImageIcon(getClass().getClassLoader().getResource(e.getBolaEquipo().getRutaImagen()));
-		} catch (Exception ej) {
-			
-			ej.printStackTrace(); 
-		}
-		resizeo(imageIconL, lblEscudoEquipo, 20, 20);
-		panelEquipoJugador.add(lblEscudoEquipo);
 
-		JLabel lblNombEquipo = new JLabel(e.getNombre());
-		panelEquipoJugador.add(lblNombEquipo);
+		panelEquipoJugador.add(lblEscudoEquipo);
+		String nombreEqLocal = "";
+
 
 		JLabel lblTEXTPuntosEquipo = new JLabel("Puntos: ");
 		panelEquipoJugador.add(lblTEXTPuntosEquipo);
 
 		int puntosLocal = 0;
-		puntosLocal = bd.convertirAEquipo(e.getNombre(), j, ligaSeleccionada).getPuntos();
 	
 		JLabel lblPuntosEquipo = new JLabel("" + puntosLocal); 
 		panelEquipoJugador.add(lblPuntosEquipo);
@@ -192,37 +183,53 @@ public class VentanaLiga extends JFrame {
 		JPanel panelEquipoAdversario = new JPanel();
 		panelInformacionEquipo.add(panelEquipoAdversario);
  
-		String nombreEqVisitante = listaPartidos.get(0).getNombre();
+		String nombreEqVisitante ;
 		JLabel lblEscudoAdversario = new JLabel();
 		ImageIcon imageIconV = null;
 		int puntosVisit = 0;
 		
 		try {
 			if(listaPartidos.size() >= 19) {
-				eLocal = e;
 				isJugadorLocal = true;
 				
+				nombreEqLocal = e.getNombre();
+				eLocal = e;
+				imageIconL = new ImageIcon(getClass().getClassLoader().getResource(e.getBolaEquipo().getRutaImagen()));
+				puntosLocal = e.getPuntos(); 
+				
+				nombreEqVisitante = listaPartidos.get(0).getNombre();
 				eVisitante = bd.convertirAEquipo(nombreEqVisitante, j, ligaSeleccionada);
 				puntosVisit = eVisitante.getPuntos();
 				imageIconV = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
-			} else if(listaPartidos.size() < 19) {
-				eVisitante = e;
-				isJugadorLocal = false;
-				eLocal = bd.convertirAEquipo(nombreEqVisitante, j, ligaSeleccionada);
-				
-				puntosVisit = puntosLocal; //intercambiamos si jugamos de visitante
-				imageIconV = imageIconL;
-				
-				puntosLocal = eVisitante.getPuntos();
-				imageIconL = new ImageIcon(getClass().getClassLoader().getResource(eVisitante.getBolaEquipo().getRutaImagen()));
-			}
 			
+				resizeo(imageIconL, lblEscudoEquipo, 20, 20);
+				resizeo(imageIconV, lblEscudoAdversario, 20, 20);
+			} else if(listaPartidos.size() < 19) {
+				isJugadorLocal = false;
+				
+				nombreEqLocal = listaPartidos.get(0).getNombre();
+				eLocal = bd.convertirAEquipo(nombreEqLocal, j, ligaSeleccionada);
+				puntosLocal = eLocal.getPuntos();
+				imageIconL = new ImageIcon(getClass().getClassLoader().getResource(eLocal.getBolaEquipo().getRutaImagen()));
+				
+				nombreEqVisitante = e.getNombre();
+				eVisitante = e;
+				puntosVisit = e.getPuntos(); //intercambiamos si jugamos de visitante
+				imageIconV = new ImageIcon(getClass().getClassLoader().getResource(e.getBolaEquipo().getRutaImagen()));
+				
+				resizeo(imageIconL, lblEscudoEquipo, 20, 20);
+				resizeo(imageIconV, lblEscudoAdversario, 20, 20);
+			
+			}
+			System.out.println(imageIconL);
 			System.out.println(imageIconV);
 		} catch (Exception ej) {
 			ej.printStackTrace();
 		}
+
+		JLabel lblNombEquipo = new JLabel(nombreEqLocal);
+		panelEquipoJugador.add(lblNombEquipo);
 		
-		resizeo(imageIconV, lblEscudoAdversario, 20, 20);
 		panelEquipoJugador.add(lblEscudoEquipo);
 		panelEquipoAdversario.add(lblEscudoAdversario);
 
@@ -332,8 +339,8 @@ public class VentanaLiga extends JFrame {
 
 /**
  * @author Jorge
- *  Renderer para definir la celda según la posición en la que se encuentren los equipos: Champions, Europa League o descenso
- *  Este renderer además settea el equipo que hayas escogido en negrita
+ *  Renderer para definir la celda segï¿½n la posiciï¿½n en la que se encuentren los equipos: Champions, Europa League o descenso
+ *  Este renderer ademï¿½s settea el equipo que hayas escogido en negrita
  */
 class TeamBold extends DefaultTableCellRenderer { 
 	private String nombre;

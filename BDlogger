@@ -2,8 +2,8 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2019-01-21T22:08:42</date>
-  <millis>1548104922793</millis>
+  <date>2019-01-21T22:46:13</date>
+  <millis>1548107173118</millis>
   <sequence>0</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -13,8 +13,8 @@
   <message>BD: CREATE TABLE Equipos('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT , PRIMARY KEY('Siglas') )</message>
 </record>
 <record>
-  <date>2019-01-21T22:08:42</date>
-  <millis>1548104922804</millis>
+  <date>2019-01-21T22:46:13</date>
+  <millis>1548107173134</millis>
   <sequence>1</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -24,8 +24,8 @@
   <message>BD: CREATE TABLE Liga( 'CodLiga' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'codLigaJugador' INTEGER, 'fk_Nombre_Jugador' TEXT REFERENCES JUGADORES(NOMBRE), 'Nombre' TEXT NOT NULL)</message>
 </record>
 <record>
-  <date>2019-01-21T22:08:42</date>
-  <millis>1548104922806</millis>
+  <date>2019-01-21T22:46:13</date>
+  <millis>1548107173138</millis>
   <sequence>2</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
@@ -35,25 +35,14 @@
   <message>BD: CREATE TABLE Jugadores( 'Nombre' TEXT PRIMARY KEY NOT NULL, 'Password' TEXT NOT NULL, 'cantidadPartidas' INTEGER DEFAULT 0)</message>
 </record>
 <record>
-  <date>2019-01-21T22:09:06</date>
-  <millis>1548104946144</millis>
+  <date>2019-01-21T22:47:05</date>
+  <millis>1548107225738</millis>
   <sequence>3</sequence>
-  <logger>baseDeDatos</logger>
-  <level>INFO</level>
-  <class>entidades.BaseDeDatos</class>
-  <method>crearTablaEquipos</method>
-  <thread>14</thread>
-  <message>BD: CREATE TABLE EquiposIBAI('fk_CodLiga' INTEGER REFERENCES LIGA(CodLiga),'fk_Nombre_jugador' TEXT REFERENCES Jugadores(Nombre) ,'Siglas' TEXT NOT NULL, 'Nombre' TEXT NOT NULL, 'Puntos' INTEGER, 'Goles Encajados Totales' INTEGER, 'Goles Encajados Local' INTEGER, 'Goles Encajados Visitante' INTEGER, 'Goles A Favor Totales' INTEGER, 'Goles A Favor Local' INTEGER, 'Goles A Favor Visitante' INTEGER, 'Derrotas Totales' INTEGER, 'Derrotas Local' INTEGER, 'Derrotas Visitante' INTEGER, 'Victorias Totales' INTEGER, 'Victorias Local' INTEGER, 'Victorias Visitante' INTEGER, 'Empates Totales' INTEGER, 'Empates Local' INTEGER, 'Empates Visitante' INTEGER, 'Color' TEXT, 'Icono' TEXT)</message>
-</record>
-<record>
-  <date>2019-01-21T22:09:09</date>
-  <millis>1548104949022</millis>
-  <sequence>4</sequence>
   <logger>baseDeDatos</logger>
   <level>INFO</level>
   <class>entidades.BaseDeDatos</class>
   <method>anyadirLiga</method>
   <thread>14</thread>
-  <message>INSERT INTO Liga('codLigaJugador','fk_Nombre_Jugador', 'Nombre') VALUES ('1','IBAI','Liga1')</message>
+  <message>INSERT INTO Liga('codLigaJugador','fk_Nombre_Jugador', 'Nombre') VALUES ('2','IBAI','Liga2')</message>
 </record>
 </log>
