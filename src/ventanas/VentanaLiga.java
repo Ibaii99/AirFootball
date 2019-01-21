@@ -220,6 +220,7 @@ public class VentanaLiga extends JFrame {
 				resizeo(imageIconV, lblEscudoAdversario, 20, 20);
 			
 			}
+			System.out.println("Partidos restantes "+listaPartidos.size());
 			System.out.println(imageIconL);
 			System.out.println(imageIconV);
 		} catch (Exception ej) {
