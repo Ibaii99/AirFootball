@@ -677,6 +677,7 @@ public class ventanaPartido extends JFrame {
 				setGolesYPuntos(bd, j, eLocal, eVisitante);
 				listaPartidos.remove(0);
 				if (listaPartidos.get(0).getNombre() == eLocal.getNombre()) {
+//					System.out.println(listaPartidos.get(0).getNombre());
 					listaPartidos.remove(0);
 					borrarPrimeraFila(j, codLiga);
 				}
