@@ -174,8 +174,7 @@ public class VentanaLiga extends JFrame {
 
 		int puntosLocal = 0;
 	
-		JLabel lblPuntosEquipo = new JLabel("" + puntosLocal); 
-		panelEquipoJugador.add(lblPuntosEquipo);
+		
 
 		JLabel lblVs = new JLabel("VS");
 		panelInformacionEquipo.add(lblVs);
@@ -227,6 +226,9 @@ public class VentanaLiga extends JFrame {
 			ej.printStackTrace();
 		}
 
+		JLabel lblPuntosEquipo = new JLabel("" + puntosLocal); 
+		panelEquipoJugador.add(lblPuntosEquipo);
+		
 		JLabel lblNombEquipo = new JLabel(nombreEqLocal);
 		panelEquipoJugador.add(lblNombEquipo);
 		
