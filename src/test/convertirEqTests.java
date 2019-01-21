@@ -13,11 +13,16 @@ import jugador.Jugador;
 import objetos.Pelota;
 import ventanas.ventanaPartido;
 
+/**
+ * @author Jorge 
+ * Tests en JUnit del metodo convertirAEquipo de la clase
+ *         baseDeDatos, el cual recorre la BD en busca del equipo cuyo nombre
+ *         sea el contenido del string que le pasemos.
+ */
 class convertirEqTests {
 
 	private static ventanaPartido vp;
 	private static Equipo eLocal;
-	private static Equipo eVisitante;
 	private static BaseDeDatos bd = new BaseDeDatos("ALPHA");
 	private static Pelota p = new Pelota(Color.black, "jabulani", 0, 0, 20, 1, null, false);
 	private static FisicasNuevas f = new FisicasNuevas();
