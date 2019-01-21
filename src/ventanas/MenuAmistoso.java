@@ -236,6 +236,7 @@ public class MenuAmistoso extends JFrame {
 				dispose();
 				char[] a = { 'a', 'b', 'c' };
 
+				
 				Equipo eLocal = bd.convertirAEquipo(cbLocal.getSelectedItem().toString(), new Jugador("", a, 0),0);
 				System.out.println(eLocal.toString());
 
