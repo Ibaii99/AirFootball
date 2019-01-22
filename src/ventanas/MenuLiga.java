@@ -134,6 +134,8 @@ public class MenuLiga extends JFrame {
 								
 								Collections.shuffle(listaequipos); // Desordenamos la lista
 								
+								listaequiposTotal = listaequipos;	// Actualizo la lista para utilizarla despues
+								
 								// Para la primera vuelta
 								for (Equipo equi : listaequipos) {	bw.write(equi.getNombre() + "\n");	}
 								
@@ -141,7 +143,7 @@ public class MenuLiga extends JFrame {
 								for (Equipo equi : listaequipos) {	bw.write(equi.getNombre() + "\n");	}
 								
 								//Duplico la lista para tener la ida y la vuelta
-								for(Equipo equi : listaequipos) {	listaequipos.add(equi);	}
+								for(Equipo equi : listaequiposTotal) {	listaequipos.add(equi);	}
 								
 								bw.flush();
 								bw.close();
