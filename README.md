@@ -84,27 +84,25 @@ Disponemos de 4 tablas predefinidas en el proyecto:
 
 Liga: Guarda todas las ligas que hay con su correspondiente usuario
 
-[https://lh3.googleusercontent.com/Coh9shU9vG-_1xeBphFg4FiRFjv2JjdHNh9xoLYwTsY6M8hXyJLer11u-hyy43OqGRpZJpo0Z3eWgfM0WJbAHegnXvV0fziXuk_Bmh84cZeuHQYeOtInm8cWTkiknWV6ArLvrhf8](https://lh3.googleusercontent.com/Coh9shU9vG-_1xeBphFg4FiRFjv2JjdHNh9xoLYwTsY6M8hXyJLer11u-hyy43OqGRpZJpo0Z3eWgfM0WJbAHegnXvV0fziXuk_Bmh84cZeuHQYeOtInm8cWTkiknWV6ArLvrhf8)
+![Untitled](README/Untitled%207.png)
 
 Arcade: Guarda la puntuación histórica del modo arcade
 
-[https://lh5.googleusercontent.com/Bir6gHvZXadZwWoPYZ1_MYwHvBiTYvFTTr1o9vswBThz8RYBCHz7SzBUErQrnhcEAd2nig3atMkAmPhn6E9cODh1rI_PbmsxjSr00OAZVn9cKulGWFG792CQYZFkOF_XI9ie3mld](https://lh5.googleusercontent.com/Bir6gHvZXadZwWoPYZ1_MYwHvBiTYvFTTr1o9vswBThz8RYBCHz7SzBUErQrnhcEAd2nig3atMkAmPhn6E9cODh1rI_PbmsxjSr00OAZVn9cKulGWFG792CQYZFkOF_XI9ie3mld)
+![Untitled](README/Untitled%208.png)
 
 Equipos: Guarda los equipos predefinidos, de los que se parte en los amistosos y antes de creación.
 
-[https://lh6.googleusercontent.com/rhSqE2qIuresNLOx8aOk8hxvqaVpybY1OQiEIYlTOMJVp-qTru39-jOP54wGNvZNZX8U4Tj035CVp7X4cYe_dbY9AxLfZWgxyh0RKxk3-2xwgRPd9do-dRpmCp2qCA2euQmhctnZ](https://lh6.googleusercontent.com/rhSqE2qIuresNLOx8aOk8hxvqaVpybY1OQiEIYlTOMJVp-qTru39-jOP54wGNvZNZX8U4Tj035CVp7X4cYe_dbY9AxLfZWgxyh0RKxk3-2xwgRPd9do-dRpmCp2qCA2euQmhctnZ)
+![Untitled](README/Untitled%209.png)
 
-[https://lh4.googleusercontent.com/jWGYkH9ZikdRo2LdSqBbGzk6ZnY6W2muDVP0g1tx4ArSoJwgoy4MGOEGdQgliPPXEH4dm-lavl4yhc-C6cyDr0As4zs_0dHKw2akZ7wnmcp1so-biPVRk0ho7HcaYprB83mgPPLI](https://lh4.googleusercontent.com/jWGYkH9ZikdRo2LdSqBbGzk6ZnY6W2muDVP0g1tx4ArSoJwgoy4MGOEGdQgliPPXEH4dm-lavl4yhc-C6cyDr0As4zs_0dHKw2akZ7wnmcp1so-biPVRk0ho7HcaYprB83mgPPLI)
+![Untitled](README/Untitled%2010.png)
 
 Jugadores: Guarda la información de los jugadores, nombre, contraseña y cantidad de ligas que tienen.
 
-[https://lh3.googleusercontent.com/08vQPNlwL8UcoYFgmRve0KjEZaRnzT4J-KeRqYXKpJAaEB1U96JlMBy1FzH5lAiqu5zn9PAvOrQNMlBdW1qRg8J2xe3Fn70LttJpouaq2dk3gFbjBHagvvxiGgqf12QbxPPmoVK3](https://lh3.googleusercontent.com/08vQPNlwL8UcoYFgmRve0KjEZaRnzT4J-KeRqYXKpJAaEB1U96JlMBy1FzH5lAiqu5zn9PAvOrQNMlBdW1qRg8J2xe3Fn70LttJpouaq2dk3gFbjBHagvvxiGgqf12QbxPPmoVK3)
+![Untitled](README/Untitled%2011.png)
 
 Además, con cada jugador registrado se crea una tabla que toma el nombre de ‘Equipos’ + el nombre del jugador. En esta se guardarán todos los equipos de todas las partidas, y se agruparan por el código de liga, el cual usaremos para diferenciar y actualizar datos.
 
-[https://lh4.googleusercontent.com/XGEROSri01hBKUcl4J4r3EU81l_uRN4-KUPv9EtbigU351luTKQSYqIyQn4NEkOPdUwV6XVyGul6fhZqLtfYBxgo7Qf1AmYaGHdNm8DucMgSEvr3HNKANBT1vbvI9CxnsZUCwHZb](https://lh4.googleusercontent.com/XGEROSri01hBKUcl4J4r3EU81l_uRN4-KUPv9EtbigU351luTKQSYqIyQn4NEkOPdUwV6XVyGul6fhZqLtfYBxgo7Qf1AmYaGHdNm8DucMgSEvr3HNKANBT1vbvI9CxnsZUCwHZb)
-
-[https://lh4.googleusercontent.com/L7sy-59MmMDkMPwXiVHV5LBh1hcCgyVFRc7pveJl95ptOs5Gl73nAFLAvTjfVMqBwnyM9KzQFUZEkVz6x8f_t6YueFPh_DyCiJKl1UglQ_1b0GLdQI5Ts7j9X-4rFvKjEJ5gdfbY](https://lh4.googleusercontent.com/L7sy-59MmMDkMPwXiVHV5LBh1hcCgyVFRc7pveJl95ptOs5Gl73nAFLAvTjfVMqBwnyM9KzQFUZEkVz6x8f_t6YueFPh_DyCiJKl1UglQ_1b0GLdQI5Ts7j9X-4rFvKjEJ5gdfbY)
+![Untitled](README/Untitled%2012.png)
 
 Hemos incluido un logger en la base de datos para que en caso de haber problemas se pueda encontrar el motivo de ellos y de esa forma poder arreglarlos.
 
@@ -116,7 +114,7 @@ A la hora de **crear** una partida se generará un fichero con *tu nombre + “c
 
 A la hora de **cargar** se debe seleccionar el archivo  *nombre + “codLiga=” + el código de liga* de la partida que quieras, y seguidamente el programa leerá los rivales del fichero y los cargará, de tal manera que puedas continuar la partida tal como la dejaste.
 
-![Untitled](README/Untitled%207.png)
+![Untitled](README/Untitled%2013.png)
 
 ## Calendario de la liga
 
@@ -126,9 +124,7 @@ Una va a ser una consulta al azar que nos vaya devolviendo uno a uno los equipos
 
 Vemos aquí una imagen de prueba del calendario de la Liga tras la primera jornada (comparando los primeros seis equipos de la tabla y los últimos, el resto empatan a dos y las estadísticas se reparten por igual). El Real Murcia no está en primera división, pero lo hemos metido en una liga mediante el modo creación:
 
-[https://lh6.googleusercontent.com/qZ0-C1ZVfy1Mn63L4r265bfcBvxneK7FsZISsWY_soAaZ8g0NM8rdpYxu4uUd0RsiwKXEzzok5Fn4caWerifVd_SwJO2tGfFyfYMN12GOixR5nUjXVYQDZbRZQFyyAUEfOvnLvzI](https://lh6.googleusercontent.com/qZ0-C1ZVfy1Mn63L4r265bfcBvxneK7FsZISsWY_soAaZ8g0NM8rdpYxu4uUd0RsiwKXEzzok5Fn4caWerifVd_SwJO2tGfFyfYMN12GOixR5nUjXVYQDZbRZQFyyAUEfOvnLvzI)
-
-[https://lh6.googleusercontent.com/WhC32U7eDCh_udMCdya49fG0NUzTODx86Rj260SvoL-v_4HR1O-fO0uXICAFIamRiWTm9hAmjvQskoToFX5CJ82T1qJIFevkVPRgOSxCrO0bahbJVlMQIi-YB85kgUQxzeY8bWpC](https://lh6.googleusercontent.com/WhC32U7eDCh_udMCdya49fG0NUzTODx86Rj260SvoL-v_4HR1O-fO0uXICAFIamRiWTm9hAmjvQskoToFX5CJ82T1qJIFevkVPRgOSxCrO0bahbJVlMQIi-YB85kgUQxzeY8bWpC)
+![Untitled](README/Untitled%2014.png)
 
 Los equipos se ordenan por puntos como primer criterio y el *goalaverage* (diferencia entre goles marcados y recibidos) como segundo criterio. En este caso, hemos hecho pruebas con partidos al mejor de tres y por eso nuestro equipo, el Murcia, sale con tres goles a favor y cero en contra (se puede apreciar que el resto han jugado al mejor de cuatro), y vemos cómo los equipos con mejor clasificación son los que más puntos llevan, y entre todos esos que tienen tres puntos, los que tienen un *goalaverage* mayor son los que mejor posición está.
 
